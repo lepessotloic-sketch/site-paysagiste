@@ -1,0 +1,16 @@
+
+body {margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f6f4;color:#222;}
+header {background:#0f3d2e;color:white;padding:20px 40px;}
+header h1 {margin:0;}
+nav a {color:white;margin-right:20px;text-decoration:none;font-weight:bold;}
+.hero {background:#1f6f54;color:white;padding:80px 40px;text-align:center;}
+.hero h2 {font-size:38px;margin-bottom:20px;}
+.btn {display:inline-block;padding:15px 30px;background:#2fa36b;color:white;text-decoration:none;border-radius:6px;font-weight:bold;margin-top:20px;border:none;cursor:pointer;}
+.section {padding:60px 40px;text-align:center;}
+.section h3 {font-size:28px;margin-bottom:20px;}
+.cards {display:flex;justify-content:center;gap:30px;flex-wrap:wrap;}
+.card {background:white;padding:25px;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.1);width:300px;}
+.price {font-size:42px;color:#1f6f54;font-weight:bold;margin:20px 0;}
+.reviews {background:#e9f5ee;}
+footer {background:#0f3d2e;color:white;text-align:center;padding:30px;}
+input {padding:12px;width:280px;border-radius:5px;border:1px solid #ccc;}
