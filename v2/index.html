@@ -1,45 +1,484 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Essentiel V2 – Impact-NVA</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #07140f; color: #fff; }
-    header { padding: 60px 20px; text-align: center; background: linear-gradient(135deg,#0b2b1e,#18a558); }
-    h1 { font-size: 48px; margin-bottom: 15px; }
-    p { font-size: 18px; line-height: 1.6; }
-    section { padding: 60px 20px; max-width: 1100px; margin: auto; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; }
-    .card { background: #10251b; padding: 25px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    .cta { display: inline-block; margin-top: 20px; background: #9cff6e; color: #06130d; padding: 14px 22px; border-radius: 999px; text-decoration: none; font-weight: bold; }
-    footer { text-align:center; padding:40px 20px; background:#050b08; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Art & Jardin Paysage — Paysagiste à Lyon | Devis gratuit</title>
+<meta name="description" content="Paysagiste à Lyon spécialisé en aménagements extérieurs, jardins, terrasses, entretien et avant/après. Devis rapide, intervention locale, réalisations sur-mesure.">
+<link rel="canonical" href="https://votre-domaine-exemple.com/">
+<meta property="og:title" content="Art & Jardin Paysage — Paysagiste à Lyon">
+<meta property="og:description" content="Aménagements extérieurs, création de jardins, terrasses et entretien. Demandez votre devis gratuit.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#1f6f3a">
+<style>
+:root{
+  --green:#1f6f3a;
+  --green-2:#2ea04a;
+  --muted:#6b6b6b;
+  --card:#f7f9f6;
+  --radius:10px;
+  --maxw:1100px;
+  --accent:#0f5132;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:#ffffff;
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+}
+.container{max-width:var(--maxw);margin:0 auto;padding:20px}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px 0;
+}
+.brand{
+  display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
+}
+.logo{
+  width:56px;height:56px;background:linear-gradient(135deg,var(--green),var(--green-2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;
+  box-shadow:0 6px 20px rgba(31,111,58,0.12);
+}
+.header-contact{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.header-contact a{color:var(--green);font-weight:700;text-decoration:none}
+.badge{background:var(--card);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid #eef5ee}
+
+/* HERO */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:28px;
+  align-items:center;
+  margin:18px 0 28px;
+}
+@media(max-width:980px){.hero{grid-template-columns:1fr;padding:0}}
+.hero-card{
+  background:linear-gradient(180deg, rgba(31,111,58,0.04), transparent);
+  padding:34px;border-radius:14px;
+  box-shadow:0 8px 30px rgba(13,52,26,0.06);
+}
+.h-title{font-size:30px;margin:0 0 8px;color:var(--accent)}
+.h-sub{margin:0 0 18px;color:var(--muted);font-size:16px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;border:0;background:var(--green);color:#fff;font-weight:700;text-decoration:none;cursor:pointer;
+  box-shadow:0 8px 20px rgba(31,111,58,0.14);
+}
+.btn-outline{
+  background:transparent;border:2px solid var(--green);color:var(--green);font-weight:700;border-radius:10px;padding:10px 16px;text-decoration:none;
+}
+.quick-info{display:flex;gap:14px;margin-top:16px;color:var(--muted);font-size:15px}
+
+/* CARD RIGHT : contact quick form */
+.card-side{background:#fff;border-radius:12px;padding:18px;border:1px solid #eef5ee}
+.card-side h4{margin:0 0 8px}
+.card-side p{margin:0 0 12px;color:var(--muted)}
+.form-row{display:flex;gap:8px;margin-bottom:8px}
+.form-row input,.form-row select,textarea{
+  width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6;font-size:14px;background:transparent
+}
+.form-row textarea{min-height:88px;resize:vertical}
+.small-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* sections */
+.section{padding:34px 0;border-top:1px solid #f2f5f2}
+.section h2{margin:0 0 12px;font-size:22px;color:var(--accent)}
+.lead{color:var(--muted);margin:0 0 18px}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:980px){.services{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.hero{grid-template-columns:1fr}.services{grid-template-columns:1fr}}
+.service{background:#fff;border-radius:12px;padding:18px;border:1px solid #eef5ee}
+.service h3{margin:0 0 8px;font-size:18px}
+.service p{margin:0;color:var(--muted)}
+
+/* réalisations */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
+.project{position:relative;border-radius:12px;overflow:hidden;border:1px solid #eef5ee}
+.project img{width:100%;height:220px;object-fit:cover;display:block}
+.project .p-info{position:absolute;left:14px;bottom:14px;background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.18));color:#fff;padding:10px 12px;border-radius:8px;font-weight:600}
+
+/* galerie */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:980px){.gallery{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #eef5ee}
+
+/* avant/après */
+.compare{
+  display:flex;gap:18px;flex-wrap:wrap;align-items:center;
+}
+.comparison{flex:1;min-width:320px;border-radius:12px;overflow:hidden;border:1px solid #eef5ee;position:relative}
+.compare .after{position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden}
+.compare img{width:100%;height:360px;object-fit:cover;display:block}
+.slider{position:absolute;left:50%;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,0.06);transform:translateX(-50%);pointer-events:none}
+.range{position:absolute;left:0;right:0;bottom:12px;padding:0 12px;display:flex;align-items:center;justify-content:center}
+.range input[type=range]{width:80%}
+
+/* avis */
+.reviews{display:flex;gap:14px;overflow:hidden}
+.review{min-width:300px;background:#fff;border-radius:12px;padding:16px;border:1px solid #eef5ee}
+.stars{color:#f5a623;margin-bottom:8px}
+
+/* map and zones */
+.map-wrap{height:320px;border-radius:12px;overflow:hidden;border:1px solid #eef5ee}
+.zones{display:flex;gap:10px;flex-wrap:wrap}
+.zone{background:var(--card);padding:10px 12px;border-radius:999px;font-size:14px;color:var(--muted);border:1px solid #eef5ee}
+
+/* footer */
+.footer{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px 0;border-top:1px solid #f2f5f2}
+.footer .col{max-width:360px}
+.footer a{color:var(--muted);text-decoration:none}
+.copy{color:var(--muted);font-size:14px}
+
+/* small */
+.kv{display:flex;gap:14px;flex-wrap:wrap}
+.kv .item{background:var(--card);padding:10px 12px;border-radius:10px;border:1px solid #eef5ee}
+
+@media(max-width:760px){
+  .header-contact{align-items:flex-start}
+  .hero{grid-template-columns:1fr}
+  .card-side{order:2}
+  .hero-card{order:1}
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  var range=document.getElementById('compareRange');
+  var after=document.querySelector('.compare .after');
+  var slider=document.querySelector('.compare .slider');
+  function update(){
+    var val=range.value;
+    after.style.width = val + '%';
+    slider.style.left = val + '%';
+  }
+  if(range){range.addEventListener('input',update);update();}
+  var reviews = document.querySelectorAll('.review');
+  var idx=0;
+  setInterval(function(){
+    reviews.forEach((r,i)=>r.style.transform='translateX(' + ((i-idx)*320) + 'px)');
+    idx = (idx+1) % reviews.length;
+  },4000);
+
+  var form=document.getElementById('contactForm');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=form.elements['name'].value||'Nouveau client';
+    var phone=form.elements['phone'].value||'Pas de téléphone';
+    var email=form.elements['email'].value||'';
+    var msg=form.elements['message'].value||'Demande de devis';
+    var subject=encodeURIComponent('Demande de devis - ' + name);
+    var body=encodeURIComponent('Nom: '+name + '\nTéléphone: '+phone + '\nEmail: '+email + '\nMessage: ' + msg);
+    window.location.href = 'mailto:contact@artjardinpaysage.fr?subject=' + subject + '&body=' + body;
+  });
+});
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Landscaping","name":"Art & Jardin Paysage","image":"https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=80&auto=format&fit=crop","@id":"https://votre-domaine-exemple.com/","url":"https://votre-domaine-exemple.com/","telephone":"+33 4 72 00 00 00","address":{"@type":"PostalAddress","streetAddress":"12 Rue du Parc","addressLocality":"Lyon","postalCode":"69002","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":45.764043,"longitude":4.835659},"openingHours":"Mo-Fr 08:00-18:00","priceRange":"€€","description":"Paysagiste à Lyon spécialisé en aménagement de jardins, terrasses, clôtures et entretien. Devis gratuit et rapide."}
+</script>
 </head>
 <body>
-  <header>
-    <h1>Essentiel V2</h1>
-    <p>Une vitrine moderne pour paysagistes qui veulent plus qu'une simple présence en ligne.</p>
-    <a class="cta" href="mailto:contact@impact-nva.fr">Demander mon site</a>
-  </header>
+<header class="container header">
+  <a class="brand" href="#">
+    <div class="logo">AJ</div>
+    <div>
+      <div style="font-weight:800;font-size:18px">Art & Jardin Paysage</div>
+      <div style="font-size:13px;color:var(--muted)">Paysagiste • Lyon et environs</div>
+    </div>
+  </a>
+  <div class="header-contact">
+    <div class="badge">Devis gratuit sous 48h</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="tel:+33472000000" style="font-weight:800;color:var(--green);text-decoration:none">+33 4 72 00 00 00</a>
+      <div style="font-size:13px;color:var(--muted)">Intervention sous 7 jours</div>
+    </div>
+  </div>
+</header>
 
-  <section>
-    <h2>Un design plus moderne, plus vendeur</h2>
-    <div class="grid">
-      <div class="card"><h3>Avant / Après</h3><p>Mettez en valeur vos transformations de jardins avec des visuels impactants.</p></div>
-      <div class="card"><h3>Portfolio premium</h3><p>Présentez vos plus belles réalisations pour rassurer les futurs clients.</p></div>
-      <div class="card"><h3>Appels à l'action</h3><p>Des boutons clairs pour générer plus de demandes de devis.</p></div>
+<main class="container">
+  <section class="hero">
+    <div class="hero-card">
+      <h1 class="h-title">Transformez votre extérieur en un espace de vie élégant</h1>
+      <p class="h-sub">Conception, création et entretien de jardins sur-mesure à Lyon. Bénéficiez d'un accompagnement complet de l'idée au rendu fini.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Demander un devis</a>
+        <a class="btn-outline" href="#realisations">Voir nos réalisations</a>
+      </div>
+      <div class="quick-info">
+        <div>✓ 15 ans d'expérience</div>
+        <div>✓ Garantie satisfaction</div>
+        <div>✓ Intervention locale: Lyon & Métropole</div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+        <div class="kv">
+          <div class="item"><strong>Tarif</strong><div style="font-weight:700">A partir de 690€</div></div>
+          <div class="item"><strong>Délais</strong><div style="font-weight:700">Sous 7 jours</div></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="card-side">
+      <h4>Obtenez votre devis personnalisé</h4>
+      <p>Remplissez les informations ci-dessous ou appelez-nous pour une estimation rapide.</p>
+      <form id="contactForm" aria-label="Formulaire de contact">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Nom et prénom" required>
+        </div>
+        <div class="form-row">
+          <input type="tel" name="phone" placeholder="Téléphone" required>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="Email (optionnel)">
+        </div>
+        <div class="form-row">
+          <select name="service">
+            <option>Choisissez un service</option>
+            <option>Création de jardin</option>
+            <option>Terrasse & aménagement</option>
+            <option>Entretien & taille</option>
+            <option>Plantations & paysagisme</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <textarea name="message" placeholder="Informations sur votre projet (surface, budget, photo)..."></textarea>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn" type="submit">Envoyer ma demande</button>
+          <a class="btn-outline" href="tel:+33472000000">Nous appeler</a>
+        </div>
+        <div class="small-note">Nous contacterons sous 48h. Vos données sont confidentielles.</div>
+      </form>
+    </aside>
+  </section>
+
+  <section class="section">
+    <h2>Qui sommes-nous ?</h2>
+    <p class="lead">Art & Jardin Paysage est une équipe de paysagistes professionnels basée à Lyon. Nous concevons et réalisons des espaces extérieurs durables, esthétiques et adaptés à votre quotidien. De la conception 3D à la réalisation, nous accompagnons chaque projet avec transparence et savoir-faire.</p>
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px;background:linear-gradient(90deg,#fff,#f7f9f6);padding:16px;border-radius:12px;border:1px solid #eef5ee">
+        <strong>Notre méthode</strong>
+        <p style="margin:8px 0 0;color:var(--muted)">Analyse du terrain → Proposition 3D → Planification → Réalisation → Entretien</p>
+      </div>
+      <div style="flex:1;min-width:220px;background:linear-gradient(90deg,#fff,#fff);padding:16px;border-radius:12px;border:1px solid #eef5ee">
+        <strong>Engagement qualité</strong>
+        <p style="margin:8px 0 0;color:var(--muted)">Matériaux locaux, plantes adaptées au climat, garantie travaux et suivi post-livraison.</p>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Pour quels paysagistes ?</h2>
-    <p>Essentiel V2 est pensé pour les paysagistes qui ont déjà un site ancien, peu moderne ou peu efficace, et qui veulent une vraie amélioration visible.</p>
+  <section class="section" id="services">
+    <h2>Nos services</h2>
+    <p class="lead">Des solutions complètes pour tous les extérieurs — petits ou grands.</p>
+    <div class="services">
+      <div class="service">
+        <h3>Conception & plans 3D</h3>
+        <p>Projet sur-mesure avec visualisation 3D et options d'aménagement.</p>
+      </div>
+      <div class="service">
+        <h3>Création de jardins</h3>
+        <p>Plantations, gazon, massifs, allées et éclairage paysager.</p>
+      </div>
+      <div class="service">
+        <h3>Terrasses & dallages</h3>
+        <p>Terrasses bois, composite, béton décoratif et pavage.</p>
+      </div>
+      <div class="service">
+        <h3>Arrosage & systèmes techniques</h3>
+        <p>Installation d'arrosage automatique et gestion de l'eau.</p>
+      </div>
+      <div class="service">
+        <h3>Entretien & taille</h3>
+        <p>Contrats d'entretien, taille, débroussaillage et nettoyage.</p>
+      </div>
+      <div class="service">
+        <h3>Clôtures & éclairage</h3>
+        <p>Clôtures paysagères, portails, éclairage pour mise en valeur.</p>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p>Impact-NVA — Sites vitrines pour paysagistes</p>
-    <p>contact@impact-nva.fr — https://impact-nva.fr</p>
-  </footer>
+  <section class="section" id="realisations">
+    <h2>Réalisations récentes</h2>
+    <p class="lead">Exemples de chantiers livrés — inspiration et savoir-faire.</p>
+    <div class="projects">
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=1200&q=70&auto=format&fit=crop" alt="Jardin moderne">
+        <div class="p-info">Jardin moderne • Lyon 3</div>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=70&auto=format&fit=crop" alt="Terrasse bois">
+        <div class="p-info">Terrasse bois • Projet urbain</div>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=70&auto=format&fit=crop" alt="Gazon et plantation">
+        <div class="p-info">Aménagement familiale</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Galerie photo</h2>
+    <p class="lead">Plusieurs projets, styles et ambiances réalisés par notre équipe.</p>
+    <div class="gallery" aria-hidden="false">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 1">
+      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 2">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=60&auto=format&fit=crop" alt="Jardin 3">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 4">
+      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 5">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=60&auto=format&fit=crop" alt="Jardin 6">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 7">
+      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 8">
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Avant / Après</h2>
+    <p class="lead">Voyez l'impact d'une transformation professionnelle.</p>
+    <div class="compare">
+      <div class="comparison">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop" alt="Avant">
+        <div class="after" style="width:55%">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1400&q=80&auto=format&fit=crop" alt="Après">
+        </div>
+        <div class="slider" aria-hidden="true"></div>
+        <div class="range">
+          <input id="compareRange" type="range" min="0" max="100" value="55">
+        </div>
+      </div>
+      <div style="min-width:260px;flex:0 0 260px">
+        <div style="background:#fff;padding:16px;border-radius:12px;border:1px solid #eef5ee">
+          <strong>Projet : Cour arrière résidentielle</strong>
+          <p style="margin:8px 0;color:var(--muted)">Remplacement d'une pelouse abîmée, création d'un coin détente en bois, plantation d'arbustes et installation d'un système d'arrosage.</p>
+          <ul style="margin:8px 0 0;color:var(--muted)">
+            <li>Durée : 10 jours</li>
+            <li>Budget : 6 400 €</li>
+            <li>Garantie : 2 ans</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Avis clients</h2>
+    <p class="lead">Des clients satisfaits — notes réelles et retours locaux.</p>
+    <div style="overflow:hidden">
+      <div class="reviews" style="position:relative;height:150px">
+        <div class="review" style="transform:translateX(0px)">
+          <div class="stars">★★★★★</div>
+          <strong>Claire D. — Lyon 2</strong>
+          <p style="margin:8px 0 0;color:var(--muted)">Travail soigné et respect des délais. Notre terrasse est devenue notre pièce préférée.</p>
+        </div>
+        <div class="review" style="transform:translateX(320px)">
+          <div class="stars">★★★★★</div>
+          <strong>Marc L. — Lyon 3</strong>
+          <p style="margin:8px 0 0;color:var(--muted)">Conseils pertinents et finitions impeccables. Équipe disponible et professionnelle.</p>
+        </div>
+        <div class="review" style="transform:translateX(640px)">
+          <div class="stars">★★★★☆</div>
+          <strong>Anne S. — Villeurbanne</strong>
+          <p style="margin:8px 0 0;color:var(--muted)">Très bon rapport qualité/prix, suivi après chantier satisfaisant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Zones d'intervention</h2>
+    <p class="lead">Nous intervenons rapidement dans la Métropole de Lyon et départements voisins.</p>
+    <div class="zones" style="margin-bottom:16px">
+      <div class="zone">Lyon 1 à 9</div>
+      <div class="zone">Villeurbanne</div>
+      <div class="zone">Caluire-et-Cuire</div>
+      <div class="zone">Vénissieux</div>
+      <div class="zone">Bron</div>
+      <div class="zone">Oullins</div>
+      <div class="zone">Décines</div>
+      <div class="zone">Tassin-la-Demi-Lune</div>
+    </div>
+    <div class="map-wrap">
+      <iframe title="Carte Google Maps - Art & Jardin Paysage Lyon" src="https://maps.google.com/maps?q=45.764043,4.835659&z=13&output=embed" style="border:0;width:100%;height:100%"></iframe>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact & demande de devis</h2>
+    <p class="lead">Prêt à commencer ? Parlez-nous de votre projet ou demandez une visite technique.</p>
+    <div style="display:grid;grid-template-columns:1fr 360px;gap:18px">
+      <div style="background:#fff;padding:18px;border-radius:12px;border:1px solid #eef5ee">
+        <form id="contactForm2" onsubmit="event.preventDefault(); document.getElementById('contactForm').dispatchEvent(new Event('submit'));">
+          <div style="display:flex;gap:8px;margin-bottom:8px">
+            <input type="text" name="name" placeholder="Nom et prénom" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6efe6">
+            <input type="tel" name="phone" placeholder="Téléphone" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6efe6">
+          </div>
+          <div style="margin-bottom:8px">
+            <input type="email" name="email" placeholder="Email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6">
+          </div>
+          <div style="margin-bottom:8px">
+            <textarea name="message" placeholder="Décrivez votre projet (surface, budget, contraintes)..." style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6;min-height:120px"></textarea>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" type="submit">Envoyer ma demande</button>
+            <a class="btn-outline" href="tel:+33472000000">Appelez-nous</a>
+          </div>
+        </form>
+      </div>
+
+      <aside style="background:#fff;padding:18px;border-radius:12px;border:1px solid #eef5ee">
+        <strong>Coordonnées</strong>
+        <p style="margin:8px 0;color:var(--muted)">Art & Jardin Paysage<br>12 Rue du Parc, 69002 Lyon<br>Tél: <a href="tel:+33472000000">+33 4 72 00 00 00</a><br>Email: <a href="mailto:contact@artjardinpaysage.fr">contact@artjardinpaysage.fr</a></p>
+        <strong>Horaires</strong>
+        <p style="margin:8px 0;color:var(--muted)">Lundi - Vendredi : 08:00 - 18:00<br>Samedi : sur rendez-vous</p>
+        <div style="margin-top:12px"><a class="btn" href="tel:+33472000000">Contactez-nous</a></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="container footer">
+  <div class="col">
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="logo" style="width:44px;height:44px;font-size:16px">AJ</div>
+      <div>
+        <div style="font-weight:800">Art & Jardin Paysage</div>
+        <div style="font-size:13px;color:var(--muted)">Paysagiste • Lyon</div>
+      </div>
+    </div>
+    <p style="margin-top:12px;color:var(--muted)">Conception et réalisation d'espaces extérieurs durables. Devis personnalisé et conseils d'experts.</p>
+  </div>
+  <div class="col" style="flex:1">
+    <strong>Liens rapides</strong>
+    <div style="margin-top:8px;display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#services">Services</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#contact">Devis</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div style="margin-top:12px;color:var(--muted)">SIRET: 123 456 789 00010</div>
+  </div>
+  <div class="col" style="text-align:right">
+    <strong>Adresse</strong>
+    <div style="margin-top:8px;color:var(--muted)">12 Rue du Parc, 69002 Lyon</div>
+    <div style="margin-top:16px">
+      <a class="btn-outline" href="https://maps.google.com?q=45.764043,4.835659" target="_blank">Nous situer</a>
+    </div>
+  </div>
+</footer>
+
+<div class="container" style="padding:16px 20px 60px">
+  <div class="copy">© <strong>Art & Jardin Paysage</strong> — Tous droits réservés • Conception locale • Données protégées</div>
+</div>
 </body>
 </html>
