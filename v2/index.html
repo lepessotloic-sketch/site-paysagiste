@@ -1,669 +1,405 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Impact-NVA — Vitrine Paysagiste • 390€ • Livraison 48h</title>
-<meta name="description" content="Modèle de site vitrine pour paysagistes. Design beige pierre & vert olive. Offre : 390€ - Livraison 48h. Le digital au service du paysagiste.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23EDE6DE'/%3E%3Cpath d='M50 20c7 0 12 5 12 12s-5 12-12 12-12-5-12-12 5-12 12-12z' fill='%233D5A2B'/%3E%3C/svg%3E" />
+  <meta charset="utf-8" />
+  <title>TEST IMPACT NVA V2 — Impact-NVA • LE DIGITAL AU SERVICE DU PAYSAGISTE</title>
+  <meta name="description" content="Vitrine démo Impact-NVA — Site prêt pour paysagistes. Offre 390€ | Livraison 48h. Galerie immersive, Avant/Après, Formulaire de contact et intégration Google Maps." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="canonical" href="https://impact-nva.fr/" />
+  <meta name="theme-color" content="#efe6d8" />
+  <style>
+    :root{
+      --beige:#efe6d0;           /* beige pierre */
+      --offwhite:#fbf9f5;       /* blanc cassé */
+      --olive:#707a3a;          /* vert olive */
+      --olive-dark:#55632a;
+      --accent:#c62828;         /* titre rouge demandé */
+      --muted:#6b6b6b;
+      --max-width:1200px;
+      --radius:10px;
+      --shadow: 0 8px 24px rgba(37,37,37,0.10);
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    }
+    html,body{height:100%;margin:0;background:var(--beige);color:#17202a;}
+    a{color:var(--olive-dark);text-decoration:none}
+    header.site-header{
+      position:fixed;top:18px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;z-index:60;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.7);backdrop-filter:blur(4px);padding:10px 14px;border-radius:10px;box-shadow:var(--shadow);
+    }
+    .brand .title{font-weight:700;color:var(--olive-dark);font-size:15px}
+    .brand .slogan{font-size:12px;color:var(--muted);margin-top:-2px}
+    .cta-top{
+      background:linear-gradient(90deg,var(--olive) 0%, #7b8a3f 100%);
+      color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(81,95,39,0.18)
+    }
 
-<style>
-:root{
-  --beige:#ede6de;
-  --stone:#d8cfc5;
-  --olive:#3d5a2b;
-  --olive-2:#6a7b3a;
-  --accent:#8aa05a;
-  --muted:#7a7269;
-  --white:#fbfaf8;
-  --card-shadow: 0 6px 22px rgba(38,34,30,0.08);
-  --radius:12px;
-  --max-width:1200px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color:#2b2b2b;
-  background:linear-gradient(180deg,var(--beige),#f7f6f4);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.45;
-}
+    /* HERO full screen */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
+      box-sizing:border-box;
+    }
+    .hero-inner{
+      width:100%;max-width:var(--max-width);display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:center;
+    }
+    .hero-left{
+      background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));
+      padding:36px;border-radius:16px;box-shadow:var(--shadow);
+    }
+    h1{
+      margin:0 0 12px 0;font-size:48px;line-height:1.02;color:var(--accent);letter-spacing:0.6px;
+      font-weight:800;
+    }
+    p.lead{margin:0 0 18px 0;color:#33403a;font-size:16px}
+    .price-badge{
+      display:inline-flex;align-items:center;gap:10px;background:var(--offwhite);padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);font-weight:700;
+    }
+    .price{
+      font-size:20px;color:var(--olive-dark)
+    }
+    .delivery{font-size:13px;color:var(--muted);font-weight:600}
+    .hero-ctas{margin-top:20px;display:flex;gap:12px;align-items:center}
+    .btn-primary{
+      background:var(--accent);color:#fff;padding:12px 16px;border-radius:10px;border:none;font-weight:800;cursor:pointer;box-shadow:0 8px 20px rgba(198,40,40,0.18)
+    }
+    .btn-ghost{
+      background:transparent;padding:12px 16px;border-radius:10px;border:2px solid rgba(85,99,42,0.12);font-weight:700;color:var(--olive-dark);cursor:pointer;
+    }
 
-/* Container */
-.container{
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:28px;
-}
+    .hero-right{display:flex;flex-direction:column;gap:14px;align-items:stretch}
+    .feature-card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.9),#ffffff);padding:16px;border-radius:14px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);
+    }
+    .feature-card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
 
-/* Header */
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  padding:10px 0 18px;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.logo{
-  width:64px;
-  height:64px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--stone),var(--beige));
-  box-shadow: var(--card-shadow);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-}
-.logo svg{width:40px;height:40px}
-.title{
-  display:flex;
-  flex-direction:column;
-}
-.title h1{
-  margin:0;
-  font-size:18px;
-  letter-spacing:0.4px;
-  color:var(--olive);
-}
-.title p{
-  margin:0;
-  font-size:12px;
-  color:var(--muted);
-}
+    /* Gallery */
+    section.gallery{padding:70px 20px;max-width:var(--max-width);margin:0 auto;box-sizing:border-box}
+    .gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+    .g-item{border-radius:12px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+    .g-large{grid-column:span 7}
+    .g-small{grid-column:span 5;display:grid;grid-template-rows:1fr 1fr;gap:12px}
+    .g-item img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* CTA header */
-.header-actions{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 16px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:600;
-  cursor:pointer;
-  border:0;
-}
-.btn-olive{
-  background:linear-gradient(180deg,var(--olive),var(--olive-2));
-  color:var(--white);
-  box-shadow: 0 8px 26px rgba(61,90,43,0.18);
-}
-.btn-outline{
-  background:transparent;
-  border:1px solid rgba(61,90,43,0.12);
-  color:var(--olive);
-  padding:10px 14px;
-}
+    /* Before / After */
+    .before-after{padding:70px 20px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.4));margin-top:18px}
+    .ba-inner{max-width:var(--max-width);margin:0 auto;padding:28px;border-radius:12px;background:transparent;box-sizing:border-box}
+    .ba-wrap{position:relative;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);height:420px}
+    .ba-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .ba-overlay{position:absolute;left:0;top:0;height:100%;width:50%;overflow:hidden}
+    .ba-handle{position:absolute;left:calc(50% - 18px);top:0;height:100%;width:36px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.2));border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:ew-resize}
+    .ba-handle:after{content:"";width:2px;height:60%;background:rgba(0,0,0,0.12);border-radius:1px}
+    .ba-labels{display:flex;justify-content:space-between;margin-top:12px;color:var(--muted);font-weight:700}
 
-/* Hero full-screen */
-.hero{
-  display:grid;
-  grid-template-columns: 1fr 480px;
-  gap:28px;
-  align-items:stretch;
-  margin:18px 0 36px;
-}
-@media (max-width:980px){
-  .hero{grid-template-columns:1fr; padding-bottom:10px}
-}
+    /* Services */
+    section.services{padding:70px 20px;max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;box-sizing:border-box}
+    .service{background:#fff;padding:18px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    .service h3{margin:0 0 8px 0;color:var(--olive-dark)}
+    .service p{margin:0;color:var(--muted)}
 
-.hero-card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.9));
-  border-radius:18px;
-  padding:28px;
-  box-shadow: var(--card-shadow);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:16px;
-  min-height:420px;
-}
-.kicker{
-  display:inline-flex;
-  background:linear-gradient(90deg,var(--accent),var(--olive-2));
-  color:var(--white);
-  padding:8px 12px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:13px;
-  align-self:flex-start;
-  box-shadow: 0 6px 18px rgba(138,160,90,0.12);
-}
-.hero h2{
-  margin:0;
-  font-size:34px;
-  color:var(--olive);
-  line-height:1.02;
-}
-.hero p.lead{
-  margin:6px 0 0;
-  color:#45403b;
-  font-size:15px;
-}
-.badges{
-  display:flex;
-  gap:10px;
-  margin-top:12px;
-}
-.badge{
-  background:var(--stone);
-  color:var(--olive);
-  padding:10px 12px;
-  border-radius:10px;
-  font-weight:700;
-  display:inline-flex;
-  gap:8px;
-  align-items:center;
-  font-size:14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
-}
-.price{background:linear-gradient(90deg,#e9f6e9,#f0f8ef) ; color:var(--olive);}
+    /* Contact & Map */
+    section.contact{padding:70px 20px;max-width:var(--max-width);margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:24px;box-sizing:border-box}
+    form.contact-form{background:#fff;padding:20px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input[type="text"],input[type="email"],textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);box-sizing:border-box;font-size:14px}
+    textarea{min-height:120px;resize:vertical}
+    .form-row{margin-bottom:12px}
+    .form-actions{display:flex;gap:8px;align-items:center}
+    .map-card{background:#fff;border-radius:12px;padding:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04)}
+    .map-card iframe{width:100%;height:360px;border:0;border-radius:8px;display:block}
 
-/* CTA stack */
-.cta-row{
-  display:flex;
-  gap:12px;
-  margin-top:18px;
-  align-items:center;
-}
-.cta-note{font-size:13px;color:var(--muted)}
+    /* Reviews block */
+    .reviews{padding:28px;margin-top:18px;background:linear-gradient(180deg,#fff, #fbfbfb);border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .reviews p{margin:0;color:var(--muted);font-weight:700}
 
-/* Right column - visual */
-.visual{
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow: var(--card-shadow);
-  min-height:420px;
-  display:flex;
-  flex-direction:column;
-  gap:0;
-  background:linear-gradient(180deg,#ffffff,#f7f7f6);
-}
-.visual .hero-media{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:2px;
-}
-.media-item{
-  min-height:200px;
-  background-size:cover;
-  background-position:center;
-  transition:transform .45s ease;
-}
-.media-item:hover{transform:scale(1.03)}
-.visual .bottom-strip{
-  padding:14px 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:linear-gradient(90deg,rgba(237,230,222,0.9),rgba(241,239,236,0.9));
-}
+    footer.site-footer{margin-top:40px;padding:26px 20px;background:transparent;max-width:var(--max-width);margin-left:auto;margin-right:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;box-sizing:border-box}
+    .footer-left{color:var(--muted)}
+    .footer-right a{margin-left:12px;color:var(--olive-dark);font-weight:700}
 
-/* Gallery section */
-.section{
-  margin:36px 0;
-}
-.section h3{
-  margin:0 0 14px;
-  color:var(--olive);
-  font-size:20px;
-}
-.gallery-grid{
-  display:grid;
-  grid-template-columns: repeat(3,1fr);
-  gap:12px;
-}
-@media (max-width:980px){ .gallery-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px){ .gallery-grid{grid-template-columns:1fr} }
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero-inner{grid-template-columns:1fr}
+      .g-large{grid-column:span 12}
+      .g-small{grid-column:span 12;grid-template-columns:repeat(2,1fr);grid-template-rows:1fr;gap:12px}
+      section.services{grid-template-columns:1fr}
+      section.contact{grid-template-columns:1fr}
+      .hero-left h1{font-size:36px}
+    }
 
-.gallery-item{
-  border-radius:12px;
-  overflow:hidden;
-  background-size:cover;
-  background-position:center;
-  height:220px;
-  cursor:pointer;
-  position:relative;
-  box-shadow:var(--card-shadow);
-}
-.gallery-item .caption{
-  position:absolute;
-  left:12px;
-  bottom:12px;
-  background:rgba(61,90,43,0.88);
-  color:white;
-  padding:8px 10px;
-  border-radius:8px;
-  font-size:13px;
-}
+    @media (max-width:520px){
+      h1{font-size:28px}
+      .brand .title{font-size:13px}
+      .brand .slogan{display:none}
+      header.site-header{left:12px;right:12px}
+    }
 
-/* Before / After */
-.compare{
-  display:flex;
-  gap:22px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-.compare-card{
-  flex:1 1 520px;
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-  background:#fff;
-  box-shadow:var(--card-shadow);
-}
-.ba-controls{
-  display:flex;
-  gap:10px;
-  padding:12px;
-  align-items:center;
-}
-.slider{
-  -webkit-appearance:none;
-  width:100%;
-  height:6px;
-  background:linear-gradient(90deg,var(--accent),var(--olive-2));
-  border-radius:6px;
-  outline:none;
-}
-
-/* Services */
-.services{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-@media (max-width:980px){ .services{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px){ .services{grid-template-columns:1fr} }
-.service{
-  background:linear-gradient(180deg,var(--white),#fcfbfa);
-  padding:18px;
-  border-radius:12px;
-  box-shadow:var(--card-shadow);
-}
-.service h4{margin:0 0 8px;color:var(--olive)}
-.service p{margin:0;color:#555}
-
-/* Contact & map */
-.split{
-  display:grid;
-  grid-template-columns:1fr 420px;
-  gap:18px;
-}
-@media (max-width:980px){ .split{grid-template-columns:1fr} }
-
-.form-card{
-  padding:18px;
-  border-radius:12px;
-  background:linear-gradient(180deg,#fff,#fbfaf8);
-  box-shadow:var(--card-shadow);
-}
-.input, textarea{
-  width:100%;
-  padding:12px 14px;
-  border-radius:10px;
-  border:1px solid #e6e0da;
-  margin-bottom:12px;
-  font-size:14px;
-  background:white;
-}
-.textarea{min-height:120px; resize:vertical}
-.form-actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-/* Map */
-.map-card{
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:var(--card-shadow);
-  background:var(--stone);
-}
-.map-card iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
-
-/* Reviews */
-.reviews{
-  padding:18px;
-  border-radius:12px;
-  background:linear-gradient(180deg,#fff,#fafaf8);
-  box-shadow:var(--card-shadow);
-}
-.reviews h4{margin:0 0 8px;color:var(--olive)}
-.reviews .placeholder{
-  background:linear-gradient(90deg,#fff,#f6f5f3);
-  border-radius:10px;
-  padding:18px;
-  color:#6b665f;
-}
-
-/* Footer */
-footer{
-  margin-top:28px;
-  padding:22px 0;
-  color:#4e4a46;
-  font-size:14px;
-  display:flex;
-  justify-content:space-between;
-  gap:18px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-.footer-left{display:flex;flex-direction:column;gap:6px}
-.footer-left a{color:var(--olive);text-decoration:none;font-weight:700}
-.small{font-size:13px;color:#6c675f}
-
-/* Lightbox modal */
-.lightbox{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  background:rgba(8,6,4,0.6);
-  z-index:1200;
-  padding:24px;
-}
-.lightbox.show{display:flex}
-.lightbox img{max-width:1200px;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
-
-/* Misc */
-.tag{
-  display:inline-block;
-  font-size:12px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:#f3f1ee;
-  color:#6b665f;
-}
-.center{display:flex;align-items:center;justify-content:center}
-.small-muted{font-size:13px;color:var(--muted)}
-.note{font-size:13px;color:#504a44}
-</style>
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(7,10,8,0.7);display:none;align-items:center;justify-content:center;z-index:120}
+    .lightbox img{max-width:92%;max-height:86%;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
+    .lb-close{position:fixed;right:20px;top:20px;color:#fff;font-size:26px;cursor:pointer;font-weight:700}
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Impact-NVA",
+    "url":"https://impact-nva.fr",
+    "email":"contact@impact-nva.fr",
+    "description":"Impact-NVA — LE DIGITAL AU SERVICE DU PAYSAGISTE. Sites vitrines rapides et optimisés pour artisans paysagistes."
+  }
+  </script>
 </head>
 <body>
-<div class="container">
-  <header class="header" role="banner">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="12" fill="#D8CFC5"/>
-          <path d="M32 16c6 0 10 4 10 10s-4 10-10 10-10-4-10-10 4-10 10-10z" fill="#3D5A2B"/>
-          <path d="M18 44c6-4 10-6 14-6s8 2 14 6v6H18v-6z" fill="#8AA05A" opacity="0.95"/>
-        </svg>
-      </div>
-      <div class="title">
-        <h1>Impact-NVA</h1>
-        <p>LE DIGITAL AU SERVICE DU PAYSAGISTE</p>
+  <header class="site-header" role="banner">
+    <div class="brand" aria-hidden="false">
+      <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--olive),var(--olive-dark));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">IN</div>
+      <div>
+        <div class="title">Impact-NVA</div>
+        <div class="slogan">LE DIGITAL AU SERVICE DU PAYSAGISTE</div>
       </div>
     </div>
-
-    <div class="header-actions">
-      <a class="btn btn-outline" href="#services">Services</a>
-      <a class="btn btn-olive" href="#contact" id="main-cta">Commander : 390€</a>
-    </div>
+    <button class="cta-top" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Demander mon site • 390€</button>
   </header>
 
   <main>
-    <section class="hero" aria-label="Introduction">
-      <div class="hero-card">
-        <span class="kicker">Vitrine paysagistes</span>
-        <h2>Un site professionnel, livré en 48h.<br>Prix fixe : 390€.</h2>
-        <p class="lead">Design haut de gamme beige pierre & vert olive, optimisé pour convaincre vos prospects et mettre en valeur vos réalisations. Responsive, SEO local et prêt à capter vos premiers clients.</p>
+    <section class="hero" aria-labelledby="main-title">
+      <div class="hero-inner">
+        <div class="hero-left" role="presentation">
+          <h1 id="main-title">TEST IMPACT NVA V2</h1>
+          <p class="lead">Vitrine démonstration conçue pour convaincre vos clients : design haut de gamme, photos immersives et conversion immédiate. Offre spéciale : site prêt pour votre entreprise de paysage.</p>
 
-        <div class="badges">
-          <div class="badge price">Prix : 390 €</div>
-          <div class="badge">Livraison : 48h</div>
-          <div class="badge">SEO local inclus</div>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+            <div class="price-badge" aria-hidden="false">
+              <div style="display:flex;flex-direction:column">
+                <div class="price">390 €</div>
+                <div class="delivery">Livraison : 48h</div>
+              </div>
+            </div>
+
+            <div style="font-size:13px;color:var(--muted);padding:8px 12px;background:rgba(255,255,255,0.6);border-radius:10px">Photos grandes • Galerie immersive • Avant/Après</div>
+          </div>
+
+          <div class="hero-ctas">
+            <button class="btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Je veux ce site — 390 €</button>
+            <button class="btn-ghost" onclick="openGallery()">Voir la galerie</button>
+          </div>
         </div>
 
-        <div class="cta-row">
-          <a class="btn btn-olive" href="#contact">Je commande mon site</a>
-          <a class="btn btn-outline" href="#gallery">Voir la galerie</a>
-          <span class="cta-note">Paiement sécurisé • Garantie satisfaction</span>
-        </div>
+        <aside class="hero-right" aria-label="Highlights">
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=914bdba2afd78b1d6b3b6e6a8a1b7e70" alt="Aménagement paysager — exemple 1">
+            <div style="margin-top:12px;font-weight:700;color:var(--olive-dark)">Design moderne et chaleureux</div>
+            <div style="color:var(--muted);margin-top:6px;font-size:13px">Optimisé pour mobile et recherche locale.</div>
+          </div>
 
-        <div style="margin-top:14px; font-size:13px; color:var(--muted)">
-          <strong>Impact-NVA</strong> — https://impact-nva.fr • <a href="mailto:contact@impact-nva.fr">contact@impact-nva.fr</a>
-        </div>
+          <div class="feature-card">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7d9c3b2fc2b3c6a8c3d6b7ae3e2d5fef" alt="Entretien de jardin — exemple 2">
+            <div style="margin-top:12px;font-weight:700;color:var(--olive-dark)">Conversion & prise de contact</div>
+            <div style="color:var(--muted);margin-top:6px;font-size:13px">Formulaire simple, CTA visible, carte intégrée.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="Galerie immersive">
+      <div style="max-width:var(--max-width);margin:0 auto 18px  auto;display:flex;justify-content:space-between;align-items:center">
+        <h2 style="margin:0;color:var(--olive-dark)">Galerie immersive</h2>
+        <div style="color:var(--muted);font-weight:700">Grandes photos • Présentation soignée</div>
       </div>
 
-      <aside class="visual" aria-hidden="false">
-        <div class="hero-media" role="list">
-          <div class="media-item" style="background-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b3d5a4a0d6f7ad5aaae8b8a0b5a27d9');"></div>
-          <div class="media-item" style="background-image:url('https://images.unsplash.com/photo-1501004318646-4d6b0f8f0a2f?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f3e9e44c5c2a6b2abf3b3627651a5d7');"></div>
-          <div class="media-item" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7c1d96c2d7b25d12a6b7a0b6f6d2f4a6');"></div>
-          <div class="media-item" style="background-image:url('https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=fc31b8e6a8b2f3f4e9a5a6a2afb2c7d8');"></div>
+      <div class="gallery-grid" role="list">
+        <div class="g-item g-large" role="listitem">
+          <img src="https://images.unsplash.com/photo-1562184552-2b8e1f3b7e8b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1f9e0c2f6d3b9d7f2c1a8e9f0b4c3d6a" alt="Aménagement paysager large" onclick="openLightbox(this.src)">
         </div>
-        <div class="bottom-strip">
-          <div>
-            <div style="font-weight:700;color:var(--olive)">Modèle prêt à l'emploi</div>
-            <div class="small-muted">Galerie & avant/après • Conversion optimisée</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="tag">Livraison 48h</span>
-            <a class="btn btn-olive" href="#contact">Commander</a>
-          </div>
+        <div class="g-item g-small" role="listitem" style="display:grid;grid-column:span 5;grid-template-columns:1fr;gap:12px">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=914bdba2afd78b1d6b3b6e6a8a1b7e70" alt="Jardin design" onclick="openLightbox(this.src)">
+          <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d7f2b7f0f8a4a8b6b1e2f3c4d5e6f7a" alt="Allée végétalisée" style="height:100%;object-fit:cover" onclick="openLightbox(this.src)">
         </div>
+      </div>
+    </section>
+
+    <section class="before-after" aria-label="Avant après spectaculaire">
+      <div class="ba-inner">
+        <h2 style="margin:0 0 12px 0;color:var(--olive-dark)">Avant / Après</h2>
+        <div style="color:var(--muted);margin-bottom:12px;font-weight:700">Comparaison visuelle pour valoriser vos réalisations</div>
+
+        <div class="ba-wrap" id="baWrap" aria-hidden="false">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=914bdba2afd78b1d6b3b6e6a8a1b7e70" alt="Après — jardin aménagé">
+          <div class="ba-overlay" id="baOverlay">
+            <img src="https://images.unsplash.com/photo-1482192505345-5655af888cc4?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=76a7b9be4b4f3c5d6a7e8f9b0c1d2e3f" alt="Avant — pelouse simple">
+          </div>
+          <div class="ba-handle" id="baHandle" title="Glisser pour comparer" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"></div>
+        </div>
+
+        <div class="ba-labels">
+          <div>Avant</div>
+          <div>Après</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" aria-label="Services">
+      <div class="service">
+        <h3>Site vitrine optimisé</h3>
+        <p>Page d'accueil, galerie, services, contact et Google Maps. Responsive et SEO local pour capter vos clients.</p>
+      </div>
+      <div class="service">
+        <h3>Pack express • 390 €</h3>
+        <p>Mise en ligne en 48h. Contenu optimisé, grandes photos et CTA visibles pour maximiser les demandes.</p>
+      </div>
+      <div class="service">
+        <h3>Visibilité locale</h3>
+        <p>Optimisation pour recherches locales, Google My Business et intégration d'avis futurs pour renforcer la confiance.</p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-label="Contact et Carte">
+      <form class="contact-form" onsubmit="submitDemo(event)">
+        <h3 style="margin-top:0;color:var(--olive-dark)">Contactez Impact-NVA</h3>
+
+        <div class="form-row">
+          <label for="name">Votre nom</label>
+          <input id="name" name="name" type="text" required>
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required>
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message (ex: Je veux ce site pour mon entreprise)</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-primary" type="submit">Demander mon site — 390 €</button>
+          <button type="button" class="btn-ghost" onclick="fillQuick()">Demande rapide</button>
+          <div style="margin-left:auto;color:var(--muted);font-weight:700">Livraison en 48h</div>
+        </div>
+
+        <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+          Email : <a href="mailto:contact@impact-nva.fr">contact@impact-nva.fr</a> • Site : <a href="https://impact-nva.fr" target="_blank" rel="noopener">impact-nva.fr</a>
+        </div>
+      </form>
+
+      <aside class="map-card" aria-label="Carte Google Maps">
+        <h4 style="margin:0 0 8px 0;color:var(--olive-dark)">Carte</h4>
+        <div style="color:var(--muted);margin-bottom:8px;font-size:13px">Carte intégrée (zone France)</div>
+        <iframe src="https://www.google.com/maps?q=46.2276,2.2137&hl=fr&z=6&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte France"></iframe>
       </aside>
     </section>
 
-    <section id="gallery" class="section" aria-label="Galerie">
-      <h3>Galerie immersive — Inspirations & réalisations</h3>
-      <p class="small-muted">Sélection d'ambiances et d'aménagements pour vous inspirer. Présentation finalisée pour une vitrine professionnelle.</p>
-      <div class="gallery-grid" style="margin-top:14px">
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1454023492551-01d35f40a0c3?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b0d4e8b0f4a2b2b1a7c3d5f6e8319b0');" data-full="https://images.unsplash.com/photo-1454023492551-01d35f40a0c3?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=5b0d4e8b0f4a2b2b1a7c3d5f6e8319b0" role="button" tabindex="0">
-          <div class="caption">Terrasse & végétal</div>
-        </div>
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=2e4a5b7e1f6a2b3c4d5e6f7a8b9c0d1e');" data-full="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2e4a5b7e1f6a2b3c4d5e6f7a8b9c0d1e" role="button" tabindex="0">
-          <div class="caption">Allée minérale</div>
-        </div>
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1505691723518-36a77b145d0d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d6f2b9f3a6c4b7a8d5e9f0b1c2d3e4f');" data-full="https://images.unsplash.com/photo-1505691723518-36a77b145d0d?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=0d6f2b9f3a6c4b7a8d5e9f0b1c2d3e4f" role="button" tabindex="0">
-          <div class="caption">Éclairage paysager</div>
-        </div>
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b3d5a4a0d6f7ad5aaae8b8a0b5a27d9');" data-full="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7b3d5a4a0d6f7ad5aaae8b8a0b5a27d9" role="button" tabindex="0">
-          <div class="caption">Jardin contemporain</div>
-        </div>
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=7c1d96c2d7b25d12a6b7a0b6f6d2f4a6');" data-full="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=7c1d96c2d7b25d12a6b7a0b6f6d2f4a6" role="button" tabindex="0">
-          <div class="caption">Muret pierre</div>
-        </div>
-        <div class="gallery-item" style="background-image:url('https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=fc31b8e6a8b2f3f4e9a5a6a2afb2c7d8');" data-full="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?q=80&w=2200&auto=format&fit=crop&ixlib=rb-4.0.3&s=fc31b8e6a8b2f3f4e9a5a6a2afb2c7d8" role="button" tabindex="0">
-          <div class="caption">Espace détente</div>
+    <div style="max-width:var(--max-width);margin:24px auto 0 auto;padding:0 20px;box-sizing:border-box">
+      <div class="reviews" role="region" aria-label="Avis Google">
+        <p>Vos futurs avis Google seront affichés ici.</p>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button class="btn-primary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
+          <div style="font-size:13px;color:var(--muted)">Affichez vos avis dès la première commande</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="section" aria-label="Avant et après">
-      <h3>Avant / Après — Impact visuel</h3>
-      <p class="small-muted">Slider interactif pour mettre en valeur la transformation. Utilisation idéale pour vos chantiers et démonstrations.</p>
-
-      <div class="compare" style="margin-top:14px">
-        <div class="compare-card" aria-hidden="false">
-          <div style="position:relative;overflow:hidden">
-            <img id="ba-after" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=3f1a6f98b7a1e0c6d2e5a5f7b9c8d1a2" alt="Après — jardin rénové" style="width:100%;display:block;transform:translateZ(0);">
-            <img id="ba-before" src="https://images.unsplash.com/photo-1501004318646-4d6b0f8f0a2f?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f3e9e44c5c2a6b2abf3b3627651a5d7" alt="Avant — état initial" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 50% 0 0);transition:clip-path .25s ease;">
-          </div>
-          <div class="ba-controls">
-            <div style="width:100%;display:flex;gap:12px;align-items:center">
-              <span class="small-muted">Avant</span>
-              <input id="ba-slider" class="slider" type="range" min="0" max="100" value="50" aria-label="Contrôle Avant Après">
-              <span class="small-muted">Après</span>
-            </div>
-          </div>
-        </div>
-
-        <div style="flex:0 0 320px;display:flex;flex-direction:column;gap:10px">
-          <div style="padding:14px;border-radius:12px;background:linear-gradient(180deg,#fff,#fbfbfa);box-shadow:var(--card-shadow)">
-            <h4 style="margin:0 0 8px;color:var(--olive)">Transformation rapide</h4>
-            <p class="note">Montrez la valeur ajoutée de vos interventions. Ce bloc avant/après est conçu pour être inséré sur la page projet de votre site.</p>
-          </div>
-          <div style="padding:12px;border-radius:12px;background:linear-gradient(90deg,#f3f1ee,#f8f7f5);box-shadow:var(--card-shadow)">
-            <div style="font-weight:700;color:var(--olive)">Prix unique</div>
-            <div style="font-size:20px;color:var(--olive);font-weight:800">390 €</div>
-            <div class="small-muted">Site complet • Livraison 48h</div>
-          </div>
-        </div>
+    <footer class="site-footer" role="contentinfo">
+      <div class="footer-left">
+        <div style="font-weight:800;color:var(--olive-dark)">Impact-NVA</div>
+        <div style="color:var(--muted)">LE DIGITAL AU SERVICE DU PAYSAGISTE</div>
       </div>
-    </section>
-
-    <section id="services" class="section" aria-label="Services">
-      <h3>Services inclus</h3>
-      <div class="services" style="margin-top:12px">
-        <div class="service">
-          <h4>Design sur-mesure</h4>
-          <p>Page d'accueil immersive, galerie optimisée et mise en avant de vos prestations. Charte beige pierre & vert olive prête à l'emploi.</p>
-        </div>
-        <div class="service">
-          <h4>SEO local</h4>
-          <p>Balises optimisées, pages locales et micro-données pour améliorer votre visibilité auprès des clients proches de vous.</p>
-        </div>
-        <div class="service">
-          <h4>Formulaire & contact</h4>
-          <p>Formulaire de contact, intégration Google Maps et call-to-action clairs pour convertir vos visiteurs.</p>
-        </div>
-        <div class="service">
-          <h4>Avant / Après</h4>
-          <p>Module interactif pour valoriser vos transformations et convaincre vos prospects en un coup d'œil.</p>
-        </div>
-        <div class="service">
-          <h4>Galerie immersive</h4>
-          <p>Photos mises en valeur, affichage optimisé mobile et lightbox pour une expérience visuelle premium.</p>
-        </div>
-        <div class="service">
-          <h4>Livraison express</h4>
-          <p>Version prête en 48h. Révisions incluses pour adapter textes et photos.</p>
-        </div>
+      <div class="footer-right">
+        <a href="https://impact-nva.fr" target="_blank" rel="noopener">impact-nva.fr</a>
+        <a href="mailto:contact@impact-nva.fr">contact@impact-nva.fr</a>
       </div>
-    </section>
-
-    <section class="section" aria-label="Contact et localisation" id="contact">
-      <h3>Contactez-nous • Commandez votre vitrine</h3>
-      <div class="split" style="margin-top:12px">
-        <div class="form-card">
-          <form id="contact-form" onsubmit="return handleForm(event)">
-            <label class="small-muted">Nom / Entreprise</label>
-            <input class="input" id="name" name="name" required placeholder="Votre nom ou le nom de votre entreprise">
-            <label class="small-muted">Email</label>
-            <input class="input" id="email" name="email" type="email" required placeholder="votre@courriel.com">
-            <label class="small-muted">Message</label>
-            <textarea class="textarea" id="message" name="message" placeholder="Décrivez votre projet (zone d'intervention, services souhaités)"></textarea>
-            <div class="form-actions">
-              <button class="btn btn-olive" type="submit">Commander le site — 390€</button>
-              <a class="btn btn-outline" href="mailto:contact@impact-nva.fr">Envoyer par mail</a>
-              <div style="margin-left:auto" class="small-muted">Livraison : 48h</div>
-            </div>
-          </form>
-          <div style="margin-top:12px" class="small-muted">Pas de téléphone ou d'adresse affichés — modèle de démonstration Impact-NVA.</div>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="map-card" aria-hidden="false">
-            <iframe title="Carte - France (centre)" src="https://maps.google.com/maps?q=46.2276,2.2137&z=6&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
-
-          <div class="reviews">
-            <h4>Avis Google</h4>
-            <div class="placeholder">
-              Vos futurs avis Google seront affichés ici.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    </footer>
   </main>
 
-  <footer role="contentinfo">
-    <div class="footer-left">
-      <div style="display:flex;gap:10px;align-items:center">
-        <div style="width:42px;height:42px;border-radius:10px;background:var(--stone)"></div>
-        <div>
-          <div style="font-weight:700;color:var(--olive)">Impact-NVA</div>
-          <div class="small">LE DIGITAL AU SERVICE DU PAYSAGISTE</div>
-        </div>
-      </div>
-      <div class="small-muted" style="margin-top:8px">Site de démonstration • Offre : 390 € • Livraison 48h</div>
-    </div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+    <div class="lb-close" onclick="closeLightbox()">✕</div>
+    <img id="lbImg" src="" alt="Image agrandie">
+  </div>
 
-    <div style="display:flex;gap:18px;align-items:center">
-      <a href="https://impact-nva.fr" target="_blank" rel="noopener">impact-nva.fr</a>
-      <a href="mailto:contact@impact-nva.fr">contact@impact-nva.fr</a>
-      <div class="small-muted">© Impact-NVA</div>
-    </div>
-  </footer>
-</div>
+  <script>
+    // Lightbox
+    function openLightbox(src){
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lbImg');
+      img.src = src;
+      lb.style.display = 'flex';
+      lb.setAttribute('aria-hidden','false');
+    }
+    function closeLightbox(){
+      const lb = document.getElementById('lightbox');
+      lb.style.display = 'none';
+      lb.setAttribute('aria-hidden','true');
+      document.getElementById('lbImg').src = '';
+    }
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
 
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox" role="dialog" aria-hidden="true" aria-label="Aperçu image">
-  <img id="lightbox-img" src="" alt="Agrandissement">
-</div>
+    function openGallery(){
+      // Scroll to gallery
+      document.querySelector('.gallery').scrollIntoView({behavior:'smooth'});
+    }
 
-<script>
-/* Lightbox */
-document.querySelectorAll('.gallery-item').forEach(item=>{
-  item.addEventListener('click', ()=> {
-    const src = item.getAttribute('data-full') || '';
-    openLightbox(src);
-  });
-  item.addEventListener('keypress', (e)=>{ if(e.key==='Enter') { const src = item.getAttribute('data-full') || ''; openLightbox(src);} });
-});
-function openLightbox(src){
-  if(!src) return;
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  img.src = src;
-  lb.classList.add('show');
-  lb.setAttribute('aria-hidden','false');
-}
-document.getElementById('lightbox').addEventListener('click', (e)=>{
-  if(e.target.id==='lightbox' || e.target.id==='lightbox-img'){
-    document.getElementById('lightbox').classList.remove('show');
-    document.getElementById('lightbox').setAttribute('aria-hidden','true');
-    document.getElementById('lightbox-img').src = '';
-  }
-});
+    // Before/After slider
+    (function(){
+      const wrap = document.getElementById('baWrap');
+      const overlay = document.getElementById('baOverlay');
+      const handle = document.getElementById('baHandle');
+      let dragging = false;
+      let wrapRect;
 
-/* Avant/Après slider */
-const baSlider = document.getElementById('ba-slider');
-const baBefore = document.getElementById('ba-before');
-baSlider.addEventListener('input', (e)=>{
-  const v = e.target.value;
-  baBefore.style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
-});
+      function setPos(pageX){
+        const x = Math.min(Math.max(0, pageX - wrapRect.left), wrapRect.width);
+        const pct = x / wrapRect.width * 100;
+        overlay.style.width = pct + '%';
+        handle.style.left = `calc(${pct}% - 18px)`;
+        handle.setAttribute('aria-valuenow', Math.round(pct));
+      }
 
-/* Contact form handling - opens mailto with content for demonstration */
-function handleForm(e){
-  e.preventDefault();
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-  const subject = encodeURIComponent('Commande site vitrine - 390€');
-  const body = encodeURIComponent('Nom / Entreprise: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message + '\n\n---\nOffre: 390€ • Livraison 48h • Impact-NVA');
-  const mailto = 'mailto:contact@impact-nva.fr?subject=' + subject + '&body=' + body;
-  window.location.href = mailto;
-  return false;
-}
+      function start(e){
+        dragging = true;
+        wrapRect = wrap.getBoundingClientRect();
+        setPos(e.touches ? e.touches[0].pageX : e.pageX);
+      }
+      function move(e){
+        if(!dragging) return;
+        setPos(e.touches ? e.touches[0].pageX : e.pageX);
+      }
+      function end(){ dragging=false; }
 
-/* Accessibility: focus main CTA on load for quick action */
-window.addEventListener('load', ()=> {
-  const cta = document.getElementById('main-cta');
-  if(cta) cta.focus({preventScroll:true});
-});
-</script>
+      handle.addEventListener('mousedown', start);
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
+      handle.addEventListener('touchstart', start, {passive:true});
+      window.addEventListener('touchmove', move, {passive:true});
+      window.addEventListener('touchend', end);
+
+      // Initialize at 50%
+      window.addEventListener('load', function(){
+        overlay.style.width = '50%';
+        handle.style.left = 'calc(50% - 18px)';
+      });
+    })();
+
+    // Contact form (demo only)
+    function submitDemo(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !email || !message){ alert('Merci de remplir tous les champs.'); return; }
+
+      // Simulate submission
+      alert('Merci ' + name + ' — Votre demande pour un site à 390 € (livraison 48h) a bien été prise en compte. Nous vous contacterons via ' + email + '.');
+      e.target.reset();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function fillQuick(){
+      document.getElementById('name').value = 'Demo Client';
+      document.getElementById('email').value = 'client@example.com';
+      document.getElementById('message').value = 'Je souhaite le site à 390 € - livraison 48h. Merci.';
+    }
+  </script>
 </body>
 </html>
