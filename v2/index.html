@@ -1,484 +1,444 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Art & Jardin Paysage — Paysagiste à Lyon | Devis gratuit</title>
-<meta name="description" content="Paysagiste à Lyon spécialisé en aménagements extérieurs, jardins, terrasses, entretien et avant/après. Devis rapide, intervention locale, réalisations sur-mesure.">
-<link rel="canonical" href="https://votre-domaine-exemple.com/">
-<meta property="og:title" content="Art & Jardin Paysage — Paysagiste à Lyon">
-<meta property="og:description" content="Aménagements extérieurs, création de jardins, terrasses et entretien. Demandez votre devis gratuit.">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<meta name="theme-color" content="#1f6f3a">
-<style>
-:root{
-  --green:#1f6f3a;
-  --green-2:#2ea04a;
-  --muted:#6b6b6b;
-  --card:#f7f9f6;
-  --radius:10px;
-  --maxw:1100px;
-  --accent:#0f5132;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color-scheme: light;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:#ffffff;
-  color:#111;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.45;
-  font-size:16px;
-}
-.container{max-width:var(--maxw);margin:0 auto;padding:20px}
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:18px 0;
-}
-.brand{
-  display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
-}
-.logo{
-  width:56px;height:56px;background:linear-gradient(135deg,var(--green),var(--green-2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;
-  box-shadow:0 6px 20px rgba(31,111,58,0.12);
-}
-.header-contact{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.header-contact a{color:var(--green);font-weight:700;text-decoration:none}
-.badge{background:var(--card);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid #eef5ee}
-
-/* HERO */
-.hero{
-  display:grid;
-  grid-template-columns:1fr 420px;
-  gap:28px;
-  align-items:center;
-  margin:18px 0 28px;
-}
-@media(max-width:980px){.hero{grid-template-columns:1fr;padding:0}}
-.hero-card{
-  background:linear-gradient(180deg, rgba(31,111,58,0.04), transparent);
-  padding:34px;border-radius:14px;
-  box-shadow:0 8px 30px rgba(13,52,26,0.06);
-}
-.h-title{font-size:30px;margin:0 0 8px;color:var(--accent)}
-.h-sub{margin:0 0 18px;color:var(--muted);font-size:16px}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap}
-.btn{
-  display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;border:0;background:var(--green);color:#fff;font-weight:700;text-decoration:none;cursor:pointer;
-  box-shadow:0 8px 20px rgba(31,111,58,0.14);
-}
-.btn-outline{
-  background:transparent;border:2px solid var(--green);color:var(--green);font-weight:700;border-radius:10px;padding:10px 16px;text-decoration:none;
-}
-.quick-info{display:flex;gap:14px;margin-top:16px;color:var(--muted);font-size:15px}
-
-/* CARD RIGHT : contact quick form */
-.card-side{background:#fff;border-radius:12px;padding:18px;border:1px solid #eef5ee}
-.card-side h4{margin:0 0 8px}
-.card-side p{margin:0 0 12px;color:var(--muted)}
-.form-row{display:flex;gap:8px;margin-bottom:8px}
-.form-row input,.form-row select,textarea{
-  width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6;font-size:14px;background:transparent
-}
-.form-row textarea{min-height:88px;resize:vertical}
-.small-note{font-size:13px;color:var(--muted);margin-top:8px}
-
-/* sections */
-.section{padding:34px 0;border-top:1px solid #f2f5f2}
-.section h2{margin:0 0 12px;font-size:22px;color:var(--accent)}
-.lead{color:var(--muted);margin:0 0 18px}
-
-/* services */
-.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:980px){.services{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.hero{grid-template-columns:1fr}.services{grid-template-columns:1fr}}
-.service{background:#fff;border-radius:12px;padding:18px;border:1px solid #eef5ee}
-.service h3{margin:0 0 8px;font-size:18px}
-.service p{margin:0;color:var(--muted)}
-
-/* réalisations */
-.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
-.project{position:relative;border-radius:12px;overflow:hidden;border:1px solid #eef5ee}
-.project img{width:100%;height:220px;object-fit:cover;display:block}
-.project .p-info{position:absolute;left:14px;bottom:14px;background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.18));color:#fff;padding:10px 12px;border-radius:8px;font-weight:600}
-
-/* galerie */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:980px){.gallery{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:560px){.gallery{grid-template-columns:repeat(2,1fr)}}
-.gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #eef5ee}
-
-/* avant/après */
-.compare{
-  display:flex;gap:18px;flex-wrap:wrap;align-items:center;
-}
-.comparison{flex:1;min-width:320px;border-radius:12px;overflow:hidden;border:1px solid #eef5ee;position:relative}
-.compare .after{position:absolute;top:0;left:0;height:100%;width:100%;overflow:hidden}
-.compare img{width:100%;height:360px;object-fit:cover;display:block}
-.slider{position:absolute;left:50%;top:0;bottom:0;width:3px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,0.06);transform:translateX(-50%);pointer-events:none}
-.range{position:absolute;left:0;right:0;bottom:12px;padding:0 12px;display:flex;align-items:center;justify-content:center}
-.range input[type=range]{width:80%}
-
-/* avis */
-.reviews{display:flex;gap:14px;overflow:hidden}
-.review{min-width:300px;background:#fff;border-radius:12px;padding:16px;border:1px solid #eef5ee}
-.stars{color:#f5a623;margin-bottom:8px}
-
-/* map and zones */
-.map-wrap{height:320px;border-radius:12px;overflow:hidden;border:1px solid #eef5ee}
-.zones{display:flex;gap:10px;flex-wrap:wrap}
-.zone{background:var(--card);padding:10px 12px;border-radius:999px;font-size:14px;color:var(--muted);border:1px solid #eef5ee}
-
-/* footer */
-.footer{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px 0;border-top:1px solid #f2f5f2}
-.footer .col{max-width:360px}
-.footer a{color:var(--muted);text-decoration:none}
-.copy{color:var(--muted);font-size:14px}
-
-/* small */
-.kv{display:flex;gap:14px;flex-wrap:wrap}
-.kv .item{background:var(--card);padding:10px 12px;border-radius:10px;border:1px solid #eef5ee}
-
-@media(max-width:760px){
-  .header-contact{align-items:flex-start}
-  .hero{grid-template-columns:1fr}
-  .card-side{order:2}
-  .hero-card{order:1}
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  var range=document.getElementById('compareRange');
-  var after=document.querySelector('.compare .after');
-  var slider=document.querySelector('.compare .slider');
-  function update(){
-    var val=range.value;
-    after.style.width = val + '%';
-    slider.style.left = val + '%';
-  }
-  if(range){range.addEventListener('input',update);update();}
-  var reviews = document.querySelectorAll('.review');
-  var idx=0;
-  setInterval(function(){
-    reviews.forEach((r,i)=>r.style.transform='translateX(' + ((i-idx)*320) + 'px)');
-    idx = (idx+1) % reviews.length;
-  },4000);
-
-  var form=document.getElementById('contactForm');
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var name=form.elements['name'].value||'Nouveau client';
-    var phone=form.elements['phone'].value||'Pas de téléphone';
-    var email=form.elements['email'].value||'';
-    var msg=form.elements['message'].value||'Demande de devis';
-    var subject=encodeURIComponent('Demande de devis - ' + name);
-    var body=encodeURIComponent('Nom: '+name + '\nTéléphone: '+phone + '\nEmail: '+email + '\nMessage: ' + msg);
-    window.location.href = 'mailto:contact@artjardinpaysage.fr?subject=' + subject + '&body=' + body;
-  });
-});
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Landscaping","name":"Art & Jardin Paysage","image":"https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=80&auto=format&fit=crop","@id":"https://votre-domaine-exemple.com/","url":"https://votre-domaine-exemple.com/","telephone":"+33 4 72 00 00 00","address":{"@type":"PostalAddress","streetAddress":"12 Rue du Parc","addressLocality":"Lyon","postalCode":"69002","addressCountry":"FR"},"geo":{"@type":"GeoCoordinates","latitude":45.764043,"longitude":4.835659},"openingHours":"Mo-Fr 08:00-18:00","priceRange":"€€","description":"Paysagiste à Lyon spécialisé en aménagement de jardins, terrasses, clôtures et entretien. Devis gratuit et rapide."}
-</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IMPACT-NVA — Vitrine paysagiste (Démo moderne)</title>
+  <meta name="description" content="IMPACT-NVA — Modèle de site vitrine moderne pour paysagiste. Services : entretien de jardin, taille de haies, tonte, création paysagère, aménagement extérieur. Optimisé SEO local." />
+  <meta name="keywords" content="paysagiste, entretien de jardin, taille de haies, tonte, création paysagère, aménagement extérieur, référencement local" />
+  <meta name="author" content="IMPACT-NVA" />
+  <style>
+    :root{
+      --bg:#0f0f10;
+      --card:#1a1a1b;
+      --muted:#bfbfbf;
+      --accent:#2ecc71; /* touche verte Impact-NVA */
+      --accent-2:#22a14b;
+      --glass: rgba(255,255,255,0.03);
+      --radius:12px;
+      --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg) 0%, #0b0b0c 60%);
+      color:#eee;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      overflow-y:scroll;
+    }
+    a{color:var(--accent); text-decoration:none}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent) 0%, var(--accent-2) 100%);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#06230a;
+      box-shadow:0 6px 18px rgba(34,161,75,0.12), inset 0 -6px 18px rgba(255,255,255,0.06);
+      font-size:20px;letter-spacing:0.6px;
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{padding:10px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    nav a:hover{background:rgba(255,255,255,0.02);color:#fff}
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:28px;
+      align-items:center;
+      padding:28px 0 40px;
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.04);
+      padding:28px;border-radius:16px;backdrop-filter: blur(6px);
+      box-shadow: 0 10px 40px rgba(2,5,8,0.6);
+    }
+    .kicker{
+      display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--accent);
+      font-weight:700;font-size:13px;margin-bottom:12px;
+    }
+    .hero h2{margin:0 0 12px;font-size:28px;line-height:1.05}
+    .hero p.lead{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-weight:700;border:0;cursor:pointer;
+    }
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04210f;box-shadow:0 8px 30px rgba(34,161,75,0.14)}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+    .info-stats{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .stat{background:var(--glass);padding:10px;border-radius:10px;font-size:13px;color:var(--muted)}
+    /* Right column card */
+    .hero-side{position:relative;overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-height:300px;background:linear-gradient(180deg, #0b0b0c, #0d0d0e)}
+    .hero-side .image{
+      height:100%;background:linear-gradient(135deg, rgba(40,40,40,0.6), rgba(10,10,10,0.6));
+      display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.08);font-size:13px;padding:18px;text-align:center;
+    }
+    /* Services */
+    section.services{margin-top:26px;padding:26px 0}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      padding:18px;border-radius:14px;transition:transform .36s cubic-bezier(.2,.9,.2,1),box-shadow .36s;
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,5,8,0.6)}
+    .card h3{margin:0 0 8px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .service-ico{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    /* Premium cards */
+    .premium{
+      background:linear-gradient(180deg, rgba(34,161,75,0.06), rgba(255,255,255,0.01));
+      border:1px solid rgba(34,161,75,0.12);
+    }
+    /* Gallery immersive */
+    .gallery{margin-top:20px}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery-grid img{width:100%;height:220px;object-fit:cover;border-radius:10px;display:block;filter:contrast(1.05) saturate(1.05);}
+    /* Avant/Après */
+    .before-after{
+      margin-top:22px;padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .ba-wrap{position:relative;height:420px;border-radius:12px;overflow:hidden;background:#0b0b0b}
+    .ba-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
+    .ba-after{clip-path: inset(0 50% 0 0);}
+    .ba-slider{position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:2px;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));z-index:6;cursor:ew-resize}
+    .ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--accent);border:4px solid rgba(0,0,0,0.4);z-index:8;display:flex;align-items:center;justify-content:center;color:#08200f;font-weight:700;box-shadow:0 8px 24px rgba(34,161,75,0.18)}
+    .ba-labels{position:absolute;top:14px;left:14px;z-index:10;display:flex;gap:8px}
+    .label{background:rgba(0,0,0,0.45);padding:8px 10px;border-radius:8px;font-size:13px;color:#fff}
+    /* Testimonials */
+    .testimonials{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.03)}
+    .testimonials p{margin:0;color:var(--muted)}
+    .map-contact{display:grid;grid-template-columns:1fr 420px;gap:20px;margin-top:22px}
+    .map{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:#0a0a0a;min-height:300px;display:flex;align-items:center;justify-content:center;color:var(--muted);padding:12px;text-align:center}
+    iframe.map-iframe{width:100%;height:100%;border:0;display:block}
+    /* Contact card */
+    .contact-card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+    .field{display:flex;flex-direction:column;margin-bottom:12px}
+    .field input,.field textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:12px;border-radius:8px;color:#fff;min-width:0}
+    .small{font-size:13px;color:var(--muted)}
+    footer{margin-top:40px;padding:20px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+    .footer-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .zones{display:flex;gap:8px;flex-wrap:wrap}
+    .zone{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:8px;font-size:13px}
+    /* Floating CTA */
+    .fab{
+      position:fixed;right:18px;bottom:18px;z-index:9999;border-radius:999px;padding:14px 18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041f0f;font-weight:800;box-shadow:0 18px 50px rgba(34,161,75,0.2);display:flex;gap:10px;align-items:center;cursor:pointer;border:0;
+    }
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .services-grid{grid-template-columns:repeat(2,1fr)}
+      .map-contact{grid-template-columns:1fr}
+      .hero-side{min-height:220px}
+      .ba-wrap{height:320px}
+    }
+    @media (max-width:520px){
+      .gallery-grid{grid-template-columns:1fr}
+      nav{display:none}
+      .stat{font-size:12px}
+      .brand h1{font-size:16px}
+      .fab{right:12px;bottom:12px;padding:12px 14px}
+    }
+    /* small animations */
+    .fade-in{opacity:0;transform:translateY(12px);animation:fadeUp .8s forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+  </style>
 </head>
 <body>
-<header class="container header">
-  <a class="brand" href="#">
-    <div class="logo">AJ</div>
-    <div>
-      <div style="font-weight:800;font-size:18px">Art & Jardin Paysage</div>
-      <div style="font-size:13px;color:var(--muted)">Paysagiste • Lyon et environs</div>
-    </div>
-  </a>
-  <div class="header-contact">
-    <div class="badge">Devis gratuit sous 48h</div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <a href="tel:+33472000000" style="font-weight:800;color:var(--green);text-decoration:none">+33 4 72 00 00 00</a>
-      <div style="font-size:13px;color:var(--muted)">Intervention sous 7 jours</div>
-    </div>
-  </div>
-</header>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">IN</div>
+        <div>
+          <h1>IMPACT-NVA</h1>
+          <p>Modèle vitrine moderne — paysagiste</p>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#avant-apres">Avant / Après</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-<main class="container">
-  <section class="hero">
-    <div class="hero-card">
-      <h1 class="h-title">Transformez votre extérieur en un espace de vie élégant</h1>
-      <p class="h-sub">Conception, création et entretien de jardins sur-mesure à Lyon. Bénéficiez d'un accompagnement complet de l'idée au rendu fini.</p>
-      <div class="cta-row">
-        <a class="btn" href="#contact">Demander un devis</a>
-        <a class="btn-outline" href="#realisations">Voir nos réalisations</a>
-      </div>
-      <div class="quick-info">
-        <div>✓ 15 ans d'expérience</div>
-        <div>✓ Garantie satisfaction</div>
-        <div>✓ Intervention locale: Lyon & Métropole</div>
-      </div>
-      <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
-        <div class="kv">
-          <div class="item"><strong>Tarif</strong><div style="font-weight:700">A partir de 690€</div></div>
-          <div class="item"><strong>Délais</strong><div style="font-weight:700">Sous 7 jours</div></div>
-        </div>
-      </div>
-    </div>
+    <main>
+      <section class="hero">
+        <div class="hero-card fade-in" style="animation-delay:.05s">
+          <span class="kicker">Modèle moderne</span>
+          <h2>Site démo moderne pour paysagiste — IMPACT-NVA</h2>
+          <p class="lead">Un modèle optimisé pour le référencement local : paysagiste, entretien de jardin, taille de haies, tonte, création paysagère et aménagement extérieur. Donnez à votre activité une présence en ligne haut de gamme.</p>
 
-    <aside class="card-side">
-      <h4>Obtenez votre devis personnalisé</h4>
-      <p>Remplissez les informations ci-dessous ou appelez-nous pour une estimation rapide.</p>
-      <form id="contactForm" aria-label="Formulaire de contact">
-        <div class="form-row">
-          <input type="text" name="name" placeholder="Nom et prénom" required>
-        </div>
-        <div class="form-row">
-          <input type="tel" name="phone" placeholder="Téléphone" required>
-        </div>
-        <div class="form-row">
-          <input type="email" name="email" placeholder="Email (optionnel)">
-        </div>
-        <div class="form-row">
-          <select name="service">
-            <option>Choisissez un service</option>
-            <option>Création de jardin</option>
-            <option>Terrasse & aménagement</option>
-            <option>Entretien & taille</option>
-            <option>Plantations & paysagisme</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <textarea name="message" placeholder="Informations sur votre projet (surface, budget, photo)..."></textarea>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center">
-          <button class="btn" type="submit">Envoyer ma demande</button>
-          <a class="btn-outline" href="tel:+33472000000">Nous appeler</a>
-        </div>
-        <div class="small-note">Nous contacterons sous 48h. Vos données sont confidentielles.</div>
-      </form>
-    </aside>
-  </section>
-
-  <section class="section">
-    <h2>Qui sommes-nous ?</h2>
-    <p class="lead">Art & Jardin Paysage est une équipe de paysagistes professionnels basée à Lyon. Nous concevons et réalisons des espaces extérieurs durables, esthétiques et adaptés à votre quotidien. De la conception 3D à la réalisation, nous accompagnons chaque projet avec transparence et savoir-faire.</p>
-    <div style="display:flex;gap:18px;flex-wrap:wrap">
-      <div style="flex:1;min-width:220px;background:linear-gradient(90deg,#fff,#f7f9f6);padding:16px;border-radius:12px;border:1px solid #eef5ee">
-        <strong>Notre méthode</strong>
-        <p style="margin:8px 0 0;color:var(--muted)">Analyse du terrain → Proposition 3D → Planification → Réalisation → Entretien</p>
-      </div>
-      <div style="flex:1;min-width:220px;background:linear-gradient(90deg,#fff,#fff);padding:16px;border-radius:12px;border:1px solid #eef5ee">
-        <strong>Engagement qualité</strong>
-        <p style="margin:8px 0 0;color:var(--muted)">Matériaux locaux, plantes adaptées au climat, garantie travaux et suivi post-livraison.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="services">
-    <h2>Nos services</h2>
-    <p class="lead">Des solutions complètes pour tous les extérieurs — petits ou grands.</p>
-    <div class="services">
-      <div class="service">
-        <h3>Conception & plans 3D</h3>
-        <p>Projet sur-mesure avec visualisation 3D et options d'aménagement.</p>
-      </div>
-      <div class="service">
-        <h3>Création de jardins</h3>
-        <p>Plantations, gazon, massifs, allées et éclairage paysager.</p>
-      </div>
-      <div class="service">
-        <h3>Terrasses & dallages</h3>
-        <p>Terrasses bois, composite, béton décoratif et pavage.</p>
-      </div>
-      <div class="service">
-        <h3>Arrosage & systèmes techniques</h3>
-        <p>Installation d'arrosage automatique et gestion de l'eau.</p>
-      </div>
-      <div class="service">
-        <h3>Entretien & taille</h3>
-        <p>Contrats d'entretien, taille, débroussaillage et nettoyage.</p>
-      </div>
-      <div class="service">
-        <h3>Clôtures & éclairage</h3>
-        <p>Clôtures paysagères, portails, éclairage pour mise en valeur.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="realisations">
-    <h2>Réalisations récentes</h2>
-    <p class="lead">Exemples de chantiers livrés — inspiration et savoir-faire.</p>
-    <div class="projects">
-      <div class="project">
-        <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=1200&q=70&auto=format&fit=crop" alt="Jardin moderne">
-        <div class="p-info">Jardin moderne • Lyon 3</div>
-      </div>
-      <div class="project">
-        <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1200&q=70&auto=format&fit=crop" alt="Terrasse bois">
-        <div class="p-info">Terrasse bois • Projet urbain</div>
-      </div>
-      <div class="project">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=70&auto=format&fit=crop" alt="Gazon et plantation">
-        <div class="p-info">Aménagement familiale</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Galerie photo</h2>
-    <p class="lead">Plusieurs projets, styles et ambiances réalisés par notre équipe.</p>
-    <div class="gallery" aria-hidden="false">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 1">
-      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 2">
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=60&auto=format&fit=crop" alt="Jardin 3">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 4">
-      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 5">
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=60&auto=format&fit=crop" alt="Jardin 6">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=800&q=60&auto=format&fit=crop" alt="Jardin 7">
-      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b?w=800&q=60&auto=format&fit=crop" alt="Jardin 8">
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Avant / Après</h2>
-    <p class="lead">Voyez l'impact d'une transformation professionnelle.</p>
-    <div class="compare">
-      <div class="comparison">
-        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80&auto=format&fit=crop" alt="Avant">
-        <div class="after" style="width:55%">
-          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=1400&q=80&auto=format&fit=crop" alt="Après">
-        </div>
-        <div class="slider" aria-hidden="true"></div>
-        <div class="range">
-          <input id="compareRange" type="range" min="0" max="100" value="55">
-        </div>
-      </div>
-      <div style="min-width:260px;flex:0 0 260px">
-        <div style="background:#fff;padding:16px;border-radius:12px;border:1px solid #eef5ee">
-          <strong>Projet : Cour arrière résidentielle</strong>
-          <p style="margin:8px 0;color:var(--muted)">Remplacement d'une pelouse abîmée, création d'un coin détente en bois, plantation d'arbustes et installation d'un système d'arrosage.</p>
-          <ul style="margin:8px 0 0;color:var(--muted)">
-            <li>Durée : 10 jours</li>
-            <li>Budget : 6 400 €</li>
-            <li>Garantie : 2 ans</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Avis clients</h2>
-    <p class="lead">Des clients satisfaits — notes réelles et retours locaux.</p>
-    <div style="overflow:hidden">
-      <div class="reviews" style="position:relative;height:150px">
-        <div class="review" style="transform:translateX(0px)">
-          <div class="stars">★★★★★</div>
-          <strong>Claire D. — Lyon 2</strong>
-          <p style="margin:8px 0 0;color:var(--muted)">Travail soigné et respect des délais. Notre terrasse est devenue notre pièce préférée.</p>
-        </div>
-        <div class="review" style="transform:translateX(320px)">
-          <div class="stars">★★★★★</div>
-          <strong>Marc L. — Lyon 3</strong>
-          <p style="margin:8px 0 0;color:var(--muted)">Conseils pertinents et finitions impeccables. Équipe disponible et professionnelle.</p>
-        </div>
-        <div class="review" style="transform:translateX(640px)">
-          <div class="stars">★★★★☆</div>
-          <strong>Anne S. — Villeurbanne</strong>
-          <p style="margin:8px 0 0;color:var(--muted)">Très bon rapport qualité/prix, suivi après chantier satisfaisant.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Zones d'intervention</h2>
-    <p class="lead">Nous intervenons rapidement dans la Métropole de Lyon et départements voisins.</p>
-    <div class="zones" style="margin-bottom:16px">
-      <div class="zone">Lyon 1 à 9</div>
-      <div class="zone">Villeurbanne</div>
-      <div class="zone">Caluire-et-Cuire</div>
-      <div class="zone">Vénissieux</div>
-      <div class="zone">Bron</div>
-      <div class="zone">Oullins</div>
-      <div class="zone">Décines</div>
-      <div class="zone">Tassin-la-Demi-Lune</div>
-    </div>
-    <div class="map-wrap">
-      <iframe title="Carte Google Maps - Art & Jardin Paysage Lyon" src="https://maps.google.com/maps?q=45.764043,4.835659&z=13&output=embed" style="border:0;width:100%;height:100%"></iframe>
-    </div>
-  </section>
-
-  <section class="section" id="contact">
-    <h2>Contact & demande de devis</h2>
-    <p class="lead">Prêt à commencer ? Parlez-nous de votre projet ou demandez une visite technique.</p>
-    <div style="display:grid;grid-template-columns:1fr 360px;gap:18px">
-      <div style="background:#fff;padding:18px;border-radius:12px;border:1px solid #eef5ee">
-        <form id="contactForm2" onsubmit="event.preventDefault(); document.getElementById('contactForm').dispatchEvent(new Event('submit'));">
-          <div style="display:flex;gap:8px;margin-bottom:8px">
-            <input type="text" name="name" placeholder="Nom et prénom" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6efe6">
-            <input type="tel" name="phone" placeholder="Téléphone" required style="flex:1;padding:10px;border-radius:8px;border:1px solid #e6efe6">
+          <div class="cta-row">
+            <button class="btn btn-primary" id="devisTop">Demander un devis</button>
+            <a class="btn btn-ghost" href="#galerie">Voir la galerie</a>
           </div>
-          <div style="margin-bottom:8px">
-            <input type="email" name="email" placeholder="Email" style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6">
+
+          <div class="info-stats" aria-hidden="true">
+            <div class="stat">Design moderne & animations CSS</div>
+            <div class="stat">Optimisé SEO local</div>
+            <div class="stat">Avant / Après immersif</div>
           </div>
-          <div style="margin-bottom:8px">
-            <textarea name="message" placeholder="Décrivez votre projet (surface, budget, contraintes)..." style="width:100%;padding:10px;border-radius:8px;border:1px solid #e6efe6;min-height:120px"></textarea>
+
+          <div style="margin-top:18px;color:var(--muted);font-size:14px">
+            <strong>Services mis en avant :</strong> création paysagère, entretien de jardin, taille de haies, tonte, aménagement extérieur, élagage léger.
           </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <button class="btn" type="submit">Envoyer ma demande</button>
-            <a class="btn-outline" href="tel:+33472000000">Appelez-nous</a>
+        </div>
+
+        <aside class="hero-side fade-in" style="animation-delay:.12s">
+          <div class="image">
+            Photo chantier disponible — remplacer par vos propres images de chantier pour un rendu premium.
           </div>
-        </form>
+        </aside>
+      </section>
+
+      <section id="services" class="services">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px">
+          <h2 style="margin:0">Services</h2>
+          <div style="color:var(--muted);font-size:14px">Optimisé pour : paysagiste, entretien de jardin, référencement local</div>
+        </div>
+
+        <div class="services-grid">
+          <div class="card fade-in" style="animation-delay:.16s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v20" stroke="#9ae7b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9c1.5-1 3-1 4 0s2 1.5 3 1.5 2-0.5 3-1.5 2.5-1 4 0" stroke="#9ae7b8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Entretien de jardin</h3>
+            <p>Tonte, nettoyage, débris, maintien de vos espaces verts pour un rendu soigné toute l'année.</p>
+          </div>
+
+          <div class="card fade-in" style="animation-delay:.18s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="#9ae7b8" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Création paysagère</h3>
+            <p>Conception et implantation de massifs, allées, terrasses et aménagements extérieurs.</p>
+          </div>
+
+          <div class="card premium fade-in" style="animation-delay:.2s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18" stroke="#0b2f19" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Aménagement extérieur</h3>
+            <p>Solutions esthétiques et durables : bordures, éclairage, drainage et gestion des eaux.</p>
+          </div>
+
+          <div class="card fade-in" style="animation-delay:.22s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12h14" stroke="#9ae7b8" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Taille de haies</h3>
+            <p>Taille régulière et saisonnière pour haies, arbustes et topiaires, avec évacuation des déchets.</p>
+          </div>
+
+          <div class="card fade-in" style="animation-delay:.24s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="6" stroke="#9ae7b8" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Élagage léger</h3>
+            <p>Interventions soignées et sécurisées pour maintenir la santé des arbres et la sécurité du site.</p>
+          </div>
+
+          <div class="card fade-in" style="animation-delay:.26s">
+            <div class="service-ico">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 21h18" stroke="#9ae7b8" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Forfait tonte</h3>
+            <p>Formules régulières adaptées aux surfaces, avec finition et ramassage selon demande.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="galerie" class="gallery">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px">
+          <h2 style="margin:0">Galerie photos</h2>
+          <div class="small">Amélioration lumineuse & harmonisation des images — remplacez par vos photos de chantier.</div>
+        </div>
+
+        <div class="gallery-grid">
+          <img src="assets/img1.jpg" alt="Photo chantier 1 — amélioration luminosité">
+          <img src="assets/img2.jpg" alt="Photo chantier 2 — amélioration contraste">
+          <img src="assets/img3.jpg" alt="Photo chantier 3 — harmonisation couleurs">
+          <img src="assets/img4.jpg" alt="Photo chantier 4 — rendu professionnel">
+        </div>
+      </section>
+
+      <section id="avant-apres" class="before-after">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px">
+          <h2 style="margin:0">Avant / Après</h2>
+          <div class="small">Slider interactif — mettez en valeur vos transformations paysagères réelles.</div>
+        </div>
+
+        <div class="ba-wrap" id="baWrap" aria-label="Avant après">
+          <img src="assets/before.jpg" alt="Avant — chantier" class="ba-before">
+          <img src="assets/after.jpg" alt="Après — chantier" class="ba-after" id="afterImage">
+          <div class="ba-slider" id="baSlider" role="separator" aria-orientation="horizontal"></div>
+          <div class="ba-handle" id="baHandle">⇆</div>
+          <div class="ba-labels">
+            <div class="label">Avant</div>
+            <div class="label">Après</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <h2 style="margin:0 0 8px">Avis clients</h2>
+        <p>Emplacement prévu pour vos futurs avis Google.</p>
+      </section>
+
+      <section class="map-contact" id="contact">
+        <div class="map">
+          <!-- Iframe prêt à être remplacé par votre carte Google Maps -->
+          <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;text-align:center;color:var(--muted)">
+            <strong>Google Maps</strong>
+            <p class="small" style="max-width:360px;margin-top:6px">Section carte prête à remplacer : insérez ici votre iframe Google Maps (embed). Exemple de remplacement dans index HTML.</p>
+            <!-- Exemple d'iframe (remplacer l'URL par votre embed) -->
+            <!-- <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb="></iframe> -->
+          </div>
+        </div>
+
+        <aside class="contact-card">
+          <h3 style="margin-top:0">Contact</h3>
+          <p class="small" style="margin-bottom:12px">Pour requestionner ce modèle ou obtenir un devis, contactez IMPACT-NVA.</p>
+
+          <form id="contactForm">
+            <div class="field"><label class="small">Nom</label><input type="text" name="name" placeholder="Votre nom" required></div>
+            <div class="field"><label class="small">Email</label><input type="email" name="email" placeholder="votre@email.com" required></div>
+            <div class="field"><label class="small">Message</label><textarea name="message" rows="4" placeholder="Décrivez votre projet..." required></textarea></div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+              <a class="btn btn-ghost" href="mailto:contact@impact-nva.fr">Contact email</a>
+            </div>
+          </form>
+
+          <p class="small" style="margin-top:12px"><strong>Remarque :</strong> ce site est une vitrine de démonstration Impact-NVA. Remplacez les visuels et précisez vos zones d'intervention dans le footer.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-row">
+        <div>
+          <strong>IMPACT-NVA</strong>
+          <div class="small" style="margin-top:6px">Site démo — modèle moderne pour paysagiste • contact@impact-nva.fr</div>
+        </div>
+
+        <div style="text-align:right">
+          <div class="small">Zones d'intervention (à personnaliser) :</div>
+          <div class="zones" style="margin-top:8px">
+            <div class="zone">Interventions locales</div>
+            <div class="zone">Communes environnantes</div>
+            <div class="zone">Départements voisins</div>
+          </div>
+        </div>
       </div>
-
-      <aside style="background:#fff;padding:18px;border-radius:12px;border:1px solid #eef5ee">
-        <strong>Coordonnées</strong>
-        <p style="margin:8px 0;color:var(--muted)">Art & Jardin Paysage<br>12 Rue du Parc, 69002 Lyon<br>Tél: <a href="tel:+33472000000">+33 4 72 00 00 00</a><br>Email: <a href="mailto:contact@artjardinpaysage.fr">contact@artjardinpaysage.fr</a></p>
-        <strong>Horaires</strong>
-        <p style="margin:8px 0;color:var(--muted)">Lundi - Vendredi : 08:00 - 18:00<br>Samedi : sur rendez-vous</p>
-        <div style="margin-top:12px"><a class="btn" href="tel:+33472000000">Contactez-nous</a></div>
-      </aside>
-    </div>
-  </section>
-</main>
-
-<footer class="container footer">
-  <div class="col">
-    <div style="display:flex;gap:12px;align-items:center">
-      <div class="logo" style="width:44px;height:44px;font-size:16px">AJ</div>
-      <div>
-        <div style="font-weight:800">Art & Jardin Paysage</div>
-        <div style="font-size:13px;color:var(--muted)">Paysagiste • Lyon</div>
-      </div>
-    </div>
-    <p style="margin-top:12px;color:var(--muted)">Conception et réalisation d'espaces extérieurs durables. Devis personnalisé et conseils d'experts.</p>
+    </footer>
   </div>
-  <div class="col" style="flex:1">
-    <strong>Liens rapides</strong>
-    <div style="margin-top:8px;display:flex;gap:12px;flex-wrap:wrap">
-      <a href="#services">Services</a>
-      <a href="#realisations">Réalisations</a>
-      <a href="#contact">Devis</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <div style="margin-top:12px;color:var(--muted)">SIRET: 123 456 789 00010</div>
-  </div>
-  <div class="col" style="text-align:right">
-    <strong>Adresse</strong>
-    <div style="margin-top:8px;color:var(--muted)">12 Rue du Parc, 69002 Lyon</div>
-    <div style="margin-top:16px">
-      <a class="btn-outline" href="https://maps.google.com?q=45.764043,4.835659" target="_blank">Nous situer</a>
-    </div>
-  </div>
-</footer>
 
-<div class="container" style="padding:16px 20px 60px">
-  <div class="copy">© <strong>Art & Jardin Paysage</strong> — Tous droits réservés • Conception locale • Données protégées</div>
-</div>
+  <button class="fab" id="fabMail" title="Demander un devis">Demandez un devis</button>
+
+  <script>
+    // Floating CTA actions
+    document.getElementById('fabMail').addEventListener('click', function(){
+      window.location.href = 'mailto:contact@impact-nva.fr?subject=Demande%20de%20devis%20-%20Site%20IMPACT-NVA';
+    });
+    document.getElementById('devisTop').addEventListener('click', function(){
+      document.getElementById('contactForm').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+
+    // Contact form: open mailto with content (client-side)
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const f = e.target;
+      const name = encodeURIComponent(f.name.value.trim());
+      const email = encodeURIComponent(f.email.value.trim());
+      const message = encodeURIComponent(f.message.value.trim());
+      const subject = encodeURIComponent('Demande de devis - ' + (name || ''));
+      const body = encodeURIComponent('Nom: ' + (name || '') + '\nEmail: ' + (email || '') + '\n\nMessage:\n' + (message || ''));
+      window.location.href = 'mailto:contact@impact-nva.fr?subject=' + subject + '&body=' + body;
+    });
+
+    // Avant / Après slider
+    (function(){
+      const wrap = document.getElementById('baWrap');
+      const after = document.getElementById('afterImage');
+      const slider = document.getElementById('baSlider');
+      const handle = document.getElementById('baHandle');
+      let dragging = false;
+      let rect = null;
+
+      function setPosition(x){
+        if(!rect) rect = wrap.getBoundingClientRect();
+        let pos = Math.max(0, Math.min(rect.width, x - rect.left));
+        let pct = (pos / rect.width) * 100;
+        after.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        slider.style.left = pct + '%';
+        handle.style.left = pct + '%';
+      }
+
+      function start(e){
+        dragging = true;
+        rect = wrap.getBoundingClientRect();
+        setPosition(e.touches ? e.touches[0].clientX : e.clientX);
+      }
+      function move(e){
+        if(!dragging) return;
+        setPosition(e.touches ? e.touches[0].clientX : e.clientX);
+      }
+      function end(){
+        dragging = false;
+      }
+
+      // init middle
+      window.addEventListener('load', function(){
+        setPosition(wrap.getBoundingClientRect().left + wrap.getBoundingClientRect().width/2);
+      });
+      slider.addEventListener('mousedown', start);
+      handle.addEventListener('mousedown', start);
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
+      // touch
+      slider.addEventListener('touchstart', start);
+      handle.addEventListener('touchstart', start);
+      window.addEventListener('touchmove', move);
+      window.addEventListener('touchend', end);
+
+      // make clickable area draggable
+      wrap.addEventListener('click', function(e){
+        setPosition(e.clientX);
+      });
+    })();
+
+    // small reveal on scroll
+    (function(){
+      const els = document.querySelectorAll('.fade-in');
+      function inView(el){
+        const r = el.getBoundingClientRect();
+        return r.top < (window.innerHeight || document.documentElement.clientHeight) - 40;
+      }
+      function run(){
+        for(const el of els){
+          if(inView(el)) el.style.opacity = 1, el.style.transform='none';
+        }
+      }
+      window.addEventListener('scroll', run);
+      window.addEventListener('resize', run);
+      run();
+    })();
+  </script>
 </body>
 </html>
