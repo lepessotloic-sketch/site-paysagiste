@@ -1,419 +1,436 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LE DIGITAL AU SERVICE DU PAYSAGISTE — Impact-NVA • Site vitrine 390 €</title>
-  <meta name="description" content="Impact-NVA — Site vitrine premium pour paysagistes. Livraison 48h. Offre fixe 390 €. Présentation, galerie, avis Google et formulaire de demande de devis." />
-  <meta property="og:title" content="LE DIGITAL AU SERVICE DU PAYSAGISTE — Impact-NVA" />
-  <meta property="og:description" content="Site vitrine premium pour paysagistes — 390 €, livraison en 48h. Photos réelles, design minimal et conversion optimisée." />
-  <meta property="og:type" content="website" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact-NVA – La visibilité digitale pour les paysagistes</title>
+  <meta name="description" content="Impact-NVA crée des sites web professionnels pour paysagistes : visibilité, crédibilité et demandes de devis. Site prêt en 48h pour 390€." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="index.html" />
+  <meta property="og:title" content="Impact-NVA – Site professionnel pour paysagiste" />
+  <meta property="og:description" content="Site pro pour paysagistes – livré en 48h. Offre : 390€." />
   <meta property="og:image" content="assets/images/hero.jpg" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#efe9dd" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a075d05399.js" crossorigin="anonymous"></script>
+
   <style>
     :root{
-      --bg:#f6f4ef;
-      --card:#fff7ee;
-      --stone:#e8e2da;
-      --olive:#6b7a4f;
-      --accent:#9aa87a;
-      --muted:#6b6b6b;
-      --radius:14px;
-      --max-width:1100px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color:#222;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      --beige-pierre: #efe9dd;
+      --olive: #6b7a3f;
+      --olive-dark: #55622f;
+      --blanc-casse: #fbf8f3;
+      --text: #2b2b2b;
+      --muted: #6a6a6a;
+      --card-shadow: rgba(27, 27, 27, 0.06);
+      --accent: #7b8a49;
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+
+    /* Base layout */
+    html,body{height:100%;}
     body{
       margin:0;
-      background:linear-gradient(180deg,var(--bg),#fff);
+      color:var(--text);
+      background:linear-gradient(180deg,var(--blanc-casse),#f7f5f0);
       -webkit-font-smoothing:antialiased;
-      line-height:1.45;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
-    .container{max-width:var(--max-width);margin:0 auto;padding:28px;}
-    header{padding:18px 0;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--stone),#fff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--olive);box-shadow:0 6px 18px rgba(102,102,80,0.08)}
-    .brand h1{font-size:14px;margin:0;color:var(--olive);letter-spacing:0.06em}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600;font-size:14px}
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    /* Skip link */
+    .skip-link{
+      position:absolute;
+      left:10px;
+      top:10px;
+      background:var(--olive);
+      color:var(--blanc-casse);
+      padding:8px 12px;
+      border-radius:6px;
+      z-index:1000;
+      transform:translateY(-120%);
+      transition:transform .18s ease;
+      text-decoration:none;
+      font-weight:600;
+    }
+    .skip-link:focus{transform:translateY(0);}
+
+    /* Header */
+    .site-header{
+      background:transparent;
+      position:sticky;
+      top:0;
+      z-index:80;
+      padding:18px 0;
+      backdrop-filter: blur(6px);
+    }
+    .nav-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .logo-link{color:var(--olive-dark);text-decoration:none;font-weight:700;font-size:1.05rem;}
+    .logo-link [data-brand]{color:var(--olive-dark);}
+
+    nav.navigation{display:flex;align-items:center;gap:12px;}
+    .nav-links{list-style:none;margin:0;padding:0;display:flex;gap:16px;align-items:center;}
+    .nav-links a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:500;}
+    .nav-links a:hover, .nav-links a:focus{background:var(--beige-pierre);color:var(--olive-dark);outline:none;}
+
+    .nav-toggle{
+      display:none;
+      background:transparent;border:0;color:var(--olive-dark);font-size:1.25rem;padding:8px;border-radius:8px;
+    }
+
     /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:center;padding:28px 0}
-    .hero-cover{position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(44,40,36,0.06)}
-    .hero-cover img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.06) saturate(1.05) brightness(1.02)}
-    .hero-panel{padding:36px;background:linear-gradient(180deg,rgba(255,255,255,0.82),rgba(255,255,255,0.96));border-radius:16px;backdrop-filter:blur(4px);box-shadow:0 8px 18px rgba(19,18,17,0.04)}
-    .kicker{display:inline-block;background:var(--stone);color:var(--olive);padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px;margin-bottom:14px}
-    h2{font-size:20px;margin:0 0 10px 0;color:#1a1a1a}
-    h1.main{font-size:30px;margin:0 0 10px 0;line-height:1.05;color:#0f1720}
-    .price-row{display:flex;gap:12px;align-items:center;margin:18px 0}
-    .pill{background:var(--card);border:1px solid var(--stone);padding:8px 12px;border-radius:12px;font-weight:700;color:#0f1720;display:inline-flex;align-items:center;gap:8px}
-    .price{font-size:20px;color:var(--olive)}
-    .cta{display:flex;gap:12px;margin-top:8px}
-    .btn-primary{background:var(--olive);color:#fff;padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(107,122,79,0.18)}
-    .btn-ghost{background:transparent;border:1px solid var(--stone);padding:12px 14px;border-radius:12px;color:var(--muted);cursor:pointer}
-    .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
-    .benefit{display:flex;gap:10px;align-items:flex-start}
-    .benefit strong{display:block}
-    /* Presentation */
-    .section{padding:48px 0;border-top:1px solid rgba(16,16,16,0.03)}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
-    .lead{font-size:16px;color:var(--muted);margin-top:8px}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-    .service{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(22,20,18,0.03);border:1px solid var(--stone)}
-    .service h4{margin:0 0 8px 0;color:var(--olive)}
-    /* Gallery */
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:10px;display:block;filter:contrast(1.05) saturate(1.06)}
-    /* Before/After */
-    .ba-wrap{position:relative;border-radius:12px;overflow:hidden}
-    .ba-img{display:block;width:100%;height:420px;object-fit:cover}
-    .ba-slider{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-    .ba-handle{position:relative;width:56px;height:56px;border-radius:999px;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;border:1px solid var(--stone);pointer-events:auto;cursor:ew-resize;box-shadow:0 8px 20px rgba(16,16,16,0.08)}
-    .ba-clip{position:absolute;inset:0;overflow:hidden}
-    /* Reviews & Map */
-    .reviews{display:flex;gap:20px;align-items:flex-start}
-    .review-card{background:#fff;padding:16px;border-radius:12px;border:1px solid var(--stone);box-shadow:0 8px 20px rgba(16,16,16,0.03)}
-    .stars{color:#ffbf24;font-weight:800}
-    iframe.map{width:100%;height:280px;border:0;border-radius:12px}
-    /* Form */
-    form{background:#fff;padding:18px;border-radius:12px;border:1px solid var(--stone)}
-    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-    input,textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--stone);font-size:15px;margin-bottom:12px}
-    .flex{display:flex;gap:12px}
-    .small{width:160px}
-    footer{padding:28px 0;color:var(--muted);font-size:14px}
-    .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:10px}
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;gap:18px;padding:18px 0}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-      .services{grid-template-columns:repeat(2,1fr)}
-      .grid{grid-template-columns:1fr}
-      .hero-panel{order:2}
+    .hero{
+      position:relative;
+      min-height:56vh;
+      display:flex;
+      align-items:center;
+      margin-bottom:28px;
+      border-bottom-left-radius:18px;
+      border-bottom-right-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(120deg, rgba(111,121,88,0.08), rgba(239,233,221,0.06));
     }
-    @media (max-width:560px){
-      .gallery{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr}
-      .brand h1{font-size:13px}
-      h1.main{font-size:22px}
+    .hero-image{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:brightness(.66) contrast(.98);
+      transform:scale(1.02);
+    }
+    .hero-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(180deg, rgba(239,233,221,0.18), rgba(251,248,243,0.55));
+      mix-blend-mode: multiply;
+    }
+    .hero-content{
+      position:relative;
+      z-index:2;
+      padding:48px 20px;
+      color:var(--olive-dark);
+      max-width:780px;
+    }
+    .hero h1{
+      margin:0 0 12px 0;
+      font-size:clamp(1.6rem, 3.6vw, 2.6rem);
+      line-height:1.05;
+      color:var(--olive-dark);
+    }
+    .hero p{
+      margin:0 0 18px 0;
+      color:var(--text);
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.0));
+      font-weight:500;
+    }
+    .btn{
+      display:inline-block;
+      text-decoration:none;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:active{transform:translateY(1px);}
+    .btn-primary{
+      background:var(--olive);
+      color:var(--blanc-casse);
+      box-shadow: 0 6px 18px rgba(83,93,48,0.12);
+    }
+    .btn-primary:hover{background:var(--olive-dark);}
+    .btn-secondary{
+      background:transparent;
+      border:2px solid rgba(107,122,63,0.12);
+      color:var(--olive-dark);
+    }
+
+    /* Why */
+    .why{padding:40px 0;}
+    .why h2{margin-bottom:18px;color:var(--olive-dark);}
+    .why-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+    .why-item{
+      background:linear-gradient(180deg, #fff, var(--blanc-casse));
+      border-radius:12px;
+      padding:18px;
+      box-shadow:0 6px 20px var(--card-shadow);
+      text-align:center;
+    }
+    .why-item .icon{display:inline-flex;width:56px;height:56px;border-radius:10px;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(107,122,63,0.12),rgba(107,122,63,0.06));margin-bottom:12px;color:var(--olive-dark);font-size:1.15rem;}
+    .why-item h3{margin:0 0 8px 0;font-size:1.02rem;color:var(--olive-dark);}
+    .why-item p{margin:0;color:var(--muted);font-size:0.95rem;}
+
+    /* Examples */
+    .examples-preview{padding:30px 0;}
+    .examples-preview h2{color:var(--olive-dark);margin-bottom:14px;}
+    .examples-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+    .example-item{
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 8px 22px rgba(27,27,27,0.04);
+      min-height:160px;
+      display:block;
+    }
+    .example-item img{display:block;width:100%;height:100%;object-fit:cover;vertical-align:middle;}
+
+    .examples-preview .cta{margin-top:16px;text-align:center;}
+
+    /* Reviews */
+    .reviews{padding:32px 0;background:linear-gradient(180deg, rgba(235,231,224,0.6), transparent);}
+    .reviews h2{color:var(--olive-dark);margin-bottom:12px;}
+    .google-summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;color:var(--text);}
+    .google-score{font-weight:700;font-size:1.35rem;color:var(--olive-dark);}
+    .google-stars{color:#b58900;font-weight:700;}
+    .google-link{color:var(--olive-dark);text-decoration:underline;font-weight:600;}
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    .review-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 10px 30px rgba(27,27,27,0.05);}
+    .review-card .stars{color:#c49500;margin-bottom:8px;font-weight:700;}
+    .review-card p{margin:0 0 8px 0;color:var(--muted);font-size:0.95rem}
+
+    /* CTA Contact */
+    .cta-contact{padding:28px 0;margin-top:6px;text-align:center;border-radius:12px;background:linear-gradient(90deg, rgba(107,122,63,0.06), rgba(239,233,221,0.04));}
+    .cta-container{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;}
+    .cta-container h2{margin:0;color:var(--olive-dark);}
+    .cta-container p{margin:0;color:var(--muted);max-width:720px;}
+
+    /* Footer */
+    .site-footer{padding:28px 0;margin-top:18px;background:transparent;color:var(--muted);}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;padding-bottom:18px;border-bottom:1px solid rgba(107,122,63,0.06);}
+    .footer-col h4{margin:0 0 8px 0;color:var(--olive-dark);}
+    .footer-col p,a{color:var(--muted);text-decoration:none;}
+    .footer-bottom{padding-top:12px;text-align:center;color:var(--muted);font-size:0.9rem;}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .why-grid{grid-template-columns:repeat(2,1fr);}
+      .examples-grid{grid-template-columns:repeat(2,1fr);}
+      .reviews-grid{grid-template-columns:repeat(2,1fr);}
+      .nav-links{display:none;position:fixed;right:12px;top:72px;background:var(--blanc-casse);padding:12px;border-radius:12px;box-shadow:0 12px 30px rgba(27,27,27,0.08);flex-direction:column;gap:8px;}
+      .nav-links.show{display:flex;}
+      .nav-toggle{display:inline-flex;}
+    }
+    @media (max-width:600px){
+      .why-grid{grid-template-columns:1fr;}
+      .examples-grid{grid-template-columns:1fr;}
+      .reviews-grid{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+      .hero{min-height:48vh;}
+      .hero-content{padding:30px 14px;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="brand" aria-label="Impact-NVA">
-        <div class="logo" aria-hidden="true">IN</div>
-        <div>
-          <h1>IMPACT-NVA</h1>
-          <div style="font-size:13px;color:var(--muted)">LE DIGITAL AU SERVICE DU PAYSAGISTE</div>
-        </div>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html" class="logo-link" aria-label="Impact-NVA – Accueil"><span data-brand>Impact-NVA</span></a>
       </div>
-      <nav aria-label="Navigation principale">
-        <a href="#presentation">Présentation</a>
-        <a href="#services">Services</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#devis">Devis</a>
+      <nav class="navigation" id="navigation" role="navigation" aria-label="Menu principal">
+        <ul class="nav-links" id="navLinks" role="menubar">
+          <li role="none"><a role="menuitem" href="index.html">Accueil</a></li>
+          <li role="none"><a role="menuitem" href="offer.html">Offre</a></li>
+          <li role="none"><a role="menuitem" href="examples.html">Exemples</a></li>
+          <li role="none"><a role="menuitem" href="process.html">Process</a></li>
+          <li role="none"><a role="menuitem" href="faq.html">FAQ</a></li>
+          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks" title="Ouvrir le menu">
+          <span class="fas fa-bars" aria-hidden="true"></span>
+        </button>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-cover" aria-hidden="false">
-          <img src="assets/images/hero.jpg" alt="Chantier paysagiste — allée et aménagement extérieur" />
+  <!-- Hero Section -->
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-label="Offre site pour paysagiste">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <img src="assets/images/hero.jpg" alt="Paysagiste travaillant dans un jardin" class="hero-image" loading="eager" />
+      <div class="hero-content container">
+        <h1>Site professionnel pour paysagiste — prêt en 48h</h1>
+        <p><strong>Livraison en 48h</strong> — <strong>390€</strong> <span style="opacity:0.95;">(offre de lancement)</span></p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="offer.html" class="btn btn-primary" role="button">Obtenir mon site – 390€</a>
+          <a href="examples.html" class="btn btn-secondary" role="button" aria-label="Voir des exemples de réalisations">Voir des exemples</a>
         </div>
+      </div>
+    </section>
 
-        <aside class="hero-panel" role="region" aria-labelledby="hero-title">
-          <div class="kicker">Offre fixe</div>
-          <h2 id="hero-title">LE DIGITAL AU SERVICE DU PAYSAGISTE</h2>
-          <h1 class="main">Un site vitrine professionnel, optimisé pour convertir vos visiteurs en demandes de devis.</h1>
-
-          <div class="price-row" aria-hidden="false">
-            <div class="pill">
-              <span style="font-size:13px;color:var(--muted)">Prix</span>
-              <span class="price">390&nbsp;€</span>
-            </div>
-            <div class="pill">
-              <span style="font-size:13px;color:var(--muted)">Livraison</span>
-              <span class="price">48&nbsp;h</span>
-            </div>
-            <div class="pill" title="Garantie">
-              <span style="font-size:13px;color:var(--muted)">Révisions</span>
-              <strong>2 incluses</strong>
-            </div>
-          </div>
-
-          <div class="cta">
-            <button class="btn-primary" onclick="document.getElementById('devis').scrollIntoView({behavior:'smooth'})" aria-label="Commander maintenant — 390 €">Commander maintenant — 390&nbsp;€</button>
-            <a href="#galerie" class="btn-ghost" style="display:inline-flex;align-items:center;padding:10px 14px;border-radius:12px;text-decoration:none;color:var(--muted)">Voir la galerie</a>
-          </div>
-
-          <div class="benefits" aria-hidden="false">
-            <div class="benefit">
-              <div style="width:10px;height:10px;border-radius:4px;background:var(--olive);margin-top:6px"></div>
-              <div><strong>Photos réelles</strong><div class="lead">Optimisation lumineuse et cadrage pro</div></div>
-            </div>
-            <div class="benefit">
-              <div style="width:10px;height:10px;border-radius:4px;background:var(--olive);margin-top:6px"></div>
-              <div><strong>SEO local</strong><div class="lead">Visibilité rapide sur Google</div></div>
-            </div>
-            <div class="benefit">
-              <div style="width:10px;height:10px;border-radius:4px;background:var(--olive);margin-top:6px"></div>
-              <div><strong>Formulaire</strong><div class="lead">Demande de devis simple et directe</div></div>
-            </div>
-            <div class="benefit">
-              <div style="width:10px;height:10px;border-radius:4px;background:var(--olive);margin-top:6px"></div>
-              <div><strong>Livraison 48h</strong><div class="lead">Site prêt à publier</div></div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section id="presentation" class="section" aria-labelledby="pres-title">
-        <div class="container">
-          <div class="grid">
-            <div>
-              <h3 id="pres-title">Présentation</h3>
-              <p class="lead">Impact-NVA conçoit des sites vitrines dédiés aux paysagistes français. Chaque site met en valeur vos chantiers réels — photos optimisées, structure pensée pour transformer les visiteurs en demandes de devis.</p>
-              <ul style="margin-top:14px;color:var(--muted);list-style:none;padding:0">
-                <li style="margin-bottom:8px"><strong>390&nbsp;€</strong> — Site vitrine complet (page accueil, services, galerie, contact)</li>
-                <li style="margin-bottom:8px"><strong>Livraison 48h</strong> — Maquette, intégration et mise en ligne (fichier prêt ou assistance mise en ligne)</li>
-                <li><strong>Performance & SEO</strong> — Optimisation pour mobile et SEO local</li>
-              </ul>
-            </div>
-            <div>
-              <img src="assets/images/example-1.webp" alt="Aménagement extérieur réalisé — terrasse contemporaine" style="width:100%;border-radius:12px;box-shadow:0 12px 30px rgba(16,16,16,0.06)" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" class="section" aria-labelledby="services-title">
-        <div class="container">
-          <h3 id="services-title">Services inclus</h3>
-          <div class="services" role="list">
-            <div class="service" role="listitem">
-              <h4>Page d'accueil optimisée</h4>
-              <div class="lead">Message clair, CTA visible, photos réelles pour rassurer le client.</div>
-            </div>
-            <div class="service" role="listitem">
-              <h4>Galerie immersive</h4>
-              <div class="lead">Mise en valeur de vos chantiers avec images optimisées.</div>
-            </div>
-            <div class="service" role="listitem">
-              <h4>Formulaire de devis</h4>
-              <div class="lead">Questions ciblées pour qualifier les demandes.</div>
-            </div>
-            <div class="service" role="listitem">
-              <h4>SEO local</h4>
-              <div class="lead">Balises, meta, et optimisation pour Google Maps.</div>
-            </div>
-            <div class="service" role="listitem">
-              <h4>Adapté mobile</h4>
-              <div class="lead">Navigation fluide et chargement rapide sur smartphone.</div>
-            </div>
-            <div class="service" role="listitem">
-              <h4>Support</h4>
-              <div class="lead">2 révisions incluses et assistance technique.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="galerie" class="section" aria-labelledby="gal-title">
-        <div class="container">
-          <h3 id="gal-title">Galerie — Exemples de chantiers</h3>
-          <div class="gallery" role="list">
-            <img src="assets/images/example-1.webp" alt="Photo chantier — aménagement allée et plantation" role="listitem" />
-            <img src="assets/images/example-2.webp" alt="Photo chantier — terrasse et revêtement extérieur" role="listitem" />
-            <img src="assets/images/example-3.webp" alt="Photo chantier — haie taillée et engazonnement" role="listitem" />
-          </div>
-        </div>
-      </section>
-
-      <section id="avantapres" class="section" aria-labelledby="ba-title">
-        <div class="container">
-          <h3 id="ba-title">Avant / Après</h3>
-          <div class="ba-wrap" id="baWrap" aria-label="Slider avant après">
-            <img src="assets/images/example-2.webp" alt="Avant / après — vue générale du chantier" class="ba-img" />
-            <div class="ba-clip" id="baClip" style="width:55%">
-              <img src="assets/images/example-2.webp" alt="Après — optimisation visuelle de la photo" class="ba-img" style="filter:brightness(1.06) contrast(1.08) saturate(1.04)" />
-            </div>
-            <div class="ba-slider" aria-hidden="true">
-              <div class="ba-handle" id="baHandle" title="Glisser pour comparer" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="#5f6a48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="avis" class="section" aria-labelledby="avis-title">
-        <div class="container">
-          <h3 id="avis-title">Avis Google</h3>
-          <div class="reviews">
-            <div class="review-card" style="flex:1">
-              <div class="stars" aria-hidden="true">★★★★★</div>
-              <strong style="display:block;margin-top:8px">4,9/5 — Satisfaction clients</strong>
-              <p class="lead" style="margin-top:8px">"Site livré en 48h, professionnel et efficace. Le formulaire nous apporte des demandes qualifiées." — Samuel, paysagiste</p>
-            </div>
-            <div class="review-card" style="flex:1">
-              <div class="stars" aria-hidden="true">★★★★★</div>
-              <strong style="display:block;margin-top:8px">Avis récents</strong>
-              <p class="lead" style="margin-top:8px">"Photos optimisées, rendu haut de gamme. Beaucoup de contacts en quelques jours." — Claire</p>
-            </div>
-            <div style="flex:1">
-              <div style="background:#fff;padding:16px;border-radius:12px;border:1px solid var(--stone);height:100%;display:flex;flex-direction:column;justify-content:center">
-                <strong>Note moyenne</strong>
-                <div style="font-size:28px;margin-top:8px;color:var(--olive)">4,9</div>
-                <a href="https://www.google.com/search?q=paysagiste+avis" style="margin-top:12px;text-decoration:none;color:var(--muted)">Voir tous les avis sur Google</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="map" class="section" aria-labelledby="map-title">
-        <div class="container">
-          <h3 id="map-title">Où nous trouver</h3>
-          <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start">
-            <div>
-              <iframe class="map" loading="lazy" title="Carte Google Maps — Impact-NVA" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999106598375!2d2.292292615674163!3d48.85837317928792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fefb6a9a1b5%3A0x3a6d3c9d8d5f0b2b!2sParis!5e0!3m2!1sfr!2sfr!4v1660000000000!5m2!1sfr!2sfr"></iframe>
-            </div>
-            <aside>
-              <div style="background:#fff;padding:16px;border-radius:12px;border:1px solid var(--stone)">
-                <strong>Impact-NVA</strong>
-                <div style="color:var(--muted);margin-top:8px">Site vitrine pour paysagistes — 390 € • Livraison 48h</div>
-                <dl style="margin-top:12px;color:var(--muted)">
-                  <dt style="font-weight:700">Contact</dt>
-                  <dd style="margin:6px 0">contact@novapaysages.fr</dd>
-                  <dt style="font-weight:700">Téléphone</dt>
-                  <dd style="margin:6px 0">06 00 00 00 00</dd>
-                </dl>
-                <a href="#devis" class="btn-primary" style="display:inline-block;margin-top:12px;text-decoration:none">Demander un devis</a>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <section id="devis" class="section" aria-labelledby="devis-title">
-        <div class="container">
-          <h3 id="devis-title">Demander un devis</h3>
-          <div style="display:grid;grid-template-columns:1fr 420px;gap:20px;align-items:start">
-            <div>
-              <form action="mailto:contact@novapaysages.fr" method="post" enctype="text/plain" aria-label="Formulaire de demande de devis">
-                <label for="nom">Nom & prénom</label>
-                <input id="nom" name="nom" type="text" required placeholder="Jean Dupont" />
-
-                <div class="flex">
-                  <div style="flex:1">
-                    <label for="telephone">Téléphone</label>
-                    <input id="telephone" name="telephone" type="tel" required placeholder="06 12 34 56 78" />
-                  </div>
-                  <div style="flex:1">
-                    <label for="email">E‑mail</label>
-                    <input id="email" name="email" type="email" required placeholder="contact@entreprise.fr" />
-                  </div>
-                </div>
-
-                <label for="adresse">Adresse du chantier</label>
-                <input id="adresse" name="adresse" type="text" placeholder="Ville ou adresse" />
-
-                <label for="message">Votre message (travaux souhaités, surface, délais)</label>
-                <textarea id="message" name="message" rows="5" placeholder="Décrivez rapidement votre projet"></textarea>
-
-                <input type="hidden" name="offre" value="Site vitrine Impact-NVA — 390 € — Livraison 48h" />
-
-                <div style="display:flex;gap:12px;align-items:center">
-                  <button type="submit" class="btn-primary">Envoyer ma demande</button>
-                  <button type="button" class="btn-ghost" onclick="scrollToTop()">Poser une question</button>
-                </div>
-              </form>
-            </div>
-
-            <div>
-              <div style="background:#fff;padding:16px;border-radius:12px;border:1px solid var(--stone)">
-                <h4 style="margin-top:0">Processus simple en 48h</h4>
-                <ol style="color:var(--muted);padding-left:18px">
-                  <li>Commande et réception des éléments (logo, photos, texte)</li>
-                  <li>Maquette & intégration (24–36h)</li>
-                  <li>Livraison finale et assistance (révisions incluses)</li>
-                </ol>
-                <div style="margin-top:12px">
-                  <strong>Paiement sécurisé</strong>
-                  <div style="color:var(--muted);margin-top:6px">Facilité de paiement et facture fournie.</div>
-                </div>
-                <div style="margin-top:14px">
-                  <a href="#presentation" class="btn-ghost" style="text-decoration:none">En savoir plus</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
+    <!-- Why Section -->
+    <section class="why" aria-labelledby="why-title">
       <div class="container">
-        <div class="footer-grid">
-          <div>
-            <strong>Impact-NVA</strong><div style="color:var(--muted)">LE DIGITAL AU SERVICE DU PAYSAGISTE</div>
+        <h2 id="why-title">Le problème (simple)</h2>
+        <div class="why-grid" role="list">
+          <div class="why-item" role="listitem">
+            <span class="icon" aria-hidden="true"><i class="fas fa-search"></i></span>
+            <h3>On vous cherche sur Google</h3>
+            <p>Si on ne vous trouve pas rapidement, le prospect passe à un autre.</p>
           </div>
-          <div style="text-align:right;color:var(--muted)">
-            <div>contact@novapaysages.fr</div>
-            <div style="margin-top:6px">© 2026 Impact-NVA</div>
+          <div class="why-item" role="listitem">
+            <span class="icon" aria-hidden="true"><i class="fas fa-user-check"></i></span>
+            <h3>Confiance immédiate</h3>
+            <p>Un site clair avec des avis et des photos inspire confiance.</p>
+          </div>
+          <div class="why-item" role="listitem">
+            <span class="icon" aria-hidden="true"><i class="fas fa-images"></i></span>
+            <h3>Vos chantiers vendent</h3>
+            <p>Les photos avant/après et vos réalisations déclenchent le contact.</p>
+          </div>
+          <div class="why-item" role="listitem">
+            <span class="icon" aria-hidden="true"><i class="fas fa-phone"></i></span>
+            <h3>Obtenir un devis</h3>
+            <p>Un formulaire simple → vous rappelez → vous fixez le rendez‑vous.</p>
           </div>
         </div>
       </div>
-    </footer>
-  </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="examples-preview" aria-labelledby="examples-title">
+      <div class="container">
+        <h2 id="examples-title">Exemples de réalisations</h2>
+        <div class="examples-grid" role="list">
+          <div class="example-item" role="listitem"><img src="assets/images/exemple-1.webp" alt="Entretien de pelouse et taille de haie" loading="lazy" /></div>
+          <div class="example-item" role="listitem"><img src="assets/images/exemple-2.webp" alt="Taille et mise en forme d’arbustes" loading="lazy" /></div>
+          <div class="example-item" role="listitem"><img src="assets/images/exemple-3.webp" alt="Entretien de pelouse et massifs" loading="lazy" /></div>
+        </div>
+        <div class="cta">
+          <a href="examples.html" class="btn btn-secondary" aria-label="Voir les exemples de réalisations">Voir les exemples</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <h2 id="reviews-title">Avis clients</h2>
+        <div class="google-summary" aria-hidden="false">
+          <div class="google-score" title="Note moyenne Google"><span data-google-rating>4,9</span> / 5</div>
+          <div class="google-stars" aria-hidden="true">★★★★★</div>
+          <div class="google-count" aria-hidden="true">(<span data-google-count>226</span>)</div>
+          <a class="google-link" data-google-link href="#" target="_blank" rel="noopener">Voir les avis Google</a>
+        </div>
+        <div class="reviews-grid" role="list">
+          <article class="review-card" role="listitem" aria-label="Avis client">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>« Site livré rapidement, rendu pro, et plus de demandes. »</p>
+            <strong>— Micro‑entrepreneur</strong>
+          </article>
+          <article class="review-card" role="listitem" aria-label="Avis client">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>« Simple : le client laisse son numéro, je rappelle. »</p>
+            <strong>— Paysagiste</strong>
+          </article>
+          <article class="review-card" role="listitem" aria-label="Avis client">
+            <div class="stars" aria-hidden="true">★★★★★</div>
+            <p>« Photos + avis = confiance. Ça change tout. »</p>
+            <strong>— Entreprise de paysage</strong>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Contact Section -->
+    <section class="cta-contact" aria-labelledby="cta-title">
+      <div class="container cta-container">
+        <h2 id="cta-title">Prêt à être visible ?</h2>
+        <p>Nous installons un site professionnel, pensé pour les paysagistes. Livraison en <strong>48h</strong> — Prix : <strong>390€</strong>.</p>
+        <a href="offer.html" class="btn btn-primary" aria-label="Obtenir mon site au tarif 390€">Obtenir mon site – 390€</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid" aria-label="Pied de page">
+      <div class="footer-col">
+        <h4><span data-brand>Impact-NVA</span></h4>
+        <p>La visibilité digitale pour les paysagistes : un site clair, pro, et prêt à recevoir des demandes.</p>
+      </div>
+      <div class="footer-col" aria-label="Navigation secondaire">
+        <h4>Navigation</h4>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="offer.html">Offre</a></li>
+          <li><a href="examples.html">Exemples</a></li>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Email : <a data-email href="mailto:contact@novapaysages.fr">contact@novapaysages.fr</a></p>
+        <p>Téléphone : <a data-phone href="tel:0600000000">06 00 00 00 00</a></p>
+        <p><small>Zone : <span data-zone>France</span></small></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 <span data-brand>Impact-NVA</span>. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Impact-NVA",
+    "description": "Création de sites web professionnels pour paysagistes. Livraison rapide en 48h. Prix fixe 390€.",
+    "url": "index.html",
+    "image": "assets/images/hero.jpg",
+    "priceRange": "€",
+    "areaServed": "FR"
+  }
+  </script>
+
+  <script src="config.js"></script>
+  <script src="js/config-apply.js"></script>
+  <script src="js/script.js"></script>
 
   <script>
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',function(e){
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
-
-    // Before / After simple drag
+    // Small accessible nav toggle (non-invasive)
     (function(){
-      const wrap = document.getElementById('baWrap');
-      const clip = document.getElementById('baClip');
-      const handle = document.getElementById('baHandle');
-      if(!wrap||!clip||!handle) return;
-      let dragging = false;
-      const rect = ()=>wrap.getBoundingClientRect();
-      function update(x){
-        const r = rect();
-        let pct = ((x - r.left) / r.width) * 100;
-        pct = Math.max(6, Math.min(94, pct));
-        clip.style.width = pct + '%';
-        handle.style.left = `calc(${pct}% - 28px)`;
-        handle.setAttribute('aria-valuenow', Math.round(pct));
-      }
-      handle.addEventListener('pointerdown', e=>{ dragging=true; handle.setPointerCapture(e.pointerId); });
-      window.addEventListener('pointerup', ()=>{ dragging=false; });
-      window.addEventListener('pointermove', e=>{ if(dragging) update(e.clientX); });
-      // initial position
-      update(rect().left + rect().width * 0.55);
-      // make handle clickable for keyboard
-      handle.tabIndex = 0;
-      handle.addEventListener('keydown', e=>{
-        let v = parseInt(handle.getAttribute('aria-valuenow')||55,10);
-        if(e.key === 'ArrowLeft') v = Math.max(6,v-4);
-        if(e.key === 'ArrowRight') v = Math.min(94,v+4);
-        clip.style.width = v + '%';
-        handle.style.left = `calc(${v}% - 28px)`;
-        handle.setAttribute('aria-valuenow', v);
+      var btn = document.getElementById('navToggle');
+      var nav = document.getElementById('navLinks');
+      if(!btn || !nav) return;
+      btn.addEventListener('click', function(){
+        var expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('show');
+      });
+      // Close nav when focus moves outside (mobile)
+      document.addEventListener('click', function(e){
+        if(!nav.classList.contains('show')) return;
+        if(!nav.contains(e.target) && e.target !== btn){
+          nav.classList.remove('show');
+          btn.setAttribute('aria-expanded','false');
+        }
       });
     })();
-
-    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
   </script>
 </body>
 </html>
