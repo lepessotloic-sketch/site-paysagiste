@@ -4,14 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Impact-NVA – La visibilité digitale pour les paysagistes</title>
-  <meta name="description" content="Impact-NVA crée des sites web professionnels pour paysagistes : visibilité, crédibilité et demandes de devis. Site prêt en 48h pour 390€." />
-  <meta name="robots" content="index,follow" />
-  <link rel="canonical" href="index.html" />
-  <meta property="og:title" content="Impact-NVA – Site professionnel pour paysagiste" />
-  <meta property="og:description" content="Site pro pour paysagistes – livré en 48h. Offre : 390€." />
-  <meta property="og:image" content="assets/images/hero.jpg" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#efe9dd" />
+  <meta name="description" content="Impact-NVA crée des sites web professionnels pour paysagistes : visibilité, crédibilité et demandes de devis." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,360 +13,357 @@
 
   <style>
     :root{
-      --beige-pierre: #efe9dd;
-      --olive: #6b7a3f;
-      --olive-dark: #55622f;
-      --blanc-casse: #fbf8f3;
-      --text: #2b2b2b;
-      --muted: #6a6a6a;
-      --card-shadow: rgba(27, 27, 27, 0.06);
-      --accent: #7b8a49;
-      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      --stone:#ECE6DE;      /* beige pierre */
+      --olive:#6B7A3A;      /* vert olive */
+      --cream:#FBF8F3;      /* blanc cassé */
+      --text:#213126;       /* sombre naturel */
+      --muted:#6d6a64;
+      --accent:#9aa868;
+      --glass: rgba(255,255,255,0.6);
     }
 
-    /* Base layout */
-    html,body{height:100%;}
-    body{
-      margin:0;
+    /* General resets / enhancements */
+    body {
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       color:var(--text);
-      background:linear-gradient(180deg,var(--blanc-casse),#f7f5f0);
+      background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-    }
-    .container{
-      max-width:1100px;
-      margin:0 auto;
-      padding:0 20px;
+      margin:0;
+      line-height:1.45;
     }
 
-    /* Skip link */
-    .skip-link{
-      position:absolute;
-      left:10px;
-      top:10px;
-      background:var(--olive);
-      color:var(--blanc-casse);
-      padding:8px 12px;
-      border-radius:6px;
-      z-index:1000;
-      transform:translateY(-120%);
-      transition:transform .18s ease;
-      text-decoration:none;
-      font-weight:600;
-    }
-    .skip-link:focus{transform:translateY(0);}
+    .container{ max-width:1100px; margin:0 auto; padding:0 20px; box-sizing:border-box; }
 
-    /* Header */
+    /* Header tweaks */
     .site-header{
       background:transparent;
-      position:sticky;
-      top:0;
-      z-index:80;
+      position:relative;
+      z-index:40;
       padding:18px 0;
-      backdrop-filter: blur(6px);
     }
     .nav-container{
       display:flex;
       align-items:center;
       justify-content:space-between;
+      gap:12px;
     }
-    .logo-link{color:var(--olive-dark);text-decoration:none;font-weight:700;font-size:1.05rem;}
-    .logo-link [data-brand]{color:var(--olive-dark);}
+    .logo-link { text-decoration:none; color:var(--text); font-weight:700; font-size:1.05rem; display:inline-block; padding:6px 10px; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border-radius:6px; box-shadow:0 2px 8px rgba(34,34,34,0.06); }
+    [data-brand]{ color:var(--olive); letter-spacing:0.2px; }
 
-    nav.navigation{display:flex;align-items:center;gap:12px;}
-    .nav-links{list-style:none;margin:0;padding:0;display:flex;gap:16px;align-items:center;}
-    .nav-links a{color:var(--text);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:500;}
-    .nav-links a:hover, .nav-links a:focus{background:var(--beige-pierre);color:var(--olive-dark);outline:none;}
-
-    .nav-toggle{
-      display:none;
-      background:transparent;border:0;color:var(--olive-dark);font-size:1.25rem;padding:8px;border-radius:8px;
-    }
-
-    /* Hero */
+    /* Hero improvements */
     .hero{
       position:relative;
-      min-height:56vh;
-      display:flex;
-      align-items:center;
-      margin-bottom:28px;
-      border-bottom-left-radius:18px;
-      border-bottom-right-radius:18px;
+      padding:40px 0 80px;
       overflow:hidden;
-      background:linear-gradient(120deg, rgba(111,121,88,0.08), rgba(239,233,221,0.06));
+      background: linear-gradient(180deg, rgba(250,247,240,0.6) 0%, rgba(244,241,236,0.35) 60%);
+      border-bottom:1px solid rgba(34,34,34,0.04);
     }
+
     .hero-image{
       position:absolute;
-      inset:0;
-      width:100%;
+      right:0;
+      top:0;
       height:100%;
+      width:55%;
       object-fit:cover;
-      filter:brightness(.66) contrast(.98);
-      transform:scale(1.02);
+      max-height:520px;
+      filter:contrast(1.05) saturate(0.95) brightness(0.95);
+      transform-origin:center;
+      transition:transform .6s ease;
+      z-index:1;
+      border-left: 160px solid transparent; /* creates a diagonal feel without adding assets */
     }
+    .hero:hover .hero-image{ transform:scale(1.02); }
+
     .hero-overlay{
-      position:absolute;inset:0;
-      background:linear-gradient(180deg, rgba(239,233,221,0.18), rgba(251,248,243,0.55));
-      mix-blend-mode: multiply;
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(235,230,222,0.95) 0%, rgba(255,255,255,0.0) 55%);
+      z-index:2;
+      pointer-events:none;
     }
+
     .hero-content{
       position:relative;
-      z-index:2;
-      padding:48px 20px;
-      color:var(--olive-dark);
-      max-width:780px;
+      z-index:10;
+      max-width:640px;
+      padding:48px 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,247,240,0.85));
+      backdrop-filter: blur(6px);
+      border-radius:12px;
+      margin-top:28px;
+      box-shadow: 0 10px 30px rgba(33,49,38,0.06);
+      border:1px solid rgba(107,122,58,0.06);
     }
+
     .hero h1{
-      margin:0 0 12px 0;
-      font-size:clamp(1.6rem, 3.6vw, 2.6rem);
+      margin:0 0 12px;
+      font-size:1.85rem;
       line-height:1.05;
-      color:var(--olive-dark);
-    }
-    .hero p{
-      margin:0 0 18px 0;
       color:var(--text);
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.0));
+      font-weight:700;
+      letter-spacing:-0.2px;
+    }
+
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
       font-weight:500;
     }
+
+    /* Badges row */
+    .hero-meta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:var(--stone);
+      color:var(--text);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:0.95rem;
+      box-shadow: 0 6px 18px rgba(107,122,58,0.06);
+      border:1px solid rgba(107,122,58,0.06);
+    }
+    .badge .fas{ color:var(--olive); font-size:0.95rem; opacity:0.95; }
+
+    .hero-cta{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:6px;
+      flex-wrap:wrap;
+    }
+
     .btn{
       display:inline-block;
       text-decoration:none;
       padding:12px 18px;
-      border-radius:10px;
+      border-radius:8px;
       font-weight:700;
-      transition:transform .12s ease, box-shadow .12s ease;
+      font-size:0.98rem;
+      transition:transform .18s ease, box-shadow .18s ease;
+      border:0;
+      cursor:pointer;
     }
-    .btn:active{transform:translateY(1px);}
     .btn-primary{
-      background:var(--olive);
-      color:var(--blanc-casse);
-      box-shadow: 0 6px 18px rgba(83,93,48,0.12);
+      background: linear-gradient(180deg, var(--olive), #5f6e33);
+      color:#fff;
+      box-shadow: 0 8px 22px rgba(91,107,46,0.18);
+      border:1px solid rgba(0,0,0,0.03);
     }
-    .btn-primary:hover{background:var(--olive-dark);}
-    .btn-secondary{
-      background:transparent;
-      border:2px solid rgba(107,122,63,0.12);
-      color:var(--olive-dark);
+    .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(91,107,46,0.22); }
+
+    .price-note{
+      font-size:0.94rem;
+      color:var(--text);
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25));
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid rgba(34,34,34,0.03);
+      font-weight:600;
     }
 
-    /* Why */
-    .why{padding:40px 0;}
-    .why h2{margin-bottom:18px;color:var(--olive-dark);}
-    .why-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
+    /* Decorative soft shapes to add depth */
+    .hero::before,
+    .hero::after{
+      content:"";
+      position:absolute;
+      z-index:0;
+      border-radius:50%;
+      filter:blur(40px);
+      opacity:0.12;
     }
-    .why-item{
-      background:linear-gradient(180deg, #fff, var(--blanc-casse));
-      border-radius:12px;
-      padding:18px;
-      box-shadow:0 6px 20px var(--card-shadow);
-      text-align:center;
+    .hero::before{
+      width:420px; height:420px;
+      background:linear-gradient(180deg, rgba(154,168,104,0.9), rgba(154,168,104,0.6));
+      left:-70px; top:20px;
+      transform:rotate(-12deg);
     }
-    .why-item .icon{display:inline-flex;width:56px;height:56px;border-radius:10px;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(107,122,63,0.12),rgba(107,122,63,0.06));margin-bottom:12px;color:var(--olive-dark);font-size:1.15rem;}
-    .why-item h3{margin:0 0 8px 0;font-size:1.02rem;color:var(--olive-dark);}
-    .why-item p{margin:0;color:var(--muted);font-size:0.95rem;}
-
-    /* Examples */
-    .examples-preview{padding:30px 0;}
-    .examples-preview h2{color:var(--olive-dark);margin-bottom:14px;}
-    .examples-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
+    .hero::after{
+      width:320px; height:320px;
+      background:linear-gradient(180deg, rgba(236,230,222,0.95), rgba(255,255,255,0.85));
+      right:140px; bottom:-60px;
     }
-    .example-item{
-      border-radius:10px;
-      overflow:hidden;
-      background:#fff;
-      box-shadow:0 8px 22px rgba(27,27,27,0.04);
-      min-height:160px;
-      display:block;
-    }
-    .example-item img{display:block;width:100%;height:100%;object-fit:cover;vertical-align:middle;}
-
-    .examples-preview .cta{margin-top:16px;text-align:center;}
-
-    /* Reviews */
-    .reviews{padding:32px 0;background:linear-gradient(180deg, rgba(235,231,224,0.6), transparent);}
-    .reviews h2{color:var(--olive-dark);margin-bottom:12px;}
-    .google-summary{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;color:var(--text);}
-    .google-score{font-weight:700;font-size:1.35rem;color:var(--olive-dark);}
-    .google-stars{color:#b58900;font-weight:700;}
-    .google-link{color:var(--olive-dark);text-decoration:underline;font-weight:600;}
-    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-    .review-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 10px 30px rgba(27,27,27,0.05);}
-    .review-card .stars{color:#c49500;margin-bottom:8px;font-weight:700;}
-    .review-card p{margin:0 0 8px 0;color:var(--muted);font-size:0.95rem}
-
-    /* CTA Contact */
-    .cta-contact{padding:28px 0;margin-top:6px;text-align:center;border-radius:12px;background:linear-gradient(90deg, rgba(107,122,63,0.06), rgba(239,233,221,0.04));}
-    .cta-container{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px;}
-    .cta-container h2{margin:0;color:var(--olive-dark);}
-    .cta-container p{margin:0;color:var(--muted);max-width:720px;}
-
-    /* Footer */
-    .site-footer{padding:28px 0;margin-top:18px;background:transparent;color:var(--muted);}
-    .footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;padding-bottom:18px;border-bottom:1px solid rgba(107,122,63,0.06);}
-    .footer-col h4{margin:0 0 8px 0;color:var(--olive-dark);}
-    .footer-col p,a{color:var(--muted);text-decoration:none;}
-    .footer-bottom{padding-top:12px;text-align:center;color:var(--muted);font-size:0.9rem;}
 
     /* Responsive */
-    @media (max-width:900px){
-      .why-grid{grid-template-columns:repeat(2,1fr);}
-      .examples-grid{grid-template-columns:repeat(2,1fr);}
-      .reviews-grid{grid-template-columns:repeat(2,1fr);}
-      .nav-links{display:none;position:fixed;right:12px;top:72px;background:var(--blanc-casse);padding:12px;border-radius:12px;box-shadow:0 12px 30px rgba(27,27,27,0.08);flex-direction:column;gap:8px;}
-      .nav-links.show{display:flex;}
-      .nav-toggle{display:inline-flex;}
+    @media (max-width: 980px){
+      .hero-image{ width:48%; border-left:100px solid transparent; }
+      .hero-content{ margin-right:auto; max-width:60%; }
     }
-    @media (max-width:600px){
-      .why-grid{grid-template-columns:1fr;}
-      .examples-grid{grid-template-columns:1fr;}
-      .reviews-grid{grid-template-columns:1fr;}
-      .footer-grid{grid-template-columns:1fr;}
-      .hero{min-height:48vh;}
-      .hero-content{padding:30px 14px;}
+    @media (max-width:760px){
+      .hero{
+        padding:22px 0 36px;
+      }
+      .hero-image{ position:relative; width:100%; height:220px; max-height:260px; border-left:0; border-radius:12px; margin-top:18px; }
+      .hero-overlay{ background: linear-gradient(180deg, rgba(250,247,240,0.9) 0%, rgba(255,255,255,0.0) 60%); }
+      .hero-content{ max-width:100%; padding:20px; margin:0; border-radius:12px; }
+      .hero h1{ font-size:1.35rem; }
+      .hero p{ font-size:0.95rem; }
+      .hero::before, .hero::after{ display:none; }
     }
+
+    /* small enhancements for other sections for cohesion */
+    .why h2, .examples-preview h2, .reviews h2, .cta-contact h2{ color:var(--text); margin-bottom:18px; }
+    .btn-secondary{
+      background:transparent;
+      color:var(--olive);
+      border:1px solid rgba(107,122,58,0.14);
+      padding:10px 16px;
+      border-radius:8px;
+      font-weight:700;
+    }
+
+    /* Accessibility focus states */
+    a:focus, button:focus{ outline:3px solid rgba(106,124,59,0.18); outline-offset:3px; border-radius:6px; }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Aller au contenu</a>
-
   <!-- Header -->
-  <header class="site-header" role="banner">
+  <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html" class="logo-link" aria-label="Impact-NVA – Accueil"><span data-brand>Impact-NVA</span></a>
+        <a href="index.html" class="logo-link"><span data-brand>Impact-NVA</span></a>
       </div>
-      <nav class="navigation" id="navigation" role="navigation" aria-label="Menu principal">
-        <ul class="nav-links" id="navLinks" role="menubar">
-          <li role="none"><a role="menuitem" href="index.html">Accueil</a></li>
-          <li role="none"><a role="menuitem" href="offer.html">Offre</a></li>
-          <li role="none"><a role="menuitem" href="examples.html">Exemples</a></li>
-          <li role="none"><a role="menuitem" href="process.html">Process</a></li>
-          <li role="none"><a role="menuitem" href="faq.html">FAQ</a></li>
-          <li role="none"><a role="menuitem" href="contact.html">Contact</a></li>
+      <nav class="navigation" id="navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="offer.html">Offre</a></li>
+          <li><a href="examples.html">Exemples</a></li>
+          <li><a href="process.html">Process</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks" title="Ouvrir le menu">
-          <span class="fas fa-bars" aria-hidden="true"></span>
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+          <span class="fas fa-bars"></span>
         </button>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <main id="main-content" tabindex="-1">
-    <section class="hero" aria-label="Offre site pour paysagiste">
-      <div class="hero-overlay" aria-hidden="true"></div>
-      <img src="assets/images/hero.jpg" alt="Paysagiste travaillant dans un jardin" class="hero-image" loading="eager" />
-      <div class="hero-content container">
-        <h1>Site professionnel pour paysagiste — prêt en 48h</h1>
-        <p><strong>Livraison en 48h</strong> — <strong>390€</strong> <span style="opacity:0.95;">(offre de lancement)</span></p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="offer.html" class="btn btn-primary" role="button">Obtenir mon site – 390€</a>
-          <a href="examples.html" class="btn btn-secondary" role="button" aria-label="Voir des exemples de réalisations">Voir des exemples</a>
-        </div>
-      </div>
-    </section>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <img src="assets/images/hero.jpg" alt="Paysage" class="hero-image" />
+    <div class="hero-content container" role="region" aria-label="Offre principale">
+      <h1 id="hero-title">Site professionnel pour paysagiste</h1>
 
-    <!-- Why Section -->
-    <section class="why" aria-labelledby="why-title">
-      <div class="container">
-        <h2 id="why-title">Le problème (simple)</h2>
-        <div class="why-grid" role="list">
-          <div class="why-item" role="listitem">
-            <span class="icon" aria-hidden="true"><i class="fas fa-search"></i></span>
-            <h3>On vous cherche sur Google</h3>
-            <p>Si on ne vous trouve pas rapidement, le prospect passe à un autre.</p>
-          </div>
-          <div class="why-item" role="listitem">
-            <span class="icon" aria-hidden="true"><i class="fas fa-user-check"></i></span>
-            <h3>Confiance immédiate</h3>
-            <p>Un site clair avec des avis et des photos inspire confiance.</p>
-          </div>
-          <div class="why-item" role="listitem">
-            <span class="icon" aria-hidden="true"><i class="fas fa-images"></i></span>
-            <h3>Vos chantiers vendent</h3>
-            <p>Les photos avant/après et vos réalisations déclenchent le contact.</p>
-          </div>
-          <div class="why-item" role="listitem">
-            <span class="icon" aria-hidden="true"><i class="fas fa-phone"></i></span>
-            <h3>Obtenir un devis</h3>
-            <p>Un formulaire simple → vous rappelez → vous fixez le rendez‑vous.</p>
-          </div>
-        </div>
+      <div class="hero-meta" aria-hidden="false">
+        <div class="badge" title="Livraison 48h"><i class="fas fa-truck"></i><span>Prêt en <strong>48h</strong></span></div>
+        <div class="badge" title="Prix fixe"><i class="fas fa-euro-sign"></i><span><strong>390€</strong></span></div>
+        <div class="price-note" style="font-weight:600;">Offre de lancement</div>
       </div>
-    </section>
 
-    <!-- Examples Section -->
-    <section class="examples-preview" aria-labelledby="examples-title">
-      <div class="container">
-        <h2 id="examples-title">Exemples de réalisations</h2>
-        <div class="examples-grid" role="list">
-          <div class="example-item" role="listitem"><img src="assets/images/exemple-1.webp" alt="Entretien de pelouse et taille de haie" loading="lazy" /></div>
-          <div class="example-item" role="listitem"><img src="assets/images/exemple-2.webp" alt="Taille et mise en forme d’arbustes" loading="lazy" /></div>
-          <div class="example-item" role="listitem"><img src="assets/images/exemple-3.webp" alt="Entretien de pelouse et massifs" loading="lazy" /></div>
-        </div>
-        <div class="cta">
-          <a href="examples.html" class="btn btn-secondary" aria-label="Voir les exemples de réalisations">Voir les exemples</a>
-        </div>
-      </div>
-    </section>
+      <p>Un site clair, optimisé pour vous rendre visible et recevoir des demandes de devis rapidement.</p>
 
-    <!-- Reviews Section -->
-    <section class="reviews" aria-labelledby="reviews-title">
-      <div class="container">
-        <h2 id="reviews-title">Avis clients</h2>
-        <div class="google-summary" aria-hidden="false">
-          <div class="google-score" title="Note moyenne Google"><span data-google-rating>4,9</span> / 5</div>
-          <div class="google-stars" aria-hidden="true">★★★★★</div>
-          <div class="google-count" aria-hidden="true">(<span data-google-count>226</span>)</div>
-          <a class="google-link" data-google-link href="#" target="_blank" rel="noopener">Voir les avis Google</a>
-        </div>
-        <div class="reviews-grid" role="list">
-          <article class="review-card" role="listitem" aria-label="Avis client">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>« Site livré rapidement, rendu pro, et plus de demandes. »</p>
-            <strong>— Micro‑entrepreneur</strong>
-          </article>
-          <article class="review-card" role="listitem" aria-label="Avis client">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>« Simple : le client laisse son numéro, je rappelle. »</p>
-            <strong>— Paysagiste</strong>
-          </article>
-          <article class="review-card" role="listitem" aria-label="Avis client">
-            <div class="stars" aria-hidden="true">★★★★★</div>
-            <p>« Photos + avis = confiance. Ça change tout. »</p>
-            <strong>— Entreprise de paysage</strong>
-          </article>
-        </div>
+      <div class="hero-cta">
+        <a href="offer.html" class="btn btn-primary" aria-label="Obtenir mon site – 390€">Obtenir mon site – 390€</a>
+        <span style="color:var(--muted); font-weight:600;">(Livraison en <strong>48h</strong>)</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CTA Contact Section -->
-    <section class="cta-contact" aria-labelledby="cta-title">
-      <div class="container cta-container">
-        <h2 id="cta-title">Prêt à être visible ?</h2>
-        <p>Nous installons un site professionnel, pensé pour les paysagistes. Livraison en <strong>48h</strong> — Prix : <strong>390€</strong>.</p>
-        <a href="offer.html" class="btn btn-primary" aria-label="Obtenir mon site au tarif 390€">Obtenir mon site – 390€</a>
+  <!-- Why Section -->
+  <section class="why">
+    <div class="container">
+      <h2>Le problème (simple)</h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <span class="icon"><i class="fas fa-search"></i></span>
+          <h3>On vous cherche sur Google</h3>
+          <p>Si on ne vous trouve pas rapidement, le prospect passe à un autre.</p>
+        </div>
+        <div class="why-item">
+          <span class="icon"><i class="fas fa-user-check"></i></span>
+          <h3>Confiance immédiate</h3>
+          <p>Un site clair avec des avis et des photos inspire confiance.</p>
+        </div>
+        <div class="why-item">
+          <span class="icon"><i class="fas fa-images"></i></span>
+          <h3>Vos chantiers vendent</h3>
+          <p>Les photos avant/après et vos réalisations déclenchent le contact.</p>
+        </div>
+        <div class="why-item">
+          <span class="icon"><i class="fas fa-phone"></i></span>
+          <h3>Obtenir un devis</h3>
+          <p>Un formulaire simple → vous rappelez → vous fixez le rendez‑vous.</p>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- Examples Section -->
+  <section class="examples-preview">
+    <div class="container">
+      <h2>Exemples de réalisations</h2>
+      <div class="examples-grid">
+        <div class="example-item"><img src="assets/images/exemple-1.webp" alt="Entretien de pelouse et taille de haie" /></div>
+        <div class="example-item"><img src="assets/images/exemple-2.webp" alt="Taille et mise en forme d’arbustes" /></div>
+        <div class="example-item"><img src="assets/images/exemple-3.webp" alt="Entretien de pelouse et massifs" /></div>
+      </div>
+      <div class="cta">
+        <a href="examples.html" class="btn btn-secondary">Voir les exemples</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews">
+    <div class="container">
+      <h2>Avis clients</h2>
+      <div class="google-summary">
+        <div class="google-score"><span data-google-rating>4,9</span> / 5</div>
+        <div class="google-stars">★★★★★</div>
+        <div class="google-count">(<span data-google-count>226</span>)</div>
+        <a class="google-link" data-google-link href="#" target="_blank" rel="noopener">Voir les avis Google</a>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>« Site livré rapidement, rendu pro, et plus de demandes. »</p>
+          <strong>— Micro‑entrepreneur</strong>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>« Simple : le client laisse son numéro, je rappelle. »</p>
+          <strong>— Paysagiste</strong>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>« Photos + avis = confiance. Ça change tout. »</p>
+          <strong>— Entreprise de paysage</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Contact Section -->
+  <section class="cta-contact">
+    <div class="container cta-container">
+      <h2>Prêt à être visible ?</h2>
+      <p>Nous installons un site professionnel, pensé pour les paysagistes.</p>
+      <a href="offer.html" class="btn btn-primary">Obtenir mon site – 390€</a>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-grid" aria-label="Pied de page">
+  <footer class="site-footer">
+    <div class="container footer-grid">
       <div class="footer-col">
         <h4><span data-brand>Impact-NVA</span></h4>
         <p>La visibilité digitale pour les paysagistes : un site clair, pro, et prêt à recevoir des demandes.</p>
       </div>
-      <div class="footer-col" aria-label="Navigation secondaire">
+      <div class="footer-col">
         <h4>Navigation</h4>
-        <ul style="list-style:none;padding:0;margin:0;">
+        <ul>
           <li><a href="index.html">Accueil</a></li>
           <li><a href="offer.html">Offre</a></li>
           <li><a href="examples.html">Exemples</a></li>
@@ -384,53 +374,18 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <p>Email : <a data-email href="mailto:contact@novapaysages.fr">contact@novapaysages.fr</a></p>
-        <p>Téléphone : <a data-phone href="tel:0600000000">06 00 00 00 00</a></p>
+        <p>Email : <a data-email href="#">contact@novapaysages.fr</a></p>
+        <p>Téléphone : <a data-phone href="#">06 00 00 00 00</a></p>
         <p><small>Zone : <span data-zone>France</span></small></p>
       </div>
     </div>
-    <div class="container footer-bottom">
+    <div class="footer-bottom">
       <p>© 2026 <span data-brand>Impact-NVA</span>. Tous droits réservés.</p>
     </div>
   </footer>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Impact-NVA",
-    "description": "Création de sites web professionnels pour paysagistes. Livraison rapide en 48h. Prix fixe 390€.",
-    "url": "index.html",
-    "image": "assets/images/hero.jpg",
-    "priceRange": "€",
-    "areaServed": "FR"
-  }
-  </script>
-
   <script src="config.js"></script>
   <script src="js/config-apply.js"></script>
   <script src="js/script.js"></script>
-
-  <script>
-    // Small accessible nav toggle (non-invasive)
-    (function(){
-      var btn = document.getElementById('navToggle');
-      var nav = document.getElementById('navLinks');
-      if(!btn || !nav) return;
-      btn.addEventListener('click', function(){
-        var expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('show');
-      });
-      // Close nav when focus moves outside (mobile)
-      document.addEventListener('click', function(e){
-        if(!nav.classList.contains('show')) return;
-        if(!nav.contains(e.target) && e.target !== btn){
-          nav.classList.remove('show');
-          btn.setAttribute('aria-expanded','false');
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
