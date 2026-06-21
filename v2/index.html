@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impact-NVA – La visibilité digitale pour les paysagistes</title>
-  <meta name="description" content="Impact-NVA crée des sites web professionnels pour paysagistes : visibilité, crédibilité et demandes de devis." />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Impact-NVA — Le digital au service du paysagiste</title>
+  <meta name="description" content="Impact-NVA — Site web premium pour paysagistes. 390 €, livraison 48h. Un design moderne et performant pour générer des demandes de devis." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -13,227 +12,147 @@
 
   <style>
     :root{
-      --stone:#ECE6DE;      /* beige pierre */
-      --olive:#6B7A3A;      /* vert olive */
-      --cream:#FBF8F3;      /* blanc cassé */
-      --text:#213126;       /* sombre naturel */
-      --muted:#6d6a64;
-      --accent:#9aa868;
-      --glass: rgba(255,255,255,0.6);
-    }
-
-    /* General resets / enhancements */
-    body {
+      --bg:#0b0b0c;
+      --panel:#121214;
+      --muted:#9aa0a6;
+      --text:#e9eef2;
+      --accent:#1fb06a; /* Impact-NVA green accent */
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --container:1100px;
+      --transition:300ms;
       font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#070708 0%, #0e0e10 100%);
       color:var(--text);
-      background: linear-gradient(180deg, var(--cream) 0%, #fff 100%);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      margin:0;
-      line-height:1.45;
+      line-height:1.5;
+      font-size:16px;
     }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
-    .container{ max-width:1100px; margin:0 auto; padding:0 20px; box-sizing:border-box; }
+    /* Header */
+    .site-header{position:fixed;top:0;left:0;right:0;z-index:60;background:linear-gradient(180deg, rgba(11,11,12,0.65), rgba(11,11,12,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .nav-container{display:flex;align-items:center;justify-content:space-between;padding:18px 20px}
+    .logo-link{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--text);font-size:18px;letter-spacing:0.6px}
+    .logo-link span[data-brand]{background:linear-gradient(90deg,var(--text),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .navigation{display:flex;align-items:center;gap:18px}
+    .nav-links{display:flex;gap:18px;list-style:none;padding:0;margin:0}
+    .nav-links a{color:var(--muted);padding:10px 12px;border-radius:8px;font-weight:600;transition:all var(--transition)}
+    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.02)}
+    .nav-toggle{display:none;background:transparent;border:0;color:var(--text);font-size:20px;padding:10px}
 
-    /* Header tweaks */
-    .site-header{
-      background:transparent;
-      position:relative;
-      z-index:40;
-      padding:18px 0;
-    }
-    .nav-container{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .logo-link { text-decoration:none; color:var(--text); font-weight:700; font-size:1.05rem; display:inline-block; padding:6px 10px; background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border-radius:6px; box-shadow:0 2px 8px rgba(34,34,34,0.06); }
-    [data-brand]{ color:var(--olive); letter-spacing:0.2px; }
+    /* Hero */
+    .hero{position:relative;min-height:100vh;display:grid;align-items:center;overflow:hidden}
+    .hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(20%) contrast(0.9) brightness(0.5);transform:scale(1.05)}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,7,8,0.45) 0%, rgba(7,7,8,0.5) 40%, rgba(7,7,8,0.7) 100%)}
+    .hero-content{position:relative;z-index:2;padding:120px 20px 120px;display:flex;flex-direction:column;gap:20px;max-width:920px}
+    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));color:var(--muted);font-weight:600;font-size:13px}
+    .hero h1{font-size:48px;margin:4px 0 0;line-height:1.02;letter-spacing:-0.6px}
+    .hero p.lead{color:var(--muted);font-size:18px;margin:6px 0 0}
+    .hero-stats{display:flex;gap:18px;align-items:center;margin-top:14px}
+    .stat{background:var(--glass);padding:10px 14px;border-radius:12px;color:var(--text);font-weight:700;font-size:15px;display:flex;flex-direction:column}
+    .stat small{font-weight:600;color:var(--muted);font-size:12px}
+    .hero-cta{display:flex;gap:12px;margin-top:22px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:1px solid transparent;cursor:pointer;transition:all var(--transition)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#16a85a);color:#06110a;box-shadow:0 8px 30px rgba(31,176,106,0.16);transform:translateZ(0)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    .cta-note{color:var(--muted);font-size:14px;margin-top:6px}
 
-    /* Hero improvements */
-    .hero{
-      position:relative;
-      padding:40px 0 80px;
-      overflow:hidden;
-      background: linear-gradient(180deg, rgba(250,247,240,0.6) 0%, rgba(244,241,236,0.35) 60%);
-      border-bottom:1px solid rgba(34,34,34,0.04);
-    }
+    /* Sections */
+    section{padding:72px 0}
+    h2{font-size:22px;margin:0 0 18px;color:var(--text)}
+    .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .why-item{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .why-item .icon{display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,0.02);color:var(--accent);font-size:18px;margin-bottom:10px}
+    .why-item h3{margin:0 0 8px;font-size:16px}
+    .why-item p{margin:0;color:var(--muted);font-size:14px}
 
-    .hero-image{
-      position:absolute;
-      right:0;
-      top:0;
-      height:100%;
-      width:55%;
-      object-fit:cover;
-      max-height:520px;
-      filter:contrast(1.05) saturate(0.95) brightness(0.95);
-      transform-origin:center;
-      transition:transform .6s ease;
-      z-index:1;
-      border-left: 160px solid transparent; /* creates a diagonal feel without adding assets */
-    }
-    .hero:hover .hero-image{ transform:scale(1.02); }
+    /* Examples */
+    .examples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .example-item{overflow:hidden;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .example-item img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.9,.2,1)}
+    .example-item img:hover{transform:scale(1.06)}
+    .examples-preview .cta{text-align:center;margin-top:20px}
 
-    .hero-overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, rgba(235,230,222,0.95) 0%, rgba(255,255,255,0.0) 55%);
-      z-index:2;
-      pointer-events:none;
-    }
+    /* Before/After */
+    .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .split-card{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+    .split-card img{width:100%;height:420px;object-fit:cover;display:block}
+    .split-label{position:absolute;left:12px;top:12px;background:linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));padding:8px 10px;border-radius:8px;color:var(--text);font-weight:700;font-size:13px}
 
-    .hero-content{
-      position:relative;
-      z-index:10;
-      max-width:640px;
-      padding:48px 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,247,240,0.85));
-      backdrop-filter: blur(6px);
-      border-radius:12px;
-      margin-top:28px;
-      box-shadow: 0 10px 30px rgba(33,49,38,0.06);
-      border:1px solid rgba(107,122,58,0.06);
-    }
+    /* Reviews */
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .review-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .stars{color:var(--accent);font-weight:800;margin-bottom:8px}
 
-    .hero h1{
-      margin:0 0 12px;
-      font-size:1.85rem;
-      line-height:1.05;
-      color:var(--text);
-      font-weight:700;
-      letter-spacing:-0.2px;
-    }
+    .google-summary{display:flex;align-items:center;gap:16px;color:var(--text)}
+    .google-score{font-weight:800;font-size:28px}
+    .google-count{color:var(--muted)}
 
-    .hero p{
-      margin:0 0 18px;
-      color:var(--muted);
-      font-weight:500;
-    }
+    /* Process preview */
+    .process-preview{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+    .process-step{flex:1;min-width:200px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .process-step h4{margin:0 0 6px;font-size:16px}
+    .process-step p{margin:0;color:var(--muted);font-size:14px}
 
-    /* Badges row */
-    .hero-meta{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:var(--stone);
-      color:var(--text);
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:600;
-      font-size:0.95rem;
-      box-shadow: 0 6px 18px rgba(107,122,58,0.06);
-      border:1px solid rgba(107,122,58,0.06);
-    }
-    .badge .fas{ color:var(--olive); font-size:0.95rem; opacity:0.95; }
+    /* Map placeholder */
+    #map{height:320px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);overflow:hidden;background:linear-gradient(180deg,#0b0c0d, #0f1113);display:flex;align-items:center;justify-content:center;color:var(--muted)}
 
-    .hero-cta{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-top:6px;
-      flex-wrap:wrap;
-    }
+    /* CTA final */
+    .final-cta{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg, rgba(31,176,106,0.06), rgba(255,255,255,0.01));padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
+    .final-cta .price{font-weight:800;font-size:20px;color:var(--text)}
+    .final-cta .delivery{color:var(--muted);font-size:14px}
 
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      padding:12px 18px;
-      border-radius:8px;
-      font-weight:700;
-      font-size:0.98rem;
-      transition:transform .18s ease, box-shadow .18s ease;
-      border:0;
-      cursor:pointer;
-    }
-    .btn-primary{
-      background: linear-gradient(180deg, var(--olive), #5f6e33);
-      color:#fff;
-      box-shadow: 0 8px 22px rgba(91,107,46,0.18);
-      border:1px solid rgba(0,0,0,0.03);
-    }
-    .btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(91,107,46,0.22); }
-
-    .price-note{
-      font-size:0.94rem;
-      color:var(--text);
-      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.25));
-      padding:8px 10px;
-      border-radius:8px;
-      border:1px solid rgba(34,34,34,0.03);
-      font-weight:600;
-    }
-
-    /* Decorative soft shapes to add depth */
-    .hero::before,
-    .hero::after{
-      content:"";
-      position:absolute;
-      z-index:0;
-      border-radius:50%;
-      filter:blur(40px);
-      opacity:0.12;
-    }
-    .hero::before{
-      width:420px; height:420px;
-      background:linear-gradient(180deg, rgba(154,168,104,0.9), rgba(154,168,104,0.6));
-      left:-70px; top:20px;
-      transform:rotate(-12deg);
-    }
-    .hero::after{
-      width:320px; height:320px;
-      background:linear-gradient(180deg, rgba(236,230,222,0.95), rgba(255,255,255,0.85));
-      right:140px; bottom:-60px;
-    }
+    /* Footer */
+    .site-footer{padding:40px 0;background:transparent;border-top:1px solid rgba(255,255,255,0.03);margin-top:40px}
+    .footer-grid{display:grid;grid-template-columns:1fr 200px 260px;gap:20px;align-items:start}
+    .footer-col h4{margin:0 0 8px;color:var(--text)}
+    .footer-col p, .footer-col a, .footer-col li{color:var(--muted);font-size:14px}
+    .footer-col ul{padding:0;margin:0;list-style:none}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.03);margin-top:20px;padding-top:18px;color:var(--muted);font-size:13px;text-align:center}
 
     /* Responsive */
-    @media (max-width: 980px){
-      .hero-image{ width:48%; border-left:100px solid transparent; }
-      .hero-content{ margin-right:auto; max-width:60%; }
+    @media (max-width:980px){
+      .why-grid{grid-template-columns:repeat(2,1fr)}
+      .examples-grid{grid-template-columns:repeat(2,1fr)}
+      .split-grid{grid-template-columns:1fr}
+      .nav-toggle{display:inline-flex}
+      .nav-links{position:fixed;top:68px;right:18px;background:linear-gradient(180deg, rgba(11,11,12,0.98), rgba(11,11,12,0.96));padding:14px;border-radius:12px;flex-direction:column;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6);display:none}
+      .nav-links.show{display:flex}
+      .hero h1{font-size:34px}
+      .hero-image{transform:none}
+      .review-card{padding:14px}
+      .reviews-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
     }
-    @media (max-width:760px){
-      .hero{
-        padding:22px 0 36px;
-      }
-      .hero-image{ position:relative; width:100%; height:220px; max-height:260px; border-left:0; border-radius:12px; margin-top:18px; }
-      .hero-overlay{ background: linear-gradient(180deg, rgba(250,247,240,0.9) 0%, rgba(255,255,255,0.0) 60%); }
-      .hero-content{ max-width:100%; padding:20px; margin:0; border-radius:12px; }
-      .hero h1{ font-size:1.35rem; }
-      .hero p{ font-size:0.95rem; }
-      .hero::before, .hero::after{ display:none; }
+    @media (max-width:520px){
+      .hero-content{padding:100px 20px}
+      .hero h1{font-size:28px}
+      .hero p.lead{font-size:15px}
+      .stat{font-size:14px}
+      .nav-toggle{font-size:22px}
     }
-
-    /* small enhancements for other sections for cohesion */
-    .why h2, .examples-preview h2, .reviews h2, .cta-contact h2{ color:var(--text); margin-bottom:18px; }
-    .btn-secondary{
-      background:transparent;
-      color:var(--olive);
-      border:1px solid rgba(107,122,58,0.14);
-      padding:10px 16px;
-      border-radius:8px;
-      font-weight:700;
-    }
-
-    /* Accessibility focus states */
-    a:focus, button:focus{ outline:3px solid rgba(106,124,59,0.18); outline-offset:3px; border-radius:6px; }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html" class="logo-link"><span data-brand>Impact-NVA</span></a>
+        <a href="index.html" class="logo-link" aria-label="Impact-NVA — Accueil">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden focusable="false"><rect width="24" height="24" rx="6" fill="url(#g)"/><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#1fb06a"/><stop offset="1" stop-color="#16a85a"/></linearGradient></defs></svg>
+          <span data-brand>Impact-NVA</span>
+        </a>
       </div>
-      <nav class="navigation" id="navigation">
+
+      <nav class="navigation" aria-label="Navigation principale">
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html">Accueil</a></li>
           <li><a href="offer.html">Offre</a></li>
@@ -243,89 +162,111 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
-          <span class="fas fa-bars"></span>
+          <span class="fas fa-bars" aria-hidden="true"></span>
         </button>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <img src="assets/images/hero.jpg" alt="Paysage" class="hero-image" />
-    <div class="hero-content container" role="region" aria-label="Offre principale">
-      <h1 id="hero-title">Site professionnel pour paysagiste</h1>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <img src="assets/images/hero.jpg" alt="Paysage — exemple de réalisation" class="hero-image" />
+      <div class="hero-content container">
+        <div class="kicker">Le digital au service du paysagiste</div>
+        <h1 id="hero-title">Un site professionnel, livré en 48h</h1>
+        <p class="lead">Design premium, SEO axé sur les demandes de devis et galerie avant/après — tout prêt pour convertir vos futurs clients.</p>
 
-      <div class="hero-meta" aria-hidden="false">
-        <div class="badge" title="Livraison 48h"><i class="fas fa-truck"></i><span>Prêt en <strong>48h</strong></span></div>
-        <div class="badge" title="Prix fixe"><i class="fas fa-euro-sign"></i><span><strong>390€</strong></span></div>
-        <div class="price-note" style="font-weight:600;">Offre de lancement</div>
-      </div>
-
-      <p>Un site clair, optimisé pour vous rendre visible et recevoir des demandes de devis rapidement.</p>
-
-      <div class="hero-cta">
-        <a href="offer.html" class="btn btn-primary" aria-label="Obtenir mon site – 390€">Obtenir mon site – 390€</a>
-        <span style="color:var(--muted); font-weight:600;">(Livraison en <strong>48h</strong>)</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Section -->
-  <section class="why">
-    <div class="container">
-      <h2>Le problème (simple)</h2>
-      <div class="why-grid">
-        <div class="why-item">
-          <span class="icon"><i class="fas fa-search"></i></span>
-          <h3>On vous cherche sur Google</h3>
-          <p>Si on ne vous trouve pas rapidement, le prospect passe à un autre.</p>
+        <div class="hero-stats" role="list" aria-hidden="false">
+          <div class="stat" role="listitem">
+            <small>Prix</small>
+            <strong>390 €</strong>
+          </div>
+          <div class="stat" role="listitem">
+            <small>Livraison</small>
+            <strong>48h</strong>
+          </div>
+          <div class="stat" role="listitem" aria-hidden="true">
+            <small>Garantie</small>
+            <strong>Prêt à recevoir des demandes</strong>
+          </div>
         </div>
-        <div class="why-item">
-          <span class="icon"><i class="fas fa-user-check"></i></span>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="offer.html" title="Obtenir mon site — 390 €">Obtenir mon site — 390€</a>
+          <a class="btn btn-ghost" href="examples.html" title="Voir des exemples">Voir des exemples</a>
+        </div>
+        <div class="cta-note">Site optimisé pour mobile et Google My Business — livré clé en main.</div>
+      </div>
+    </section>
+
+    <!-- Why -->
+    <section class="why container" aria-labelledby="why-title">
+      <h2 id="why-title">Pourquoi un site change tout</h2>
+      <div class="why-grid" role="list">
+        <div class="why-item" role="listitem">
+          <div class="icon"><i class="fas fa-search" aria-hidden="true"></i></div>
+          <h3>Être visible là où on vous cherche</h3>
+          <p>Apparaître sur Google quand un client recherche un paysagiste près de chez lui.</p>
+        </div>
+        <div class="why-item" role="listitem">
+          <div class="icon"><i class="fas fa-user-check" aria-hidden="true"></i></div>
           <h3>Confiance immédiate</h3>
-          <p>Un site clair avec des avis et des photos inspire confiance.</p>
+          <p>Une présentation claire, des avis et des photos renforcent votre crédibilité.</p>
         </div>
-        <div class="why-item">
-          <span class="icon"><i class="fas fa-images"></i></span>
-          <h3>Vos chantiers vendent</h3>
-          <p>Les photos avant/après et vos réalisations déclenchent le contact.</p>
+        <div class="why-item" role="listitem">
+          <div class="icon"><i class="fas fa-images" aria-hidden="true"></i></div>
+          <h3>Vos réalisations vendent</h3>
+          <p>Avant / Après et galerie soignée : la meilleure preuve de votre savoir‑faire.</p>
         </div>
-        <div class="why-item">
-          <span class="icon"><i class="fas fa-phone"></i></span>
-          <h3>Obtenir un devis</h3>
-          <p>Un formulaire simple → vous rappelez → vous fixez le rendez‑vous.</p>
+        <div class="why-item" role="listitem">
+          <div class="icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+          <h3>Des demandes qualifiées</h3>
+          <p>Formulaire simple et call-to-action visibles : le client vous contacte, vous concluez.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Examples Section -->
-  <section class="examples-preview">
-    <div class="container">
-      <h2>Exemples de réalisations</h2>
-      <div class="examples-grid">
-        <div class="example-item"><img src="assets/images/exemple-1.webp" alt="Entretien de pelouse et taille de haie" /></div>
-        <div class="example-item"><img src="assets/images/exemple-2.webp" alt="Taille et mise en forme d’arbustes" /></div>
-        <div class="example-item"><img src="assets/images/exemple-3.webp" alt="Entretien de pelouse et massifs" /></div>
+    <!-- Gallery / Examples -->
+    <section class="examples-preview container" aria-labelledby="examples-title">
+      <h2 id="examples-title">Galerie — réalisations</h2>
+      <div class="examples-grid" role="list">
+        <div class="example-item" role="listitem"><img src="assets/images/exemple-1.webp" alt="Entretien de pelouse et taille de haie" /></div>
+        <div class="example-item" role="listitem"><img src="assets/images/exemple-2.webp" alt="Taille et mise en forme d’arbustes" /></div>
+        <div class="example-item" role="listitem"><img src="assets/images/exemple-3.webp" alt="Entretien de pelouse et massifs" /></div>
       </div>
       <div class="cta">
-        <a href="examples.html" class="btn btn-secondary">Voir les exemples</a>
+        <a href="examples.html" class="btn btn-ghost">Plus d'exemples</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Reviews Section -->
-  <section class="reviews">
-    <div class="container">
-      <h2>Avis clients</h2>
-      <div class="google-summary">
-        <div class="google-score"><span data-google-rating>4,9</span> / 5</div>
-        <div class="google-stars">★★★★★</div>
+    <!-- Before / After -->
+    <section class="container" aria-labelledby="before-title">
+      <h2 id="before-title">Avant / Après</h2>
+      <div class="split-grid" role="list">
+        <div class="split-card" role="listitem">
+          <img src="assets/images/exemple-1.webp" alt="Avant : chantier — exemple 1" />
+          <div class="split-label">Avant</div>
+        </div>
+        <div class="split-card" role="listitem">
+          <img src="assets/images/exemple-2.webp" alt="Après : rendu — exemple 2" />
+          <div class="split-label">Après</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews / Google -->
+    <section class="reviews container" aria-labelledby="reviews-title">
+      <h2 id="reviews-title">Avis clients</h2>
+      <div class="google-summary" role="region" aria-label="Résumé des avis Google">
+        <div class="google-score" aria-hidden="false"><span data-google-rating>4,9</span> / 5</div>
+        <div class="google-stars" aria-hidden="true">★★★★★</div>
         <div class="google-count">(<span data-google-count>226</span>)</div>
         <a class="google-link" data-google-link href="#" target="_blank" rel="noopener">Voir les avis Google</a>
       </div>
-      <div class="reviews-grid">
+
+      <div class="reviews-grid" aria-live="polite">
         <div class="review-card">
           <div class="stars">★★★★★</div>
           <p>« Site livré rapidement, rendu pro, et plus de demandes. »</p>
@@ -342,24 +283,63 @@
           <strong>— Entreprise de paysage</strong>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CTA Contact Section -->
-  <section class="cta-contact">
-    <div class="container cta-container">
-      <h2>Prêt à être visible ?</h2>
-      <p>Nous installons un site professionnel, pensé pour les paysagistes.</p>
-      <a href="offer.html" class="btn btn-primary">Obtenir mon site – 390€</a>
-    </div>
-  </section>
+    <!-- Google Maps integrable -->
+    <section class="container" aria-labelledby="map-title">
+      <h2 id="map-title">Zone d'intervention (intégrable)</h2>
+      <div id="map" data-map aria-hidden="false">
+        <!-- Google Maps s'installe ici via script externe / iframe -->
+        <span style="color:var(--muted)">Carte intégrable — activez votre Google Maps dans la page contact.</span>
+      </div>
+    </section>
+
+    <!-- Process simple preview -->
+    <section class="container" aria-labelledby="process-title">
+      <h2 id="process-title">Process simple</h2>
+      <div class="process-preview" role="list">
+        <div class="process-step" role="listitem">
+          <h4>1 — Commande</h4>
+          <p>Vous commandez — 390 €.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <h4>2 — Validation</h4>
+          <p>On échange vos photos, avis et informations.</p>
+        </div>
+        <div class="process-step" role="listitem">
+          <h4>3 — Livraison</h4>
+          <p>Site prêt en 48h, vous recevez les accès.</p>
+        </div>
+      </div>
+      <div style="margin-top:18px">
+        <a href="process.html" class="btn btn-ghost">Voir le process complet</a>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="container" aria-labelledby="final-cta-title">
+      <div class="final-cta" role="region" aria-labelledby="final-cta-title">
+        <div>
+          <h2 id="final-cta-title" style="margin:0 0 6px">Prêt à être visible dès cette semaine ?</h2>
+          <div class="delivery">Livraison en <strong>48h</strong> — site optimisé pour la conversion</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+          <div class="price">390 €</div>
+          <div>
+            <a class="btn btn-primary" href="offer.html">Obtenir mon site</a>
+            <a class="btn btn-ghost" href="contact.html" style="margin-left:8px">Contact</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="container footer-grid">
       <div class="footer-col">
         <h4><span data-brand>Impact-NVA</span></h4>
-        <p>La visibilité digitale pour les paysagistes : un site clair, pro, et prêt à recevoir des demandes.</p>
+        <p>Le digital au service du paysagiste — site clé en main, galerie avant/après, avis et formulaire pour recevoir des demandes.</p>
       </div>
       <div class="footer-col">
         <h4>Navigation</h4>
@@ -374,15 +354,31 @@
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <p>Email : <a data-email href="#">contact@novapaysages.fr</a></p>
-        <p>Téléphone : <a data-phone href="#">06 00 00 00 00</a></p>
-        <p><small>Zone : <span data-zone>France</span></small></p>
+        <p>Email : <a href="mailto:contact@impact-nva.fr" data-email>contact@impact-nva.fr</a></p>
+        <p style="margin-top:6px"><small>Site : <a href="https://impact-nva.fr" target="_blank" rel="noopener">impact-nva.fr</a></small></p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 <span data-brand>Impact-NVA</span>. Tous droits réservés.</p>
+
+    <div class="container footer-bottom">
+      <p>© 2026 <span data-brand>Impact-NVA</span>. Tous droits réservés.</p>
     </div>
   </footer>
+
+  <script>
+    // Simple nav toggle
+    (function(){
+      const btn = document.getElementById('navToggle');
+      const nav = document.getElementById('navLinks');
+      btn.addEventListener('click', ()=> nav.classList.toggle('show'));
+      // Close menu on link click (mobile)
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', ()=> nav.classList.remove('show')));
+    })();
+    // Lightweight hero image lazy hint for UX
+    document.addEventListener('DOMContentLoaded', function(){
+      const img = document.querySelector('.hero-image');
+      if(img && 'loading' in HTMLImageElement.prototype) img.loading = 'eager';
+    });
+  </script>
 
   <script src="config.js"></script>
   <script src="js/config-apply.js"></script>
