@@ -1,6 +1,3 @@
-# Impact-NVA V3 Signature MASTER
+# Impact-NVA V4 Signature
 
-Site statique prêt pour GitHub Pages.
-
-Accueil : V3 Signature.
-Démos futures : /v1-essentiel et /v2-prestige.
+Site statique prêt pour GitHub Pages. Ouvrir `index.html` ou publier tous les fichiers à la racine du dépôt.
