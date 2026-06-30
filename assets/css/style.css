@@ -65,3 +65,9 @@ select{background-color:#07100d;color:var(--white)}select option{background:#071
   .compare-heading{grid-template-columns:1fr;text-align:left}.compare-heading span:last-child{text-align:left}.compare-heading strong{text-align:left;font-size:24px}
   .site-compare-screenshot{min-height:380px}
 }
+
+/* V3 MASTER commercial polish */
+.pricing-card p,.card p{line-height:1.65}
+.pricing-card ul li{line-height:1.45}
+.service-note{color:var(--muted);font-size:14px;margin-top:12px}
+form label.offer-choice{cursor:pointer}
