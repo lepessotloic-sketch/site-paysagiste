@@ -71,3 +71,11 @@ select{background-color:#07100d;color:var(--white)}select option{background:#071
 .pricing-card ul li{line-height:1.45}
 .service-note{color:var(--muted);font-size:14px;margin-top:12px}
 form label.offer-choice{cursor:pointer}
+
+
+/* Correctifs V3 Signature — logo visible + boutons démos */
+.brand{display:flex;align-items:center;min-width:132px}
+.brand img{height:104px;width:auto;max-width:150px;object-fit:contain;object-position:left center;filter:drop-shadow(0 0 18px rgba(212,175,55,.26)) drop-shadow(0 0 10px rgba(167,191,162,.16))}
+.demo-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:34px auto 0}
+.demo-actions .btn{min-width:260px}
+@media(max-width:980px){.brand{min-width:auto}.brand img{height:78px;max-width:112px}.demo-actions .btn{width:100%;min-width:0}}
