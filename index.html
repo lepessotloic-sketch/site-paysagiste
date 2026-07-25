@@ -454,7 +454,18 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   .enjeux-grid{grid-template-columns:1fr;gap:16px}
   .enjeux-warning{flex-direction:column;text-align:center;gap:14px}
 }
-@media(max-width:520px){.wrap{padding:0 22px}nav{padding:18px 22px}.cta-box{padding:50px 26px}.cmp-demo{font-size:.6rem;padding:.7em 1em}}
+@media(max-width:520px){
+  .wrap{padding:0 22px}
+  nav{padding:18px 22px}
+  .hero-inner{gap:24px}
+  .hero h1{font-size:clamp(2.25rem,10.5vw,2.65rem);line-height:1.03;margin:20px 0 24px}
+  .hero h1 br{display:none}
+  .hero-copy .lead{max-width:none;font-size:1.05rem;line-height:1.58;margin-bottom:32px}
+  .hero .eyebrow{max-width:100%;font-size:.64rem;line-height:1.65;letter-spacing:.28em}
+  .scroll-hint{display:none}
+  .cta-box{padding:50px 26px}
+  .cmp-demo{font-size:.6rem;padding:.7em 1em}
+}
 </style>
 
 <div class="grain"></div>
