@@ -1,5 +1,6 @@
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#050b08" />
 <title>Impact-NVA — Vitrines Signature pour artisans d'exception</title>
 <meta name="description" content="Impact-NVA conçoit des sites internet haut de gamme pour les artisans. La vitrine Signature qui donne à votre savoir-faire la valeur qu'il mérite." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,8 +16,11 @@
   --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--green-950);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold-bright);outline-offset:4px}
 ::selection{background:var(--gold);color:var(--green-950)}
 h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:.01em}
 .eyebrow{font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);display:inline-block}
@@ -434,15 +438,18 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
 @media(max-width:900px){
   nav{padding:18px 22px}nav.scrolled{padding:12px 22px}
   .nav-cta{display:none}
-  .nav-drop{right:22px;left:22px;width:auto}
-  .hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}
+  .nav-drop{right:22px;left:22px;width:auto;max-height:calc(100dvh - 92px);overflow-y:auto}
+  .hero{min-height:auto;padding:104px 0 82px}
+  .hero-inner{grid-template-columns:1fr;gap:12px;text-align:center}
   .hero-copy .lead{margin-left:auto;margin-right:auto}
   .hero-actions,.hero-note{justify-content:center}
-  .emblem{order:-1;min-height:360px}
-  .emblem-ring{width:320px;height:320px}.emblem-halo{width:380px;height:380px}
+  .emblem{order:-1;min-height:330px}
+  .emblem-ring{width:300px;height:300px}.emblem-halo{width:360px;height:360px}
+  .logo-3d{width:280px}
+  .scroll-hint{display:none}
   .compare,.grid-3,.offers,.mini-quotes{grid-template-columns:1fr}
   .offer.feature{transform:none}.offer.feature:hover{transform:translateY(-8px)}
-  section{padding:90px 0}.form .row{grid-template-columns:1fr}
+  section{padding:84px 0}.form .row{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr;gap:34px}
   .cmp-slider{aspect-ratio:4/5}
   .scene-body{max-width:82%}
@@ -454,7 +461,139 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   .enjeux-grid{grid-template-columns:1fr;gap:16px}
   .enjeux-warning{flex-direction:column;text-align:center;gap:14px}
 }
-@media(max-width:520px){.wrap{padding:0 22px}nav{padding:18px 22px}.cta-box{padding:50px 26px}.cmp-demo{font-size:.6rem;padding:.7em 1em}}
+@media(max-width:520px){
+  body{line-height:1.62}
+  .wrap{padding:0 18px}
+  section{padding:68px 0;scroll-margin-top:70px}
+  p{font-size:1rem}
+  .lead{font-size:1.06rem}
+  .eyebrow{max-width:100%;font-size:.64rem;line-height:1.7;letter-spacing:.24em}
+  .btn{width:100%;min-height:50px;padding:1.05em 1.15em;font-size:.74rem;letter-spacing:.14em}
+
+  nav{padding:calc(12px + env(safe-area-inset-top)) 16px 12px}
+  nav.scrolled{padding:calc(9px + env(safe-area-inset-top)) 16px 9px}
+  .nav-logo{gap:8px;font-size:1.17rem;letter-spacing:.035em;white-space:nowrap}
+  .nav-logo img{height:40px}
+  nav.scrolled .nav-logo img{height:36px}
+  .nav-right{gap:10px}
+  .menu-btn{width:46px;height:44px;padding:0 11px}
+  .nav-drop{top:calc(100% + 5px);right:12px;left:12px;padding:10px;max-height:calc(100dvh - 82px)}
+  .nav-drop a{min-height:46px;padding:11px 12px;font-size:.9rem}
+  .drop-label{padding:6px 12px 8px}
+
+  .intro-logo img{width:220px;max-width:58vw}
+  .intro-line{max-width:92vw;padding:0 14px;font-size:.66rem;line-height:1.65;letter-spacing:.2em}
+  .intro-underline{max-width:52vw}
+  .intro-skip{right:18px;bottom:calc(20px + env(safe-area-inset-bottom));min-width:44px;min-height:44px}
+
+  .hero{padding:88px 0 62px}
+  .hero-inner{gap:0}
+  .emblem{min-height:260px}
+  .emblem-ring{width:228px;height:228px}
+  .emblem-ring::before{inset:-22px}
+  .emblem-halo{width:280px;height:280px;filter:blur(48px)}
+  .logo-3d{width:220px;max-width:62vw}
+  .hero h1{font-size:clamp(2.35rem,11.5vw,3rem);margin:18px 0 20px}
+  .hero-copy .lead{font-size:1.03rem;line-height:1.65;margin-bottom:28px}
+  .hero-actions{gap:12px}
+  .hero-note{margin-top:30px}
+  .hero-price{align-items:center}
+  .price-big{font-size:3rem}
+  .price-sub{font-size:.67rem;letter-spacing:.12em;line-height:1.5}
+  .hero-fomo{font-size:1.16rem;margin-top:14px}
+
+  .sec-head{margin-bottom:42px}
+  .sec-head h2{font-size:clamp(2rem,10vw,2.65rem);margin:14px 0 18px}
+  .sec-head p{font-size:1rem}
+
+  .cmp-sec{padding-bottom:76px}
+  .cmp-slider{aspect-ratio:3/4;border-radius:9px}
+  .cmp-demo{max-width:calc(100% - 24px);white-space:normal;font-size:.56rem;line-height:1.35;letter-spacing:.1em;padding:.75em .9em;text-align:center}
+  .demo-prestige{top:58px;right:12px}
+  .demo-essentiel{bottom:12px;left:12px}
+  .cmp-grip{width:42px;height:42px}
+  .cmp-badges{flex-direction:column;align-items:center;gap:8px;text-align:center}
+  .cmp-badges span{font-size:.62rem;line-height:1.55;letter-spacing:.13em}
+  .cmp-hint{margin-top:18px;font-size:.64rem;line-height:1.6;letter-spacing:.14em}
+
+  .gallery{grid-auto-rows:132px;gap:9px}
+  .gcard{border-radius:6px}
+  .gcard .cap{left:12px;right:12px;bottom:12px;transform:none;opacity:1}
+  .gcard .cap .t{font-size:1.06rem}
+  .gcard .cap .s{font-size:.58rem;letter-spacing:.13em}
+  .gallery-note{font-size:.75rem;line-height:1.55}
+
+  .ba-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ba-tabs button{min-height:44px;padding:.75em .6em;font-size:.66rem;letter-spacing:.1em}
+  .ba-slider{aspect-ratio:4/5;border-radius:9px}
+  .ba-tag{top:12px;font-size:.58rem;letter-spacing:.15em;padding:.5em .85em}
+  .ba-tag.before{left:12px}.ba-tag.after{right:12px}
+  .ba-grip{width:46px;height:46px}
+  .ba-grip svg{width:20px;height:20px}
+  .ba-cap{font-size:1.12rem}
+  .ba-cap span{font-size:.68rem;line-height:1.55}
+
+  .card-cmp{padding:32px 22px}
+  .card-cmp h3{font-size:1.65rem}
+  .seal{top:18px;right:16px;font-size:.54rem}
+  .cmp-list li{font-size:.93rem;gap:11px}
+  .enjeux-card{padding:32px 22px}
+  .enjeux-card .big{font-size:2.55rem}
+  .enjeux-warning{padding:24px 20px}
+  .enjeux-warning p{font-size:.97rem}
+
+  .svc{padding:30px 23px}
+  .svc .ico{margin:18px 0}
+  .process::before{left:23px}
+  .step{grid-template-columns:48px 1fr;gap:18px;padding:22px 0}
+  .step .dot{width:48px;height:48px;font-size:1.3rem}
+  .step h3{font-size:1.32rem}
+  .step .tag{font-size:.62rem;line-height:1.5;letter-spacing:.12em}
+  .step p{font-size:.93rem}
+
+  .reviews-empty{padding:42px 20px}
+  .reviews-empty .stars-outline{letter-spacing:.18em}
+  .offers{gap:34px}
+  .offer{padding:36px 23px}
+  .offer .badge{font-size:.55rem;letter-spacing:.13em;max-width:calc(100% - 28px);text-align:center}
+  .offer .desc{min-height:auto}
+  .offer .price{font-size:2.55rem}
+  .promo-line{font-size:.62rem;line-height:1.5;letter-spacing:.07em}
+
+  .guarantees{grid-template-columns:1fr;gap:12px;margin-bottom:48px}
+  .guar{padding:24px 22px}
+  .partners{padding-top:36px}
+  .partners-label{font-size:.65rem;line-height:1.6;letter-spacing:.16em}
+  .partners-logos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .partner-img{max-width:94px}
+  .partner-role{font-size:.54rem;line-height:1.45;letter-spacing:.1em}
+
+  .qa button{min-height:64px;padding:20px 0;font-size:1.12rem;line-height:1.35}
+  .qa .ans p{font-size:.95rem}
+  .cta-box{padding:44px 18px;border-radius:10px}
+  .cta-box h2{font-size:clamp(2rem,10vw,2.65rem)}
+  .cta-box h2 br{display:none}
+  .form{margin-top:34px;gap:16px}
+  .field input,.field textarea,.field select{min-height:48px;padding:13px 14px;font-size:16px}
+  .field textarea{min-height:120px}
+  .form-note{font-size:.72rem}
+
+  footer{padding:62px 0 30px}
+  .foot-grid{margin-bottom:42px}
+  .foot-logo{font-size:1.45rem}
+  .foot-logo img{height:42px}
+  .foot-bottom{align-items:flex-start;font-size:.74rem;line-height:1.5}
+}
+@media(hover:none),(pointer:coarse){
+  .btn:hover,.card-cmp:hover,.enjeux-card:hover,.gcard:hover img,.svc:hover,.offer:hover,.offer.feature:hover,.guar:hover{transform:none}
+  .gcard:hover::after{opacity:.85}
+  .nav-drop a:not(.drop-cta):hover{padding-left:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
 </style>
 
 <div class="grain"></div>
@@ -471,7 +610,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   <div class="intro-burst" id="introBurst"></div>
   <div class="intro-logo">
     <div class="intro-glint"></div>
-    <img src="impact-nva-logo-hd.png" alt="Impact-NVA" />
+    <img src="impact-nva-logo-hd.png" alt="Impact-NVA" width="785" height="865" decoding="async" />
   </div>
   <div class="intro-underline"></div>
   <div class="intro-line">Le digital qui donne vie à votre savoir-faire</div>
@@ -480,7 +619,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#top" class="nav-logo"><img src="impact-nva-logo-hd.png" alt="Impact-NVA" />IMPACT·NVA</a>
+  <a href="#top" class="nav-logo"><img src="impact-nva-logo-hd.png" alt="Impact-NVA" width="785" height="865" decoding="async" />IMPACT·NVA</a>
   <div class="nav-right">
     <a href="#contact" class="btn btn-gold nav-cta">Démarrer mon projet</a>
     <button class="menu-btn" id="menuBtn" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -529,7 +668,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       <div class="emblem-inner" id="emblemInner">
         <div class="logo-3d">
           <div class="logo-glint"></div>
-          <img src="impact-nva-logo-hd.png" alt="Logo Impact-NVA en relief" />
+          <img src="impact-nva-logo-hd.png" alt="Logo Impact-NVA en relief" width="785" height="865" decoding="async" fetchpriority="high" />
           <div class="logo-shine" id="logoShine"></div>
         </div>
       </div>
@@ -552,9 +691,9 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
     <div class="cmp-stage reveal d1">
       <div class="cmp-slider" id="cmpSlider" style="--pos:26%">
         <!-- BASE : V1 ESSENTIEL (capture réelle du site) -->
-        <img class="cmp-img" src="medias-signature/demo-essentiel.jpg" alt="Site V1 Essentiel">
+        <img class="cmp-img" src="medias-signature/demo-essentiel.jpg" alt="Site V1 Essentiel" width="3000" height="1876" loading="lazy" decoding="async">
         <!-- TOP : V2 PRESTIGE, se dévoile quand on glisse vers la gauche -->
-        <div class="cmp-top" id="cmpTop"><img class="cmp-img" src="medias-signature/demo-prestige.jpg" alt="Site V2 Prestige"></div>
+        <div class="cmp-top" id="cmpTop"><img class="cmp-img" src="medias-signature/demo-prestige.jpg" alt="Site V2 Prestige" width="3000" height="1876" loading="lazy" decoding="async"></div>
         <a href="https://essentiel.impact-nva.fr" target="_blank" rel="noopener" class="cmp-demo demo-essentiel show" id="demoEssentiel">Accès à la V1 Essentiel →</a>
         <a href="https://prestige.impact-nva.fr" target="_blank" rel="noopener" class="cmp-demo demo-prestige" id="demoPrestige">Accès à la V2 Prestige →</a>
         <div class="cmp-handle" id="cmpHandle">
@@ -608,8 +747,8 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
         <button data-before="medias-signature/avant-massif.jpg" data-after="medias-signature/realisation-massif-fleuri.jpg" data-cap="Massif & haies|Des bordures redessinées, un jardin qui respire">Massif fleuri</button>
       </div>
       <div class="ba-slider" id="baSlider" style="--pos:50%">
-        <img class="ba-after-img" id="baAfter" src="medias-signature/realisation-terrasse-haie.jpg" alt="Après">
-        <div class="ba-before"><img class="ba-before-img" id="baBefore" src="medias-signature/avant-terrasse.jpg" alt="Avant"></div>
+        <img class="ba-after-img" id="baAfter" src="medias-signature/realisation-terrasse-haie.jpg" alt="Après" width="1200" height="801" loading="lazy" decoding="async">
+        <div class="ba-before"><img class="ba-before-img" id="baBefore" src="medias-signature/avant-terrasse.jpg" alt="Avant" width="1200" height="801" loading="lazy" decoding="async"></div>
         <span class="ba-tag before">Avant</span>
         <span class="ba-tag after">Après</span>
         <div class="ba-handle" id="baHandle"><div class="ba-grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></div></div>
@@ -893,7 +1032,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-logo"><img src="impact-nva-logo-hd.png" alt="Impact-NVA" />IMPACT·NVA</div>
+        <div class="foot-logo"><img src="impact-nva-logo-hd.png" alt="Impact-NVA" width="785" height="865" loading="lazy" decoding="async" />IMPACT·NVA</div>
         <p style="max-width:340px;font-size:.94rem">Le digital qui donne vie à votre savoir-faire. Des vitrines Signature pour les artisans qui veulent marquer les esprits.</p>
       </div>
       <div class="foot-col"><h4>Navigation</h4><a href="#comparateur">Comparateur</a><a href="#realisations">Réalisations</a><a href="#avant-apres">Avant / Après</a><a href="#services">Savoir-faire</a><a href="#offres">Offres</a></div>
@@ -907,10 +1046,12 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
 // ===== INTRO cinématique =====
 (function(){
   const intro=document.getElementById('intro');if(!intro)return;
+  const compact=matchMedia('(max-width:520px)').matches;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){intro.remove();return}
   // particules de l'explosion
   const burst=document.getElementById('introBurst');
   if(burst){
-    const N=30;
+    const N=compact?18:30;
     for(let i=0;i<N;i++){
       const p=document.createElement('div');p.className='p';
       const ang=(Math.PI*2*i)/N + Math.random()*0.4;
@@ -928,15 +1069,15 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   const end=()=>{document.body.classList.remove('intro-lock');intro.remove()};
   const skip=()=>{intro.classList.add('skip');document.body.classList.remove('intro-lock');setTimeout(()=>intro.remove(),600)};
   document.getElementById('introSkip').addEventListener('click',skip);
-  setTimeout(end,10800);
+  setTimeout(end,compact?7400:10800);
 })();
 
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
 
 const menuBtn=document.getElementById('menuBtn'),navDrop=document.getElementById('navDrop');
-function closeMenu(){menuBtn.classList.remove('x');navDrop.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}
-menuBtn.addEventListener('click',e=>{e.stopPropagation();const o=navDrop.classList.toggle('open');menuBtn.classList.toggle('x',o);menuBtn.setAttribute('aria-expanded',o)});
+function closeMenu(){menuBtn.classList.remove('x');navDrop.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.setAttribute('aria-label','Ouvrir le menu')}
+menuBtn.addEventListener('click',e=>{e.stopPropagation();const o=navDrop.classList.toggle('open');menuBtn.classList.toggle('x',o);menuBtn.setAttribute('aria-expanded',o);menuBtn.setAttribute('aria-label',o?'Fermer le menu':'Ouvrir le menu')});
 navDrop.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
 document.addEventListener('click',e=>{if(!navDrop.contains(e.target)&&e.target!==menuBtn)closeMenu()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
@@ -948,22 +1089,25 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 // hero spotlight + logo 3D
 const hero=document.getElementById('top'),spot=document.getElementById('heroSpot');
 const emblem=document.getElementById('emblem'),inner=document.getElementById('emblemInner'),shine=document.getElementById('logoShine');
-hero.addEventListener('mousemove',e=>{
-  const x=e.clientX/innerWidth*100,y=e.clientY/innerHeight*100;
-  spot.style.setProperty('--mx',x+'%');spot.style.setProperty('--my',y+'%');
-});
-let tilt=false;
-emblem.addEventListener('mousemove',e=>{
-  tilt=true;
-  const r=emblem.getBoundingClientRect();
-  const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-  inner.style.transition='transform .12s ease-out';
-  inner.style.transform=`rotateY(${x*22}deg) rotateX(${-y*22}deg)`;
-  shine.style.setProperty('--lx',(x+.5)*100+'%');
-  shine.style.setProperty('--ly',(y+.5)*100+'%');
-});
-emblem.addEventListener('mouseleave',()=>{tilt=false;inner.style.transition='transform .8s var(--ease)'});
-let t=0;(function orbit(){t+=.01;if(!tilt)inner.style.transform=`rotateY(${Math.sin(t)*7}deg) rotateX(${Math.cos(t*.8)*4}deg)`;requestAnimationFrame(orbit)})();
+const canHover=matchMedia('(hover:hover) and (pointer:fine)').matches;
+if(canHover){
+  hero.addEventListener('mousemove',e=>{
+    const x=e.clientX/innerWidth*100,y=e.clientY/innerHeight*100;
+    spot.style.setProperty('--mx',x+'%');spot.style.setProperty('--my',y+'%');
+  });
+  let tilt=false;
+  emblem.addEventListener('mousemove',e=>{
+    tilt=true;
+    const r=emblem.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    inner.style.transition='transform .12s ease-out';
+    inner.style.transform=`rotateY(${x*22}deg) rotateX(${-y*22}deg)`;
+    shine.style.setProperty('--lx',(x+.5)*100+'%');
+    shine.style.setProperty('--ly',(y+.5)*100+'%');
+  });
+  emblem.addEventListener('mouseleave',()=>{tilt=false;inner.style.transition='transform .8s var(--ease)'});
+  let t=0;(function orbit(){t+=.01;if(!tilt)inner.style.transform=`rotateY(${Math.sin(t)*7}deg) rotateX(${Math.cos(t*.8)*4}deg)`;requestAnimationFrame(orbit)})();
+}
 
 // count-up
 const counters=document.querySelectorAll('[data-count]');
@@ -976,10 +1120,12 @@ const cio=new IntersectionObserver((es)=>es.forEach(e=>{
 counters.forEach(c=>cio.observe(c));
 
 // magnetic buttons
-document.querySelectorAll('.magnetic').forEach(b=>{
-  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.3-3}px)`});
-  b.addEventListener('mouseleave',()=>b.style.transform='');
-});
+if(canHover){
+  document.querySelectorAll('.magnetic').forEach(b=>{
+    b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.3-3}px)`});
+    b.addEventListener('mouseleave',()=>b.style.transform='');
+  });
+}
 
 // ===== COMPARATEUR slider =====
 const slider=document.getElementById('cmpSlider');
