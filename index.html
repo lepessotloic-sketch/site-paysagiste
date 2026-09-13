@@ -84,7 +84,7 @@
       "name": "Et si je veux modifier mon site plus tard ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "C'est prévu. Les petites modifications sont incluses dans le suivi. Pour un changement plus important, on s'en occupe rapidement. Vous n'êtes jamais seul face à votre site."
+        "text": "Une modification simple coûte 50 €, publiée sous 48 h ouvrées : changer un texte, remplacer ou ajouter des photos sur une page existante, mettre à jour vos coordonnées, horaires ou services. Une nouvelle page, une nouvelle section, une refonte ou une nouvelle fonctionnalité fait l'objet d'un devis. Avec la Signature, le suivi est inclus pendant 12 mois. Aucun abonnement."
       }
     },
     {
@@ -100,7 +100,7 @@
       "name": "Serai-je bien visible sur Google ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Chaque vitrine est optimisée pour le référencement local et la vitesse. On configure aussi votre fiche Google pour que les clients de votre secteur vous trouvent en premier."
+        "text": "Oui. Chaque site est optimisé pour Google et pour la vitesse, et on configure votre fiche Google. La Signature va plus loin avec 8 pages dédiées à vos communes, pour être présent là où vos clients cherchent."
       }
     }
   ]
@@ -482,6 +482,34 @@ nav.scrolled .nav-logo img{height:44px}
 .offer li .ck{color:var(--gold);flex-shrink:0;margin-top:2px}
 .offer .btn{width:100%;justify-content:center}
 
+/* OFFRES — Signature en tête, puis propriétaire/location, puis Prestige et Essentiel */
+.hero-keys{font-family:var(--serif);font-size:clamp(1.4rem,2.3vw,1.8rem);color:var(--white);line-height:1.25;margin:-4px 0 20px}
+.hero-keys em{font-style:italic;color:var(--gold-bright)}
+.offer-wide{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px 56px;align-items:center;padding:56px 52px}
+.offer-wide .desc{min-height:0}
+.offer-wide .price{font-size:3.4rem}
+.offer-wide ul{margin:0 0 26px}
+.own{max-width:1000px;margin:110px auto;text-align:center}
+.own h2{font-size:clamp(2rem,4vw,3.2rem);margin:20px 0 18px}
+.own h2 em{font-style:italic;color:var(--gold-bright)}
+.own-sub{max-width:640px;margin:0 auto 44px}
+.own-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;text-align:left}
+.own-card{border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:34px 32px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+.own-card.own-buy{border-color:rgba(201,162,75,.45);background:linear-gradient(180deg,rgba(18,48,36,.6),rgba(138,108,44,.06))}
+.own-kicker{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--silver-dim)}
+.own-buy .own-kicker,.modif .own-kicker{color:var(--gold)}
+.own-figure{font-family:var(--serif);font-size:2.2rem;color:var(--white);line-height:1.1;margin:12px 0}
+.own-figure small{font-family:var(--sans);font-size:.85rem;color:var(--silver-dim)}
+.own-note{font-size:.82rem;color:var(--silver-dim);margin-top:10px}
+.own-tip{margin:34px auto 0;max-width:760px;font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--white)}
+.simpler{margin-bottom:56px}
+.offers-2{grid-template-columns:repeat(2,1fr);max-width:820px}
+.modif{max-width:820px;margin:70px auto 0;border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:34px 36px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+.modif h4{font-family:var(--serif);font-size:1.5rem;color:var(--white);font-weight:500;margin-bottom:10px}
+.modif-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.modif-grid>div{border-top:1px solid rgba(201,162,75,.3);padding-top:14px}
+.modif-grid p{font-size:.95rem;margin-top:6px}
+
 /* GARANTIES + PARTENAIRES */
 .guarantees{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;max-width:1040px;margin:0 auto 66px}
 .guar{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:28px 24px;border:1px solid rgba(255,255,255,.07);border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);transition:transform .5s var(--ease),border-color .5s}
@@ -554,7 +582,8 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   .hero-actions,.hero-note{justify-content:center}
   .emblem{order:-1;min-height:360px}
   .emblem-ring{width:320px;height:320px}.emblem-halo{width:380px;height:380px}
-  .compare,.grid-3,.offers,.mini-quotes{grid-template-columns:1fr}
+  .compare,.grid-3,.offers,.mini-quotes,.offers-2,.offer-wide,.own-grid,.modif-grid{grid-template-columns:1fr}
+  .offer-wide{padding:46px 28px}.modif{padding:28px 24px}.own{margin:90px auto}
   .offer.feature{transform:none}.offer.feature:hover{transform:translateY(-8px)}
   section{padding:90px 0}.form .row{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr;gap:34px}
@@ -591,6 +620,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   .scroll-hint{display:none}
   .cta-box{padding:50px 26px}
   .cmp-demo{font-size:.6rem;padding:.7em 1em}
+  .demo-prestige{top:14px;right:12px}
 }
 </style>
 
@@ -646,6 +676,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
     <div class="hero-copy">
       <span class="eyebrow reveal">Agence de vitrines Signature · France</span>
       <h1 class="reveal d1">Votre savoir-faire mérite<br> <em>une vitrine d'exception.</em></h1>
+      <p class="hero-keys reveal d2">Nous créons votre site. <em>Vous en gardez les clés.</em></p>
       <p class="lead reveal d2">Impact-NVA crée des sites internet haut de gamme pour les artisans qui refusent la banalité. Pas un modèle de plus — une vitrine Signature qui donne envie, dès la première seconde.</p>
       <div class="hero-actions reveal d3">
         <a href="#contact" class="btn btn-gold magnetic">Créer ma vitrine <span class="arrow">→</span></a>
@@ -653,10 +684,10 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       </div>
       <div class="hero-note reveal d4">
         <div class="hero-price">
-          <b class="price-big" data-count="790" data-suffix="€">0€</b>
-          <span class="price-sub">La vitrine Signature · en ligne sous 48h</span>
+          <b class="price-big" data-count="1290" data-suffix="&nbsp;€">0&nbsp;€</b>
+          <span class="price-sub">La vitrine Signature · paiement unique</span>
         </div>
-        <p class="hero-fomo">Chaque artisan mérite <em>sa propre Signature</em>.</p>
+        <p class="hero-fomo">Chaque métier mérite <em>sa propre Signature</em>.</p>
       </div>
     </div>
 
@@ -689,9 +720,9 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
     <div class="cmp-stage reveal d1">
       <div class="cmp-slider" id="cmpSlider" style="--pos:26%">
         <!-- BASE : V1 ESSENTIEL (capture réelle du site) -->
-        <img class="cmp-img" src="medias-signature/demo-essentiel.jpg" alt="Site V1 Essentiel">
+        <picture><source media="(max-width:900px)" srcset="medias-signature/demo-essentiel-mobile.jpg"><img class="cmp-img" src="medias-signature/demo-essentiel.jpg" alt="Site V1 Essentiel"></picture>
         <!-- TOP : V2 PRESTIGE, se dévoile quand on glisse vers la gauche -->
-        <div class="cmp-top" id="cmpTop"><img class="cmp-img" src="medias-signature/demo-prestige.jpg" alt="Site V2 Prestige"></div>
+        <div class="cmp-top" id="cmpTop"><picture><source media="(max-width:900px)" srcset="medias-signature/demo-prestige-mobile.jpg"><img class="cmp-img" src="medias-signature/demo-prestige.jpg?v=2" alt="Site V2 Prestige"></picture></div>
         <a href="https://essentiel.impact-nva.fr" target="_blank" rel="noopener" class="cmp-demo demo-essentiel show" id="demoEssentiel">Accès à la V1 Essentiel →</a>
         <a href="https://prestige.impact-nva.fr" target="_blank" rel="noopener" class="cmp-demo demo-prestige" id="demoPrestige">Accès à la V2 Prestige →</a>
         <div class="cmp-handle" id="cmpHandle">
@@ -806,9 +837,9 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
     </div>
     <div class="enjeux-grid reveal d1">
       <div class="enjeux-card">
-        <span class="big">9<small>/10</small></span>
-        <h4>vous cherchent sur Google</h4>
-        <p>9 clients sur 10 se renseignent en ligne avant de contacter un artisan. Sans site, vous n'existez pas pour eux.</p>
+        <span class="big">Testez</span>
+        <h4>Tapez votre métier + votre ville sur Google</h4>
+        <p>Regardez qui apparaît avant vous. Ces clients-là appellent déjà votre concurrent. Sans site, vous n'existez pas pour eux.</p>
       </div>
       <div class="enjeux-card feature-green">
         <span class="big">Google<br>Maps</span>
@@ -844,7 +875,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       <div class="svc reveal d2"><span class="num">03</span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="8"/></svg><h3>Visibilité Google</h3><p>Référencement local optimisé, vitesse de chargement soignée, fiche Google. Vos futurs clients vous trouvent avant vos concurrents.</p></div>
       <div class="svc reveal"><span class="num">04</span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg><h3>Machine à prospects</h3><p>Formulaires, appels en un clic, devis express. Chaque page pousse doucement le visiteur à vous contacter. Le site travaille pendant que vous travaillez.</p></div>
       <div class="svc reveal d1"><span class="num">05</span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg><h3>Parfait sur mobile</h3><p>8 visiteurs sur 10 viennent du téléphone. Votre vitrine est pensée mobile d'abord : nette, fluide, rapide, sur chaque écran.</p></div>
-      <div class="svc reveal d2"><span class="num">06</span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg><h3>Suivi & tranquillité</h3><p>Hébergement, sécurité, mises à jour, petites modifs. On garde votre vitrine impeccable. Vous ne touchez à rien, on s'occupe de tout.</p></div>
+      <div class="svc reveal d2"><span class="num">06</span><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg><h3>Suivi & tranquillité</h3><p>Hébergement offert et sécurisé. Suivi inclus pendant 12 mois avec la Signature. Ensuite, 50 € la modification simple, publiée sous 48 h ouvrées — sans abonnement.</p></div>
     </div>
   </div>
 </section>
@@ -856,13 +887,13 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow green">La méthode Impact-NVA</span>
-      <h2>De vos infos à la vitrine, <em>en 48h</em></h2>
+      <h2>De vos infos à la vitrine, <em>sous 48h</em></h2>
       <p>Un parcours simple et clair : vous envoyez vos éléments, on crée, c'est en ligne. Sans jargon, sans mauvaise surprise.</p>
     </div>
     <div class="process">
       <div class="step reveal"><div class="dot">1</div><div><span class="tag">Étape 1 · Vos éléments</span><h3>Vous nous envoyez vos infos</h3><p>Votre logo, votre ville, vos coordonnées et vos photos de chantier. C'est tout ce dont on a besoin pour démarrer — on s'occupe du reste.</p></div></div>
       <div class="step reveal d1"><div class="dot">2</div><div><span class="tag">Étape 2 · Création</span><h3>On crée votre vitrine sur-mesure</h3><p>Design à votre image, textes qui vendent, retouche de vos photos. Une vitrine pensée pour inspirer confiance et déclencher les demandes de devis.</p></div></div>
-      <div class="step reveal d2"><div class="dot">3</div><div><span class="tag">Étape 3 · Livraison</span><h3>En ligne sous 48h</h3><p>Votre site est prêt et publié en 48h après réception de vos éléments. Vous validez, on ajuste les derniers détails, il part en ligne.</p></div></div>
+      <div class="step reveal d2"><div class="dot">3</div><div><span class="tag">Étape 3 · Livraison</span><h3>En ligne sous 48h</h3><p>Votre site est prêt et publié sous 48h après réception de vos éléments. Vous validez, on ajuste les derniers détails, il part en ligne.</p></div></div>
       <div class="step reveal d3"><div class="dot">4</div><div><span class="tag">Étape 4 · Votre domaine</span><h3>Votre nom de domaine chez OVH</h3><p>Il vous reste juste à acheter votre nom de domaine sur OVH (10 à 15€/an). Il vous appartient, à vie — vous n'êtes prisonnier de personne.</p></div></div>
     </div>
   </div>
@@ -877,7 +908,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       <div class="stars-outline">★★★★★</div>
       <h2>Vos premiers avis<br><span class="gold-text">arrivent bientôt ici</span></h2>
       <p>Cet espace accueillera de <b>vrais avis clients vérifiés</b> (Google). Nous préférons un mur d'avis vide aujourd'hui à de faux témoignages — c'est ça, la confiance.</p>
-      <a href="#offres" class="btn btn-ghost">Devenir l'un des 30 premiers <span class="arrow">→</span></a>
+      <a href="#offres" class="btn btn-ghost">Voir les offres <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -892,46 +923,89 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       <h2>Trois niveaux d'exigence, <em>une seule obsession</em></h2>
       <p>De la présence pro à la vitrine d'exception. On choisit ensemble celle qui correspond à votre métier et à votre ambition.</p>
     </div>
-    <div class="offers">
-      <div class="offer reveal">
+
+    <!-- 1. Signature en tête -->
+    <div class="offer offer-signature offer-wide reveal d1">
+      <span class="badge sig">✦ La Signature ✦</span>
+      <div>
+        <h3>Signature</h3>
+        <p class="desc">Votre nom devient une marque.</p>
+        <div class="price"><span class="from">Paiement unique</span>1&nbsp;290€ <small>/ site</small></div>
+      </div>
+      <div>
+        <ul>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tout le Prestige</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Design sur-mesure</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Textes rédigés pour vous</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>8 pages dédiées à vos communes</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Suivi 12 mois inclus</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tous les fichiers du site vous sont remis</li>
+        </ul>
+        <a href="https://buy.stripe.com/14AdR88Z13h7eJZb8jbo404" target="_blank" rel="noopener" class="btn btn-gold">Je veux la Signature</a>
+      </div>
+    </div>
+
+    <!-- 2. Propriétaire, pas locataire -->
+    <div class="own reveal">
+      <span class="eyebrow green">Propriétaire, pas locataire</span>
+      <h2>Vous n'êtes pas locataire de votre site.<br><em>Vous en êtes propriétaire.</em></h2>
+      <p class="own-sub">Aucun abonnement Impact-NVA. Seul le nom de domaine se renouvelle chaque année, à votre nom.</p>
+      <div class="own-grid">
+        <div class="own-card">
+          <span class="own-kicker">Un site en location</span>
+          <p class="own-figure">40 à 300&nbsp;€ HT <small>/ mois</small></p>
+          <p>Avec un engagement de 12 à 48 mois.</p>
+          <p class="own-note">Exemples de tarifs publics constatés en 2026.</p>
+        </div>
+        <div class="own-card own-buy">
+          <span class="own-kicker">Impact-NVA</span>
+          <p class="own-figure">390 à 1&nbsp;290&nbsp;€ <small>une seule fois</small></p>
+          <p><b>Propriétaire dès la livraison.</b> Pas au bout de 12, 24 ou 48 mois de mensualités.</p>
+        </div>
+      </div>
+      <p class="own-tip">Avant de signer une location, demandez ce que vous récupérez à la fin : les fichiers, le nom de domaine, l'hébergement.</p>
+    </div>
+
+    <!-- 3. Projet plus simple -->
+    <div class="sec-head simpler reveal">
+      <h2>Votre projet est <em>plus simple</em> ?</h2>
+      <p>Artisan, indépendant ou créateur ? Nos offres sont aussi pour vous.</p>
+    </div>
+    <div class="offers offers-2">
+      <div class="offer feature reveal">
+        <h3>Prestige</h3>
+        <p class="desc">Votre site existe, mais il a vieilli. On le remet au goût du jour.</p>
+        <div class="price"><span class="from">Paiement unique</span>690€ <small>/ site</small></div>
+        <ul>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Site multi-sections sur-mesure</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Retouche de vos photos &amp; avant/après</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Référencement Google de base</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tunnel de demande de devis</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>En ligne sous 48h</li>
+        </ul>
+        <a href="https://buy.stripe.com/14A9AS1wz2d36dtgsDbo405" target="_blank" rel="noopener" class="btn btn-gold">Je veux le Prestige</a>
+      </div>
+      <div class="offer reveal d1">
         <h3>Essentiel</h3>
-        <p class="desc">L'entrée de gamme qui a déjà de l'allure. Propre, clair, efficace.</p>
-        <div class="price"><span class="from">Tout compris</span>390€ <small>/ site</small></div>
+        <p class="desc">Vous n'avez pas encore de site. Le plus simple pour exister en ligne.</p>
+        <div class="price"><span class="from">Paiement unique</span>390€ <small>/ site</small></div>
         <ul>
           <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Site vitrine une page, design soigné</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Optimisé mobile & rapide</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Formulaire de contact & appel direct</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Optimisé mobile &amp; rapide</li>
+          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Formulaire de contact &amp; appel direct</li>
           <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>En ligne sous 48h</li>
         </ul>
         <a href="https://buy.stripe.com/3cI8wO6QT6tj0T93FRbo401" target="_blank" rel="noopener" class="btn btn-ghost">Je veux l'Essentiel</a>
       </div>
-      <div class="offer feature reveal d1">
-        <span class="badge">★ Offre de lancement ★</span>
-        <h3>Prestige</h3>
-        <p class="desc">La Prestige au prix de l'Essentiel — pour les 30 premiers artisans seulement.</p>
-        <div class="price"><span class="from">Offre de lancement</span><span class="was">590€</span>390€ <small>/ site</small></div>
-        <span class="promo-line">🔥 30 premiers clients · en ligne sous 48h</span>
-        <ul>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Site multi-sections sur-mesure</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Retouche de vos photos & avant/après</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Référencement local Google</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tunnel de demande de devis</li>
-        </ul>
-        <a href="https://buy.stripe.com/3cI7sK4IL5pf45la4fbo402" target="_blank" rel="noopener" class="btn btn-gold">Je veux le Prestige</a>
-      </div>
-      <div class="offer offer-signature reveal d2">
-        <span class="badge sig">✦ La Signature ✦</span>
-        <h3>Signature</h3>
-        <p class="desc">L'exception. Le site qui fait dire : « je le veux, peu importe le prix ».</p>
-        <div class="price"><span class="from">Sur-mesure</span>790€ <small>/ site</small></div>
-        <ul>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Tout Prestige, sublimé et sans limite</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Design d'exception & effet « waouh » garanti</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Animations & interactions haut de gamme</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Textes qui vendent, rédigés pour vous</li>
-          <li><svg class="ck" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Accompagnement & suivi prioritaire</li>
-        </ul>
-        <a href="https://buy.stripe.com/6oU3cuejldVL1Xdb8jbo403" target="_blank" rel="noopener" class="btn btn-gold">Je veux la Signature</a>
+    </div>
+
+    <!-- 4. Après la livraison -->
+    <div class="modif reveal">
+      <h4>Et après la livraison ?</h4>
+      <p><b>50 € la modification simple</b>, publiée sous 48 h ouvrées. Sans abonnement : vous payez seulement quand vous en avez besoin. Toute évolution importante fait l'objet d'un devis.</p>
+      <div class="modif-grid">
+        <div><span class="own-kicker">Modification simple · 50 €</span><p>Changer un texte, remplacer ou ajouter des photos sur une page existante, mettre à jour vos coordonnées, horaires ou services.</p></div>
+        <div><span class="own-kicker">Sur devis</span><p>Nouvelle page, nouvelle section, refonte, nouvelle fonctionnalité.</p></div>
       </div>
     </div>
   </div>
@@ -953,7 +1027,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
       </div>
       <div class="guar">
         <svg class="gi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <h4>Paiement sécurisé</h4><p>Règlement unique et chiffré via <b>Stripe</b>. Aucun abonnement caché.</p>
+        <h4>Paiement sécurisé</h4><p>Règlement unique et chiffré via <b>Stripe</b>. Aucun abonnement Impact-NVA.</p>
       </div>
       <div class="guar">
         <svg class="gi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 6 9 17l-5-5"/></svg>
@@ -991,9 +1065,9 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
     <div class="faq reveal">
       <div class="qa"><button>Je n'y connais rien en informatique, est-ce un problème ?<span class="plus"></span></button><div class="ans"><p>Absolument pas, c'est même notre spécialité. Vous nous parlez de votre métier, on s'occupe de toute la technique. Aucun mot compliqué : on vous explique tout simplement, à chaque étape.</p></div></div>
       <div class="qa"><button>Combien de temps pour avoir mon site ?<span class="plus"></span></button><div class="ans"><p>Votre site est en ligne <b>sous 48h</b> après réception de vos photos et informations, pour les offres Essentiel et Prestige. Une vitrine Signature sur-mesure demande quelques jours de plus. On avance vite, sans jamais bâcler.</p></div></div>
-      <div class="qa"><button>Et si je veux modifier mon site plus tard ?<span class="plus"></span></button><div class="ans"><p>C'est prévu. Les petites modifications sont incluses dans le suivi. Pour un changement plus important, on s'en occupe rapidement. Vous n'êtes jamais seul face à votre site.</p></div></div>
+      <div class="qa"><button>Et si je veux modifier mon site plus tard ?<span class="plus"></span></button><div class="ans"><p>Une modification simple coûte 50 €, publiée sous 48 h ouvrées : changer un texte, remplacer ou ajouter des photos sur une page existante, mettre à jour vos coordonnées, horaires ou services. Une nouvelle page, une nouvelle section, une refonte ou une nouvelle fonctionnalité fait l'objet d'un devis. Avec la Signature, le suivi est inclus pendant 12 mois. Aucun abonnement.</p></div></div>
       <div class="qa"><button>Mes photos ne sont pas très belles, ça pose problème ?<span class="plus"></span></button><div class="ans"><p>On retouche vos photos de chantier pour les sublimer — lumière, cadrage, harmonie — tout en gardant leur authenticité. Vos réalisations restent les vôtres, simplement mises en valeur comme elles le méritent.</p></div></div>
-      <div class="qa"><button>Serai-je bien visible sur Google ?<span class="plus"></span></button><div class="ans"><p>Oui. Chaque vitrine est optimisée pour le référencement local et la vitesse. On configure aussi votre fiche Google pour que les clients de votre secteur vous trouvent en premier.</p></div></div>
+      <div class="qa"><button>Serai-je bien visible sur Google ?<span class="plus"></span></button><div class="ans"><p>Oui. Chaque site est optimisé pour Google et pour la vitesse, et on configure votre fiche Google. La Signature va plus loin avec 8 pages dédiées à vos communes, pour être présent là où vos clients cherchent.</p></div></div>
     </div>
   </div>
 </section>
@@ -1016,7 +1090,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
           <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="vous@exemple.fr" required></div>
           <div class="field"><label for="metier">Votre métier</label><select id="metier"><option>Paysagiste</option><option>Maçon / Rénovation</option><option>Ébéniste / Menuisier</option><option>Électricien / Plombier</option><option>Fleuriste</option><option>Autre artisan</option></select></div>
         </div>
-        <div class="field"><label for="offre">Quelle offre vous intéresse ?</label><select id="offre"><option>Je ne sais pas encore — conseillez-moi</option><option>Essentiel — 390€</option><option>Prestige — 390€ (au lieu de 590€)</option><option>Signature — 790€</option></select></div>
+        <div class="field"><label for="offre">Quelle offre vous intéresse ?</label><select id="offre"><option>Je ne sais pas encore — conseillez-moi</option><option>Signature — 1 290€</option><option>Prestige — 690€</option><option>Essentiel — 390€</option></select></div>
         <div class="field"><label for="msg">Votre projet en quelques mots</label><textarea id="msg" placeholder="Je souhaite une vitrine pour valoriser mes réalisations et recevoir plus de demandes de devis…"></textarea></div>
         <button type="submit" class="btn btn-gold">Recevoir ma proposition <span class="arrow">→</span></button>
         <p class="form-note">🔒 Vos informations restent confidentielles. Aucun engagement.</p>
@@ -1104,10 +1178,11 @@ let t=0;(function orbit(){t+=.01;if(!tilt)inner.style.transform=`rotateY(${Math.
 
 // count-up
 const counters=document.querySelectorAll('[data-count]');
+const fmt=v=>v.toLocaleString('fr-FR').replace(/\s/g,'\u00a0');
 const cio=new IntersectionObserver((es)=>es.forEach(e=>{
   if(!e.isIntersecting)return;
   const el=e.target,to=+el.dataset.count,suf=el.dataset.suffix||'';let n=0;
-  const step=()=>{n+=Math.max(1,to/40);if(n>=to){el.textContent=to+suf}else{el.textContent=Math.floor(n)+suf;requestAnimationFrame(step)}};
+  const step=()=>{n+=Math.max(1,to/40);if(n>=to){el.textContent=fmt(to)+suf}else{el.textContent=fmt(Math.floor(n))+suf;requestAnimationFrame(step)}};
   step();cio.unobserve(el);
 }),{threshold:.6});
 counters.forEach(c=>cio.observe(c));
@@ -1206,8 +1281,8 @@ document.getElementById('contactForm').addEventListener('submit',async e=>{
     const prenom=(data.nom||'').trim().split(' ').slice(-1)[0]||'';
     const msgs={
       'Essentiel — 390€':`Merci ${prenom} ! Vous avez choisi l'offre <b>Essentiel</b> (390€). On vous recontacte sous 24h avec votre lien de paiement et les prochaines étapes.`,
-      'Prestige — 390€ (au lieu de 590€)':`Merci ${prenom} ! Vous avez choisi l'offre <b>Prestige</b> (390€ au lieu de 590€). On vous recontacte sous 24h avec votre lien de paiement et les prochaines étapes.`,
-      'Signature — 790€':`Merci ${prenom} ! Vous avez choisi la <b>Signature</b> (790€). On vous recontacte sous 24h pour construire votre vitrine d'exception.`
+      'Prestige — 690€':`Merci ${prenom} ! Vous avez choisi l'offre <b>Prestige</b> (690€). On vous recontacte sous 24h avec votre lien de paiement et les prochaines étapes.`,
+      'Signature — 1 290€':`Merci ${prenom} ! Vous avez choisi la <b>Signature</b> (1 290€). On vous recontacte sous 24h pour construire votre vitrine d'exception.`
     };
     const fs=document.getElementById('formSuccess');
     fs.innerHTML=msgs[data.offre]||`Merci ${prenom} ! On analyse votre besoin et on vous conseille la formule idéale — Essentiel, Prestige ou Signature — sous 24h.`;
