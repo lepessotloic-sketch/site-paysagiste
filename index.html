@@ -107,20 +107,13 @@
 }
 </script>
 
-<!-- Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D17K8K9VPS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-D17K8K9VPS');
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <style>
+.piege{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
 :root{
   --green-950:#050b08;--green-900:#08130d;--green-850:#0a1913;--green-800:#0d2118;--green-700:#123024;
   --gold:#c9a24b;--gold-bright:#e7cc86;--gold-deep:#8a6c2c;
@@ -1091,6 +1084,7 @@ footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,.08);background
           <div class="field"><label for="metier">Votre métier</label><select id="metier"><option>Paysagiste</option><option>Maçon / Rénovation</option><option>Ébéniste / Menuisier</option><option>Électricien / Plombier</option><option>Fleuriste</option><option>Autre artisan</option></select></div>
         </div>
         <div class="field"><label for="offre">Quelle offre vous intéresse ?</label><select id="offre"><option>Je ne sais pas encore — conseillez-moi</option><option>Signature — 1 290€</option><option>Prestige — 690€</option><option>Essentiel — 390€</option></select></div>
+        <div class="field piege" aria-hidden="true"><label for="societe">Ne remplissez pas ce champ</label><input id="societe" name="societe" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="field"><label for="msg">Votre projet en quelques mots</label><textarea id="msg" placeholder="Je souhaite une vitrine pour valoriser mes réalisations et recevoir plus de demandes de devis…"></textarea></div>
         <button type="submit" class="btn btn-gold">Recevoir ma proposition <span class="arrow">→</span></button>
         <p class="form-note">🔒 Vos informations restent confidentielles. Aucun engagement.</p>
@@ -1274,6 +1268,12 @@ document.getElementById('contactForm').addEventListener('submit',async e=>{
     offre:document.getElementById('offre').value,
     msg:document.getElementById('msg').value
   };
+  /* champ piège rempli = robot : on n'envoie rien, mais on ne le prévient pas */
+  if(document.getElementById('societe').value.trim()!==''){
+    f.style.display='none';document.getElementById('formSuccess').classList.add('show');
+    return;
+  }
+  data.origine='site-impact-nva';
   btn.disabled=true;btn.innerHTML='Envoi en cours…';
   try{
     const r=await fetch('https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
