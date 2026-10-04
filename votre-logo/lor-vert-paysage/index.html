@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f0d">
+<title>L'Or Vert Paysage · votre logo en mouvement</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Votre logo en 3D, animé à l’ouverture de votre site. Préparé par Impact-NVA.">
+<meta property="og:title" content="L'Or Vert Paysage · votre logo en mouvement">
+<meta property="og:description" content="Préparé pour vous par Impact-NVA.">
+<meta property="og:image" content="https://impact-nva.fr/votre-logo/lor-vert-paysage/logo.png">
+<meta property="og:url" content="https://impact-nva.fr/votre-logo/lor-vert-paysage/">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap">
+<style>
+  :root { color-scheme:dark; --fond:#0b0f0d; --texte:#f3f1ea; --doux:rgba(243,241,234,.62); --bord:rgba(243,241,234,.18); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body {
+    background:var(--fond); color:var(--texte); overflow:hidden;
+    font-family:system-ui, "Segoe UI", Roboto, sans-serif;
+    transition:background .6s ease, color .6s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  /* Le logo en image normale : toujours visible tant que la 3D n'a pas prouvé qu'elle marche. */
+  .scene { position:fixed; inset:var(--haut, 0px) 0 var(--bas, 76px) 0; display:grid; place-items:center; padding:24px; }
+  #plain {
+    max-width:min(80vw, 820px); max-height:min(62vh, 620px); object-fit:contain;
+    animation:apparait 1.1s ease-out both;
+  }
+  @keyframes apparait { from { opacity:0; transform:scale(.96); } to { opacity:1; transform:none; } }
+  canvas { position:fixed; inset:0; width:100%; height:100%; display:none; touch-action:pan-y; }
+  body.vivant canvas, canvas.vivant { display:block; }
+  #plain.cache { visibility:hidden; }
+  body.presentation .haut, body.presentation .carte { display:none !important; }
+  body.vivant #plain { visibility:hidden; }
+
+  .marque { position:fixed; top:16px; left:18px; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--doux); z-index:3; }
+  .barre {
+    position:fixed; left:0; right:0; bottom:0; z-index:3; display:flex; flex-wrap:wrap; gap:8px;
+    justify-content:center; align-items:center; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  }
+  .barre button, .barre label {
+    font:inherit; font-size:13px; color:var(--texte); background:transparent; cursor:pointer;
+    border:1px solid var(--bord); border-radius:999px; padding:9px 14px; line-height:1;
+  }
+  .barre button.actif { border-color:var(--texte); }
+  .barre .principal { background:var(--texte); color:var(--fond); border-color:var(--texte); }
+  .barre input { display:none; }
+  body.presentation .barre, body.presentation .marque { display:none; }
+  body.presentation .scene { inset:0; }
+  /* Page envoyée à un prospect */
+  .carte { position:fixed; left:0; right:0; bottom:0; z-index:3; display:none; text-align:center;
+    padding:18px 20px calc(20px + env(safe-area-inset-bottom)); }
+  body.prospect .carte { display:grid; gap:12px; justify-items:center; }
+  body.prospect .barre { display:none; }
+  body.prospect { --bas:190px; --haut:90px; }
+  body.video .carte .actions { display:none; }
+  .signature { display:flex; align-items:center; gap:10px; padding:8px 18px 8px 10px; border-radius:999px;
+    border:1px solid var(--bord); font-size:16px; letter-spacing:.04em; }
+  .signature[hidden] { display:none; }
+  .signature img { height:40px; width:auto; }
+  .signature b { font-weight:800; letter-spacing:.14em; }
+  .sig-texte { display:grid; gap:2px; text-align:left; }
+  .depli { --d:0; font-family:"Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif; font-weight:700; font-size:1.3em; line-height:1.1; letter-spacing:.1em;
+    display:flex; color:var(--vertM); }
+  .depli i { font-style:normal; display:inline-block; padding-right:.18em; }
+  .depli .or { color:var(--orI); }
+  .depli .m { position:relative; z-index:1; }
+  .depli .sort { transform:translateX(calc((1 - var(--d)) * var(--r))); opacity:var(--d); }
+  .depli .sort { --r:calc(var(--rang) * -1.45em); }
+  :root { --orI:#8a6c2c; --vertM:#2c7a4f; }
+  body.sombre { --orI:#e7cc86; --vertM:#57b183; }
+  body.video .signature { font-size:21px; padding:10px 22px 10px 12px; }
+  body.video .signature img { height:52px; }
+  body.prospect .marque { display:none; }
+  .haut { position:fixed; top:0; left:0; right:0; z-index:3; display:none; justify-content:center;
+    padding:calc(16px + env(safe-area-inset-top)) 16px 0; }
+  body.prospect .haut { display:flex; }
+  body.video .haut { padding-top:48px; }
+  body.video { --bas:150px; --haut:140px; }
+  body.video .carte .phrase { font-size:22px; }
+  .carte .pour { font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--doux); }
+  .carte .phrase { max-width:34ch; font-size:17px; line-height:1.4; text-wrap:balance; }
+  .carte .actions { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .carte button, .carte a { font:inherit; font-size:14px; color:var(--texte); background:transparent; cursor:pointer; text-decoration:none;
+    border:1px solid var(--bord); border-radius:999px; padding:10px 16px; line-height:1; }
+  .carte a { background:var(--texte); color:var(--fond); border-color:var(--texte); }
+  .carte button:focus-visible, .carte a:focus-visible, .barre button:focus-visible { outline:2px solid var(--texte); outline-offset:2px; }
+</style>
+</head>
+<body>
+<div class="marque">Impact-NVA · logo vivant</div>
+<div class="scene"><img id="plain" alt="Logo"></div>
+<canvas id="c"></canvas>
+<div class="haut" id="haut">
+<div class="signature" id="signature" hidden><img id="sigLogo" alt="" width="50" height="40"><span class="sig-texte"><span>Créé par <b>IMPACT-NVA</b></span>
+    <span class="depli" id="depli" aria-label="I M N V A"><i class="or">I</i><i>·</i><i class="m">M</i><i class="sort" style="--rang:1">·N</i><i class="sort" style="--rang:2">·V</i><i class="sort" style="--rang:3">·A</i></span></span></div>
+</div>
+<div class="carte" id="carte">
+  <p class="pour">Préparé pour <span id="pNom"></span></p>
+  <p class="phrase">Quand un client ouvre votre site, la première chose qu’il voit, c’est votre logo qui prend vie.</p>
+  <div class="actions"><button id="revoir" type="button">↻ Revoir</button><a href="https://impact-nva.fr/">Découvrir Impact-NVA</a></div>
+</div>
+<div class="barre" id="barre">
+  <button id="rejouer" class="principal" type="button">↻ Rejouer</button>
+  <label>＋ Choisir un logo<input id="fichier" type="file" accept="image/*"></label>
+  <span id="exemples" style="display:contents"></span>
+</div>
+
+<script type="module">
+// Page prospect / vidéo client, avec le moteur à éclats du site Prismatik (logo-vivant.js copié à côté).
+import { creerLogoVivant, rebond, clamp } from './logo-vivant.js';
+const PROSPECT = {"nom":"L'Or Vert Paysage","signature":"impact-nva.png","fond":null,"logo":"logo.png","eclats":true,"zone":[0,0.32,0.5,0.66]};
+const q = new URLSearchParams(location.search);
+if (q.has('presentation') || location.hash === '#presentation') document.body.classList.add('presentation');
+if (q.has('video')) document.body.classList.add('video');
+document.body.classList.add('prospect');
+document.getElementById('pNom').textContent = PROSPECT.nom;
+if (PROSPECT.signature) { document.getElementById('sigLogo').src = PROSPECT.signature; document.getElementById('signature').hidden = false; }
+const plain = document.getElementById('plain'); plain.src = PROSPECT.logo;
+const canvas = document.getElementById('c'), depli = document.getElementById('depli');
+const presentation = document.body.classList.contains('presentation');
+const marge = id => presentation ? 0 : (document.getElementById(id).offsetHeight + 8);
+const lv = window.__lv = await creerLogoVivant({
+  canvas, image:plain, src:PROSPECT.logo, eclats:PROSPECT.eclats ? 60 : 0, zone:PROSPECT.zone || null,
+  marges:{ haut:marge('haut'), bas:marge('carte') },
+  surTemps:(t, fin) => depli && depli.style.setProperty('--d', Math.max(0, rebond(clamp((t - fin - 0.15) / 0.9))).toFixed(3))
+});
+lv.etape = lv.etat;
+// Fond : imposé à la fabrication, sinon celui du logo, sinon celui qui le fait ressortir.
+const info = lv.info || {};
+const force = PROSPECT.fond;
+let fond, clair;
+if (force) { fond = force === 'sombre' ? '#0b0f0d' : '#f6f7f4'; clair = force !== 'sombre'; }
+else if (info.fond) { fond = 'rgb(' + info.fond.join(',') + ')'; clair = (0.2126 * info.fond[0] + 0.7152 * info.fond[1] + 0.0722 * info.fond[2]) / 255 > 0.5; }
+else { const sombre = info.lumLogo > 0.42 && info.partSombre < 0.12; fond = sombre ? '#0b0f0d' : '#f6f7f4'; clair = !sombre; }
+const st = document.body.style;
+st.setProperty('--fond', fond);
+st.setProperty('--texte', clair ? '#16201a' : '#f3f1ea');
+st.setProperty('--doux', clair ? 'rgba(22,32,26,.6)' : 'rgba(243,241,234,.62)');
+st.setProperty('--bord', clair ? 'rgba(22,32,26,.2)' : 'rgba(243,241,234,.2)');
+document.body.classList.toggle('sombre', !clair);
+document.querySelector('meta[name=theme-color]').content = fond;
+const rejoue = () => lv.rejouer && lv.rejouer();
+document.getElementById('revoir').onclick = rejoue;
+canvas.addEventListener('click', rejoue);
+setInterval(() => { lv.etape = lv.etat; }, 200);
+</script>
+</body>
+</html>
