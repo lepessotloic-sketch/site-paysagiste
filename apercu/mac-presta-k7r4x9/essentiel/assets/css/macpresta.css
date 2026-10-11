@@ -25,3 +25,49 @@ html { overflow-x: clip; }
 .signe-impact:hover { color: var(--text); }
 .nav-toggle svg { width: 26px; height: 26px; }
 @media (max-width: 560px) { .form-duo { grid-template-columns: 1fr; } }
+
+/* ============ 2026-10-11 : plus de gris. Palette = noir asphalte + blanc franc + jaune engin (actions) + rouge du logo (accents) ============ */
+:root { --muted: #EFEDE8; --soft: #C2C0BB; --rouge: #FF3B41; }
+p, .card-desc, .step-desc, .trio-for, .section-lead { color: var(--muted); }
+.hero-subtitle { color: #F6F4EF; }
+.hero-badge { color: #F6F4EF; border-color: rgba(255, 201, 90, .32); }
+.hero-badge strong { color: var(--green-2); }
+.eyebrow { display: inline-flex; align-items: center; gap: .7em; color: #F6F4EF; }
+.eyebrow::before { content: ''; width: 26px; height: 3px; border-radius: 2px; background: var(--rouge); }
+.eyebrow.center { display: flex !important; justify-content: center; }
+.included li, .trio-list li, .trio-lignes li, .modif-box li, .contact-details ul, .footer-col li, .contact-form label { color: var(--muted); }
+.footer-bottom { color: var(--soft); line-height: 1.9; }
+
+/* barre du haut : liens blancs, trait rouge → jaune sous le lien survolé ou en cours */
+header { background: rgba(13, 14, 15, .88); }
+header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2px; background: linear-gradient(90deg, transparent, var(--rouge) 22%, var(--green) 60%, transparent); opacity: .75; }
+.nav-links a { position: relative; color: #F6F4EF; font-weight: 600; padding: .5rem 0; }
+.nav-links a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--rouge), var(--green-2)); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.22, 1, .36, 1); }
+.nav-links a:hover::after, .nav-links a.actif::after { transform: scaleX(1); }
+.nav-links a.actif { color: #fff; }
+
+/* bouton du sommaire : le cylindre de son logo, qui roule et laisse place à une croix */
+.nav-toggle { position: relative; width: 54px; height: 54px; padding: 0; }
+.nav-toggle .ic-cyl, .nav-toggle .ic-croix { position: absolute; inset: 0; margin: auto; transition: transform .55s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, filter .3s ease; }
+.nav-toggle .ic-cyl { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 1px rgba(255, 255, 255, .5)); }
+.nav-toggle .ic-croix { width: 26px; height: 26px; color: var(--green-2); opacity: 0; transform: rotate(-90deg) scale(.55); }
+.nav-toggle:hover .ic-cyl, .nav-toggle:focus-visible .ic-cyl { transform: translateX(-4px); filter: drop-shadow(0 0 10px var(--green)); }
+.nav-toggle[aria-expanded="true"] .ic-cyl { opacity: 0; transform: translateX(-34px); }
+.nav-toggle[aria-expanded="true"] .ic-croix { opacity: 1; transform: none; }
+
+@media (max-width: 768px) {
+  /* le sommaire */
+  .nav-links { counter-reset: lien; gap: 0; padding: 8px 20px 14px; background: #121315; border-color: rgba(255, 201, 90, .3); box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+  .nav-links::before { content: 'Sommaire'; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); padding: 10px 0 4px; }
+  .nav-links a { counter-increment: lien; display: flex; align-items: baseline; gap: 14px; padding: 14px 0; font-size: 1.15rem; font-weight: 700; border-bottom: 1px solid var(--line); }
+  .nav-links a:last-child { border-bottom: 0; }
+  .nav-links a::before { content: counter(lien, decimal-leading-zero); font-size: .78rem; font-weight: 700; letter-spacing: .1em; color: var(--green-2); }
+  .nav-links a::after { display: none; }
+  .nav-links a.actif { color: var(--green-2); }
+}
+
+/* signature Impact-NVA : la pastille aux couleurs du site */
+.signe-impact { display: inline-flex; align-items: center; gap: 10px; margin-top: 10px; color: #F6F4EF; font-weight: 600; }
+.signe-impact img { width: 34px; height: 34px; border-radius: 9px; transition: transform .3s ease, box-shadow .3s ease; }
+.signe-impact:hover img { transform: translateY(-2px); box-shadow: 0 0 18px rgba(245, 164, 23, .45); }
+.signe-impact:hover { color: var(--green-2); }

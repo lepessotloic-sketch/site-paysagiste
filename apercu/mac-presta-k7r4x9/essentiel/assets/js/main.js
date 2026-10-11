@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (toggle && links) {
     toggle.addEventListener('click', () => { const o = links.classList.toggle('open'); toggle.setAttribute('aria-expanded', o); });
     links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', false); }));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') links.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { links.classList.remove('open'); toggle.setAttribute('aria-expanded', false); } });
+    // lien de la partie en cours
+    const liens = [...links.querySelectorAll('a')], cibles = liens.map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+    const marque = () => { const y = scrollY + innerHeight * .35; let c = null; cibles.forEach(x => { if (x.getBoundingClientRect().top + scrollY <= y) c = x; }); liens.forEach(l => l.classList.toggle('actif', !!c && l.getAttribute('href') === '#' + c.id)); };
+    marque(); addEventListener('scroll', marque, { passive: true });
   }
 
   // Questions en accordéon
