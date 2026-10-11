@@ -56,10 +56,12 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
 .nav-toggle[aria-expanded="true"] .ic-tele { opacity: 0; transform: rotate(18deg) scale(.6); }
 .nav-toggle[aria-expanded="true"] .ic-croix { opacity: 1; transform: none; }
 
-@media (max-width: 768px) {
+/* à toutes les tailles d écran (demande de Loïc, 2026-10-11) : le bouton télécommande remplace les liens, même sur ordinateur */
+.nav-toggle { display: block; background: none; border: 0; cursor: pointer; }
+@media all {
   /* le tapis : vraie texture d'enrobé (tirée de sa photo de chantier), lignes de rive blanches sur les côtés */
   .nav-links {
-    display: block; top: 100%; left: 14px; right: 14px; padding: 0 30px; gap: 0;
+    display: block; position: absolute; top: 100%; left: auto; right: 32px; width: min(400px, calc(100vw - 28px)); padding: 0 30px; gap: 0;
     max-height: 0; overflow: hidden; opacity: 1; transform: none; visibility: hidden; pointer-events: none;
     border: 0; border-radius: 0 0 16px 16px; counter-reset: lien;
     background:
@@ -102,3 +104,6 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
 .signe-impact img { width: 34px; height: 34px; border-radius: 9px; transition: transform .3s ease, box-shadow .3s ease; }
 .signe-impact:hover img { transform: translateY(-2px); box-shadow: 0 0 18px rgba(245, 164, 23, .45); }
 .signe-impact:hover { color: var(--green-2); }
+
+@media (max-width: 768px) { .nav-links { right: 14px; left: 14px; width: auto; } }
+@media (min-width: 769px) { .nav-toggle { width: 52px; height: 52px; } .nav-toggle .ic-tele { height: 42px; } .nav-toggle .ic-croix { width: 28px; height: 28px; } }
