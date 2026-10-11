@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', marque, { passive: true });
 
   const bouton = document.getElementById('nav-toggle');
+  // un clic en dehors du tapis le referme
+  document.addEventListener('click', e => { if (bouton && bouton.getAttribute('aria-expanded') === 'true' && !e.target.closest('.nav-links, #nav-toggle, #theme-toggle')) bouton.click(); });
   if (bouton) new MutationObserver(() => {
     document.documentElement.classList.toggle('menu-ouvert', bouton.getAttribute('aria-expanded') === 'true');
   }).observe(bouton, { attributes: true, attributeFilter: ['aria-expanded'] });
