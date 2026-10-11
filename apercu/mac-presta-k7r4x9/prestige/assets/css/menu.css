@@ -1,0 +1,69 @@
+/* MAC PRESTA — barre du menu (2026-10-10) : filet doré, liens soulignés, bouton « cylindre » comme le cheval de Troie de Clash of Myths */
+.site-header::after {
+  content: ''; position: absolute; inset: auto 0 -1px 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--gold) 18%, var(--gold-soft) 50%, var(--gold) 82%, transparent);
+  opacity: 0; transition: opacity .4s ease;
+}
+.site-header.scrolled { border-bottom-color: transparent; }
+.site-header.scrolled::after { opacity: .6; }
+
+.nav-links li:not(.nav-extra) a {
+  position: relative; border-bottom: 0; padding: .65rem 0;
+  font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+}
+.nav-links li:not(.nav-extra) a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: .2rem; height: 2px; border-radius: 2px;
+  background: var(--cta-grad); transform: scaleX(0); transform-origin: left center;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.nav-links li:not(.nav-extra) a:hover::after, .nav-links li:not(.nav-extra) a.actif::after { transform: scaleX(1); }
+.nav-links li:not(.nav-extra) a.actif { color: var(--ink); }
+.nav-extra { display: none; }
+
+/* bouton du menu : le cylindre de son logo, qui roule et laisse place à une croix */
+.nav-toggle { width: 54px; height: 54px; padding: 0; border: 0; border-radius: 0; background: none; position: relative; }
+.nav-toggle .ic-cyl, .nav-toggle .ic-croix {
+  position: absolute; inset: 0; margin: auto;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, filter .3s ease;
+}
+.nav-toggle .ic-cyl { width: 50px; height: 50px; object-fit: contain; }
+[data-theme="nuit"] .nav-toggle .ic-cyl { filter: drop-shadow(0 0 1px rgba(255, 255, 255, .5)); }
+.nav-toggle .ic-croix { width: 26px; height: 26px; color: var(--gold-text); opacity: 0; transform: rotate(-90deg) scale(.55); }
+.nav-toggle:hover .ic-cyl, .nav-toggle:focus-visible .ic-cyl { transform: translateX(-4px); filter: drop-shadow(0 0 10px var(--gold)); }
+.nav-toggle[aria-expanded="true"] .ic-cyl { opacity: 0; transform: translateX(-34px); }
+.nav-toggle[aria-expanded="true"] .ic-croix { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  html.menu-ouvert { overflow: hidden; }
+  .nav-links {
+    min-height: 100dvh; max-height: 100dvh; overflow-y: auto; counter-reset: lien;
+    padding: 6.2rem 1.6rem 2rem; border-bottom: 0;
+    background:
+      radial-gradient(90% 55% at 100% 0, var(--glow), transparent 70%),
+      radial-gradient(70% 45% at 0 100%, color-mix(in srgb, var(--rouge) 9%, transparent), transparent 70%),
+      var(--bg);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .nav-links li:not(.nav-extra) { counter-increment: lien; }
+  .nav-links li:not(.nav-extra) a {
+    display: flex; align-items: baseline; gap: 1rem; padding: 1.05rem .1rem;
+    font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; font-weight: 560;
+    letter-spacing: 0; text-transform: none; color: var(--ink);
+    border-bottom: 1px dashed var(--line-gold);
+  }
+  .nav-links li:not(.nav-extra) a::before {
+    content: counter(lien, decimal-leading-zero);
+    font-family: 'Inter', sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .12em; color: var(--gold-text);
+  }
+  .nav-links li:not(.nav-extra) a::after { display: none; }
+  .nav-links li:not(.nav-extra) a.actif { color: var(--gold-text); }
+  .nav-extra { display: block; margin-top: 1.4rem; }
+  .nav-extra + .nav-extra { margin-top: .9rem; }
+  .nav-links .nav-extra a.cta-button { display: block; text-align: center; color: var(--cta-ink); font-size: 1.05rem; padding: 1rem; border-bottom: 0; }
+  .nav-links .nav-extra a.nav-tel { display: block; text-align: center; border-bottom: 0; padding: .2rem; font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; color: var(--ink); }
+}
+@media (max-width: 900px) {
+  /* le logo et le bouton jour/nuit restent visibles par-dessus le menu ouvert */
+  .brand, .theme-toggle { position: relative; z-index: calc(var(--z-menu) + 1); }
+  .nav-links .nav-extra a.cta-button { font-weight: 650; }
+}

@@ -1,0 +1,27 @@
+/* MAC PRESTA — ajouts posés sur le modèle Impact-NVA Essentiel */
+html { overflow-x: clip; }
+.hero:before { background: radial-gradient(60% 55% at 50% 30%, rgba(240,160,26,.14), transparent 70%), radial-gradient(40% 40% at 85% 90%, rgba(232,38,44,.08), transparent 70%), var(--bg); }
+.hero-logo { width: min(440px, 86%); margin: 0 auto 26px; filter: drop-shadow(0 0 1px rgba(255,255,255,.5)) drop-shadow(0 18px 40px rgba(240,160,26,.16)); }
+.hero-title span.r { color: #FF3B41; }
+.logo-img { height: 52px; filter: drop-shadow(0 0 1px rgba(255,255,255,.5)); }
+.card-icon svg { width: 28px; height: 28px; }
+.g-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--soft); font-size: .9rem; text-align: center; padding: 12px;
+  background: repeating-linear-gradient(-45deg, transparent 0 14px, rgba(255,201,90,.05) 14px 28px), linear-gradient(160deg, var(--panel-2), var(--panel)); }
+.g-ph svg { width: 32px; height: 32px; color: var(--green-2); }
+.g-ph strong { color: var(--text); }
+.trio-price small { font-size: .9rem; font-weight: 600; color: var(--muted); }
+.trio-lignes { display: grid; gap: 8px; margin-bottom: 22px; flex-grow: 1; align-content: start; }
+.trio-lignes li { display: flex; justify-content: space-between; align-items: baseline; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; color: var(--muted); font-size: .92rem; }
+.trio-lignes b { font-size: 1.7rem; color: var(--text); }
+.trio-lignes b small { font-size: .8rem; color: var(--muted); font-weight: 600; margin-left: 3px; }
+.form-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.contact-form input[type=date], .contact-form input[type=time] { color-scheme: dark; }
+.contact-form button:disabled { opacity: .45; }
+.form-status.success { color: var(--green-2); }
+.envoye { display: none; text-align: center; padding: 26px 8px; }
+.envoye h3 { font-size: 1.4rem; margin: 10px 0 6px; }
+.envoye svg { width: 52px; height: 52px; color: #3FCF7C; }
+.signe-impact { color: var(--muted); }
+.signe-impact:hover { color: var(--text); }
+.nav-toggle svg { width: 26px; height: 26px; }
+@media (max-width: 560px) { .form-duo { grid-template-columns: 1fr; } }
