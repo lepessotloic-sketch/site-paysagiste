@@ -47,10 +47,10 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
 .nav-links a.actif { color: #fff; }
 
 /* bouton du sommaire : la télécommande du finisseur, dessinée au trait fin doré (comme le cheval de Troie de Clash ; la photo découpée a été rejetée : « copié-collé, moche »). On appuie : le tapis d'enrobé se déroule, le sommaire est peint dessus. */
-.nav-toggle { position: relative; width: 50px; height: 58px; padding: 0; }
+.nav-toggle { position: relative; width: 44px; height: 44px; padding: 0; }
 .nav-toggle .ic-tele, .nav-toggle .ic-croix { position: absolute; inset: 0; margin: auto; transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, filter .3s ease; }
-.nav-toggle .ic-tele { height: 54px; width: auto; color: var(--green-2); filter: drop-shadow(0 0 6px rgba(245, 164, 23, .25)); }
-.nav-toggle .ic-croix { width: 28px; height: 28px; color: var(--green-2); opacity: 0; transform: rotate(-90deg) scale(.55); }
+.nav-toggle .ic-tele { height: 34px; width: auto; color: var(--green-2); filter: drop-shadow(0 0 6px rgba(245, 164, 23, .25)); }
+.nav-toggle .ic-croix { width: 24px; height: 24px; color: var(--green-2); opacity: 0; transform: rotate(-90deg) scale(.55); }
 .nav-toggle:hover .ic-tele, .nav-toggle:focus-visible .ic-tele { transform: rotate(-7deg) scale(1.07); color: #FFE3A0; filter: drop-shadow(0 0 9px rgba(245, 164, 23, .75)); }
 .nav-toggle:active .ic-tele { transform: scale(.92); }
 .nav-toggle[aria-expanded="true"] .ic-tele { opacity: 0; transform: rotate(18deg) scale(.6); }
