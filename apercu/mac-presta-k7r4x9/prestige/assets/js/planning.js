@@ -9,7 +9,7 @@
     finisseur: { jour: 400, nuit: 550, nom: 'Chauffeur régleur finisseur' },
     cylindre:  { jour: 400, nuit: 550, nom: 'Chauffeur cylindre' }
   };
-  const HEURE_PE = 30, HEURE_SUP = 50;
+  const HEURE_PE = 30, HEURE_SUP = { jour: '50', nuit: '68,75' };   /* 400 ÷ 8 et 550 ÷ 8 */
   const auj = new Date(); auj.setHours(0, 0, 0, 0);
   const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   const plus = n => { const d = new Date(auj); d.setDate(d.getDate() + n); return iso(d); };
@@ -132,11 +132,11 @@
         <tr><td class="l">${TARIF[d.presta].nom} · ${d.creneau}</td><td class="droite">${base + ' €'}</td></tr>
         ${km(d) ? `<tr><td class="l">Déplacement · chantier à plus de ${d.dist} km</td><td class="droite">${km(d)} €</td></tr>` : ''}${km(d) === null ? '<tr><td class="l">Déplacement · plus de 200 km</td><td class="droite">sur devis</td></tr>' : ''}
         ${d.pe ? `<tr><td class="l">Conduite porte-engins · ${d.pe} h × ${HEURE_PE} €</td><td class="droite">${d.pe * HEURE_PE} €</td></tr>` : ''}
-        <tr><td class="l">Heures supplémentaires</td><td class="droite">à noter sur place : ____ h × ${HEURE_SUP} €</td></tr>
+        <tr><td class="l">Heures supplémentaires</td><td class="droite">à noter sur place : ____ h × ${HEURE_SUP[d.creneau]} €</td></tr>
         <tr class="tot"><td>Total</td><td>${p === null ? 'Sur devis' : p + ' € net'}</td></tr>
       </table>
       <div class="sign"><div class="valide">Validé par MAC PRESTA<br><span style="color:#17191C;font-weight:500">Mickael Araujo Costa, le ${d.valideLe}</span></div><div>Nom et signature du responsable de chantier</div></div>
-      <p class="pied">Forfait de 8 heures sur la machine du client, sans demi-journée. Heure supplémentaire : 50 €. Déplacement inclus jusqu'à 50 km, puis 50 € par tranche de 50 km. Annulation moins de 24 h avant : facturation possible. Prix nets, TVA non applicable, art. 293 B du CGI. La facture est établie après l'intervention.</p>`;
+      <p class="pied">Forfait de 8 heures sur la machine du client, sans demi-journée. Heure supplémentaire : 50 € de jour, 68,75 € de nuit. Déplacement inclus jusqu'à 50 km, puis 50 € par tranche de 50 km. Annulation moins de 24 h avant : facturation possible. Prix nets, TVA non applicable, art. 293 B du CGI. La facture est établie après l'intervention.</p>`;
     $('#bc-fond').classList.add('vu'); document.body.style.overflow = 'hidden'; $('#bc-ferme').focus();
   }
   const fermeBC = () => { $('#bc-fond').classList.remove('vu'); document.body.style.overflow = ''; };
