@@ -9,7 +9,7 @@
     finisseur: { jour: 400, nuit: 550, nom: 'Chauffeur régleur finisseur' },
     cylindre:  { jour: 400, nuit: 550, nom: 'Chauffeur cylindre' }
   };
-  const HEURE_PE = 30;
+  const HEURE_PE = 30, HEURE_SUP = 50;
   const auj = new Date(); auj.setHours(0, 0, 0, 0);
   const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   const plus = n => { const d = new Date(auj); d.setDate(d.getDate() + n); return iso(d); };
@@ -19,13 +19,14 @@
   /* jours déjà pris (exemple), calculés depuis aujourd'hui pour que la démo reste vivante */
   const prisDemo = [1, 2, 6, 7, 8, 13, 14, 20, 23, 27, 28, 34, 35, 41].map(plus);
   let demandes = store.get('mp-demandes', null) || [
-    { id: 1, date: plus(10), presta: 'finisseur', creneau: 'nuit', heure: '21:00', pe: 0, loin: false, adresse: 'A4, aire de Ferrières, 77164 Ferrières-en-Brie', societe: "Routes de l'Est TP", resp: 'J. Martin', tel: '06 11 22 33 44', mail: 'chantier@exemple.fr', desc: 'Finisseur 1900-5 loué, rabotage la veille', statut: 'attente' },
-    { id: 2, date: plus(16), presta: 'cylindre', creneau: 'jour', heure: '07:30', pe: 2, loin: false, adresse: 'Rue de la Gare, 77400 Lagny-sur-Marne', societe: 'Voirie 77', resp: 'S. Durand', tel: '06 55 66 77 88', mail: 'contact@exemple.fr', desc: "Cylindre tandem de l'entreprise, accès par l'arrière", statut: 'attente' }
+    { id: 1, date: plus(10), presta: 'finisseur', creneau: 'nuit', heure: '21:00', pe: 0, dist: '0', adresse: 'A4, aire de Ferrières, 77164 Ferrières-en-Brie', societe: "Routes de l'Est TP", resp: 'J. Martin', tel: '06 11 22 33 44', mail: 'chantier@exemple.fr', desc: 'Finisseur 1900-5 loué, rabotage la veille', statut: 'attente' },
+    { id: 2, date: plus(16), presta: 'cylindre', creneau: 'jour', heure: '07:30', pe: 2, dist: '50', adresse: 'Rue de la Gare, 77400 Lagny-sur-Marne', societe: 'Voirie 77', resp: 'S. Durand', tel: '06 55 66 77 88', mail: 'contact@exemple.fr', desc: "Cylindre tandem de l'entreprise, accès par l'arrière", statut: 'attente' }
   ];
   let numBC = store.get('mp-num', 1);
   const sauve = () => { store.set('mp-demandes', demandes); store.set('mp-num', numBC); };
   const estPris = j => prisDemo.includes(j) || demandes.some(d => d.statut === 'validee' && d.date === j);
-  const prixDe = d => d.loin ? null : TARIF[d.presta][d.creneau] + HEURE_PE * (+d.pe || 0);
+  const km = d => (d.dist === 'plus' || d.loin) ? null : (+d.dist || 0);   /* supplément déplacement : 50 € par tranche de 50 km */
+  const prixDe = d => km(d) === null ? null : TARIF[d.presta][d.creneau] + km(d) + HEURE_PE * (+d.pe || 0);
 
   /* ---------- calendrier ---------- */
   const vue = new Date(auj.getFullYear(), auj.getMonth(), 1);
@@ -61,7 +62,7 @@
     date: choisi,
     presta: document.querySelector('[name=presta]:checked').value,
     creneau: document.querySelector('[name=creneau]:checked').value,
-    heure: val('#r-heure'), pe: Math.max(0, parseInt($('#r-pe').value, 10) || 0), loin: $('#r-loin').checked,
+    heure: val('#r-heure'), pe: Math.max(0, parseInt($('#r-pe').value, 10) || 0), dist: $('#r-dist').value,
     adresse: val('#r-adresse'), societe: val('#r-societe'), resp: val('#r-resp'), tel: val('#r-tel'), mail: val('#r-mail'), desc: val('#r-desc')
   });
   function maj() {
@@ -128,13 +129,14 @@
         <td>Chauffeur finisseur${x(d.presta === 'finisseur')}</td><td>Régleur finisseur${x(d.presta === 'finisseur')}</td><td>Cylindreur${x(d.presta === 'cylindre')}</td><td>Porte-engins${x(d.pe > 0)}</td>
       </tr></table>
       <table>
-        <tr><td class="l">${TARIF[d.presta].nom} · ${d.creneau}</td><td class="droite">${d.loin ? 'sur devis' : base + ' €'}</td></tr>
+        <tr><td class="l">${TARIF[d.presta].nom} · ${d.creneau}</td><td class="droite">${base + ' €'}</td></tr>
+        ${km(d) ? `<tr><td class="l">Déplacement · chantier à plus de ${d.dist} km</td><td class="droite">${km(d)} €</td></tr>` : ''}${km(d) === null ? '<tr><td class="l">Déplacement · plus de 200 km</td><td class="droite">sur devis</td></tr>' : ''}
         ${d.pe ? `<tr><td class="l">Conduite porte-engins · ${d.pe} h × ${HEURE_PE} €</td><td class="droite">${d.pe * HEURE_PE} €</td></tr>` : ''}
-        <tr><td class="l">Heures supplémentaires</td><td class="droite">à noter sur place : ____ h</td></tr>
+        <tr><td class="l">Heures supplémentaires</td><td class="droite">à noter sur place : ____ h × ${HEURE_SUP} €</td></tr>
         <tr class="tot"><td>Total</td><td>${p === null ? 'Sur devis' : p + ' € net'}</td></tr>
       </table>
       <div class="sign"><div class="valide">Validé par MAC PRESTA<br><span style="color:#17191C;font-weight:500">Mickael Araujo Costa, le ${d.valideLe}</span></div><div>Nom et signature du responsable de chantier</div></div>
-      <p class="pied">Journée de 8 heures sur la machine du client. Déplacement inclus jusqu'à 100 km, au-delà sur devis. Annulation moins de 24 h avant : facturation possible. Prix nets, TVA non applicable, art. 293 B du CGI. La facture est établie après l'intervention.</p>`;
+      <p class="pied">Forfait de 8 heures sur la machine du client, sans demi-journée. Heure supplémentaire : 50 €. Déplacement inclus jusqu'à 50 km, puis 50 € par tranche de 50 km. Annulation moins de 24 h avant : facturation possible. Prix nets, TVA non applicable, art. 293 B du CGI. La facture est établie après l'intervention.</p>`;
     $('#bc-fond').classList.add('vu'); document.body.style.overflow = 'hidden'; $('#bc-ferme').focus();
   }
   const fermeBC = () => { $('#bc-fond').classList.remove('vu'); document.body.style.overflow = ''; };
