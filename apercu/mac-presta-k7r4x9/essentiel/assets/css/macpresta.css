@@ -46,25 +46,56 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
 .nav-links a:hover::after, .nav-links a.actif::after { transform: scaleX(1); }
 .nav-links a.actif { color: #fff; }
 
-/* bouton du sommaire : le cylindre de son logo, qui roule et laisse place à une croix */
-.nav-toggle { position: relative; width: 54px; height: 54px; padding: 0; }
-.nav-toggle .ic-cyl, .nav-toggle .ic-croix { position: absolute; inset: 0; margin: auto; transition: transform .55s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, filter .3s ease; }
-.nav-toggle .ic-cyl { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 1px rgba(255, 255, 255, .5)); }
-.nav-toggle .ic-croix { width: 26px; height: 26px; color: var(--green-2); opacity: 0; transform: rotate(-90deg) scale(.55); }
-.nav-toggle:hover .ic-cyl, .nav-toggle:focus-visible .ic-cyl { transform: translateX(-4px); filter: drop-shadow(0 0 10px var(--green)); }
-.nav-toggle[aria-expanded="true"] .ic-cyl { opacity: 0; transform: translateX(-34px); }
+/* bouton du sommaire : la télécommande du finisseur (découpée dans SA photo). On appuie : le tapis d'enrobé se déroule, le sommaire est peint dessus. */
+.nav-toggle { position: relative; width: 50px; height: 58px; padding: 0; }
+.nav-toggle .ic-tele, .nav-toggle .ic-croix { position: absolute; inset: 0; margin: auto; transition: transform .5s cubic-bezier(.22, 1, .36, 1), opacity .3s ease, filter .3s ease; }
+.nav-toggle .ic-tele { height: 56px; width: auto; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .55)); }
+.nav-toggle .ic-croix { width: 28px; height: 28px; color: var(--green-2); opacity: 0; transform: rotate(-90deg) scale(.55); }
+.nav-toggle:hover .ic-tele, .nav-toggle:focus-visible .ic-tele { transform: rotate(-7deg) scale(1.07); filter: drop-shadow(0 0 10px rgba(245, 164, 23, .7)); }
+.nav-toggle:active .ic-tele { transform: scale(.92); }
+.nav-toggle[aria-expanded="true"] .ic-tele { opacity: 0; transform: rotate(18deg) scale(.6); }
 .nav-toggle[aria-expanded="true"] .ic-croix { opacity: 1; transform: none; }
 
 @media (max-width: 768px) {
-  /* le sommaire */
-  .nav-links { counter-reset: lien; gap: 0; padding: 8px 20px 14px; background: #121315; border-color: rgba(255, 201, 90, .3); box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
-  .nav-links::before { content: 'Sommaire'; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--soft); padding: 10px 0 4px; }
-  .nav-links a { counter-increment: lien; display: flex; align-items: baseline; gap: 14px; padding: 14px 0; font-size: 1.15rem; font-weight: 700; border-bottom: 1px solid var(--line); }
-  .nav-links a:last-child { border-bottom: 0; }
+  /* le tapis : vraie texture d'enrobé (tirée de sa photo de chantier), lignes de rive blanches sur les côtés */
+  .nav-links {
+    display: block; top: 100%; left: 14px; right: 14px; padding: 0 30px; gap: 0;
+    max-height: 0; overflow: hidden; opacity: 1; transform: none; visibility: hidden; pointer-events: none;
+    border: 0; border-radius: 0 0 16px 16px; counter-reset: lien;
+    background:
+      linear-gradient(90deg, transparent 11px, rgba(255, 255, 255, .9) 11px 14px, transparent 14px calc(100% - 14px), rgba(255, 255, 255, .9) calc(100% - 14px) calc(100% - 11px), transparent calc(100% - 11px)),
+      linear-gradient(180deg, rgba(8, 8, 9, .25), rgba(8, 8, 9, .5)),
+      url(../images/enrobe.jpg) center / cover #141517;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, .65);
+    transition: max-height .95s cubic-bezier(.3, .9, .3, 1), visibility 0s .95s;
+  }
+  .nav-links.open { max-height: 460px; visibility: visible; pointer-events: auto; transition: max-height .95s cubic-bezier(.3, .9, .3, 1), visibility 0s; }
+  /* le rouleau qui déroule le tapis : il suit le bord du bas, puis s'efface */
+  .nav-links::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 20px; border-radius: 10px; opacity: 0; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(0, 0, 0, .22) 0 2px, transparent 2px 16px), linear-gradient(180deg, #f4f4f4, #a9adb2 38%, #5a5e63 72%, #2b2d30);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .6);
+  }
+  .nav-links.open::after { animation: rouleau 1.05s linear forwards; }
+  @keyframes rouleau { 0% { opacity: 1; background-position: 0 0, 0 0; } 80% { opacity: 1; } 100% { opacity: 0; background-position: 160px 0, 0 0; } }
+  .nav-links::before { content: 'Sommaire'; display: block; padding: 20px 0 6px; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--green-2); }
+  /* les titres : peints en blanc comme un marquage au sol, séparés par une ligne discontinue */
+  .nav-links a {
+    counter-increment: lien; position: relative; display: flex; align-items: baseline; gap: 14px; padding: 15px 0 17px;
+    font-size: 1.22rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+    opacity: 0; transform: translateY(-8px); transition: opacity .35s ease, transform .35s ease, color .2s ease;
+  }
+  .nav-links.open a { opacity: 1; transform: none; }
+  .nav-links.open a:nth-child(1) { transition-delay: .15s; } .nav-links.open a:nth-child(2) { transition-delay: .27s; }
+  .nav-links.open a:nth-child(3) { transition-delay: .39s; } .nav-links.open a:nth-child(4) { transition-delay: .51s; }
+  .nav-links.open a:nth-child(5) { transition-delay: .63s; }
   .nav-links a::before { content: counter(lien, decimal-leading-zero); font-size: .78rem; font-weight: 700; letter-spacing: .1em; color: var(--green-2); }
-  .nav-links a::after { display: none; }
-  .nav-links a.actif { color: var(--green-2); }
+  .nav-links a::after { display: block; top: auto; bottom: 0; height: 3px; border-radius: 0; transform: none; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .8) 0 26px, transparent 26px 46px); }
+  .nav-links a:last-child { padding-bottom: 30px; }
+  .nav-links a:last-child::after { display: none; }
+  .nav-links a.actif, .nav-links a:hover { color: var(--green-2); }
 }
+@media (max-width: 768px) and (prefers-reduced-motion: reduce) { .nav-links, .nav-links a { transition: none; } .nav-links.open::after { animation: none; } }
 
 /* signature Impact-NVA : la pastille aux couleurs du site */
 .signe-impact { display: inline-flex; align-items: center; gap: 10px; margin-top: 10px; color: #F6F4EF; font-weight: 600; }
