@@ -109,3 +109,17 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
 
 @media (max-width: 768px) { .nav-links { right: 14px; left: 14px; width: auto; } }
 @media (min-width: 769px) { .nav-toggle { width: 52px; height: 52px; } .nav-toggle .ic-tele { height: 42px; } .nav-toggle .ic-croix { width: 28px; height: 28px; } }
+
+/* carte contact : plus de grand vide noir à côté du formulaire. Le téléphone en grand, puis sa photo du pupitre qui remplit la hauteur. */
+.contact-details { display: flex; flex-direction: column; }
+.contact-details h3 { margin-bottom: 6px; }
+.cd-tel { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 800; letter-spacing: -.02em; color: var(--green-2); line-height: 1.2; }
+.cd-tel:hover { color: #FFE3A0; }
+.cd-mail { color: #F6F4EF; font-size: .95rem; margin-top: 4px; word-break: break-word; }
+.cd-mail:hover { color: var(--green-2); }
+.cd-points { display: flex !important; flex-wrap: wrap; gap: 8px !important; margin: 18px 0; }
+.cd-points li { border: 1px solid rgba(255, 201, 90, .32); border-radius: 999px; padding: 6px 14px; font-size: .85rem; font-weight: 600; color: #F6F4EF; }
+.cd-photo { position: relative; flex: 1 1 260px; min-height: 260px; margin: 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+.cd-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; }
+.cd-photo figcaption { position: absolute; inset: auto 0 0 0; padding: 34px 16px 12px; background: linear-gradient(180deg, transparent, rgba(8, 8, 9, .85)); color: #fff; font-weight: 600; font-size: .9rem; }
+@media (max-width: 980px) { .cd-photo { flex-basis: 300px; min-height: 300px; } }
