@@ -67,7 +67,7 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
     background:
       linear-gradient(90deg, transparent 11px, rgba(255, 255, 255, .9) 11px 14px, transparent 14px calc(100% - 14px), rgba(255, 255, 255, .9) calc(100% - 14px) calc(100% - 11px), transparent calc(100% - 11px)),
       linear-gradient(180deg, rgba(8, 8, 9, .25), rgba(8, 8, 9, .5)),
-      url(../images/enrobe.jpg) center / cover #141517;
+      url(../images/enrobe-hd.jpg) top center / 100% auto #141517;
     box-shadow: 0 30px 60px rgba(0, 0, 0, .65);
     transition: max-height .95s cubic-bezier(.3, .9, .3, 1), visibility 0s .95s;
   }
