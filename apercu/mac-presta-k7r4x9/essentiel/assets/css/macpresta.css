@@ -92,9 +92,11 @@ header::after { content: ''; position: absolute; inset: auto 0 -1px 0; height: 2
   .nav-links.open a:nth-child(3) { transition-delay: .39s; } .nav-links.open a:nth-child(4) { transition-delay: .51s; }
   .nav-links.open a:nth-child(5) { transition-delay: .63s; }
   .nav-links a::before { content: counter(lien, decimal-leading-zero); font-size: .78rem; font-weight: 700; letter-spacing: .1em; color: var(--green-2); }
-  .nav-links a::after { display: block; top: auto; bottom: 0; height: 3px; border-radius: 0; transform: none; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .8) 0 26px, transparent 26px 46px); }
+  /* sous chaque titre : le trait rouge → orangé (validé par Loïc), qui se trace de gauche à droite à l ouverture */
+  .nav-links a::after { display: block; top: auto; bottom: 0; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--rouge), var(--green) 55%, var(--green-2)); transform: scaleX(0); transform-origin: left center; transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+  .nav-links.open a::after { transform: scaleX(1); transition-delay: inherit; }
   .nav-links a:last-child { padding-bottom: 30px; }
-  .nav-links a:last-child::after { display: none; }
+  .nav-links a:last-child::after { display: block; bottom: 14px; }
   .nav-links a.actif, .nav-links a:hover { color: var(--green-2); }
 }
 @media (max-width: 768px) and (prefers-reduced-motion: reduce) { .nav-links, .nav-links a { transition: none; } .nav-links.open::after { animation: none; } }
