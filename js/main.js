@@ -727,7 +727,20 @@
         var signature = /signature/i.test(selOffre.value);
         if (boiteP) boiteP.hidden = !signature;
         if (caseFormP && !signature) caseFormP.checked = false;
+        nommerEnvoi();
       };
+      /* le bouton d'envoi dit ce que le client demande vraiment (retour de Loïc : « Découvrir ma signature » avec la Prestige) */
+      var boutonEnvoi = $('#envoyer'), caseDemo = $('#demo');
+      var nommerEnvoi = function () {
+        if (!boutonEnvoi || boutonEnvoi.disabled) return;
+        var v = selOffre.value;
+        boutonEnvoi.textContent = caseDemo && caseDemo.checked ? 'Recevoir ma démo offerte'
+          : /essentiel/i.test(v) ? 'Demander mon Essentiel'
+          : /prestige/i.test(v) ? 'Demander mon Prestige'
+          : /signature/i.test(v) ? 'Demander ma Signature'
+          : 'Envoyer ma demande';
+      };
+      if (caseDemo) caseDemo.addEventListener('change', nommerEnvoi);
       choixOffre.forEach(function (r) {
         r.addEventListener('change', function () { selOffre.value = r.value; suivreListe(); });
       });
