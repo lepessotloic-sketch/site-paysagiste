@@ -834,15 +834,22 @@
         <fieldset class="etape" data-etape>
           <legend>Votre projet</legend>
           <div class="champ champ--large">
-            <label for="offre">Quelle offre vous intéresse&nbsp;?</label>
-            <select id="offre" name="offre">
+            <p class="champ-titre" id="offreTitre">Quelle offre vous intéresse&nbsp;?</p>
+            <div class="offre-choix" role="radiogroup" aria-labelledby="offreTitre">
+              <label><input type="radio" name="offreChoix" value="Essentiel — 390€"><b>Essentiel</b><span>390&nbsp;€</span></label>
+              <label><input type="radio" name="offreChoix" value="Prestige — 690€"><b>Prestige</b><span>690&nbsp;€</span></label>
+              <label><input type="radio" name="offreChoix" value="Signature — 1 290€"><b>Signature</b><span>1&nbsp;290&nbsp;€</span></label>
+            </div>
+            <p class="champ-aide">Pas encore décidé&nbsp;? Ne cochez rien&nbsp;: on choisit ensemble.</p>
+            <!-- la valeur envoyée à n8n reste dans cette liste cachée (mêmes libellés qu avant : le workflow et les remerciements les reconnaissent) -->
+            <select id="offre" name="offre" hidden tabindex="-1" aria-hidden="true" aria-label="Offre choisie">
               <option>Je ne sais pas encore — conseillez-moi</option>
-              <option>Signature — 1 290€</option>
-              <option>Prestige — 690€</option>
               <option>Essentiel — 390€</option>
+              <option>Prestige — 690€</option>
+              <option>Signature — 1 290€</option>
             </select>
           </div>
-          <label class="case champ--large" for="casePrismatik">
+          <label class="case champ--large" for="casePrismatik" id="boitePrismatik" hidden>
             <input id="casePrismatik" name="prismatik" type="checkbox">
             <span>Ajouter l'option Prismatik (+&nbsp;290&nbsp;€)&nbsp;: mon logo qui prend vie</span>
           </label>

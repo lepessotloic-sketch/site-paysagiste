@@ -1452,3 +1452,24 @@ body{background:none}
   .cmp-niveaux button{padding:8px 6px;text-align:center;justify-items:center}
   .cmp-niveaux b{font-size:clamp(.82rem,6.4cqi,1.15rem);white-space:nowrap}
 }
+/* Retour de Loïc (15/10) : le choix d'offre en cartes au style du site, à la place de la liste blanche du système */
+.offre-choix{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.offre-choix label{position:relative;display:grid;gap:2px;justify-items:center;padding:14px 8px;border:1px solid var(--trait-doux);border-radius:6px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);text-align:center;cursor:pointer;transition:border-color .3s,background-color .3s,transform .3s}
+.offre-choix input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.offre-choix b{font-family:var(--serif);font-size:1.3rem;font-weight:500;line-height:1.1;color:var(--texte-courant)}
+.offre-choix span{font-size:.92rem;color:var(--texte-discret)}
+.offre-choix .offre-choix-large{grid-column:1/-1;grid-template-columns:auto auto;justify-content:center;align-items:baseline;gap:.6em;padding:12px}
+.offre-choix .offre-choix-large b{font-size:1.15rem}
+.offre-choix label:hover{border-color:rgba(201,162,75,.4)}
+.offre-choix label.choisi{border-color:rgba(201,162,75,.65);background:linear-gradient(180deg,rgba(18,48,36,.7),rgba(138,108,44,.1))}
+.offre-choix label.choisi b{font-style:italic;color:var(--or-clair)}
+.offre-choix label.choisi span{color:var(--texte-fort)}
+.offre-choix label:focus-within{outline:2px solid var(--or-clair);outline-offset:3px}
+@media (max-width:420px){.offre-choix{gap:8px}.offre-choix label{padding:12px 4px}.offre-choix b{font-size:1.12rem}.offre-choix span{font-size:.84rem}.offre-choix .offre-choix-large{grid-template-columns:1fr;gap:2px}}
+#offre[hidden]{display:none!important}
+/* les cartes d'offre ne prennent pas le style vert argent des intitulés du formulaire (il effaçait leur texte) */
+.champ .offre-choix label{-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;color:var(--texte-courant);text-transform:none;letter-spacing:0;font-size:1rem;font-weight:400;margin:0}
+.champ .offre-choix input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;background:none;opacity:0;cursor:pointer}
+.offre-choix label:focus-within{outline:none}
+.offre-choix label:has(input:focus-visible){outline:2px solid var(--or-clair);outline-offset:3px}
+#boitePrismatik[hidden]{display:none!important}

@@ -714,6 +714,27 @@
     }
   } catch (e) {}
 
+
+  /* Retour de Loïc (15/10) : la liste déroulante blanche du système est remplacée par 4 cartes au style du site.
+     La liste cachée #offre garde la valeur envoyée (mêmes libellés qu'avant pour n8n et les remerciements) */
+  try {
+    var selOffre = $('#offre'), choixOffre = $$('input[name="offreChoix"]');
+    if (selOffre && choixOffre.length) {
+      /* Prismatik est une option de la Signature seulement : la case n'apparaît qu'avec la Signature (retour de Loïc, 15/10) */
+      var boiteP = $('#boitePrismatik'), caseFormP = $('#casePrismatik');
+      var suivreListe = function () {
+        choixOffre.forEach(function (r) { r.checked = r.value === selOffre.value; r.parentNode.classList.toggle('choisi', r.checked); });
+        var signature = /signature/i.test(selOffre.value);
+        if (boiteP) boiteP.hidden = !signature;
+        if (caseFormP && !signature) caseFormP.checked = false;
+      };
+      choixOffre.forEach(function (r) {
+        r.addEventListener('change', function () { selOffre.value = r.value; suivreListe(); });
+      });
+      selOffre.addEventListener('change', suivreListe);
+      suivreListe();
+    }
+  } catch (e) {}
   /* ------------------------------------------------------------
      8 bis. La boutique : on choisit sa formule, la fiche et le total suivent
      ------------------------------------------------------------ */
@@ -774,8 +795,8 @@
       if (source) {
         if (window.__store) window.__store({ essentiel: 0, prestige: 100, signature: 200 }[choix]);
         var offreChamp = $('#offre'), caseP = $('#casePrismatik');
-        if (offreChamp) offreChamp.value = LIBELLES[choix];
-        if (caseP) caseP.checked = avec;
+        if (offreChamp) { offreChamp.value = LIBELLES[choix]; offreChamp.dispatchEvent(new Event('change')); }
+        if (caseP) caseP.checked = avec && choix === 'signature';
       }
       if (film) {
         try { if (avec) { var r = film.play(); if (r && r.catch) r.catch(function () {}); } else film.pause(); } catch (e) {}
