@@ -1473,3 +1473,32 @@ body{background:none}
 .offre-choix label:focus-within{outline:none}
 .offre-choix label:has(input:focus-visible){outline:2px solid var(--or-clair);outline-offset:3px}
 #boitePrismatik[hidden]{display:none!important}
+
+/* Avis clients (16/10) : la liste des avis publiés (validés par Loïc sur Telegram) et le formulaire « Laisser mon avis » */
+.avis-tete{max-width:760px;margin:0 auto var(--esp3);text-align:center}
+.avis-tete h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1}
+.avis-tete h2 em{color:var(--texte-accent)}
+.avis-explication{max-width:52ch;margin:var(--esp2) auto 0;font-size:var(--t-petit);color:var(--texte-discret)}
+.avis-liste{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px;max-width:1080px;margin-inline:auto}
+.avis-liste[hidden],.avis-cadre[hidden],.avis-form[hidden],.avis-merci[hidden],.avis-action[hidden]{display:none!important}
+.avis-carte{margin:0;padding:var(--carte-pad);border:1px solid var(--bord-fort);border-radius:var(--r-carte);background:var(--carte-fond);text-align:left}
+.avis-carte .avis-etoiles{justify-content:flex-start}
+.avis-carte .avis-etoiles svg{fill:var(--or);stroke:none}
+.avis-carte .avis-etoiles svg.vide{opacity:.28}
+.avis-carte blockquote{margin:var(--esp2) 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,1.8vw,1.35rem);line-height:1.45;color:var(--blanc)}
+.avis-carte figcaption{margin-top:var(--esp2);font-size:.95rem;color:var(--texte-fort)}
+.avis-carte figcaption b{font-weight:500;color:var(--or-clair)}
+.avis-action{margin-top:var(--esp3);text-align:center}
+.avis-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px;max-width:760px;margin:var(--esp3) auto 0;padding:var(--carte-pad);border:1px solid var(--bord-fort);border-radius:var(--r-carte);background:var(--carte-fond)}
+.avis-form .champ--large,.avis-form-titre{grid-column:1/-1}
+.avis-form-titre{font-family:var(--serif);font-style:italic;font-size:1.35rem;color:var(--blanc)}
+.avis-notes{display:flex;gap:6px;margin-top:8px}
+.champ .avis-note-choix{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;margin:0;cursor:pointer;background:none;-webkit-text-fill-color:currentColor}
+.champ .avis-notes input{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;padding:0;border:0;opacity:0;cursor:pointer}
+.avis-note-choix svg{width:30px;height:30px;fill:none;stroke:var(--or);stroke-width:1.3;stroke-linejoin:round;transition:fill .2s}
+.avis-note-choix.allumee svg{fill:var(--or)}
+.avis-note-choix:has(input:focus-visible){outline:2px solid var(--or-clair);outline-offset:2px;border-radius:4px}
+.avis-form-bas{text-align:center}
+.avis-merci{max-width:760px;margin:var(--esp3) auto 0;padding:var(--carte-pad);border:1px solid var(--bord-fort);border-radius:var(--r-carte);background:var(--carte-fond);text-align:center;font-family:var(--serif);font-size:1.3rem;color:var(--blanc)}
+@media (max-width:700px){.avis-form{grid-template-columns:1fr}.avis-form-bas .bouton{width:100%}}
+.avis-liste{grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),460px));justify-content:center}

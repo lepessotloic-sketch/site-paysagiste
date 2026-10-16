@@ -748,6 +748,68 @@
       suivreListe();
     }
   } catch (e) {}
+
+  /* Avis clients (16/10) : la liste des avis publiés (validés par Loïc sur Telegram) et le formulaire « Laisser mon avis ».
+     Le site ne montre que le prénom, l'entreprise, la note et le texte. */
+  try {
+    var AVIS_URL = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-avis';
+    var avisListe = $('#avisListe'), avisVide = $('#avisVide'), avisForm = $('#avisForm'), avisOuvrir = $('#avisOuvrir'), avisMerci = $('#avisMerci'), avisErreur = $('#avisErreur');
+    var ETOILE = '<path d="M12 2.8l2.7 6.2 6.7.6-5.1 4.4 1.6 6.6L12 17.2l-5.9 3.4 1.6-6.6L2.6 9.6l6.7-.6z"/>';
+    var echapper = function (s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+    if (avisListe && AVIS_URL) {
+      fetch(AVIS_URL + '-liste').then(function (r) { return r.json(); }).then(function (d) {
+        var avis = (d && d.avis) || [];
+        if (!avis.length) return;
+        avisListe.innerHTML = avis.map(function (a) {
+          var n = Math.max(1, Math.min(5, Math.round(Number(a.note) || 5))), etoiles = '';
+          for (var k = 1; k <= 5; k++) etoiles += '<svg viewBox="0 0 24 24"' + (k > n ? ' class="vide"' : '') + '>' + ETOILE + '</svg>';
+          return '<figure class="avis-carte"><p class="avis-etoiles" role="img" aria-label="' + n + ' sur 5">' + etoiles + '</p>'
+            + '<blockquote>« ' + echapper(a.texte) + ' »</blockquote>'
+            + '<figcaption><b>' + echapper(a.nom) + '</b>' + (a.entreprise ? ' · ' + echapper(a.entreprise) : '') + '</figcaption></figure>';
+        }).join('');
+        avisListe.hidden = false; if (avisVide) avisVide.hidden = true;
+      }).catch(function () {});
+    }
+    if (avisForm && avisOuvrir) {
+      var notes = $$('.avis-note-choix', avisForm);
+      var allumer = function () {
+        var v = 0; notes.forEach(function (l) { var i = l.querySelector('input'); if (i.checked) v = Number(i.value); });
+        notes.forEach(function (l) { l.classList.toggle('allumee', Number(l.querySelector('input').value) <= v); });
+      };
+      notes.forEach(function (l) { l.querySelector('input').addEventListener('change', allumer); });
+      allumer();
+      var ouvrirAvis = function () { avisForm.hidden = false; avisOuvrir.setAttribute('aria-expanded', 'true'); avisOuvrir.parentNode.hidden = true; };
+      avisOuvrir.addEventListener('click', function () { ouvrirAvis(); var c = $('#avisNom'); if (c) c.focus(); });
+      /* le lien de l'e-mail « Laisser mon avis » ouvre le formulaire, déjà rempli avec le prénom et l'entreprise */
+      var parametresAvis = new URLSearchParams(location.search);
+      if (parametresAvis.has('avis')) {
+        ouvrirAvis();
+        if (parametresAvis.get('nom')) $('#avisNom').value = parametresAvis.get('nom');
+        if (parametresAvis.get('entreprise')) $('#avisEntreprise').value = parametresAvis.get('entreprise');
+        setTimeout(function () { var s = $('#avis'); if (s) s.scrollIntoView({ block: 'start' }); }, 400);
+      }
+      avisForm.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var nom = $('#avisNom').value.trim(), texte = $('#avisTexte').value.trim(), accord = $('#avisAccord').checked;
+        var noteChoisie = 5; $$('input[name="avisNote"]', avisForm).forEach(function (i) { if (i.checked) noteChoisie = Number(i.value); });
+        var souci = nom.length < 2 ? 'Indiquez votre prénom.' : texte.length < 10 ? 'Écrivez quelques mots sur votre expérience.' : !accord ? 'Cochez la case pour accepter la publication de votre avis.' : '';
+        avisErreur.hidden = !souci; avisErreur.textContent = souci;
+        if (souci) return;
+        var bouton = $('#avisEnvoyer'), libelle = bouton.textContent;
+        bouton.disabled = true; bouton.textContent = 'Envoi en cours…';
+        var donnees = { nom: nom, entreprise: $('#avisEntreprise').value.trim(), note: noteChoisie, texte: texte, accord: true, societe: $('#avisSociete').value };
+        (AVIS_URL ? fetch(AVIS_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(donnees) }) : Promise.resolve({ ok: true }))
+          .then(function (r) {
+            if (!r.ok) throw new Error('http ' + r.status);
+            avisForm.hidden = true;
+            avisMerci.innerHTML = 'Merci ' + echapper(nom) + '&nbsp;! Votre avis apparaîtra ici dès que Loïc l’aura relu.';
+            avisMerci.hidden = false; avisMerci.focus();
+          })
+          .catch(function () { avisErreur.hidden = false; avisErreur.innerHTML = 'L’envoi n’a pas abouti. Réessayez dans un instant, ou écrivez à <a href="mailto:contact@impact-nva.fr">contact@impact-nva.fr</a>.'; })
+          .then(function () { bouton.disabled = false; bouton.textContent = libelle; });
+      });
+    }
+  } catch (e) {}
   /* ------------------------------------------------------------
      8 bis. La boutique : on choisit sa formule, la fiche et le total suivent
      ------------------------------------------------------------ */
