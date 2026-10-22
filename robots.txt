@@ -1,25 +1,33 @@
 User-agent: *
 Allow: /
+Disallow: /apercu/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /apercu/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /apercu/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /apercu/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /apercu/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /apercu/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /apercu/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /apercu/
 
 Sitemap: https://impact-nva.fr/sitemap.xml
