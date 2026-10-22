@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr" data-mode="{{MODE}}" data-logo="{{LOGO_URL}}" data-email="{{EMAIL}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+
+<title>{{ENTREPRISE}} — aperçu de votre site</title>
+<meta name="description" content="Aperçu non publié du site de {{ENTREPRISE}}, paysagiste à {{VILLE}}.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="{{BASE}}assets/css/style.css">
+
+<style>
+  :root{
+    --accent:{{COULEUR}};
+    --accent-vif:color-mix(in srgb,{{COULEUR}} 55%,#ffffff);
+    --accent-clair:color-mix(in srgb,{{COULEUR}} 22%,#0e1412);
+  }
+  html:not([data-logo=""]) .marque__image{background-image:url("{{LOGO_URL}}")}
+</style>
+</head>
+
+<body>
+
+<div class="bandeau-demo">
+  <strong>Aperçu non publié</strong> — démonstration pour {{ENTREPRISE}}. Rien n&rsquo;est en ligne, rien n&rsquo;est définitif.
+</div>
+
+<header class="entete">
+  <div class="conteneur entete__interieur">
+    <span class="marque">
+      <span class="marque__image" role="img" aria-label="{{ENTREPRISE}}"></span>
+      <span class="marque__texte">
+        <svg class="marque__feuille" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+        <span class="marque__bloc">
+          <span class="marque__nom">{{ENTREPRISE}}</span>
+          <span class="marque__sous">Paysagiste &middot; {{VILLE}}</span>
+        </span>
+      </span>
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ====================== ACCROCHE ====================== -->
+  <section class="apercu-haut">
+    <div class="conteneur apercu-intro">
+      <span class="surtitre">Votre site vitrine</span>
+      <h1>{{ENTREPRISE}}</h1>
+      <p class="apercu-phrase">
+        Un particulier ou un syndic qui cherche un paysagiste à {{VILLE}} compare vite&nbsp;:
+        qui a l&rsquo;air le plus sérieux, qui répond le plus simplement. Un site clair vous
+        donne cette première impression.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================== CE QUE VOUS AUREZ ====================== -->
+  <section class="section section--douce">
+    <div class="conteneur">
+      <div class="section__chapeau">
+        <h2>Ce que comprend votre site</h2>
+      </div>
+
+      <ul class="apercu-liste">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Un site vitrine professionnel
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          La galerie de vos réalisations
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Un formulaire de contact
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Votre fiche Google Maps reliée au site
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          En ligne sous 48&nbsp;h après réception de vos éléments
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====================== LES PHOTOS ====================== -->
+  <section class="section">
+    <div class="conteneur">
+      <div class="section__chapeau">
+        <h2>La mise en avant de vos chantiers</h2>
+        <p>Voici le genre de mise en avant possible pour vos réalisations.</p>
+      </div>
+
+      <div class="apercu-cadre">
+        <div class="apercu-galerie">
+          <figure><img src="{{PHOTO_2}}" alt="Exemple de mise en avant d un aménagement extérieur" loading="lazy"></figure>
+          <figure><img src="{{PHOTO_3}}" alt="Exemple de mise en avant d un entretien de jardin" loading="lazy"></figure>
+          <figure><img src="{{PHOTO_4}}" alt="Exemple de mise en avant d une pelouse entretenue" loading="lazy"></figure>
+        </div>
+
+        <p class="apercu-avertissement">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
+          </svg>
+          <span>
+            <b>Ces photos ne sont pas les vôtres.</b>
+            Elles montrent seulement la présentation. <strong>Vos futures réalisations
+            prendront leur place</strong> sur votre site.
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== LA SUITE ====================== -->
+  <section class="section section--douce">
+    <div class="conteneur">
+      <div class="section__chapeau">
+        <h2>Pour voir votre vrai site</h2>
+        <p>Envoyez-nous trois choses, et vous recevez votre site complet sous 48&nbsp;h.</p>
+      </div>
+
+      <ol class="apercu-etapes">
+        <li><span>1</span> Votre logo, s&rsquo;il existe — sinon votre nom suffit</li>
+        <li><span>2</span> Trois photos de vos chantiers</li>
+        <li><span>3</span> Les communes où vous intervenez</li>
+      </ol>
+
+      <!-- Le bouton contacte Impact-NVA, jamais le prospect : c est nous qu il
+           doit joindre pour recevoir son site. Adresse a changer ici si elle
+           evolue. -->
+      <div class="apercu-actions">
+        <a class="btn btn--plein" href="mailto:contact@impact-nva.fr?subject=Mes%20elements%20-%20{{ENTREPRISE}}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>
+          </svg>
+          Envoyer mes éléments
+        </a>
+      </div>
+      <p class="apercu-repondre">Ou répondez simplement au message par lequel vous avez reçu ce lien.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pied">
+  <div class="conteneur">
+    <div class="pied__bas" style="margin-top:0;border-top:none;padding-top:0">
+      <span>Aperçu préparé pour {{ENTREPRISE}} &middot; <span data-annee>{{ANNEE}}</span></span>
+      <span><a href="https://essentiel.impact-nva.fr" target="_blank" rel="noopener">Impact-NVA</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="{{BASE}}assets/js/main.js" defer></script>
+</body>
+</html>
