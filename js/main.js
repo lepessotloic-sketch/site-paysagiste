@@ -791,13 +791,13 @@
       avisForm.addEventListener('submit', function (ev) {
         ev.preventDefault();
         var nom = $('#avisNom').value.trim(), texte = $('#avisTexte').value.trim(), accord = $('#avisAccord').checked;
-        var noteChoisie = 5; $$('input[name="avisNote"]', avisForm).forEach(function (i) { if (i.checked) noteChoisie = Number(i.value); });
-        var souci = nom.length < 2 ? 'Indiquez votre prénom.' : texte.length < 10 ? 'Écrivez quelques mots sur votre expérience.' : !accord ? 'Cochez la case pour accepter la publication de votre avis.' : '';
+       var noteChoisie = 0; $$('input[name="avisNote"]', avisForm).forEach(function (i) { if (i.checked) noteChoisie = Number(i.value); });
+        var souci = nom.length < 2 ? 'Indiquez votre prénom.' : !noteChoisie ? 'Choisissez une note en cliquant sur les étoiles.' : texte.length < 10 ? 'Écrivez quelques mots sur votre expérience.' : !accord ? 'Cochez la case pour accepter la publication de votre avis.' : '';
         avisErreur.hidden = !souci; avisErreur.textContent = souci;
         if (souci) return;
         var bouton = $('#avisEnvoyer'), libelle = bouton.textContent;
         bouton.disabled = true; bouton.textContent = 'Envoi en cours…';
-        var donnees = { nom: nom, entreprise: $('#avisEntreprise').value.trim(), note: noteChoisie, texte: texte, accord: true, societe: $('#avisSociete').value };
+        var donnees = { nom: nom, entreprise: $('#avisEntreprise').value.trim(), note: noteChoisie, texte: texte, accord: true, societe: $('#avisSociete').value, jeton: parametresAvis.get('jeton') || '' };
         (AVIS_URL ? fetch(AVIS_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(donnees) }) : Promise.resolve({ ok: true }))
           .then(function (r) {
             if (!r.ok) throw new Error('http ' + r.status);
