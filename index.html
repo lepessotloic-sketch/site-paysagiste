@@ -32,12 +32,49 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Impact-NVA",
+  "@type": "WebSite",
+  "@id": "https://impact-nva.fr/#site",
   "url": "https://impact-nva.fr/",
-  "logo": "https://impact-nva.fr/impact-nva-logo-hd.png",
+  "name": "Impact-NVA",
+  "alternateName": ["Impact NVA", "ImpactNVA", "Impact\u2011NVA", "impact-nva.fr"],
+  "inLanguage": "fr-FR",
+  "publisher": { "@id": "https://impact-nva.fr/#organisation" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://impact-nva.fr/#organisation",
+  "name": "Impact-NVA",
+  "alternateName": ["Impact NVA", "ImpactNVA", "Impact\u2011NVA"],
+  "url": "https://impact-nva.fr/",
+  "mainEntityOfPage": "https://impact-nva.fr/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://impact-nva.fr/impact-nva-logo-hd.png",
+    "caption": "Logo Impact-NVA"
+  },
+  "image": "https://impact-nva.fr/og-signature.jpg",
   "description": "Impact-NVA révèle ce qui vous rend impossible à confondre, puis le transforme en une présence qui inspire confiance et vous appartient. Paiement unique, aucun abonnement.",
+  "slogan": "Votre différence mérite une signature",
   "email": "contact@impact-nva.fr",
+  "foundingDate": "2026-08-01",
+  "founder": {
+    "@type": "Person",
+    "name": "Loïc Le Pessot"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Jouarre",
+    "postalCode": "77640",
+    "addressRegion": "Île-de-France",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Seine-et-Marne"
+  },
   "sameAs": [
     "https://www.facebook.com/profile.php?id=1305970245922651"
   ]
@@ -47,19 +84,68 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://impact-nva.fr/#service",
   "name": "Impact-NVA",
+  "alternateName": ["Impact NVA", "ImpactNVA", "Impact\u2011NVA"],
+  "parentOrganization": { "@id": "https://impact-nva.fr/#organisation" },
   "url": "https://impact-nva.fr/",
   "image": "https://impact-nva.fr/impact-nva-logo-hd.png",
   "description": "Création de sites internet sur-mesure pour les indépendants et les créateurs : Essentiel 390 €, Prestige 690 €, Signature 1 290 €, payés une seule fois.",
   "email": "contact@impact-nva.fr",
   "priceRange": "390€-1580€",
+  "currenciesAccepted": "EUR",
   "areaServed": {
-    "@type": "Country",
-    "name": "France"
+    "@type": "AdministrativeArea",
+    "name": "Seine-et-Marne"
   },
   "address": {
     "@type": "PostalAddress",
+    "addressLocality": "Jouarre",
+    "postalCode": "77640",
+    "addressRegion": "Île-de-France",
     "addressCountry": "FR"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Les trois offres Impact-NVA",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Essentiel",
+        "price": "390",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Site vitrine Essentiel",
+          "provider": { "@id": "https://impact-nva.fr/#organisation" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Prestige",
+        "price": "690",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Site vitrine Prestige",
+          "provider": { "@id": "https://impact-nva.fr/#organisation" }
+        }
+      },
+      {
+        "@type": "Offer",
+        "name": "Signature",
+        "price": "1290",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Site sur-mesure Signature",
+          "provider": { "@id": "https://impact-nva.fr/#organisation" }
+        }
+      }
+    ]
   },
   "sameAs": [
     "https://www.facebook.com/profile.php?id=1305970245922651"
