@@ -904,4 +904,5 @@ rendreSoir(); rendreAppels(); rendreOutils();
 })();
 </script>
 
+<script>/* ouverture hors connexion : le service worker garde la derniere version de la page. Reseau d'abord, cache en secours : jamais de version perimee servie quand la connexion est la. */if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js',{scope:'./'}).catch(function(){/* sans lui l'app marche quand meme */});});}</script>
 </body></html>
