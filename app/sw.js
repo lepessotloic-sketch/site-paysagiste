@@ -3,7 +3,7 @@
    quand la connexion est la, et reste ouvrable sur un chantier sans reseau.
    Ne touche QUE les fichiers de /app/ : n8n, Google Fonts et tout le reste passent
    directement au reseau. */
-var CACHE='impact-nva-app-f14d8de761';
+var CACHE='impact-nva-app-701f0e605d';
 var ESSENTIELS=['./','./index.html','./manifest.webmanifest','./icone-192.png','./icone-512.png','./icone-maskable-512.png'];
 
 self.addEventListener('install',function(e){

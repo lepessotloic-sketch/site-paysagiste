@@ -858,7 +858,6 @@ $$('#offres button').forEach(function(b){b.onclick=function(){
     if(d.prenom.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)){retour.className='retour erreur';retour.textContent='Il manque le prénom ou une adresse e-mail valide.';return}
     var k=cleLue()||cleDemande();
     if(!k){retour.className='retour erreur';retour.textContent='Cl\u00e9 de l\u2019app non renseign\u00e9e sur cet appareil.';return}
-    d.cle=k;
     var b=f.querySelector('button[type=submit]'); b.disabled=true; retour.textContent='Envoi…';
     fetch('https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-demande-avis-app',{method:'POST',headers:{'Content-Type':'application/json','x-impact-cle':k},body:JSON.stringify(d)})
       .then(function(r){f.dataset.statut=r.status;return r.json().catch(function(){return null})})
