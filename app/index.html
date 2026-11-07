@@ -64,7 +64,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .marque span{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--doux);font-weight:400}
 .marque time{margin-left:auto;font-size:12.5px;color:var(--faible);font-variant-numeric:tabular-nums}
-.chif{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}@media(min-width:620px){.chif{grid-template-columns:repeat(4,1fr)}}.chif .bloc{border:1px solid var(--trait);border-radius:3px;padding:13px 12px;text-align:center}.chif .bloc b{display:block;font:600 26px/1 var(--titre);color:var(--or-clair)}.chif .bloc span{display:block;margin-top:5px;font:400 11px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.62}.barres{display:flex;align-items:flex-end;gap:3px;height:92px;margin-top:6px}.barres i{flex:1;background:var(--or);opacity:.78;border-radius:1px 1px 0 0;min-height:2px}.barres i.vide{background:var(--trait);opacity:1}.barres i.auj{background:var(--or-clair);opacity:1}.bornes{display:flex;justify-content:space-between;margin-top:6px;font:400 10px/1 var(--sans);letter-spacing:.08em;opacity:.5}.depuis{margin-top:14px;font:400 12px/1.5 var(--sans);opacity:.6}.onglets{display:flex;gap:4px;margin-top:13px;border-bottom:1px solid var(--trait)}
+.chif{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}@media(min-width:620px){.chif{grid-template-columns:repeat(4,1fr)}}.chif .bloc{border:1px solid var(--trait);border-radius:3px;padding:13px 12px;text-align:center}.chif .bloc b{display:block;font:600 26px/1 var(--romain);color:var(--or-clair)}.chif .bloc span{display:block;margin-top:5px;font:400 11px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.62}.barres{display:flex;align-items:flex-end;gap:3px;height:92px;margin-top:6px}.barres i{flex:1;background:var(--or);opacity:.78;border-radius:1px 1px 0 0;min-height:2px}.barres i.vide{background:var(--trait);opacity:1}.barres i.auj{background:var(--or-clair);opacity:1}.bornes{display:flex;justify-content:space-between;margin-top:6px;font:400 10px/1 var(--sans);letter-spacing:.08em;opacity:.5}.depuis{margin-top:14px;font:400 12px/1.5 var(--sans);opacity:.6}.issues{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:2px 0 13px}@media(min-width:540px){.issues{grid-template-columns:repeat(5,1fr)}}.issues button{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 5px 9px;border:1px solid var(--trait);border-radius:3px;background:none;color:var(--doux);cursor:pointer;font:500 10px/1.2 var(--sans);letter-spacing:.09em;text-transform:uppercase;transition:.15s}.issues button b{font:600 20px/1 var(--romain);color:var(--or-clair)}.issues button:hover{border-color:var(--trait-fort);color:var(--blanc)}.issues button:active{border-color:var(--or)}.issues button[disabled]{cursor:default;opacity:.92}.issues button.gros{border-color:var(--trait-fort)}.issues button.gros b{color:var(--or)}.issues button.fait{border-color:var(--menthe)}.issues button.fait b{color:var(--menthe)}.bilan{margin:0 0 4px;font:400 12px/1.5 var(--sans);color:var(--faible)}.entonnoir{margin-top:22px}.ratio{margin-top:14px;border:1px solid var(--trait-fort);border-radius:3px;padding:15px 14px;text-align:center}.ratio b{display:block;font:600 30px/1 var(--romain);color:var(--or)}.ratio span{display:block;margin-top:6px;font:400 11px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.66}.ratio p{margin:0;font:400 13px/1.55 var(--sans);color:var(--doux);text-align:left}.onglets{display:flex;gap:4px;margin-top:13px;border-bottom:1px solid var(--trait)}
 .onglets button{flex:1;padding:12px 6px 11px;font:500 12px/1 var(--sans);letter-spacing:.16em;
   text-transform:uppercase;color:var(--faible);
   border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
@@ -218,6 +218,7 @@ details.objections .dedans{padding-bottom:14px;border-top:1px solid var(--trait)
 /* ---- Outils ---- */
 /* Demander un avis (16/10) : le client reçoit un e-mail avec le lien vers impact-nva.fr/#avis */
 .avis-app{padding:18px 16px 16px;margin-bottom:6px}
+p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04em;color:var(--or-clair)}
 .avis-app p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04em;color:var(--or-clair)}
 .avis-app p.aide{margin:0 0 14px;font-size:13.5px;color:var(--doux)}
 .avis-app label{display:block;margin:0 0 10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--or)}
@@ -443,6 +444,13 @@ var DEVIS={
   signature:'https://buy.stripe.com/14AdR88Z13h7eJZb8jbo404'
 };
 
+/* ---------- les cinq resultats d’appel ----------
+   Un seul plus ne disait que le nombre d’appels. Il ne repondait pas
+   a la question de Loic : combien d’appels pour une vente.
+   Chaque appel a un resultat, et le repondeur en est un. 07/11/2026. */
+var ISSUES=[{k:'repondeur',n:'Répondeur'},{k:'refus',n:'Refus'},{k:'rappeler',n:'À rappeler'},{k:'rdv',n:'Rendez-vous'},{k:'vente',n:'Vente',gros:true}];
+function compteSuite(s){var o={};(s||[]).forEach(function(k){o[k]=(o[k]||0)+1});return o}
+
 /* ---------- chantiers ---------- */
 var CHANTIERS=[
  {id:'appels',ico:'tel',nom:'Appels prospects',sous:'La tournée du 77',
@@ -583,7 +591,7 @@ function jourCle(){
   var d=new Date();
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
-function neuf(){return{jour:jourCle(),chantier:null,faits:{},appels:0}}
+function neuf(){return{jour:jourCle(),chantier:null,faits:{},appels:0,suite:[]}}
 var etat=neuf(), serie={n:0,dernier:null}, monMaj=0;
 try{
   var brut=localStorage.getItem(CLE);
@@ -592,7 +600,7 @@ try{
     if(o && o.serie)serie=o.serie;
     if(o && o.maj)monMaj=o.maj;}
 }catch(e){}
-function sauveLocal(){try{localStorage.setItem(CLE,JSON.stringify({etat:etat,serie:serie,maj:monMaj}))}catch(e){} histoNote();}
+function sauveLocal(){try{if(!etat.suite)etat.suite=[];localStorage.setItem(CLE,JSON.stringify({etat:etat,serie:serie,maj:monMaj}))}catch(e){} histoNote();}
 
 /* ---------- historique : une ligne par journee, sur cet appareil ----------
    L'app n'gardait que le jour en cours et ecrasait la veille. Sans memoire,
@@ -604,7 +612,7 @@ function faitsComptes(f){var n=0;for(var k in (f||{}))if(f[k])n++;return n}
 function histoNote(){
   try{
     var h=histoLue();
-    h[etat.jour]={appels:etat.appels||0,faits:faitsComptes(etat.faits)};
+    h[etat.jour]={appels:etat.appels||0,faits:faitsComptes(etat.faits),issues:compteSuite(etat.suite)};
     var cles=Object.keys(h).sort();
     while(cles.length>400){delete h[cles.shift()]}
     localStorage.setItem(CLE_HISTO,JSON.stringify(h));
@@ -618,7 +626,7 @@ function pousse(){
   enCours=true;aEcrire=false;
   monMaj=Date.now();
   sauveLocal();
-  var corps={jour:etat.jour,chantier:etat.chantier,faits:etat.faits,appels:etat.appels,maj:monMaj};
+  var corps={jour:etat.jour,chantier:etat.chantier,faits:etat.faits,appels:etat.appels,suite:etat.suite||[],maj:monMaj};
   function fini(){enCours=false;if(aEcrire)pousse()}
   try{
     Promise.resolve(db.doc('journal/'+etat.jour).set(corps))
@@ -635,6 +643,24 @@ function majSerie(){
   var h=hier.getFullYear()+'-'+String(hier.getMonth()+1).padStart(2,'0')+'-'+String(hier.getDate()).padStart(2,'0');
   serie.n=(serie.dernier===h)?serie.n+1:1;
   serie.dernier=j;
+}
+
+
+/* Les cinq boutons, sous l’etape des appels passes. */
+function blocIssues(){
+  var c=compteSuite(etat.suite);
+  var h='<div class="issues">';
+  ISSUES.forEach(function(x){
+    var v=c[x.k]||0;
+    var cl=(x.gros?'gros':'')+((v>0&&x.k==='vente')?' fait':'');
+    h+='<button type="button" class="'+cl+'" data-issue="'+x.k+'">'
+      +'<b>'+v+'</b>'+esc(x.n)+'</button>';
+  });
+  h+='</div>';
+  var n=(etat.suite||[]).length, t=etat.appels||0;
+  if(t>n){var e=t-n; h+='<p class="bilan">'+e+' appel'+(e>1?'s':'')
+    +' compté'+(e>1?'s':'')+' avant les résultats, sans détail.</p>';}
+  return h;
 }
 
 /* ---------- rendu ---------- */
@@ -655,10 +681,11 @@ function rendreSoir(){
     var etapes=C.etapes.map(function(e,i){
       var fait=!!etat.faits[C.id+'-'+i];
       var compteur=e.compteur
-        ? '<span class="compteur"><button type="button" data-pas="-1" aria-label="Un appel de moins">−</button><b id="nbAppels">'+(etat.appels||0)+'</b><button type="button" data-pas="1" aria-label="Un appel de plus">+</button></span>'
+        ? '<span class="compteur"><button type="button" data-pas="-1" aria-label="Annuler le dernier appel">−</button><b id="nbAppels">'+(etat.appels||0)+'</b></span>'
         : '';
-      return '<div class="etape" role="checkbox" tabindex="0" aria-checked="'+fait+'" data-et="'+i+'">'+
+      var ligne='<div class="etape" role="checkbox" tabindex="0" aria-checked="'+fait+'" data-et="'+i+'">'+
         '<span class="case">'+svg('coche',13)+'</span><span class="lib">'+esc(e.t)+'</span>'+compteur+'</div>';
+      return e.compteur ? ligne+blocIssues() : ligne;
     }).join('');
     var outils=C.outils.map(function(o,i){
       if(o.w)return '<a class="oc vert" href="'+lienWhatsApp(o.w)+'" target="_blank" rel="noopener">'+svg('whatsapp',14)+esc(o.n)+'</a>';
@@ -701,12 +728,17 @@ function brancherSoir(){
   });
   $$('[data-pas]').forEach(function(b){b.onclick=function(ev){
     ev.stopPropagation();
+    if(!etat.suite)etat.suite=[];
+    if(+b.dataset.pas<0 && etat.suite.length)etat.suite.pop();
     etat.appels=Math.max(0,(etat.appels||0)+(+b.dataset.pas));
-    majSerie(); sauveLocal(); pousse();
-    var n=document.getElementById('nbAppels'); if(n)n.textContent=etat.appels;
-    var carte=$$('[data-ch]').filter(function(x){return x.dataset.ch===C.id})[0];
-    if(carte){var f=C.etapes.filter(function(_,i){return etat.faits[C.id+'-'+i]}).length;
-      carte.querySelector('.etat').textContent=f+'/'+C.etapes.length}
+    majSerie(); sauveLocal(); pousse(); rendreSoir();
+  }});
+  $$('[data-issue]').forEach(function(b){b.onclick=function(ev){
+    ev.stopPropagation();
+    if(!etat.suite)etat.suite=[];
+    etat.suite.push(b.dataset.issue);
+    etat.appels=(etat.appels||0)+1;
+    majSerie(); sauveLocal(); pousse(); rendreSoir();
   }});
   $$('[data-copie-ch]').forEach(function(b){b.onclick=function(){
     copier(C.outils[+b.dataset.copieCh].c,b);
@@ -784,6 +816,7 @@ function copier(txt,btn){
 
 
 /* ---------- les chiffres ---------- */
+var APOS=String.fromCharCode(8217);
 function cleDe(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function dateDe(j){var p=j.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
 function derniersJours(n){var out=[],d=new Date();
@@ -801,14 +834,14 @@ function meilleureSerie(h){
 function rendreChiffres(){
   var zone=document.getElementById('chif'); if(!zone)return;
   var h=histoLue();
-  h[jourCle()]={appels:etat.appels||0,faits:faitsComptes(etat.faits)};
+  h[jourCle()]={appels:etat.appels||0,faits:faitsComptes(etat.faits),issues:compteSuite(etat.suite)};
   function somme(n){var t=0;derniersJours(n).forEach(function(j){t+=(h[j]&&h[j].appels)||0});return t}
   var j30=derniersJours(30);
   var actifs=j30.filter(function(j){return (h[j]&&h[j].appels)>0}).length;
   var s7=somme(7), s30=somme(30), auj=etat.appels||0;
   var record=Math.max(meilleureSerie(h),serie.n||0);
   var pic=1; j30.forEach(function(j){var v=(h[j]&&h[j].appels)||0; if(v>pic)pic=v});
-  var blocs=[[auj,'Aujourd'+String.fromCharCode(8217)+'hui'],[s7,'7 derniers jours'],[s30,'30 derniers jours'],[serie.n||0,'Serie en cours']];
+  var blocs=[[auj,'Aujourd'+String.fromCharCode(8217)+'hui'],[s7,'7 derniers jours'],[s30,'30 derniers jours'],[serie.n||0,'Série en cours']];
   var html='<div class="chif">';
   blocs.forEach(function(b){html+='<div class="bloc"><b>'+b[0]+'</b><span>'+b[1]+'</span></div>'});
   html+='</div>';
@@ -826,9 +859,44 @@ function rendreChiffres(){
   var depuis=cles.length?cles[0]:jourCle();
   html+='<div class="chif" style="margin-top:18px">'
     +'<div class="bloc"><b>'+actifs+'</b><span>jours actifs sur 30</span></div>'
-    +'<div class="bloc"><b>'+record+'</b><span>meilleure serie</span></div>'
+    +'<div class="bloc"><b>'+record+'</b><span>meilleure série</span></div>'
     +'</div>';
-  html+='<p class="depuis">L'+String.fromCharCode(8217)+'historique de cet appareil commence le '+depuis+'. Il ne remonte pas avant : l'+String.fromCharCode(8217)+'app ne gardait rien jusqu'+String.fromCharCode(8217)+'au 07/11/2026.</p>';
+  /* l’entonnoir : les resultats, et le seul rapport qui compte */
+  function parResultat(jours){
+    var o={}, tot=0;
+    jours.forEach(function(j){
+      var is=(h[j]&&h[j].issues)||{};
+      ISSUES.forEach(function(x){var v=is[x.k]||0; o[x.k]=(o[x.k]||0)+v; tot+=v});
+    });
+    o.total=tot; return o;
+  }
+  var r30=parResultat(j30);
+  var tousJours=Object.keys(h).sort();
+  var rTout=parResultat(tousJours);
+  var appelsTout=0; tousJours.forEach(function(j){appelsTout+=(h[j].appels||0)});
+  html+='<div class="entonnoir">';
+  html+='<p class="titre-carte">Par résultat, sur 30 jours</p>';
+  html+='<div class="issues">';
+  ISSUES.forEach(function(x){
+    var v=r30[x.k]||0;
+    html+='<button type="button" class="'+(x.gros?'gros':'')+'" disabled><b>'+v+'</b>'+esc(x.n)+'</button>';
+  });
+  html+='</div>';
+  var ventes=rTout.vente||0;
+  if(ventes>0){
+    html+='<div class="ratio"><b>'+Math.round(appelsTout/ventes)+'</b>'
+      +'<span>appels pour une vente</span></div>';
+  }else if(rTout.total>0){
+    html+='<div class="ratio"><p>Pas encore de vente notée.'
+      +' Le rapport appels / vente apparaîtra au premier Vente coché, sur les '
+      +rTout.total+' résultat'+(rTout.total>1?'s':'')+' déjà notés.</p></div>';
+  }else{
+    html+='<div class="ratio"><p>Aucun résultat noté pour l'+APOS+'instant.'
+      +' Les cinq boutons sont dans CE SOIR, sous l'+APOS+'étape des appels passés.'
+      +'</p></div>';
+  }
+  html+='</div>';
+  html+='<p class="depuis">L'+String.fromCharCode(8217)+'historique de cet appareil commence le '+depuis+'. Il ne remonte pas avant : l'+String.fromCharCode(8217)+'app ne gardait rien jusqu'+APOS+'au 07/11/2026. Les résultats d'+APOS+'appel, eux, ne sont notés que depuis ce soir.</p>';
   zone.innerHTML=html;
 }
 
@@ -959,7 +1027,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
     var sj=await db.doc('journal/'+jourCle()).get();
     if(sj&&sj.exists){var d=sj.data()||{};
       if((d.maj||0)>monMaj){monMaj=d.maj||0;
-        etat={jour:jourCle(),chantier:d.chantier||null,faits:d.faits||{},appels:d.appels||0};}
+        etat={jour:jourCle(),chantier:d.chantier||null,faits:d.faits||{},appels:d.appels||0,suite:d.suite||[]};}
       else pousse();}
     var ss=await db.doc('etat/serie').get();
     if(ss&&ss.exists){var e=ss.data()||{}; if(typeof e.n==='number')serie={n:e.n,dernier:e.dernier||null};}
@@ -971,7 +1039,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
     // Sans horodatage, ou pas plus recent que nous : c'est notre propre echo. On ne touche a rien.
     if(!d.maj||d.maj<=monMaj)return;
     monMaj=d.maj;
-    etat={jour:jourCle(),chantier:d.chantier||null,faits:d.faits||{},appels:d.appels||0};
+    etat={jour:jourCle(),chantier:d.chantier||null,faits:d.faits||{},appels:d.appels||0,suite:d.suite||[]};
     sauveLocal(); rendreSoir();
   },function(){});
 })();
