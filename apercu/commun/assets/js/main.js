@@ -57,11 +57,46 @@
   /* --- Bouton d appel flottant (mobile) ---
      Il apparait une fois le heros depasse, pour ne pas doubler le bouton
      d appel deja present dans le premier ecran. */
+  /* Sur ordinateur, quand le numéro de la section contact est à l'écran,
+     le bouton de l'en-tête s'efface : jamais deux numéros visibles. */
+  var numeroContact = document.querySelector('#contact a[href^="tel:"]');
+  if (numeroContact && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entrees) {
+      document.documentElement.classList.toggle('numero-contact-visible', entrees[0].isIntersecting);
+    }).observe(numeroContact);
+  }
+
+  /* La présentation du client, raccourcie à 3 lignes au téléphone :
+     « Lire la suite » déplie le reste (Loïc, 09/11/2026 : « trop chargé »).
+     Le bouton n'apparaît que si le texte est vraiment coupé. */
+  var pres = document.querySelector('.presentation-texte');
+  var suite = document.querySelector('.lire-suite');
+  if (pres && suite) {
+    var verifier = function () {
+      if (!pres.classList.contains('ouvert')) suite.hidden = pres.scrollHeight <= pres.clientHeight + 2;
+    };
+    verifier();
+    window.addEventListener('resize', verifier);
+    suite.addEventListener('click', function () {
+      var ouvert = pres.classList.toggle('ouvert');
+      suite.textContent = ouvert ? 'Réduire' : 'Lire la suite';
+    });
+  }
+
   var appel = document.querySelector('.appel-flottant');
 
   if (appel) {
     var basculer = function () {
-      appel.classList.toggle('est-visible', window.scrollY > 420);
+      /* Jamais deux numéros à l'écran (Loïc, 09/11/2026) : le bouton
+         flottant se cache tant que le numéro du haut de page ou celui de la
+         section contact est visible. */
+      var vus = document.querySelectorAll('.heros .tel-mobile, #contact a[href^="tel:"]');
+      var unVisible = false;
+      for (var k = 0; k < vus.length; k++) {
+        var r = vus[k].getBoundingClientRect();
+        if (r.width && r.bottom > 0 && r.top < window.innerHeight) unVisible = true;
+      }
+      appel.classList.toggle('est-visible', window.scrollY > 420 && !unVisible);
     };
     basculer();
     window.addEventListener('scroll', basculer, { passive: true });
