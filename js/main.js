@@ -978,8 +978,21 @@
         demo: !!(champ('demo') && champ('demo').checked),
         entreprise: entreprise,
         /* Jeton anti-robot Turnstile. Vide si le widget n a pas charge :
-           on envoie quand meme, c est n8n qui decide. Un vrai prospect n est jamais perdu. */
-        verif: (function () { var j = f.querySelector("[name=cf-turnstile-response]"); return j ? j.value : ''; })()
+           on envoie quand meme, c est n8n qui decide. Un vrai prospect n est jamais perdu.
+           On demande le jeton a Turnstile lui-meme, et on ne retombe sur le champ cache
+           que s il n est pas joignable : un jeton ne vaut que 300 s, et le formulaire a
+           trois etapes. Turnstile en refabrique un tout seul quand le premier expire,
+           mais c est getResponse qui donne a coup sur le dernier en date. */
+        verif: (function () {
+          try {
+            if (window.turnstile && typeof window.turnstile.getResponse === 'function') {
+              var t = window.turnstile.getResponse();
+              if (t) { return t; }
+            }
+          } catch (e) { /* widget absent ou en erreur : on passe au secours */ }
+          var j = f.querySelector("[name=cf-turnstile-response]");
+          return j ? j.value : '';
+        })()
       };
       var libelle = bouton.textContent;
       bouton.disabled = true; bouton.textContent = 'Envoi en cours…';

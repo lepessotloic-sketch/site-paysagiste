@@ -1007,7 +1007,10 @@
           <!-- CLE DE SITE Turnstile : PUBLIQUE par nature, elle doit etre lisible ici. -->
           <!-- Widget "impact-nva.fr", cree le 11/11/2026, domaines impact-nva.fr et www. -->
           <!-- La cle SECRETE, elle, ne vit que dans le credential n8n "Impact-NVA - Turnstile secret". -->
-          <div class="cf-turnstile champ--large" id="verif" data-sitekey="0x4AAAAAAF8Fa2WBlUY8qKIa" data-theme="dark"></div>
+          <!-- refresh-expired / refresh-timeout : Turnstile refabrique le jeton tout seul.
+               C'est deja son comportement par defaut ; ecrit ici pour que ce soit un choix
+               et non un hasard. Un jeton ne vaut que 300 s, le formulaire a trois etapes. -->
+          <div class="cf-turnstile champ--large" id="verif" data-sitekey="0x4AAAAAAF8Fa2WBlUY8qKIa" data-theme="dark" data-refresh-expired="auto" data-refresh-timeout="auto"></div>
           <button class="bouton bouton--grand" type="submit" id="envoyer">Recevoir ma démo offerte</button>
           <p class="formulaire-note">Vos informations restent confidentielles. Réponse sous 24&nbsp;h, sans engagement.</p>
         </div>
@@ -1064,6 +1067,6 @@
 <script src="js/monde.js?v=334f7d76" defer></script>
 <!-- Turnstile : verification anti-robot. Le script doit venir de cette URL exacte (doc Cloudflare). -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script src="js/main.js?v=ff28e77d" defer></script>
+<script src="js/main.js?v=9e36de84" defer></script>
 </body>
 </html>
