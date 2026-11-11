@@ -953,6 +953,48 @@
     var afficherMerci = function (html) {
       merci.innerHTML = html; f.hidden = true; merci.hidden = false; merci.focus();
     };
+
+    /* Le jeton anti-robot, au moment de l envoi et pas avant.
+       Un jeton Turnstile ne vaut que 300 secondes. La case est dans le pied
+       commun du formulaire : elle se resout des l etape 1. Quelqu un qui prend
+       son temps sur les trois etapes arrive donc avec un jeton perime, et il
+       etait classe robot. C est arrive a Loic le 11/11/2026 sur son propre
+       formulaire : aucun accuse, juste une alerte Telegram.
+       Ici : on lit le jeton ; s il est absent ou vide, on en redemande un et on
+       attend au maximum six secondes. Passe ce delai on envoie SANS jeton, et
+       c est n8n qui tranche. La page ne bloque jamais personne. */
+    var lireJeton = function () {
+      try {
+        if (window.turnstile && typeof window.turnstile.getResponse === 'function') {
+          var t = window.turnstile.getResponse('#verif');
+          if (t) { return t; }
+        }
+      } catch (e) { /* widget absent, pas encore rendu, ou en erreur */ }
+      var champCache = f.querySelector("[name=cf-turnstile-response]");
+      return champCache ? champCache.value : '';
+    };
+
+    var jetonFrais = function (suite) {
+      var rendu = false;
+      var rendre = function (j) { if (!rendu) { rendu = true; suite(j || ''); } };
+
+      var dejaLa = lireJeton();
+      if (dejaLa) { rendre(dejaLa); return; }
+
+      /* Pas de jeton : il a expire, ou le widget n a jamais abouti. On relance
+         la verification. Si Turnstile n est pas la, on part sans jeton. */
+      try {
+        if (!window.turnstile || typeof window.turnstile.reset !== 'function') { rendre(''); return; }
+        window.turnstile.reset('#verif');
+      } catch (e) { rendre(''); return; }
+
+      var debut = Date.now();
+      var guet = setInterval(function () {
+        var t = lireJeton();
+        if (t) { clearInterval(guet); rendre(t); }
+        else if (Date.now() - debut > 6000) { clearInterval(guet); rendre(''); }
+      }, 250);
+    };
     var propre = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
 
     f.addEventListener('submit', function (ev) {
@@ -977,25 +1019,13 @@
         logo: window.__logoDemo || '',
         demo: !!(champ('demo') && champ('demo').checked),
         entreprise: entreprise,
-        /* Jeton anti-robot Turnstile. Vide si le widget n a pas charge :
-           on envoie quand meme, c est n8n qui decide. Un vrai prospect n est jamais perdu.
-           On demande le jeton a Turnstile lui-meme, et on ne retombe sur le champ cache
-           que s il n est pas joignable : un jeton ne vaut que 300 s, et le formulaire a
-           trois etapes. Turnstile en refabrique un tout seul quand le premier expire,
-           mais c est getResponse qui donne a coup sur le dernier en date. */
-        verif: (function () {
-          try {
-            if (window.turnstile && typeof window.turnstile.getResponse === 'function') {
-              var t = window.turnstile.getResponse();
-              if (t) { return t; }
-            }
-          } catch (e) { /* widget absent ou en erreur : on passe au secours */ }
-          var j = f.querySelector("[name=cf-turnstile-response]");
-          return j ? j.value : '';
-        })()
+        /* Rempli juste avant l envoi par jetonFrais, jamais a l etape 1. */
+        verif: ''
       };
       var libelle = bouton.textContent;
       bouton.disabled = true; bouton.textContent = 'Envoi en cours…';
+      jetonFrais(function (jeton) {
+      data.verif = jeton;
       fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) {
           if (!r.ok) throw new Error('http ' + r.status);
@@ -1010,6 +1040,7 @@
         })
         .catch(function () { echec.hidden = false; })
         .then(function () { bouton.disabled = false; bouton.textContent = libelle; });
+      });
     });
   } catch (e) {}
 
