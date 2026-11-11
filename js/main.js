@@ -976,7 +976,10 @@
         origine: ORIGINE,
         logo: window.__logoDemo || '',
         demo: !!(champ('demo') && champ('demo').checked),
-        entreprise: entreprise
+        entreprise: entreprise,
+        /* Jeton anti-robot Turnstile. Vide si le widget n a pas charge :
+           on envoie quand meme, c est n8n qui decide. Un vrai prospect n est jamais perdu. */
+        verif: (function () { var j = f.querySelector("[name=cf-turnstile-response]"); return j ? j.value : ''; })()
       };
       var libelle = bouton.textContent;
       bouton.disabled = true; bouton.textContent = 'Envoi en cours…';

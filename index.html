@@ -1004,6 +1004,10 @@
         <div class="champ--large formulaire-bas">
           <button class="bouton bouton--contour bouton--retour" type="button" id="etapeRetour" hidden>Retour</button>
           <button class="bouton bouton--grand" type="button" id="etapeSuite" hidden>Continuer</button>
+          <!-- CLE DE SITE Turnstile : PUBLIQUE par nature, elle doit etre lisible ici. -->
+          <!-- Widget "impact-nva.fr", cree le 11/11/2026, domaines impact-nva.fr et www. -->
+          <!-- La cle SECRETE, elle, ne vit que dans le credential n8n "Impact-NVA - Turnstile secret". -->
+          <div class="cf-turnstile champ--large" id="verif" data-sitekey="0x4AAAAAAF8Fa2WBlUY8qKIa" data-theme="dark"></div>
           <button class="bouton bouton--grand" type="submit" id="envoyer">Recevoir ma démo offerte</button>
           <p class="formulaire-note">Vos informations restent confidentielles. Réponse sous 24&nbsp;h, sans engagement.</p>
         </div>
@@ -1058,6 +1062,8 @@
 <script src="js/logo-im.js?v=76694f2b" defer></script>
 <script src="js/moteur-eclats.js?v=2067e40b" defer></script>
 <script src="js/monde.js?v=334f7d76" defer></script>
-<script src="js/main.js?v=471b5946" defer></script>
+<!-- Turnstile : verification anti-robot. Le script doit venir de cette URL exacte (doc Cloudflare). -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="js/main.js?v=ff28e77d" defer></script>
 </body>
 </html>
