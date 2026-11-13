@@ -319,6 +319,10 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   min-height:42px;max-width:100%}
 .fa .dom span{color:var(--faible);font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fa .dom:hover{border-color:var(--or);color:var(--or-clair)}
+.fa .versScript{display:block;width:100%;min-height:44px;margin-top:10px;
+  border-radius:10px;border:1px solid var(--trait-fort);background:rgba(87,177,131,.10);
+  color:var(--menthe);font:600 13px var(--sans);letter-spacing:.04em;cursor:pointer}
+.fa .versScript:hover{border-color:var(--menthe)}
 .listeMot{font-size:13px;color:var(--doux);padding:11px 2px;line-height:1.5}
 .listeMot.erreur{color:#e8a39a}
 </style>
@@ -1173,8 +1177,27 @@ rendreSoir(); rendreAppels(); rendreOutils();
        ouverte par un lien peut sinon reprendre la main sur celle qui l'ouvre. */
     var d = domaine(p.site);
     if (d) h += '<a class="dom" href="' + esc(p.site) + '" target="_blank" rel="noopener noreferrer">↗ Voir son site <span>' + esc(d) + '</span></a>';
+    /* 14/11/2026 — la fiche choisit le script a la place de Loic. Sans site
+       -> Essentiel, avec site -> Prestige : la meme regle que le pilote 14,
+       pour que la liste et le script ne puissent pas se contredire. Le bouton
+       bascule l'onglet d'offre, ce qui redessine le script ET les deux liens
+       a envoyer (impact-nva.fr en 1, la demo de l'offre en 2). */
+    h += '<button class="versScript" type="button" data-offre="' + (p.sansSite ? 'essentiel' : 'prestige') + '">'
+       + 'Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</button>';
     return h + '</div>';
   }
+
+  /* Un seul ecouteur sur la zone, pas un par fiche : la liste est redessinee
+     a chaque chargement, et des ecouteurs poses fiche par fiche seraient
+     perdus ou dupliques. */
+  zone.addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('.versScript') : null;
+    if (!b) return;
+    var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
+    if (onglet) onglet.click();
+    var s = $('#script');
+    if (s && s.scrollIntoView) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   function rendre(liste){
     if (!liste.length){ mot('Aucune fiche à appeler pour le moment.'); compte.textContent = '0 fiche'; return; }
