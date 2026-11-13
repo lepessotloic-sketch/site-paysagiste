@@ -287,6 +287,31 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   letter-spacing:.18em;text-transform:uppercase;color:var(--faible);
   background:none;border:0;padding:14px 20px;cursor:pointer}
 .entrer:hover{color:var(--or-clair)}
+
+/* La tournée du 77, dans l'app : qui appeler, avant quoi dire. 14/11/2026.
+   La liste vient du pilote 20 par la même clé que la demande d'avis. */
+#blocListe{margin:0 0 20px}
+.listeTete{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 2px 9px}
+.listeTete b{font:600 12.5px var(--sans);letter-spacing:.14em;color:var(--or-clair)}
+.listeTete small{font-size:12px;color:var(--faible);letter-spacing:.02em}
+.btnListe{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--trait-fort);
+  background:rgba(201,162,75,.12);color:var(--or-clair);font:600 13.5px var(--sans);
+  letter-spacing:.06em;cursor:pointer}
+.btnListe:disabled{opacity:.55;cursor:default}
+.groupeAppel{display:flex;gap:8px;align-items:baseline;margin:16px 2px 9px;
+  font:600 12.5px var(--sans);letter-spacing:.06em;color:var(--or-clair)}
+.groupeAppel small{font-weight:400;color:var(--faible);letter-spacing:.02em}
+.fa{position:relative;border:1px solid var(--trait);border-radius:13px;padding:13px;margin-bottom:10px;
+  background:linear-gradient(180deg,rgba(18,48,36,.40),rgba(10,25,19,.50))}
+.fa .haute{position:absolute;top:-1px;right:13px;background:var(--or);color:var(--vert-950);
+  font:600 9.5px var(--sans);letter-spacing:.12em;padding:3px 8px;border-radius:0 0 6px 6px}
+.fa h4{margin:0 0 3px;font:600 15.5px/1.3 var(--romain);color:var(--blanc);padding-right:72px}
+.fa .ou{font-size:12.5px;color:var(--faible);margin-bottom:8px}
+.fa .tel{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--menthe);
+  font:600 20px/1 var(--sans);letter-spacing:.04em;padding:11px 0;min-height:46px}
+.fa .dom{font-size:12px;color:var(--faible);margin-top:-2px}
+.listeMot{font-size:13px;color:var(--doux);padding:11px 2px;line-height:1.5}
+.listeMot.erreur{color:#e8a39a}
 </style>
 
 <div id="ouverture" role="presentation">
@@ -327,6 +352,14 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <section class="vue" id="v-appels" role="tabpanel" hidden>
     <h2 class="titre">Le script, <em>dans la main.</em></h2>
     <p class="sous">Choisis l'offre, suis les sept étapes. Le silence fait partie du script.</p>
+
+  <div id="blocListe">
+    <div class="listeTete"><b>QUI APPELER</b><small id="listeCompte">la tournée du 77</small></div>
+    <button class="btnListe" type="button" id="btnListe">Charger la liste</button>
+    <div id="listeAppels"></div>
+  </div>
+
+  <div class="frise" aria-hidden="true"></div>
 
     <div class="offres" role="tablist" id="offres">
       <button role="tab" aria-selected="true" data-offre="essentiel"><b>Essentiel</b><small>390 €</small></button>
@@ -1066,6 +1099,121 @@ rendreSoir(); rendreAppels(); rendreOutils();
     etat={jour:jourCle(),chantier:d.chantier||null,faits:d.faits||{},appels:d.appels||0,suite:d.suite||[]};
     sauveLocal(); rendreSoir();
   },function(){});
+})();
+
+/* ---------- la tournée du 77, servie par n8n ---------- */
+/* 14/11/2026 — la liste des prospects à appeler ne vit plus dans un artefact
+   Claude. Elle vient du pilote 20 (webhook impact-nva-liste-du-jour), dont la
+   porte est fermée par l'en-tête x-impact-cle : la MÊME clé que la demande
+   d'avis, déjà saisie sur cet appareil. Aucun secret n'est écrit ici.
+   On ne fait que LIRE : noter le résultat d'un appel viendra avec la seconde
+   porte, celle qui écrit. Tant qu'elle n'existe pas, la liste sert à appeler,
+   et le tableau se remplit encore à la main. */
+(function(){
+  var ADRESSE = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-liste-du-jour';
+  var btn = $('#btnListe'), zone = $('#listeAppels'), compte = $('#listeCompte');
+  if (!btn || !zone) return;
+  var chargee = false;
+
+  function mot(t, err){
+    zone.innerHTML = '<p class="listeMot' + (err ? ' erreur' : '') + '">' + esc(t) + '</p>';
+  }
+
+  /* 14/11/2026 — on ne peut PAS appeler cleLue() d'ici : elle est declaree dans
+     le bloc de la demande d'avis, qui est une fonction fermee. L'appeler lance
+     « cleLue is not defined », le bouton ne fait rien ET n'affiche rien.
+     Attrape en l'exercant, pas en le relisant. On relit donc le meme rangement,
+     sous le meme nom — a garder identique a CLE_STOCK dans ce fichier. */
+  var RANGEMENT = 'impactnva_cle_avis';
+  function cleDeLAppareil(){
+    var v = null;
+    try { v = localStorage.getItem(RANGEMENT); } catch (e) {}
+    return v || '';
+  }
+
+  /* Pas une seule barre oblique inverse ici : ni regex, ni echappement.
+     Les barres obliques inverses se perdent en chemin — piege du 04/11. */
+  function garde(t){
+    t = String(t == null ? '' : t);
+    var s = '';
+    for (var i = 0; i < t.length; i++){
+      var c = t.charAt(i);
+      if ((c >= '0' && c <= '9') || c === '+') s += c;
+    }
+    return s;
+  }
+  function domaine(u){
+    u = String(u == null ? '' : u);
+    var i = u.indexOf('//');
+    if (i < 0) return '';
+    var r = u.slice(i + 2);
+    var j = r.indexOf('/');
+    if (j >= 0) r = r.slice(0, j);
+    if (r.indexOf('www.') === 0) r = r.slice(4);
+    return r;
+  }
+
+  function fiche(p){
+    var h = '<div class="fa">';
+    if (p.priorite === 'HAUTE') h += '<div class="haute">PRIORITÉ</div>';
+    h += '<h4>' + esc(p.nom || '(sans nom)') + '</h4>';
+    if (p.ville) h += '<div class="ou">' + esc(p.ville) + '</div>';
+    var num = garde(p.tel);
+    if (num) h += '<a class="tel" href="tel:' + esc(num) + '"><span>☎</span>' + esc(p.tel) + '</a>';
+    var d = domaine(p.site);
+    if (d) h += '<div class="dom">' + esc(d) + '</div>';
+    return h + '</div>';
+  }
+
+  function rendre(liste){
+    if (!liste.length){ mot('Aucune fiche à appeler pour le moment.'); compte.textContent = '0 fiche'; return; }
+    var sans = [], avec = [];
+    liste.forEach(function(p){ (p.sansSite ? sans : avec).push(p); });
+    var h = '';
+    if (sans.length){
+      h += '<div class="groupeAppel">🌱 Sans site <small>offre Essentiel · 390 €</small></div>';
+      h += sans.map(fiche).join('');
+    }
+    if (avec.length){
+      h += '<div class="groupeAppel">🔧 Avec site <small>offre Prestige · 690 €</small></div>';
+      h += avec.map(fiche).join('');
+    }
+    zone.innerHTML = h;
+    var haute = liste.filter(function(p){ return p.priorite === 'HAUTE'; }).length;
+    compte.textContent = liste.length + ' à appeler · ' + haute + ' en priorité';
+  }
+
+  btn.onclick = function(){
+    var k = cleDeLAppareil();
+    if (!k){
+      mot('Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS, puis reviens.', true);
+      return;
+    }
+    btn.disabled = true;
+    var avant = btn.textContent;
+    btn.textContent = 'Chargement…';
+    mot('');
+    fetch(ADRESSE, { headers: { 'x-impact-cle': k } })
+      .then(function(r){
+        if (r.status === 403) throw new Error('cle');
+        if (!r.ok) throw new Error('code ' + r.status);
+        return r.json();
+      })
+      .then(function(d){
+        var liste = (d && d.liste) || [];
+        rendre(liste);
+        chargee = true;
+        btn.textContent = 'Recharger la liste';
+      })
+      .catch(function(e){
+        var m = String(e && e.message || e);
+        if (m === 'cle') mot('La clé de cet appareil a été refusée par n8n. Vérifie-la dans OUTILS.', true);
+        else if (m.indexOf('code ') === 0) mot('n8n a répondu ' + m + '. La liste n’a pas pu être chargée.', true);
+        else mot('Pas de réseau, ou n8n ne répond pas. Réessaie dans un instant.', true);
+        if (!chargee) btn.textContent = avant;
+      })
+      .then(function(){ btn.disabled = false; });
+  };
 })();
 })();
 </script>
