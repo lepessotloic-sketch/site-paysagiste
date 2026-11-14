@@ -375,6 +375,12 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 .fFait{margin-top:12px;padding:12px;border-radius:11px;text-align:center;
   background:rgba(87,177,131,.12);border:1px solid rgba(87,177,131,.4);
   color:var(--menthe);font:600 14px var(--sans)}
+.fFait small{display:block;margin-top:4px;font:400 12px var(--sans);opacity:.85}
+.fFait.attente{background:rgba(201,162,75,.10);border-color:rgba(201,162,75,.38);color:var(--or-clair)}
+.fFait.rate{background:rgba(200,80,70,.12);border-color:rgba(200,80,70,.45);color:#e8a39c}
+.fReessayer{width:100%;min-height:46px;margin-top:8px;border-radius:10px;
+  border:1px solid var(--or);background:transparent;color:var(--or-clair);
+  font:600 14px var(--sans);cursor:pointer}
 .fFini{text-align:center;padding:40px 16px;color:var(--doux)}
 .fFini b{display:block;font:600 19px var(--romain);color:var(--or-clair);margin-bottom:8px}
 
@@ -1308,6 +1314,51 @@ rendreSoir(); rendreAppels(); rendreOutils();
     { k:'vente',     n:'Vente', gros:true }
   ];
 
+  /* LA PORTE QUI ECRIT — pilote 25, webhook impact-nva-resultat-appel.
+     Meme cle que la liste : l'en-tete x-impact-cle, deja saisie sur cet
+     appareil. Aucun secret n'est ecrit ici.
+     L'envoi se fait EN ARRIERE-PLAN : Loic passe au prospect suivant tout de
+     suite, il n'attend pas le reseau. L'etat revient se poser sur la fiche,
+     et s'il a rate, il le dit et propose de reessayer. On ne laisse jamais
+     croire que le tableau est au courant quand il ne l'est pas. */
+  var ECRITURE = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-resultat-appel';
+
+  function envoyerResultat(p, issue){
+    var k = cle(p), nom = '';
+    ISSUES_FILE.forEach(function(x){ if (x.k === issue) nom = x.n; });
+    resultats[k] = { n:nom, k:issue, e:'envoi' };
+
+    var c = cleDeLAppareil();
+    if (!c){
+      resultats[k] = { n:nom, k:issue, e:'rate',
+        m:'Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS.' };
+      rendre(gardee);
+      return;
+    }
+    fetch(ECRITURE, {
+      method:'POST',
+      headers:{ 'x-impact-cle':c, 'Content-Type':'application/json' },
+      body: JSON.stringify({ ligne: Number(p.ligne || 0), tel: String(p.tel || ''), resultat: issue })
+    })
+      .then(function(r){
+        if (r.status === 403) throw new Error('cle');
+        if (!r.ok) throw new Error('code ' + r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if (d && d.ok) resultats[k] = { n:nom, k:issue, e:'ok' };
+        else resultats[k] = { n:nom, k:issue, e:'rate', m:(d && d.motif) || 'n8n a refusé d’écrire.' };
+      })
+      .catch(function(e){
+        var m = String(e && e.message || e), t;
+        if (m === 'cle') t = 'La clé de cet appareil a été refusée par n8n.';
+        else if (m.indexOf('code ') === 0) t = 'n8n a répondu ' + m + '.';
+        else t = 'Pas de réseau. Rien n’est noté dans le tableau.';
+        resultats[k] = { n:nom, k:issue, e:'rate', m:t };
+      })
+      .then(function(){ rendre(gardee); });
+  }
+
   function rendre(liste){
     gardee = liste || [];
     if (!gardee.length){
@@ -1331,7 +1382,11 @@ rendreSoir(); rendreAppels(); rendreOutils();
     }
 
     aAppeler = (groupe === 'sans') ? sans : avec;
-    if (position >= aAppeler.length) position = 0;
+    /* 14/11/2026 — on BORNE, on ne remet plus a zero. Avant, arriver au bout
+       du groupe renvoyait en silence sur la premiere fiche : l'ecran « Groupe
+       termine » etait du code mort, et on avait l'impression de tourner en
+       rond. Le retour a zero appartient au changement d'onglet, pas ici. */
+    if (position > aAppeler.length) position = aAppeler.length;
 
     /* 14/11/2026 — les DEUX vues sont dessinees, et c'est le CSS qui en
        affiche une selon la largeur. Essaye d'abord avec un evenement :
@@ -1361,8 +1416,11 @@ rendreSoir(); rendreAppels(); rendreOutils();
     var total = aAppeler.length;
     if (!total) return '<p class="listeMot">Personne dans ce groupe.</p>';
     if (position >= total){
+      /* Un bouton pour revenir : sans lui, l'ecran de fin est un cul-de-sac et
+         le dernier resultat n'est plus consultable. Vu le 14/11 en essayant. */
       return '<div class="fFini"><b>Groupe terminé.</b>'
-        + 'Tu as parcouru les ' + total + ' fiches. Passe à l’autre onglet, ou recharge la liste.</div>';
+        + 'Tu as parcouru les ' + total + ' fiches. Passe à l’autre onglet, ou recharge la liste.'
+        + '<div class="fPied" style="margin-top:16px;grid-template-columns:1fr"><button type="button" data-nav="prec">← Revoir la dernière</button></div></div>';
     }
     var p = aAppeler[position];
     var r = resultats[cle(p)];
@@ -1380,7 +1438,18 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + 'Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</button>';
 
     if (r){
-      h += '<div class="fFait">' + esc(r) + '</div>';
+      /* 14/11/2026 — le resultat ne reste plus sur le telephone : il part au
+         tableau par le pilote 25. L'etat est dit en toutes lettres, parce
+         qu'un envoi peut echouer et qu'on ne laisse jamais croire que le
+         tableau est au courant quand il ne l'est pas. */
+      var cls = r.e === 'ok' ? '' : (r.e === 'envoi' ? ' attente' : ' rate');
+      var dit = r.e === 'ok' ? '✓ noté dans le tableau'
+              : (r.e === 'envoi' ? '⏳ envoi au tableau…' : '⚠ pas noté dans le tableau');
+      h += '<div class="fFait' + cls + '">' + esc(r.n) + '<small>' + esc(dit) + '</small></div>';
+      if (r.e === 'rate'){
+        if (r.m) h += '<p class="fNote erreur">' + esc(r.m) + '</p>';
+        h += '<button type="button" class="fReessayer" data-reprendre="' + esc(r.k) + '">Réessayer</button>';
+      }
     } else {
       h += '<div class="fApres">APRÈS L’APPEL</div><div class="fIssues">';
       ISSUES_FILE.forEach(function(x){
@@ -1392,14 +1461,15 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + '<button type="button" data-nav="prec"' + (position ? '' : ' disabled') + '>← Précédent</button>'
        + '<button type="button" data-nav="suiv">Suivant →</button>'
        + '</div>';
-    /* Tant que la porte d'ecriture n'existe pas, on ne laisse pas croire que
-       le tableau est au courant. */
-    h += '<p class="fNote">Le résultat reste sur ce téléphone : le tableau ne le sait pas encore. Ça viendra avec la porte qui écrit.</p>';
+    if (!r) h += '<p class="fNote">Ce que tu choisis part dans le tableau tout de suite. « À rappeler » le fait disparaître de la file pendant deux jours.</p>';
     return h + '</div>';
   }
 
   zone.addEventListener('click', function(ev){
-    var b = ev.target.closest ? ev.target.closest('[data-issue],[data-nav],.fScript') : null;
+    /* [data-reprendre] DOIT figurer ici : sans lui, le bouton « Réessayer »
+       n'est reconnu par personne et ne fait rien, en silence. Attrape le
+       14/11 en l'exerçant dans le navigateur — la syntaxe etait parfaite. */
+    var b = ev.target.closest ? ev.target.closest('[data-issue],[data-nav],[data-reprendre],.fScript') : null;
     if (!b) return;
     if (b.classList.contains('fScript')){
       var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
@@ -1408,13 +1478,19 @@ rendreSoir(); rendreAppels(); rendreOutils();
       if (s && s.scrollIntoView) s.scrollIntoView({ behavior:'smooth', block:'start' });
       return;
     }
+    var reprendre = b.getAttribute('data-reprendre');
+    if (reprendre){
+      var pr = aAppeler[position];
+      /* rendre() tout de suite : sinon le « ⏳ envoi… » n'apparait jamais au
+         reessai, et le bouton semble mort pendant la seconde d'attente. */
+      if (pr){ envoyerResultat(pr, reprendre); rendre(gardee); }
+      return;
+    }
     var issue = b.getAttribute('data-issue');
     if (issue){
       var p = aAppeler[position];
       if (!p) return;
-      var nom = '';
-      ISSUES_FILE.forEach(function(x){ if (x.k === issue) nom = x.n; });
-      resultats[cle(p)] = nom;
+      envoyerResultat(p, issue);
       position++;
       rendre(gardee);
       return;
@@ -1434,6 +1510,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
       var b = ev.target.closest ? ev.target.closest('[data-groupe]') : null;
       if (!b) return;
       groupe = b.getAttribute('data-groupe');
+      position = 0; /* on change de groupe : on repart de sa premiere fiche */
       rendre(gardee);
       /* On remonte en haut du bloc : sinon on change d'onglet et on reste au
          milieu de l'ancienne liste, ce qui donne l'impression que rien n'a
