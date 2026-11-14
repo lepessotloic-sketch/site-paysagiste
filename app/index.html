@@ -294,6 +294,16 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 .listeTete{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 2px 9px}
 .listeTete b{font:600 12.5px var(--sans);letter-spacing:.14em;color:var(--or-clair)}
 .listeTete small{font-size:12px;color:var(--faible);letter-spacing:.02em}
+/* Deux sous-onglets, un groupe a la fois : avec 122 fiches, les deux groupes
+   a la suite obligeaient a traverser tous les Essentiel pour voir les Prestige. */
+.sousOnglets{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.sousOnglets button{min-height:46px;border-radius:11px;border:1px solid var(--trait);
+  background:rgba(5,11,8,.45);color:var(--doux);font:500 13px var(--sans);
+  letter-spacing:.03em;cursor:pointer}
+.sousOnglets button b{font-weight:700;color:var(--blanc);margin-left:4px}
+.sousOnglets button[aria-selected=true]{background:rgba(201,162,75,.16);
+  border-color:var(--or);color:var(--or-clair)}
+.sousOnglets button[aria-selected=true] b{color:var(--or-clair)}
 .btnListe{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--trait-fort);
   background:rgba(201,162,75,.12);color:var(--or-clair);font:600 13.5px var(--sans);
   letter-spacing:.06em;cursor:pointer}
@@ -369,6 +379,10 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <div id="blocListe">
     <div class="listeTete"><b>QUI APPELER</b><small id="listeCompte">la tournée du 77</small></div>
     <button class="btnListe" type="button" id="btnListe">Charger la liste</button>
+    <div class="sousOnglets" id="sousOnglets" role="tablist" hidden>
+      <button role="tab" type="button" id="ongletSans" data-groupe="sans" aria-selected="true">🌱 Sans site</button>
+      <button role="tab" type="button" id="ongletAvec" data-groupe="avec" aria-selected="false">🔧 Avec site</button>
+    </div>
     <div id="listeAppels"></div>
   </div>
 
@@ -1125,6 +1139,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
 (function(){
   var ADRESSE = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-liste-du-jour';
   var btn = $('#btnListe'), zone = $('#listeAppels'), compte = $('#listeCompte');
+  var sousOnglets = $('#sousOnglets');
   if (!btn || !zone) return;
   var chargee = false;
 
@@ -1199,22 +1214,61 @@ rendreSoir(); rendreAppels(); rendreOutils();
     if (s && s.scrollIntoView) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  /* 14/11/2026 — Loic : « je dois descendre pendant 10 secondes sur le tel pour
+     trouver les leads v2, ce n'est pas preferable de faire en sous-onglets ? »
+     Avec 122 fiches, les deux groupes a la suite obligent a traverser tous les
+     Essentiel pour atteindre les Prestige. Deux sous-onglets, un groupe a la
+     fois. La liste recue est gardee en memoire : changer d'onglet ne rappelle
+     pas n8n. */
+  var gardee = [];
+  var groupe = 'sans';
+
   function rendre(liste){
-    if (!liste.length){ mot('Aucune fiche à appeler pour le moment.'); compte.textContent = '0 fiche'; return; }
-    var sans = [], avec = [];
-    liste.forEach(function(p){ (p.sansSite ? sans : avec).push(p); });
-    var h = '';
-    if (sans.length){
-      h += '<div class="groupeAppel">🌱 Sans site <small>offre Essentiel · 390 €</small></div>';
-      h += sans.map(fiche).join('');
+    gardee = liste || [];
+    if (!gardee.length){
+      mot('Aucune fiche à appeler pour le moment.');
+      compte.textContent = '0 fiche';
+      if (sousOnglets) sousOnglets.hidden = true;
+      return;
     }
-    if (avec.length){
-      h += '<div class="groupeAppel">🔧 Avec site <small>offre Prestige · 690 €</small></div>';
-      h += avec.map(fiche).join('');
+    var sans = gardee.filter(function(p){ return p.sansSite; });
+    var avec = gardee.filter(function(p){ return !p.sansSite; });
+
+    if (sousOnglets){
+      sousOnglets.hidden = false;
+      $('#ongletSans').innerHTML = '🌱 Sans site <b>' + sans.length + '</b>';
+      $('#ongletAvec').innerHTML = '🔧 Avec site <b>' + avec.length + '</b>';
+      /* Si un groupe est vide, on ouvre l'autre : pas d'onglet qui ne montre rien. */
+      if (groupe === 'sans' && !sans.length && avec.length) groupe = 'avec';
+      if (groupe === 'avec' && !avec.length && sans.length) groupe = 'sans';
+      $('#ongletSans').setAttribute('aria-selected', String(groupe === 'sans'));
+      $('#ongletAvec').setAttribute('aria-selected', String(groupe === 'avec'));
     }
-    zone.innerHTML = h;
-    var haute = liste.filter(function(p){ return p.priorite === 'HAUTE'; }).length;
-    compte.textContent = liste.length + ' à appeler · ' + haute + ' en priorité';
+
+    var montres = (groupe === 'sans') ? sans : avec;
+    var titre = (groupe === 'sans')
+      ? '<div class="groupeAppel">🌱 Sans site <small>offre Essentiel · 390 €</small></div>'
+      : '<div class="groupeAppel">🔧 Avec site <small>offre Prestige · 690 €</small></div>';
+    zone.innerHTML = montres.length
+      ? titre + montres.map(fiche).join('')
+      : '<p class="listeMot">Personne dans ce groupe.</p>';
+
+    var haute = montres.filter(function(p){ return p.priorite === 'HAUTE'; }).length;
+    compte.textContent = montres.length + ' à appeler · ' + haute + ' en priorité';
+  }
+
+  if (sousOnglets){
+    sousOnglets.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-groupe]') : null;
+      if (!b) return;
+      groupe = b.getAttribute('data-groupe');
+      rendre(gardee);
+      /* On remonte en haut du bloc : sinon on change d'onglet et on reste au
+         milieu de l'ancienne liste, ce qui donne l'impression que rien n'a
+         bouge. */
+      var bl = $('#blocListe');
+      if (bl && bl.scrollIntoView) bl.scrollIntoView({ block: 'start' });
+    });
   }
 
   btn.onclick = function(){
