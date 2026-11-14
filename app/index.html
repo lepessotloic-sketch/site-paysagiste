@@ -294,6 +294,16 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 .listeTete{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 2px 9px}
 .listeTete b{font:600 12.5px var(--sans);letter-spacing:.14em;color:var(--or-clair)}
 .listeTete small{font-size:12px;color:var(--faible);letter-spacing:.02em}
+/* Deux sous-onglets, un groupe a la fois : avec 122 fiches, les deux groupes
+   a la suite obligeaient a traverser tous les Essentiel pour voir les Prestige. */
+.sousOnglets{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.sousOnglets button{min-height:46px;border-radius:11px;border:1px solid var(--trait);
+  background:rgba(5,11,8,.45);color:var(--doux);font:500 13px var(--sans);
+  letter-spacing:.03em;cursor:pointer}
+.sousOnglets button b{font-weight:700;color:var(--blanc);margin-left:4px}
+.sousOnglets button[aria-selected=true]{background:rgba(201,162,75,.16);
+  border-color:var(--or);color:var(--or-clair)}
+.sousOnglets button[aria-selected=true] b{color:var(--or-clair)}
 .btnListe{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--trait-fort);
   background:rgba(201,162,75,.12);color:var(--or-clair);font:600 13.5px var(--sans);
   letter-spacing:.06em;cursor:pointer}
@@ -325,6 +335,59 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 .fa .versScript:hover{border-color:var(--menthe)}
 .listeMot{font-size:13px;color:var(--doux);padding:11px 2px;line-height:1.5}
 .listeMot.erreur{color:#e8a39a}
+
+/* ---- LA FILE D'APPEL — ecran exterieur du Honor, replie. 14/11/2026 ----
+   Un prospect a la fois, en grand, un pouce suffit. Aucune liste a lire
+   pendant qu'on appelle : la seule decision possible est le resultat. */
+.carteFile{border:1px solid var(--trait-fort);border-radius:16px;padding:16px 15px 15px;
+  background:linear-gradient(180deg,rgba(18,48,36,.52),rgba(10,25,19,.60))}
+.fPos{font:500 11px var(--sans);letter-spacing:.14em;color:var(--faible);margin-bottom:9px}
+.fPos b{color:var(--or);font-weight:700}
+.fNom{margin:0 0 4px;font:600 21px/1.22 var(--romain);color:var(--blanc)}
+.fVille{font-size:13.5px;color:var(--doux);margin-bottom:11px}
+.fOffre{display:inline-block;font:600 11.5px var(--sans);letter-spacing:.08em;
+  padding:4px 11px;border-radius:999px;margin-bottom:14px;
+  border:1px solid var(--trait-fort);color:var(--or-clair);background:rgba(201,162,75,.12)}
+.fTel{display:flex;align-items:center;justify-content:center;gap:11px;text-decoration:none;
+  color:var(--vert-950);background:var(--menthe);border-radius:13px;
+  font:700 25px/1 var(--sans);letter-spacing:.04em;min-height:68px;margin-bottom:11px}
+.fSite{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--or-clair);
+  font:500 13px var(--sans);border:1px solid var(--trait);border-radius:10px;
+  padding:11px 13px;min-height:44px;margin-bottom:9px}
+.fSite span{color:var(--faible);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fScript{display:block;width:100%;min-height:44px;margin-bottom:16px;border-radius:10px;
+  border:1px solid var(--trait-fort);background:rgba(87,177,131,.10);color:var(--menthe);
+  font:600 13px var(--sans);letter-spacing:.04em;cursor:pointer}
+.fApres{font:600 11px var(--sans);letter-spacing:.16em;color:var(--faible);
+  border-top:1px solid var(--trait);padding-top:13px;margin-bottom:10px}
+.fIssues{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fIssues button{min-height:52px;border-radius:11px;border:1px solid var(--trait);
+  background:rgba(5,11,8,.45);color:var(--blanc);font:500 14px var(--sans);cursor:pointer}
+.fIssues button:hover{border-color:var(--or)}
+.fIssues button.gros{grid-column:1/-1;border-color:var(--or);color:var(--or-clair);
+  background:rgba(201,162,75,.14);font-weight:600;letter-spacing:.06em}
+.fPied{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fPied button{min-height:44px;border-radius:10px;border:1px solid var(--trait);
+  background:none;color:var(--doux);font:500 12.5px var(--sans);cursor:pointer}
+.fPied button[disabled]{opacity:.35;cursor:default}
+.fNote{margin-top:11px;font-size:12px;line-height:1.5;color:var(--faible);
+  border-left:2px solid var(--trait);padding-left:10px}
+.fFait{margin-top:12px;padding:12px;border-radius:11px;text-align:center;
+  background:rgba(87,177,131,.12);border:1px solid rgba(87,177,131,.4);
+  color:var(--menthe);font:600 14px var(--sans)}
+.fFini{text-align:center;padding:40px 16px;color:var(--doux)}
+.fFini b{display:block;font:600 19px var(--romain);color:var(--or-clair);margin-bottom:8px}
+
+/* C'est ICI que le pliage est decide, et nulle part ailleurs.
+   Replie (ecran exterieur, ~400 px) : la file. Deplie (~820 px) : la liste.
+   Les deux vues sont dans la page ; le media query en montre une. Aucun
+   evenement a ecouter, donc aucun evenement a rater. */
+.vueFile{display:none}
+.vueListe{display:block}
+@media (max-width:540px){
+  .vueFile{display:block}
+  .vueListe{display:none}
+}
 </style>
 
 <div id="ouverture" role="presentation">
@@ -369,6 +432,10 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <div id="blocListe">
     <div class="listeTete"><b>QUI APPELER</b><small id="listeCompte">la tournée du 77</small></div>
     <button class="btnListe" type="button" id="btnListe">Charger la liste</button>
+    <div class="sousOnglets" id="sousOnglets" role="tablist" hidden>
+      <button role="tab" type="button" id="ongletSans" data-groupe="sans" aria-selected="true">🌱 Sans site</button>
+      <button role="tab" type="button" id="ongletAvec" data-groupe="avec" aria-selected="false">🔧 Avec site</button>
+    </div>
     <div id="listeAppels"></div>
   </div>
 
@@ -1125,6 +1192,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
 (function(){
   var ADRESSE = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-liste-du-jour';
   var btn = $('#btnListe'), zone = $('#listeAppels'), compte = $('#listeCompte');
+  var sousOnglets = $('#sousOnglets');
   if (!btn || !zone) return;
   var chargee = false;
 
@@ -1199,22 +1267,180 @@ rendreSoir(); rendreAppels(); rendreOutils();
     if (s && s.scrollIntoView) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
+  /* 14/11/2026 — Loic : « je dois descendre pendant 10 secondes sur le tel pour
+     trouver les leads v2, ce n'est pas preferable de faire en sous-onglets ? »
+     Avec 122 fiches, les deux groupes a la suite obligent a traverser tous les
+     Essentiel pour atteindre les Prestige. Deux sous-onglets, un groupe a la
+     fois. La liste recue est gardee en memoire : changer d'onglet ne rappelle
+     pas n8n. */
+  var gardee = [];
+  var groupe = 'sans';
+
+  /* ---- le pliage du Honor decide du mode. 14/11/2026 ----
+     Loic : « ne faire qu'un avec le Honor Magic : une partie ecran exterieur,
+     une partie ecran interieur ». Les deux ecrans ne montrent donc pas la
+     meme chose :
+       replie  (~400 px) -> LA FILE : un prospect a la fois, en grand, un pouce
+                            suffit. On ne lit jamais une liste pendant qu'on
+                            appelle.
+       deplie  (~820 px) -> LA LISTE : pour choisir, comparer, voir ou on en est.
+     Le signal est la LARGEUR, pas une API de pliage : deplier change la
+     largeur, donc le mode bascule tout seul. Rien de fragile a detecter. */
+  var aAppeler = [];
+  var position = 0;
+  var resultats = {};
+  /* Le choix de la vue ne se fait PAS en JavaScript : voir plus bas, c'est un
+     media query. Deux tentatives par evenement ont echoue — « resize » ne
+     basculait qu'en depliant, et matchMedia ne se reevaluait pas du tout dans
+     le cadre d'essai, si bien que le garde-fou croyait que rien n'avait
+     change. Le CSS, lui, ne peut pas rater un evenement. */
+  function cle(p){ return garde(p.tel) || p.nom; }
+
+  /* Les cinq resultats sont redeclares ici plutot que repris de ISSUES : le
+     06/11 une fonction d'un bloc voisin s'est averee hors de portee, et le
+     bouton est reste mort sans rien dire. Cinq libelles ne valent pas ce
+     risque. */
+  var ISSUES_FILE = [
+    { k:'repondeur', n:'Répondeur' },
+    { k:'refus',     n:'Pas intéressé' },
+    { k:'rappeler',  n:'À rappeler' },
+    { k:'rdv',       n:'Rendez-vous' },
+    { k:'vente',     n:'Vente', gros:true }
+  ];
+
   function rendre(liste){
-    if (!liste.length){ mot('Aucune fiche à appeler pour le moment.'); compte.textContent = '0 fiche'; return; }
-    var sans = [], avec = [];
-    liste.forEach(function(p){ (p.sansSite ? sans : avec).push(p); });
-    var h = '';
-    if (sans.length){
-      h += '<div class="groupeAppel">🌱 Sans site <small>offre Essentiel · 390 €</small></div>';
-      h += sans.map(fiche).join('');
+    gardee = liste || [];
+    if (!gardee.length){
+      mot('Aucune fiche à appeler pour le moment.');
+      compte.textContent = '0 fiche';
+      if (sousOnglets) sousOnglets.hidden = true;
+      return;
     }
-    if (avec.length){
-      h += '<div class="groupeAppel">🔧 Avec site <small>offre Prestige · 690 €</small></div>';
-      h += avec.map(fiche).join('');
+    var sans = gardee.filter(function(p){ return p.sansSite; });
+    var avec = gardee.filter(function(p){ return !p.sansSite; });
+
+    if (sousOnglets){
+      sousOnglets.hidden = false;
+      $('#ongletSans').innerHTML = '🌱 Sans site <b>' + sans.length + '</b>';
+      $('#ongletAvec').innerHTML = '🔧 Avec site <b>' + avec.length + '</b>';
+      /* Si un groupe est vide, on ouvre l'autre : pas d'onglet qui ne montre rien. */
+      if (groupe === 'sans' && !sans.length && avec.length) groupe = 'avec';
+      if (groupe === 'avec' && !avec.length && sans.length) groupe = 'sans';
+      $('#ongletSans').setAttribute('aria-selected', String(groupe === 'sans'));
+      $('#ongletAvec').setAttribute('aria-selected', String(groupe === 'avec'));
     }
-    zone.innerHTML = h;
-    var haute = liste.filter(function(p){ return p.priorite === 'HAUTE'; }).length;
-    compte.textContent = liste.length + ' à appeler · ' + haute + ' en priorité';
+
+    aAppeler = (groupe === 'sans') ? sans : avec;
+    if (position >= aAppeler.length) position = 0;
+
+    /* 14/11/2026 — les DEUX vues sont dessinees, et c'est le CSS qui en
+       affiche une selon la largeur. Essaye d'abord avec un evenement :
+       « resize » basculait en depliant mais pas en repliant, et matchMedia ne
+       se reevaluait pas du tout dans le cadre d'essai, si bien que le
+       garde-fou croyait que rien n'avait change. Un media query ne peut pas
+       se tromper : il n'a pas d'evenement a rater. */
+    zone.innerHTML =
+      '<div class="vueFile">'  + htmlFile()  + '</div>' +
+      '<div class="vueListe">' + htmlListe() + '</div>';
+
+    var haute = aAppeler.filter(function(p){ return p.priorite === 'HAUTE'; }).length;
+    compte.textContent = aAppeler.length + ' à appeler · ' + haute + ' en priorité';
+  }
+
+  function htmlListe(){
+    if (!aAppeler.length) return '<p class="listeMot">Personne dans ce groupe.</p>';
+    var titre = (groupe === 'sans')
+      ? '<div class="groupeAppel">🌱 Sans site <small>offre Essentiel · 390 €</small></div>'
+      : '<div class="groupeAppel">🔧 Avec site <small>offre Prestige · 690 €</small></div>';
+    return titre + aAppeler.map(fiche).join('');
+  }
+
+  /* Un prospect a la fois. Pas de liste, pas de defilement, pas de choix a
+     faire : appeler, puis dire ce que ca a donne. */
+  function htmlFile(){
+    var total = aAppeler.length;
+    if (!total) return '<p class="listeMot">Personne dans ce groupe.</p>';
+    if (position >= total){
+      return '<div class="fFini"><b>Groupe terminé.</b>'
+        + 'Tu as parcouru les ' + total + ' fiches. Passe à l’autre onglet, ou recharge la liste.</div>';
+    }
+    var p = aAppeler[position];
+    var r = resultats[cle(p)];
+    var h = '<div class="carteFile">';
+    h += '<div class="fPos">' + (position + 1) + ' / ' + total
+       + (p.priorite === 'HAUTE' ? ' · <b>PRIORITÉ</b>' : '') + '</div>';
+    h += '<h3 class="fNom">' + esc(p.nom || '(sans nom)') + '</h3>';
+    if (p.ville) h += '<div class="fVille">' + esc(p.ville) + '</div>';
+    if (p.offre) h += '<div class="fOffre">' + esc(p.offre) + '</div>';
+    var num = garde(p.tel);
+    if (num) h += '<a class="fTel" href="tel:' + esc(num) + '"><span>☎</span>' + esc(p.tel) + '</a>';
+    var d = domaine(p.site);
+    if (d) h += '<a class="fSite" href="' + esc(p.site) + '" target="_blank" rel="noopener noreferrer">↗ Voir son site <span>' + esc(d) + '</span></a>';
+    h += '<button class="fScript" type="button" data-offre="' + (p.sansSite ? 'essentiel' : 'prestige') + '">'
+       + 'Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</button>';
+
+    if (r){
+      h += '<div class="fFait">' + esc(r) + '</div>';
+    } else {
+      h += '<div class="fApres">APRÈS L’APPEL</div><div class="fIssues">';
+      ISSUES_FILE.forEach(function(x){
+        h += '<button type="button" class="' + (x.gros ? 'gros' : '') + '" data-issue="' + x.k + '">' + esc(x.n) + '</button>';
+      });
+      h += '</div>';
+    }
+    h += '<div class="fPied">'
+       + '<button type="button" data-nav="prec"' + (position ? '' : ' disabled') + '>← Précédent</button>'
+       + '<button type="button" data-nav="suiv">Suivant →</button>'
+       + '</div>';
+    /* Tant que la porte d'ecriture n'existe pas, on ne laisse pas croire que
+       le tableau est au courant. */
+    h += '<p class="fNote">Le résultat reste sur ce téléphone : le tableau ne le sait pas encore. Ça viendra avec la porte qui écrit.</p>';
+    return h + '</div>';
+  }
+
+  zone.addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('[data-issue],[data-nav],.fScript') : null;
+    if (!b) return;
+    if (b.classList.contains('fScript')){
+      var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
+      if (onglet) onglet.click();
+      var s = $('#script');
+      if (s && s.scrollIntoView) s.scrollIntoView({ behavior:'smooth', block:'start' });
+      return;
+    }
+    var issue = b.getAttribute('data-issue');
+    if (issue){
+      var p = aAppeler[position];
+      if (!p) return;
+      var nom = '';
+      ISSUES_FILE.forEach(function(x){ if (x.k === issue) nom = x.n; });
+      resultats[cle(p)] = nom;
+      position++;
+      rendre(gardee);
+      return;
+    }
+    var nav = b.getAttribute('data-nav');
+    if (nav === 'suiv') position++;
+    if (nav === 'prec' && position > 0) position--;
+    rendre(gardee);
+  });
+
+  /* Aucun ecouteur de pliage : c'est le media query qui choisit la vue.
+     Deux tentatives par evenement ont echoue avant celle-ci, chacune dans un
+     sens different. Un media query n'a pas d'evenement a rater. */
+
+  if (sousOnglets){
+    sousOnglets.addEventListener('click', function(ev){
+      var b = ev.target.closest ? ev.target.closest('[data-groupe]') : null;
+      if (!b) return;
+      groupe = b.getAttribute('data-groupe');
+      rendre(gardee);
+      /* On remonte en haut du bloc : sinon on change d'onglet et on reste au
+         milieu de l'ancienne liste, ce qui donne l'impression que rien n'a
+         bouge. */
+      var bl = $('#blocListe');
+      if (bl && bl.scrollIntoView) bl.scrollIntoView({ block: 'start' });
+    });
   }
 
   btn.onclick = function(){
