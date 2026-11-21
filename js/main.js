@@ -1030,9 +1030,9 @@
         .then(function (r) {
           if (!r.ok) throw new Error('http ' + r.status);
           var messages = {
-            'Essentiel — 390€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Essentiel</b> (390 €). On vous recontacte sous 24h pour vos éléments et votre démo offerte, avant tout paiement.',
-            'Prestige — 690€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Prestige</b> (690 €). On vous recontacte sous 24h pour vos éléments et votre démo offerte, avant tout paiement.',
-            'Signature — 1 290€': 'Merci ' + prenom + ' ! Vous avez choisi la <b>Signature</b> (1 290 €). On vous recontacte sous 24h pour construire votre site.'
+            'Essentiel — 390€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Essentiel</b> (390 €). On vous recontacte sous 24h. Vous recevez aussi par email votre lien de paiement sécurisé.',
+            'Prestige — 690€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Prestige</b> (690 €). On vous recontacte sous 24h. Vous recevez aussi par email votre lien de paiement sécurisé.',
+            'Signature — 1 290€': 'Merci ' + prenom + ' ! Vous avez choisi la <b>Signature</b> (1 290 €). On vous recontacte sous 24h pour construire votre site. Vous recevez aussi par email votre lien de paiement sécurisé.'
           };
           if (avecPrismatik && data.offre === 'Signature — 1 290€') messages[data.offre] = 'Merci ' + prenom + ' ! Vous avez choisi la <b>Signature</b> avec l’option <b>Prismatik</b> (1 580 €). On vous recontacte sous 24h pour construire votre site.';
           if (data.demo) { afficherMerci('Merci ' + prenom + ' ! Votre <b>démo offerte</b> est en préparation : elle vous arrive sous 24 h dès que nous avons vos éléments (logo, photos, informations). Vous voyez votre futur site avant tout paiement.'); return; }
