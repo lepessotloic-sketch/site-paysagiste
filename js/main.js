@@ -540,9 +540,9 @@
     var section = $('#store'), store = $('#cmpSlider'), boutonsNiveau = $$('#cmpNiveaux button'), demos = $$('#store .cmp-demo'), ecart = $('#cmpEcart'), indice = $('#cmpHint');
     var noms = ['Essentiel', 'Prestige', 'Signature'];
     var ecarts = [
-      'On vous trouve : une page claire, votre fiche Google reliée, en ligne sous 48 h.',
-      'On vous prend au sérieux : plusieurs sections, vos photos retouchées, vos avant/après.',
-      'On vous reconnaît : un design qui n’existe qu’une fois, des textes écrits pour vous, et votre logo qui peut prendre vie.'
+      'Être présent : votre site d’une page, vos réalisations, un contact facile.',
+      'Être valorisé : une refonte en plusieurs sections, vos avant/après, vos avis clients.',
+      'Être unique : une création entièrement sur mesure, des textes personnalisés, et votre logo qui peut prendre vie.'
     ];
     var v = 0, niveau = -1, saisi = false, phase = 0;
     var poserStore = function (nv) {
@@ -1030,12 +1030,12 @@
         .then(function (r) {
           if (!r.ok) throw new Error('http ' + r.status);
           var messages = {
-            'Essentiel — 390€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Essentiel</b> (390 €). On vous recontacte sous 24h avec votre lien de paiement et les prochaines étapes.',
-            'Prestige — 690€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Prestige</b> (690 €). On vous recontacte sous 24h avec votre lien de paiement et les prochaines étapes.',
+            'Essentiel — 390€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Essentiel</b> (390 €). On vous recontacte sous 24h pour vos éléments et votre démo offerte, avant tout paiement.',
+            'Prestige — 690€': 'Merci ' + prenom + ' ! Vous avez choisi l’offre <b>Prestige</b> (690 €). On vous recontacte sous 24h pour vos éléments et votre démo offerte, avant tout paiement.',
             'Signature — 1 290€': 'Merci ' + prenom + ' ! Vous avez choisi la <b>Signature</b> (1 290 €). On vous recontacte sous 24h pour construire votre site.'
           };
           if (avecPrismatik && data.offre === 'Signature — 1 290€') messages[data.offre] = 'Merci ' + prenom + ' ! Vous avez choisi la <b>Signature</b> avec l’option <b>Prismatik</b> (1 580 €). On vous recontacte sous 24h pour construire votre site.';
-          if (data.demo) { afficherMerci('Merci ' + prenom + ' ! Votre <b>démo offerte</b> est en préparation : elle vous arrive sous 48 h ouvrées dès que nous avons votre logo. Vous voyez votre futur site avant tout paiement.'); return; }
+          if (data.demo) { afficherMerci('Merci ' + prenom + ' ! Votre <b>démo offerte</b> est en préparation : elle vous arrive sous 24 h dès que nous avons vos éléments (logo, photos, informations). Vous voyez votre futur site avant tout paiement.'); return; }
           afficherMerci(messages[data.offre] || 'Merci ' + prenom + ' ! On regarde votre besoin et on vous conseille la bonne formule, Essentiel, Prestige ou Signature, sous 24h.');
         })
         .catch(function () { echec.hidden = false; })
