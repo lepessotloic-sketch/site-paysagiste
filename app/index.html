@@ -54,6 +54,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--or-clair);outline-offset:3px}
 .enveloppe{max-width:720px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
 
+/* 22/11/2026 - grand ecran. L'app etait pensee pour le telephone : le dernier
+   affichage prevu s'arretait a 620px, donc sur un PC elle restait une colonne
+   de 720px au milieu du vide. Tout ce qui suit est sous min-width:1100px et ne
+   peut donc pas toucher le telephone, qui reste l'usage principal. */
+@media(min-width:1100px){
+  .enveloppe{max-width:1180px}
+  #listeAppels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:0 12px;align-items:start}
+  #listeAppels>.groupeAppel{grid-column:1/-1}
+  #listeAppels>.listeMot{grid-column:1/-1}
+  .liens{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1560px){
+  .enveloppe{max-width:1500px}
+  #listeAppels{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .liens{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
 /* ---- en-tête ---- */
 .tete{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
   background:linear-gradient(var(--vert-950) 68%,rgba(5,11,8,.92));
