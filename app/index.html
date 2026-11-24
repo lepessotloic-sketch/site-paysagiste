@@ -502,6 +502,21 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 @media (max-width:540px){
   .vueFile{display:block}
   .vueListe{display:none}
+
+  /* 24/11/2026 — l ecran de couverture du Honor : montrer peu, et l essentiel.
+     Loic : « sur l ecran exterieur je dois voir le script d appel et les
+     taches a faire et surtout les prospects a appeler ».
+     Mesure a 353px : le grand titre et sa phrase poussaient « QUI APPELER »
+     a 253px du haut, soit un tiers de l ecran mange avant le premier
+     prospect. Le titre reste (il dit ou on est) mais tient sur une ligne, et
+     la phrase d explication s efface : elle apprend le script a quelqu un qui
+     le connait par coeur depuis des semaines.
+     On ne touche PAS aux onglets. Cacher OUTILS sur l ecran de couverture
+     rendrait le telephone irrecuperable : la cle de l app ne se saisit que
+     la, et trois messages d erreur disent « Saisis-la une fois dans OUTILS ».
+     Les cacher ferait pointer l app vers un endroit qui n existe plus. */
+  #v-appels>h2.titre{font-size:25px;margin-bottom:6px}
+  #v-appels>.sous{display:none}
 }
 </style>
 
