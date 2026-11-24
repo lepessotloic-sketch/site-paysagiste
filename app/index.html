@@ -106,6 +106,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
      une lecture faite au moment du clic n a aucun evenement a rater. */
   #etabliSonde{display:block;width:0;height:0}
 
+  /* En appel, la colonne de droite se degage pour que LE SCRIPT soit visible
+     sans defiler — c est tout l objet de l etabli.
+     L aiguille sert a CHOISIR l offre avant d appeler ; une fois la fiche
+     prise en main, l offre est deja decidee par la fiche elle-meme, donc
+     l aiguille ne fait plus que repousser le script vers le bas. Mesure le
+     22/11 sur le Honor deplie (724px) : sans cette regle, le script commence
+     a 650px du haut de la colonne et reste hors de l ecran.
+     Les deux liens a envoyer restent, eux : ils servent PENDANT l appel. */
+  .etPanneauG.enAppel+.etPanneauD>.frise{display:none}
+  .etPanneauG.enAppel+.etPanneauD>.aiguille{display:none}
+
   /* En appel : le site du prospect prend tout le panneau, la liste s efface.
      Hors de ce media query la classe .enAppel ne fait rien, donc la liste ne
      peut jamais disparaitre sur le telephone. */
