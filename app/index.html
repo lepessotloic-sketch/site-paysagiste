@@ -1386,6 +1386,23 @@ rendreSoir(); rendreAppels(); rendreOutils();
     }
     return s;
   }
+  /* 26/11/2026 — Loic : « mets 390 € ». n8n envoie « Essentiel 390 EUR »
+     (nœud de code du pilote 20), et c est ce texte brut qui s affichait sur
+     les trois ecrans. On ne touche PAS a n8n pour si peu : on met en forme a
+     l affichage, ici, et la donnee reste ce qu elle est.
+     Aucune barre oblique inverse : ni regex, ni \u20ac — le caractere euro
+     est ecrit en clair, comme garde() plus haut evite les echappements.
+     Si le texte ne finit pas par EUR / EUROS, il ressort tel quel : le code
+     s adapte a ce qu on lui donne, il n impose pas une forme. */
+  function prix(t){
+    t = String(t == null ? '' : t).trim();
+    var i = t.toUpperCase().lastIndexOf('EUR');
+    if (i < 0) return t;
+    var apres = t.slice(i + 3).trim().toUpperCase();
+    if (apres !== '' && apres !== 'O' && apres !== 'OS') return t;
+    var avant = t.slice(0, i).trim();
+    return avant ? (avant + ' €') : '€';
+  }
   function domaine(u){
     u = String(u == null ? '' : u);
     var i = u.indexOf('//');
@@ -1416,7 +1433,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
     var h = '<div class="csTete"><div class="csQui"><b>' + esc(p.nom || '(sans nom)') + '</b>';
     var sous = [];
     if (p.ville) sous.push(p.ville);
-    if (p.offre) sous.push(p.offre);
+    if (p.offre) sous.push(prix(p.offre));
     if (sous.length) h += '<small>' + esc(sous.join(' · ')) + '</small>';
     h += '</div><button type="button" class="csRetour" data-cs="liste">← La liste</button></div>';
 
@@ -1449,7 +1466,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
          il n a que « Entreprise ». On affiche donc ce qui existe vraiment, et
          rien d invente. */
       var lieu = p.ville ? '<div class="csiVille">' + esc(p.ville) + '</div>' : '';
-      var off  = p.offre ? '<div class="csiOffre">' + esc(p.offre) + '</div>' : '';
+      var off  = p.offre ? '<div class="csiOffre">' + esc(prix(p.offre)) + '</div>' : '';
       var ou   = p.ville ? ('à ' + p.ville) : 'dans sa commune';
       h += '<div class="csIdentite">'
          + '<div class="csiNom">' + esc(p.nom || '(sans nom)') + '</div>'
@@ -1679,7 +1696,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + (p.priorite === 'HAUTE' ? ' · <b>PRIORITÉ</b>' : '') + '</div>';
     h += '<h3 class="fNom">' + esc(p.nom || '(sans nom)') + '</h3>';
     if (p.ville) h += '<div class="fVille">' + esc(p.ville) + '</div>';
-    if (p.offre) h += '<div class="fOffre">' + esc(p.offre) + '</div>';
+    if (p.offre) h += '<div class="fOffre">' + esc(prix(p.offre)) + '</div>';
     var num = garde(p.tel);
     if (num) h += '<a class="fTel" href="tel:' + esc(num) + '"><span>☎</span>' + esc(p.tel) + '</a>';
     var d = domaine(p.site);
