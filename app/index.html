@@ -54,6 +54,141 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--or-clair);outline-offset:3px}
 .enveloppe{max-width:720px;margin:0 auto;padding-inline:18px;padding-block:0 90px}
 
+/* ================= L ETABLI — 22/11/2026 =================
+   Pendant un appel, Loic place deja ses deux fenetres a la main : le site du
+   prospect a gauche, l app a droite. L app fait desormais ce travail toute
+   seule.
+   Un premier essai (22/11, remplace) elargissait la LISTE en colonnes : plus
+   de fiches a l ecran, mais le script restait le 13e bloc de la vue, donc
+   toujours tout en bas. Juge par Loic : « sur le PC ca ne rend pas bien ». Il
+   avait raison — la largeur n est pas un probleme de remplissage, c est un
+   probleme d usage : deux choses a voir EN MEME TEMPS.
+   Hors grand ecran, ces trois regles ne font rien : .etabli est un bloc
+   ordinaire, les deux panneaux s empilent dans l ordre d origine, et le cadre
+   du site n existe pas. Le telephone replie (353px) ne voit rien de tout ca. */
+.etabli{display:block}
+#cadreSite{display:none}
+.motLarge{display:none}
+/* Eteinte par defaut, comme la sonde de l etabli : un <div> sans regle vaut
+   display:block, et la barre s afficherait sur les quatre onglets. */
+.barreAppel{display:none}
+/* La sonde doit etre ETEINTE par defaut, et pas seulement absente des regles :
+   un <i> vaut display:inline tout seul, donc sans cette ligne le JavaScript
+   croyait l etabli monte des 353px. Entre 541 et 699px le bouton d une fiche
+   serait alors reste MORT, sans rien dire — la panne silencieuse habituelle.
+   Trouve le 22/11 en mesurant, pas en relisant. */
+#etabliSonde{display:none}
+
+/* Tout l etabli est enferme ici. Sous 700px, rien de ce bloc ne s applique :
+   le telephone ferme et le telephone droit restent exactement comme avant. */
+@media(min-width:700px){
+  /* --tete : la hauteur de l en-tete colle en haut (mesuree a 89px le 22/11).
+     Declaree ici, la ou elle sert, et nulle part ailleurs. */
+  .etabli{--tete:92px;display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
+    gap:0 26px;align-items:start}
+
+  /* Le panneau de gauche reste colle sous l en-tete pendant que le script
+     defile a droite : le site du prospect ne quitte jamais l ecran. */
+  .etPanneauG{position:sticky;top:var(--tete);min-width:0;
+    display:flex;flex-direction:column;max-height:calc(100vh - var(--tete) - 14px)}
+  .etPanneauG>#blocListe{min-height:0;overflow:auto;padding-right:6px}
+  .etPanneauD{min-width:0}
+
+  /* Cette frise separait la liste du script quand ils etaient l un sous
+     l autre. Cote a cote, elle ne separe plus rien. */
+  .etPanneauD>.frise:first-child{display:none}
+
+  /* Le bouton d une fiche ne renvoie plus vers le bas : le script est a cote. */
+  .motEtroit{display:none}
+  .motLarge{display:inline}
+
+  /* La sonde : un point invisible que le media query allume. Le JavaScript lit
+     SA valeur pour savoir si l etabli est monte, au lieu de deviner une
+     largeur. Deux tentatives par evenement ont deja echoue dans ce fichier
+     (resize ne basculait que dans un sens, matchMedia ne se reevaluait pas) :
+     une lecture faite au moment du clic n a aucun evenement a rater. */
+  #etabliSonde{display:block;width:0;height:0}
+
+  /* En appel, la colonne de droite se degage pour que LE SCRIPT soit visible
+     sans defiler — c est tout l objet de l etabli.
+     L aiguille sert a CHOISIR l offre avant d appeler ; une fois la fiche
+     prise en main, l offre est deja decidee par la fiche elle-meme, donc
+     l aiguille ne fait plus que repousser le script vers le bas. Mesure le
+     22/11 sur le Honor deplie (724px) : sans cette regle, le script commence
+     a 650px du haut de la colonne et reste hors de l ecran.
+     Les deux liens a envoyer restent, eux : ils servent PENDANT l appel. */
+  .etPanneauG.enAppel+.etPanneauD>.frise{display:none}
+  .etPanneauG.enAppel+.etPanneauD>.aiguille{display:none}
+
+  /* En appel : le site du prospect prend tout le panneau, la liste s efface.
+     Hors de ce media query la classe .enAppel ne fait rien, donc la liste ne
+     peut jamais disparaitre sur le telephone. */
+  .etPanneauG.enAppel{height:calc(100vh - var(--tete) - 14px)}
+  .etPanneauG.enAppel>#blocListe{display:none}
+  .etPanneauG.enAppel>#cadreSite{display:flex;flex:1 1 auto}
+
+  #cadreSite{flex-direction:column;min-height:0;overflow:hidden;
+    border:1px solid var(--trait-fort);border-radius:13px;
+    background:linear-gradient(180deg,rgba(18,48,36,.42),rgba(10,25,19,.58))}
+  .csTete{display:flex;align-items:flex-start;gap:10px;padding:12px 13px 0}
+  .csQui{flex:1;min-width:0}
+  .csQui b{display:block;font:600 17px/1.25 var(--romain);color:var(--blanc)}
+  .csQui small{display:block;margin-top:3px;font:400 12.5px var(--sans);color:var(--faible)}
+  .csRetour{flex:none;border:1px solid var(--trait);border-radius:9px;padding:8px 11px;
+    min-height:38px;color:var(--doux);font:500 12px var(--sans);cursor:pointer}
+  .csRetour:hover{border-color:var(--or);color:var(--or-clair)}
+  .csTel{display:flex;align-items:center;justify-content:center;gap:10px;
+    margin:11px 13px 0;text-decoration:none;color:var(--vert-950);background:var(--menthe);
+    border-radius:11px;font:700 21px/1 var(--sans);letter-spacing:.04em;min-height:56px}
+  .csBarre{display:flex;align-items:center;gap:10px;margin:10px 13px 0}
+  .csDom{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:500 12.5px var(--sans);color:var(--or-clair)}
+  .csOnglet{flex:none;display:inline-flex;align-items:center;text-decoration:none;
+    border:1px solid var(--trait);border-radius:9px;padding:8px 11px;min-height:38px;
+    color:var(--or-clair);font:500 12px var(--sans)}
+  .csOnglet:hover{border-color:var(--or)}
+  .csCadre{position:relative;flex:1 1 auto;min-height:0;margin:11px 13px 10px;
+    border:1px solid var(--trait);border-radius:9px;overflow:hidden;background:#fff}
+  .csCadre iframe{display:block;width:100%;height:100%;border:0}
+  .csRepli{margin:0 13px 12px;padding-left:9px;border-left:2px solid var(--trait);
+    font:400 11.5px/1.45 var(--sans);color:var(--faible)}
+  /* 26/11/2026 — LA CIBLE ESSENTIEL. Loic : « pour une cible essentiel, a
+     gauche juste son nom, entreprise, et a droite le script ».
+     Avant, le panneau de gauche d un prospect sans site etait un grand cadre
+     en pointilles presque vide (mesure a 1400px : 560px de haut pour deux
+     lignes de texte), et son nom restait ecrit en petit tout en haut. En
+     haut-parleur, a deux metres de l ecran, ce nom n est pas lisible.
+     Maintenant c est une FICHE D IDENTITE : le nom en grand au centre, la
+     commune, l offre, et l argument en dessous. Le nom de l en-tete s efface,
+     sinon il serait ecrit deux fois.
+     Tout est ici, dans le media query de l etabli : sous 700px le cadre
+     entier est en display:none, donc le telephone ne voit rien de ceci. */
+  #cadreSite.csEssentiel .csQui{display:none}
+  #cadreSite.csEssentiel .csTete{justify-content:flex-end}
+  .csIdentite{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
+    margin:11px 13px 13px;padding:26px 20px;text-align:center;
+    border:1px solid var(--trait-fort);border-radius:11px;
+    background:linear-gradient(180deg,rgba(23,58,43,.34),rgba(10,25,19,.26))}
+  .csiNom{font:600 clamp(23px,3.1vw,36px)/1.18 var(--romain);color:var(--blanc);
+    overflow-wrap:break-word}
+  .csiVille{margin-top:9px;font:400 15px/1.3 var(--sans);color:var(--or-clair);
+    letter-spacing:.09em;text-transform:uppercase}
+  .csiOffre{align-self:center;margin-top:15px;border:1px solid var(--or);border-radius:999px;
+    padding:5px 15px;font:500 11.5px/1 var(--sans);color:var(--or-clair);letter-spacing:.09em;
+    text-transform:uppercase}
+  .csiArg{margin-top:24px;padding-top:18px;border-top:1px solid var(--trait);
+    font:400 13.5px/1.6 var(--sans);color:var(--doux)}
+  .csiArg b{font-weight:600;color:var(--or-clair)}
+}
+@media(min-width:1100px){
+  .enveloppe{max-width:1180px}
+  .liens{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1560px){
+  .enveloppe{max-width:1500px}
+  .liens{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
 /* ---- en-tête ---- */
 .tete{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
   background:linear-gradient(var(--vert-950) 68%,rgba(5,11,8,.92));
@@ -375,6 +510,12 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 .fFait{margin-top:12px;padding:12px;border-radius:11px;text-align:center;
   background:rgba(87,177,131,.12);border:1px solid rgba(87,177,131,.4);
   color:var(--menthe);font:600 14px var(--sans)}
+.fFait small{display:block;margin-top:4px;font:400 12px var(--sans);opacity:.85}
+.fFait.attente{background:rgba(201,162,75,.10);border-color:rgba(201,162,75,.38);color:var(--or-clair)}
+.fFait.rate{background:rgba(200,80,70,.12);border-color:rgba(200,80,70,.45);color:#e8a39c}
+.fReessayer{width:100%;min-height:46px;margin-top:8px;border-radius:10px;
+  border:1px solid var(--or);background:transparent;color:var(--or-clair);
+  font:600 14px var(--sans);cursor:pointer}
 .fFini{text-align:center;padding:40px 16px;color:var(--doux)}
 .fFini b{display:block;font:600 19px var(--romain);color:var(--or-clair);margin-bottom:8px}
 
@@ -387,6 +528,56 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
 @media (max-width:540px){
   .vueFile{display:block}
   .vueListe{display:none}
+
+  /* 24/11/2026 — l ecran de couverture du Honor : montrer peu, et l essentiel.
+     Loic : « sur l ecran exterieur je dois voir le script d appel et les
+     taches a faire et surtout les prospects a appeler ».
+     Mesure a 353px : le grand titre et sa phrase poussaient « QUI APPELER »
+     a 253px du haut, soit un tiers de l ecran mange avant le premier
+     prospect. Le titre reste (il dit ou on est) mais tient sur une ligne, et
+     la phrase d explication s efface : elle apprend le script a quelqu un qui
+     le connait par coeur depuis des semaines.
+     On ne touche PAS aux onglets. Cacher OUTILS sur l ecran de couverture
+     rendrait le telephone irrecuperable : la cle de l app ne se saisit que
+     la, et trois messages d erreur disent « Saisis-la une fois dans OUTILS ».
+     Les cacher ferait pointer l app vers un endroit qui n existe plus. */
+  #v-appels>h2.titre{font-size:25px;margin-bottom:6px}
+  #v-appels>.sous{display:none}
+}
+
+/* ================= L APPEL SUR ECRAN ETROIT. 26/11/2026 =================
+   Loic : « deux apps cote a cote » sur le Honor deplie — Chrome d un cote
+   avec le site du prospect, l app de l autre, environ 360 px de large.
+   Mesure du 26/11 avant correction, a 360 px : la fiche occupe le premier
+   ecran, et le script commence a 1760 px du haut, soit 2,2 ecrans plus bas.
+   Entre les deux : la frise, les trois onglets d offre, l aiguille (338 px)
+   et les deux liens. Une fois arrive au script, la fiche est hors ecran :
+   plus de numero, plus de boutons de resultat.
+   Ce qui se passe maintenant quand on ouvre le script : la fiche s efface,
+   l aiguille et les onglets d offre aussi (l offre est DEJA choisie par la
+   fiche, comme sur l etabli), et une barre reste collee sous l en-tete avec
+   le nom, le numero et le retour. Un seul appui pour revenir noter.
+   La borne est 699 px : au-dela c est l etabli qui prend la main, et rien
+   de ce bloc ne s applique. */
+@media (max-width:699px){
+  body.appelEnCours .barreAppel{display:flex}
+  body.appelEnCours #v-appels #blocListe{display:none}
+  body.appelEnCours #v-appels .etPanneauD>.frise{display:none}
+  body.appelEnCours #v-appels #offres{display:none}
+  body.appelEnCours #v-appels .aiguille{display:none}
+
+  .barreAppel{align-items:center;gap:9px;
+    margin:0 -18px;padding:9px 18px 10px}
+  .baRetour{flex:none;border:1px solid var(--trait);border-radius:9px;
+    padding:8px 10px;min-height:38px;color:var(--doux);
+    font:500 12px var(--sans);cursor:pointer}
+  .baRetour:active{border-color:var(--or)}
+  .baQui{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
+    white-space:nowrap;font:600 14.5px var(--romain);color:var(--blanc)}
+  .baTel{flex:none;display:flex;align-items:center;justify-content:center;
+    width:44px;height:44px;border-radius:11px;text-decoration:none;
+    background:var(--menthe);color:var(--vert-950);font-size:19px}
+  .baTel.vide{display:none}
 }
 </style>
 
@@ -407,6 +598,17 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
       <button role="tab" aria-selected="false" data-vue="chiffres">Chiffres</button>
       <button role="tab" aria-selected="false" data-vue="outils">Outils</button>
     </nav>
+    <!-- La barre d appel. Elle vit DANS l en-tete, qui est deja collant :
+         comme ca elle ne peut pas se desynchroniser de lui. Une barre posee
+         en dessous aurait demande sa hauteur en dur, et cette hauteur change
+         avec la largeur — 101 px a 353 px, 89 px a 360 px (mesure le 26/11).
+         Elle est eteinte par defaut dans le CSS, pas seulement absente des
+         regles : sans ca elle s afficherait partout. -->
+    <div class="barreAppel" id="barreAppel">
+      <button type="button" class="baRetour" data-retour="fiche">&larr; La fiche</button>
+      <b class="baQui" id="baQui">&mdash;</b>
+      <a class="baTel" id="baTel" href="tel:" aria-label="Appeler ce prospect">&#9742;</a>
+    </div>
   </header>
 
   <!-- ================= CE SOIR ================= -->
@@ -429,7 +631,12 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
     <h2 class="titre">Le script, <em>dans la main.</em></h2>
     <p class="sous">Choisis l'offre, suis les sept étapes. Le silence fait partie du script.</p>
 
-  <div id="blocListe">
+  <!-- L'ÉTABLI : à gauche qui on appelle (puis son site), à droite quoi lui dire.
+       Sur un téléphone, les deux panneaux s'empilent et l'ordre ne change pas. -->
+  <div class="etabli">
+   <div class="etPanneauG">
+    <i id="etabliSonde" aria-hidden="true"></i>
+    <div id="blocListe">
     <div class="listeTete"><b>QUI APPELER</b><small id="listeCompte">la tournée du 77</small></div>
     <button class="btnListe" type="button" id="btnListe">Charger la liste</button>
     <div class="sousOnglets" id="sousOnglets" role="tablist" hidden>
@@ -437,7 +644,13 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
       <button role="tab" type="button" id="ongletAvec" data-groupe="avec" aria-selected="false">🔧 Avec site</button>
     </div>
     <div id="listeAppels"></div>
-  </div>
+    </div>
+    <!-- Le site du prospect, une fois qu'une fiche est prise en main.
+         Rempli par prendreEnMain(), vidé par le retour à la liste. -->
+    <div id="cadreSite"></div>
+   </div>
+
+   <div class="etPanneauD">
 
   <div class="frise" aria-hidden="true"></div>
 
@@ -483,6 +696,9 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
       <div class="etiquette" style="margin-top:0">Après l'appel, je note</div>
       <p>Appelé · Rappeler [jour] · Pas intéressé · RDV</p>
     </div>
+
+   </div><!-- fin .etPanneauD -->
+  </div><!-- fin .etabli -->
   </section>
 
   <!-- ================= OUTILS ================= -->
@@ -598,10 +814,6 @@ var CHANTIERS=[
           {n:'Message après appel',c:MSG_APPEL},
           {n:'Envoyer par WhatsApp',w:MSG_APPEL},
           {n:'Gmail',l:'gmail',u:'https://mail.google.com'}]},
- {id:'cliente',ico:'ciseaux',nom:'Site cliente',sous:'Angel Sewing',
-  etapes:[{t:'Finir les retouches du site'},{t:'Envoyer le devis'},{t:'Réclamer photos, textes et liens'}],
-  outils:[{n:'Demander ses photos',c:MSG_PHOTOS},{n:'Gmail',l:'gmail',u:'https://mail.google.com'},
-          {n:'Drive',l:'googledrive',u:'https://drive.google.com'}]},
  {id:'tech',ico:'flux',nom:'Technique',sous:'n8n et automatisations',
   etapes:[{t:'Regarder les exécutions en erreur'},{t:'Corriger ce qui bloque'},{t:'Relancer et vérifier'}],
   outils:[{n:'n8n',l:'n8n',u:'https://n8n.srv1677224.hstgr.cloud'},{n:'GitHub',l:'github',u:'https://github.com'},
@@ -1044,6 +1256,10 @@ $$('.onglets button').forEach(function(b){b.onclick=function(){
     document.getElementById('v-'+v).hidden = (v!==b.dataset.vue);
   });
   if(b.dataset.vue==='chiffres')rendreChiffres();
+  /* On quitte APPELS : la barre d appel n a plus rien a faire dans
+     l en-tete. Ecrit en clair et pas par barreDescend(), qui est declaree
+     dans une fonction fermee plus bas et serait « not defined » ici. */
+  document.body.classList.remove('appelEnCours');
   window.scrollTo({top:0,behavior:'smooth'});
 }});
 $$('#offres button').forEach(function(b){b.onclick=function(){
@@ -1223,6 +1439,23 @@ rendreSoir(); rendreAppels(); rendreOutils();
     }
     return s;
   }
+  /* 26/11/2026 — Loic : « mets 390 € ». n8n envoie « Essentiel 390 EUR »
+     (nœud de code du pilote 20), et c est ce texte brut qui s affichait sur
+     les trois ecrans. On ne touche PAS a n8n pour si peu : on met en forme a
+     l affichage, ici, et la donnee reste ce qu elle est.
+     Aucune barre oblique inverse : ni regex, ni \u20ac — le caractere euro
+     est ecrit en clair, comme garde() plus haut evite les echappements.
+     Si le texte ne finit pas par EUR / EUROS, il ressort tel quel : le code
+     s adapte a ce qu on lui donne, il n impose pas une forme. */
+  function prix(t){
+    t = String(t == null ? '' : t).trim();
+    var i = t.toUpperCase().lastIndexOf('EUR');
+    if (i < 0) return t;
+    var apres = t.slice(i + 3).trim().toUpperCase();
+    if (apres !== '' && apres !== 'O' && apres !== 'OS') return t;
+    var avant = t.slice(0, i).trim();
+    return avant ? (avant + ' €') : '€';
+  }
   function domaine(u){
     u = String(u == null ? '' : u);
     var i = u.indexOf('//');
@@ -1234,7 +1467,132 @@ rendreSoir(); rendreAppels(); rendreOutils();
     return r;
   }
 
-  function fiche(p){
+  /* ---- L ETABLI : le site du prospect a gauche, le script a droite ----
+     22/11/2026. On ne demande PAS sa largeur au JavaScript : on demande au CSS
+     si l etabli est monte, en lisant la sonde que le media query allume. Deux
+     tentatives par evenement ont deja echoue dans ce fichier — resize ne
+     basculait qu en depliant, matchMedia ne se reevaluait pas du tout — alors
+     qu une lecture faite au moment du clic n a aucun evenement a rater. */
+  function etabliActif(){
+    var s = document.getElementById('etabliSonde');
+    return !!s && getComputedStyle(s).display !== 'none';
+  }
+
+  /* ---- L APPEL SUR ECRAN ETROIT : la barre monte, la fiche s efface ----
+     26/11/2026. Meme sonde que l etabli, lue au moment du clic : au-dessus de
+     699 px c est prendreEnMain() qui s en charge, ici on ne fait rien.
+     La hauteur de l en-tete est RELUE a chaque fois, jamais figee : elle vaut
+     101 px a 353 px (le titre passe a la ligne) et 89 px a 360 px. */
+  var barreAppel = document.getElementById('barreAppel');
+
+  function barreMonte(p){
+    if (!barreAppel || !p) return;
+    var qui = document.getElementById('baQui');
+    var tel = document.getElementById('baTel');
+    if (qui) qui.textContent = p.nom || '(sans nom)';
+    var num = garde(p.tel);
+    if (tel){
+      if (num) tel.setAttribute('href', 'tel:' + num);
+      else tel.removeAttribute('href');
+      /* Une classe, pas l attribut hidden : une regle de classe bat
+         [hidden], et le bouton serait reste visible sans rien faire. */
+      tel.classList.toggle('vide', !num);
+    }
+    document.body.classList.add('appelEnCours');
+    versLeHaut(document.getElementById('script'));
+  }
+
+  function barreDescend(){ document.body.classList.remove('appelEnCours'); }
+
+  /* On place l element juste sous l en-tete collant, dont on relit la hauteur
+     maintenant — apres que la barre y soit montee, donc barre comprise. */
+  function versLeHaut(e){
+    var tete = document.querySelector('.tete');
+    if (!e || !tete) return;
+    var y = e.getBoundingClientRect().top + (window.pageYOffset || 0)
+          - tete.getBoundingClientRect().height - 8;
+    window.scrollTo(0, y > 0 ? y : 0);
+  }
+
+  if (barreAppel) barreAppel.addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('[data-retour]') : null;
+    if (!b) return;
+    barreDescend();
+    versLeHaut(document.getElementById('blocListe'));
+  });
+
+  function prendreEnMain(p){
+    var panneau = document.querySelector('.etPanneauG');
+    var cadre = document.getElementById('cadreSite');
+    if (!panneau || !cadre || !p) return;
+
+    var h = '<div class="csTete"><div class="csQui"><b>' + esc(p.nom || '(sans nom)') + '</b>';
+    var sous = [];
+    if (p.ville) sous.push(p.ville);
+    if (p.offre) sous.push(prix(p.offre));
+    if (sous.length) h += '<small>' + esc(sous.join(' · ')) + '</small>';
+    h += '</div><button type="button" class="csRetour" data-cs="liste">← La liste</button></div>';
+
+    var num = garde(p.tel);
+    if (num) h += '<a class="csTel" href="tel:' + esc(num) + '"><span>☎</span>' + esc(p.tel) + '</a>';
+
+    var d = domaine(p.site);
+    if (d){
+      /* La sortie vers un vrai onglet est TOUJOURS visible, au-dessus du cadre.
+         Un site peut refuser d etre affiche dans un cadre, et ce refus est
+         muet : le cadre reste blanc, aucune erreur nulle part. On ne tente
+         donc pas de le detecter — on laisse la porte de sortie sous les yeux
+         et on dit en toutes lettres quoi faire. */
+      h += '<div class="csBarre"><span class="csDom">' + esc(d) + '</span>'
+         + '<a class="csOnglet" href="' + esc(p.site) + '" target="_blank" rel="noopener noreferrer">Ouvrir dans un onglet ↗</a></div>';
+      /* referrerpolicy : le prospect ne lit pas dans ses statistiques qu une
+         page impact-nva.fr a regarde son site juste avant l appel.
+         sandbox : son site garde son origine et tourne normalement, mais il ne
+         peut pas emmener l app ailleurs. */
+      h += '<div class="csCadre"><iframe src="' + esc(p.site) + '"'
+         + ' title="Le site de ' + esc(p.nom || 'ce prospect') + '"'
+         + ' referrerpolicy="no-referrer"'
+         + ' sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe></div>';
+      h += '<p class="csRepli">Le cadre reste blanc&nbsp;? Son site refuse d’être affiché ici. Ouvre-le dans un onglet, juste au-dessus.</p>';
+    } else {
+      /* 26/11/2026 — pas de site : le panneau de gauche devient sa fiche
+         d identite. Le nom en grand, parce que Loic appelle en haut-parleur
+         sans etre devant l ecran. La liste reçue de n8n (pilote 20) ne porte
+         AUCUN prenom de contact : le tableau Prospects n a pas cette colonne,
+         il n a que « Entreprise ». On affiche donc ce qui existe vraiment, et
+         rien d invente. */
+      var lieu = p.ville ? '<div class="csiVille">' + esc(p.ville) + '</div>' : '';
+      var off  = p.offre ? '<div class="csiOffre">' + esc(prix(p.offre)) + '</div>' : '';
+      var ou   = p.ville ? ('à ' + p.ville) : 'dans sa commune';
+      h += '<div class="csIdentite">'
+         + '<div class="csiNom">' + esc(p.nom || '(sans nom)') + '</div>'
+         + lieu + off
+         + '<div class="csiArg"><b>Pas de site.</b> '
+         + 'C’est l’argument&nbsp;: quand on cherche un paysagiste '
+         + esc(ou) + ', on ne le trouve pas.</div>'
+         + '</div>';
+    }
+
+    cadre.innerHTML = h;
+    /* La classe dit au CSS lequel des deux panneaux est monte. On l enleve
+       toujours avant de la remettre : sans ça, passer d un prospect sans site
+       a un prospect avec site laisserait le nom de l en-tete cache. */
+    cadre.classList.toggle('csEssentiel', !d);
+    panneau.classList.add('enAppel');
+  }
+
+  var cadreSite = document.getElementById('cadreSite');
+  if (cadreSite) cadreSite.addEventListener('click', function(ev){
+    var b = ev.target.closest ? ev.target.closest('[data-cs]') : null;
+    if (!b || b.getAttribute('data-cs') !== 'liste') return;
+    var panneau = document.querySelector('.etPanneauG');
+    if (panneau) panneau.classList.remove('enAppel');
+    /* On vide le cadre : sinon le site du prospect precedent continue de
+       tourner derriere la liste — sons, videos, requetes. */
+    cadreSite.innerHTML = '';
+  });
+
+  function fiche(p, i){
     var h = '<div class="fa">';
     if (p.priorite === 'HAUTE') h += '<div class="haute">PRIORITÉ</div>';
     h += '<h4>' + esc(p.nom || '(sans nom)') + '</h4>';
@@ -1250,8 +1608,12 @@ rendreSoir(); rendreAppels(); rendreOutils();
        pour que la liste et le script ne puissent pas se contredire. Le bouton
        bascule l'onglet d'offre, ce qui redessine le script ET les deux liens
        a envoyer (impact-nva.fr en 1, la demo de l'offre en 2). */
-    h += '<button class="versScript" type="button" data-offre="' + (p.sansSite ? 'essentiel' : 'prestige') + '">'
-       + 'Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</button>';
+    /* Deux libelles, et c est le CSS qui choisit : sur un telephone le script
+       est plus bas (« ↓ »), sur l etabli il est deja a cote. Un libelle qui
+       ment sur ce qui va se passer est pire que pas de libelle. */
+    h += '<button class="versScript" type="button" data-i="' + i + '" data-offre="' + (p.sansSite ? 'essentiel' : 'prestige') + '">'
+       + '<span class="motEtroit">Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</span>'
+       + '<span class="motLarge">Le prendre en main →</span></button>';
     return h + '</div>';
   }
 
@@ -1263,8 +1625,17 @@ rendreSoir(); rendreAppels(); rendreOutils();
     if (!b) return;
     var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
     if (onglet) onglet.click();
-    var s = $('#script');
-    if (s && s.scrollIntoView) s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* Sur l etabli, le script est deja a cote : descendre vers lui n aurait
+       aucun sens. On monte le site du prospect dans le panneau de gauche, et
+       les deux restent sous les yeux pendant tout l appel. */
+    if (etabliActif()){
+      prendreEnMain(aAppeler[Number(b.getAttribute('data-i'))]);
+      return;
+    }
+    /* Ecran etroit : on ne descend plus de 1760 px vers le script, c est le
+       script qui prend la place de la fiche. La barre garde le nom, le
+       numero et le retour. */
+    barreMonte(aAppeler[Number(b.getAttribute('data-i'))]);
   });
 
   /* 14/11/2026 — Loic : « je dois descendre pendant 10 secondes sur le tel pour
@@ -1308,6 +1679,51 @@ rendreSoir(); rendreAppels(); rendreOutils();
     { k:'vente',     n:'Vente', gros:true }
   ];
 
+  /* LA PORTE QUI ECRIT — pilote 25, webhook impact-nva-resultat-appel.
+     Meme cle que la liste : l'en-tete x-impact-cle, deja saisie sur cet
+     appareil. Aucun secret n'est ecrit ici.
+     L'envoi se fait EN ARRIERE-PLAN : Loic passe au prospect suivant tout de
+     suite, il n'attend pas le reseau. L'etat revient se poser sur la fiche,
+     et s'il a rate, il le dit et propose de reessayer. On ne laisse jamais
+     croire que le tableau est au courant quand il ne l'est pas. */
+  var ECRITURE = 'https://n8n.srv1677224.hstgr.cloud/webhook/impact-nva-resultat-appel';
+
+  function envoyerResultat(p, issue){
+    var k = cle(p), nom = '';
+    ISSUES_FILE.forEach(function(x){ if (x.k === issue) nom = x.n; });
+    resultats[k] = { n:nom, k:issue, e:'envoi' };
+
+    var c = cleDeLAppareil();
+    if (!c){
+      resultats[k] = { n:nom, k:issue, e:'rate',
+        m:'Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS.' };
+      rendre(gardee);
+      return;
+    }
+    fetch(ECRITURE, {
+      method:'POST',
+      headers:{ 'x-impact-cle':c, 'Content-Type':'application/json' },
+      body: JSON.stringify({ ligne: Number(p.ligne || 0), tel: String(p.tel || ''), resultat: issue })
+    })
+      .then(function(r){
+        if (r.status === 403) throw new Error('cle');
+        if (!r.ok) throw new Error('code ' + r.status);
+        return r.json();
+      })
+      .then(function(d){
+        if (d && d.ok) resultats[k] = { n:nom, k:issue, e:'ok' };
+        else resultats[k] = { n:nom, k:issue, e:'rate', m:(d && d.motif) || 'n8n a refusé d’écrire.' };
+      })
+      .catch(function(e){
+        var m = String(e && e.message || e), t;
+        if (m === 'cle') t = 'La clé de cet appareil a été refusée par n8n.';
+        else if (m.indexOf('code ') === 0) t = 'n8n a répondu ' + m + '.';
+        else t = 'Pas de réseau. Rien n’est noté dans le tableau.';
+        resultats[k] = { n:nom, k:issue, e:'rate', m:t };
+      })
+      .then(function(){ rendre(gardee); });
+  }
+
   function rendre(liste){
     gardee = liste || [];
     if (!gardee.length){
@@ -1331,7 +1747,11 @@ rendreSoir(); rendreAppels(); rendreOutils();
     }
 
     aAppeler = (groupe === 'sans') ? sans : avec;
-    if (position >= aAppeler.length) position = 0;
+    /* 14/11/2026 — on BORNE, on ne remet plus a zero. Avant, arriver au bout
+       du groupe renvoyait en silence sur la premiere fiche : l'ecran « Groupe
+       termine » etait du code mort, et on avait l'impression de tourner en
+       rond. Le retour a zero appartient au changement d'onglet, pas ici. */
+    if (position > aAppeler.length) position = aAppeler.length;
 
     /* 14/11/2026 — les DEUX vues sont dessinees, et c'est le CSS qui en
        affiche une selon la largeur. Essaye d'abord avec un evenement :
@@ -1361,8 +1781,11 @@ rendreSoir(); rendreAppels(); rendreOutils();
     var total = aAppeler.length;
     if (!total) return '<p class="listeMot">Personne dans ce groupe.</p>';
     if (position >= total){
+      /* Un bouton pour revenir : sans lui, l'ecran de fin est un cul-de-sac et
+         le dernier resultat n'est plus consultable. Vu le 14/11 en essayant. */
       return '<div class="fFini"><b>Groupe terminé.</b>'
-        + 'Tu as parcouru les ' + total + ' fiches. Passe à l’autre onglet, ou recharge la liste.</div>';
+        + 'Tu as parcouru les ' + total + ' fiches. Passe à l’autre onglet, ou recharge la liste.'
+        + '<div class="fPied" style="margin-top:16px;grid-template-columns:1fr"><button type="button" data-nav="prec">← Revoir la dernière</button></div></div>';
     }
     var p = aAppeler[position];
     var r = resultats[cle(p)];
@@ -1371,7 +1794,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + (p.priorite === 'HAUTE' ? ' · <b>PRIORITÉ</b>' : '') + '</div>';
     h += '<h3 class="fNom">' + esc(p.nom || '(sans nom)') + '</h3>';
     if (p.ville) h += '<div class="fVille">' + esc(p.ville) + '</div>';
-    if (p.offre) h += '<div class="fOffre">' + esc(p.offre) + '</div>';
+    if (p.offre) h += '<div class="fOffre">' + esc(prix(p.offre)) + '</div>';
     var num = garde(p.tel);
     if (num) h += '<a class="fTel" href="tel:' + esc(num) + '"><span>☎</span>' + esc(p.tel) + '</a>';
     var d = domaine(p.site);
@@ -1380,7 +1803,18 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + 'Ouvrir le script ' + (p.sansSite ? 'Essentiel' : 'Prestige') + ' ↓</button>';
 
     if (r){
-      h += '<div class="fFait">' + esc(r) + '</div>';
+      /* 14/11/2026 — le resultat ne reste plus sur le telephone : il part au
+         tableau par le pilote 25. L'etat est dit en toutes lettres, parce
+         qu'un envoi peut echouer et qu'on ne laisse jamais croire que le
+         tableau est au courant quand il ne l'est pas. */
+      var cls = r.e === 'ok' ? '' : (r.e === 'envoi' ? ' attente' : ' rate');
+      var dit = r.e === 'ok' ? '✓ noté dans le tableau'
+              : (r.e === 'envoi' ? '⏳ envoi au tableau…' : '⚠ pas noté dans le tableau');
+      h += '<div class="fFait' + cls + '">' + esc(r.n) + '<small>' + esc(dit) + '</small></div>';
+      if (r.e === 'rate'){
+        if (r.m) h += '<p class="fNote erreur">' + esc(r.m) + '</p>';
+        h += '<button type="button" class="fReessayer" data-reprendre="' + esc(r.k) + '">Réessayer</button>';
+      }
     } else {
       h += '<div class="fApres">APRÈS L’APPEL</div><div class="fIssues">';
       ISSUES_FILE.forEach(function(x){
@@ -1392,29 +1826,35 @@ rendreSoir(); rendreAppels(); rendreOutils();
        + '<button type="button" data-nav="prec"' + (position ? '' : ' disabled') + '>← Précédent</button>'
        + '<button type="button" data-nav="suiv">Suivant →</button>'
        + '</div>';
-    /* Tant que la porte d'ecriture n'existe pas, on ne laisse pas croire que
-       le tableau est au courant. */
-    h += '<p class="fNote">Le résultat reste sur ce téléphone : le tableau ne le sait pas encore. Ça viendra avec la porte qui écrit.</p>';
+    if (!r) h += '<p class="fNote">Ce que tu choisis part dans le tableau tout de suite. « À rappeler » le fait disparaître de la file pendant deux jours.</p>';
     return h + '</div>';
   }
 
   zone.addEventListener('click', function(ev){
-    var b = ev.target.closest ? ev.target.closest('[data-issue],[data-nav],.fScript') : null;
+    /* [data-reprendre] DOIT figurer ici : sans lui, le bouton « Réessayer »
+       n'est reconnu par personne et ne fait rien, en silence. Attrape le
+       14/11 en l'exerçant dans le navigateur — la syntaxe etait parfaite. */
+    var b = ev.target.closest ? ev.target.closest('[data-issue],[data-nav],[data-reprendre],.fScript') : null;
     if (!b) return;
     if (b.classList.contains('fScript')){
       var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
       if (onglet) onglet.click();
-      var s = $('#script');
-      if (s && s.scrollIntoView) s.scrollIntoView({ behavior:'smooth', block:'start' });
+      barreMonte(aAppeler[position]);
+      return;
+    }
+    var reprendre = b.getAttribute('data-reprendre');
+    if (reprendre){
+      var pr = aAppeler[position];
+      /* rendre() tout de suite : sinon le « ⏳ envoi… » n'apparait jamais au
+         reessai, et le bouton semble mort pendant la seconde d'attente. */
+      if (pr){ envoyerResultat(pr, reprendre); rendre(gardee); }
       return;
     }
     var issue = b.getAttribute('data-issue');
     if (issue){
       var p = aAppeler[position];
       if (!p) return;
-      var nom = '';
-      ISSUES_FILE.forEach(function(x){ if (x.k === issue) nom = x.n; });
-      resultats[cle(p)] = nom;
+      envoyerResultat(p, issue);
       position++;
       rendre(gardee);
       return;
@@ -1434,6 +1874,8 @@ rendreSoir(); rendreAppels(); rendreOutils();
       var b = ev.target.closest ? ev.target.closest('[data-groupe]') : null;
       if (!b) return;
       groupe = b.getAttribute('data-groupe');
+      position = 0; /* on change de groupe : on repart de sa premiere fiche */
+      barreDescend(); /* on change de groupe : l appel en cours n a plus de sens */
       rendre(gardee);
       /* On remonte en haut du bloc : sinon on change d'onglet et on reste au
          milieu de l'ancienne liste, ce qui donne l'impression que rien n'a
@@ -1444,6 +1886,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
   }
 
   btn.onclick = function(){
+    barreDescend(); /* on recharge la liste : on sort de l appel en cours */
     var k = cleDeLAppareil();
     if (!k){
       mot('Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS, puis reviens.', true);
