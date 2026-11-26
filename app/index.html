@@ -149,10 +149,33 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .csCadre iframe{display:block;width:100%;height:100%;border:0}
   .csRepli{margin:0 13px 12px;padding-left:9px;border-left:2px solid var(--trait);
     font:400 11.5px/1.45 var(--sans);color:var(--faible)}
-  .csSansSite{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
-    margin:11px 13px 13px;padding:22px 16px;text-align:center;color:var(--doux);
-    border:1px dashed var(--trait-fort);border-radius:9px;font:400 13.5px/1.55 var(--sans)}
-  .csSansSite b{display:block;margin-bottom:7px;font:600 16px var(--romain);color:var(--or-clair)}
+  /* 26/11/2026 — LA CIBLE ESSENTIEL. Loic : « pour une cible essentiel, a
+     gauche juste son nom, entreprise, et a droite le script ».
+     Avant, le panneau de gauche d un prospect sans site etait un grand cadre
+     en pointilles presque vide (mesure a 1400px : 560px de haut pour deux
+     lignes de texte), et son nom restait ecrit en petit tout en haut. En
+     haut-parleur, a deux metres de l ecran, ce nom n est pas lisible.
+     Maintenant c est une FICHE D IDENTITE : le nom en grand au centre, la
+     commune, l offre, et l argument en dessous. Le nom de l en-tete s efface,
+     sinon il serait ecrit deux fois.
+     Tout est ici, dans le media query de l etabli : sous 700px le cadre
+     entier est en display:none, donc le telephone ne voit rien de ceci. */
+  #cadreSite.csEssentiel .csQui{display:none}
+  #cadreSite.csEssentiel .csTete{justify-content:flex-end}
+  .csIdentite{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
+    margin:11px 13px 13px;padding:26px 20px;text-align:center;
+    border:1px solid var(--trait-fort);border-radius:11px;
+    background:linear-gradient(180deg,rgba(23,58,43,.34),rgba(10,25,19,.26))}
+  .csiNom{font:600 clamp(23px,3.1vw,36px)/1.18 var(--romain);color:var(--blanc);
+    overflow-wrap:break-word}
+  .csiVille{margin-top:9px;font:400 15px/1.3 var(--sans);color:var(--or-clair);
+    letter-spacing:.09em;text-transform:uppercase}
+  .csiOffre{align-self:center;margin-top:15px;border:1px solid var(--or);border-radius:999px;
+    padding:5px 15px;font:500 11.5px/1 var(--sans);color:var(--or-clair);letter-spacing:.09em;
+    text-transform:uppercase}
+  .csiArg{margin-top:24px;padding-top:18px;border-top:1px solid var(--trait);
+    font:400 13.5px/1.6 var(--sans);color:var(--doux)}
+  .csiArg b{font-weight:600;color:var(--or-clair)}
 }
 @media(min-width:1100px){
   .enveloppe{max-width:1180px}
@@ -1419,11 +1442,29 @@ rendreSoir(); rendreAppels(); rendreOutils();
          + ' sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe></div>';
       h += '<p class="csRepli">Le cadre reste blanc&nbsp;? Son site refuse d’être affiché ici. Ouvre-le dans un onglet, juste au-dessus.</p>';
     } else {
-      h += '<div class="csSansSite"><b>Pas de site.</b>'
-         + 'C’est l’argument&nbsp;: quand on cherche un paysagiste dans sa commune, on ne le trouve pas.</div>';
+      /* 26/11/2026 — pas de site : le panneau de gauche devient sa fiche
+         d identite. Le nom en grand, parce que Loic appelle en haut-parleur
+         sans etre devant l ecran. La liste reçue de n8n (pilote 20) ne porte
+         AUCUN prenom de contact : le tableau Prospects n a pas cette colonne,
+         il n a que « Entreprise ». On affiche donc ce qui existe vraiment, et
+         rien d invente. */
+      var lieu = p.ville ? '<div class="csiVille">' + esc(p.ville) + '</div>' : '';
+      var off  = p.offre ? '<div class="csiOffre">' + esc(p.offre) + '</div>' : '';
+      var ou   = p.ville ? ('à ' + p.ville) : 'dans sa commune';
+      h += '<div class="csIdentite">'
+         + '<div class="csiNom">' + esc(p.nom || '(sans nom)') + '</div>'
+         + lieu + off
+         + '<div class="csiArg"><b>Pas de site.</b> '
+         + 'C’est l’argument&nbsp;: quand on cherche un paysagiste '
+         + esc(ou) + ', on ne le trouve pas.</div>'
+         + '</div>';
     }
 
     cadre.innerHTML = h;
+    /* La classe dit au CSS lequel des deux panneaux est monte. On l enleve
+       toujours avant de la remettre : sans ça, passer d un prospect sans site
+       a un prospect avec site laisserait le nom de l en-tete cache. */
+    cadre.classList.toggle('csEssentiel', !d);
     panneau.classList.add('enAppel');
   }
 
