@@ -179,6 +179,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .csiArg{margin-top:24px;padding-top:18px;border-top:1px solid var(--trait);
     font:400 13.5px/1.6 var(--sans);color:var(--doux)}
   .csiArg b{font-weight:600;color:var(--or-clair)}
+
+  /* 27/11/2026 — NOTER LE RESULTAT SUR GRAND ECRAN. Releve en l exercant a
+     724 px : les cinq boutons n existaient QUE dans la vue file, affichee
+     sous 540 px. Sur le Honor deplie et sur le PC il n y avait donc aucun
+     moyen de noter un appel — pas un bouton cache, un bouton jamais ecrit.
+     Ils vivent maintenant au bas du panneau de gauche, qui reste colle
+     pendant tout l appel. On reprend les classes de la vue file (.fApres,
+     .fIssues, .fFait, .fReessayer) pour n avoir qu une seule apparence a
+     entretenir, juste resserrees : 44 px de haut au lieu de 52. */
+  .csIssues{flex:none;margin:0 13px 13px}
+  .csIssues .fApres{padding-top:11px;margin-bottom:8px}
+  .csIssues .fIssues{gap:7px;margin-bottom:0}
+  .csIssues .fIssues button{min-height:44px;font-size:13px}
+  .csIssues .fFait{margin-top:0}
+  .csIssues .fReessayer{margin-top:7px}
 }
 @media(min-width:1100px){
   .enveloppe{max-width:1180px}
@@ -1542,6 +1557,42 @@ rendreSoir(); rendreAppels(); rendreOutils();
     versLeHaut(document.getElementById('blocListe'));
   });
 
+  /* Le prospect actuellement dans le panneau de gauche. Il faut le garder :
+     les boutons de resultat sont dessines dans ce panneau, et au clic il n y
+     a plus d indice dans le DOM pour savoir de qui il s agit. */
+  var enMain = null;
+
+  /* Le meme contenu que dans la vue file du telephone : soit les cinq
+     boutons, soit l etat de l envoi. Ecrit une fois, utilise aux deux
+     endroits — deux copies auraient fini par diverger. */
+  function blocResultat(p){
+    var r = resultats[cle(p)];
+    if (r){
+      var cls = r.e === 'ok' ? '' : (r.e === 'envoi' ? ' attente' : ' rate');
+      var dit = r.e === 'ok' ? '✓ noté dans le tableau'
+              : (r.e === 'envoi' ? '⏳ envoi au tableau…' : '⚠ pas noté dans le tableau');
+      var h = '<div class="fFait' + cls + '">' + esc(r.n) + '<small>' + esc(dit) + '</small></div>';
+      if (r.e === 'rate'){
+        if (r.m) h += '<p class="fNote erreur">' + esc(r.m) + '</p>';
+        h += '<button type="button" class="fReessayer" data-reprendre="' + esc(r.k) + '">Réessayer</button>';
+      }
+      return h;
+    }
+    var g = '<div class="fApres">APRÈS L’APPEL</div><div class="fIssues">';
+    ISSUES_FILE.forEach(function(x){
+      g += '<button type="button" class="' + (x.gros ? 'gros' : '') + '" data-issue="' + x.k + '">' + esc(x.n) + '</button>';
+    });
+    return g + '</div>';
+  }
+
+  /* Redessine UNIQUEMENT le bloc de resultat, jamais tout le panneau : sinon
+     le site du prospect serait recharge a chaque appui, avec le clignotement
+     et le trafic que ca suppose. */
+  function rafraichirPanneau(){
+    var z = document.getElementById('csIssues');
+    if (z && enMain) z.innerHTML = blocResultat(enMain);
+  }
+
   function prendreEnMain(p){
     var panneau = document.querySelector('.etPanneauG');
     var cadre = document.getElementById('cadreSite');
@@ -1594,7 +1645,10 @@ rendreSoir(); rendreAppels(); rendreOutils();
          + '</div>';
     }
 
+    h += '<div class="csIssues" id="csIssues">' + blocResultat(p) + '</div>';
+
     cadre.innerHTML = h;
+    enMain = p;
     /* La classe dit au CSS lequel des deux panneaux est monte. On l enleve
        toujours avant de la remettre : sans ça, passer d un prospect sans site
        a un prospect avec site laisserait le nom de l en-tete cache. */
@@ -1604,13 +1658,34 @@ rendreSoir(); rendreAppels(); rendreOutils();
 
   var cadreSite = document.getElementById('cadreSite');
   if (cadreSite) cadreSite.addEventListener('click', function(ev){
-    var b = ev.target.closest ? ev.target.closest('[data-cs]') : null;
-    if (!b || b.getAttribute('data-cs') !== 'liste') return;
-    var panneau = document.querySelector('.etPanneauG');
-    if (panneau) panneau.classList.remove('enAppel');
-    /* On vide le cadre : sinon le site du prospect precedent continue de
-       tourner derriere la liste — sons, videos, requetes. */
-    cadreSite.innerHTML = '';
+    /* Les trois boutons du panneau passent par ici. [data-reprendre] DOIT
+       figurer dans la liste : sans lui « Réessayer » ne serait reconnu par
+       personne et resterait muet — deja paye le 14/11 dans la vue file. */
+    var b = ev.target.closest ? ev.target.closest('[data-cs],[data-issue],[data-reprendre]') : null;
+    if (!b) return;
+
+    if (b.getAttribute('data-cs') === 'liste'){
+      var panneau = document.querySelector('.etPanneauG');
+      if (panneau) panneau.classList.remove('enAppel');
+      /* On vide le cadre : sinon le site du prospect precedent continue de
+         tourner derriere la liste — sons, videos, requetes. */
+      cadreSite.innerHTML = '';
+      enMain = null;
+      return;
+    }
+
+    if (!enMain) return;
+    var reprendre = b.getAttribute('data-reprendre');
+    if (reprendre){
+      envoyerResultat(enMain, reprendre);
+      rafraichirPanneau(); /* le « envoi… » doit apparaitre tout de suite */
+      return;
+    }
+    var issue = b.getAttribute('data-issue');
+    if (issue){
+      envoyerResultat(enMain, issue);
+      rafraichirPanneau();
+    }
   });
 
   function fiche(p, i){
@@ -1623,7 +1698,15 @@ rendreSoir(); rendreAppels(); rendreOutils();
     /* Le site s'ouvre dans un onglet a cote : rel noopener, parce qu'une page
        ouverte par un lien peut sinon reprendre la main sur celle qui l'ouvre. */
     var d = domaine(p.site);
-    if (d) h += '<a class="dom" href="' + esc(p.site) + '" target="_blank" rel="noopener noreferrer">↗ Voir son site <span>' + esc(d) + '</span></a>';
+    /* Deux libelles, et c est le CSS qui choisit, comme pour le bouton du
+       script. Sur un telephone le site s ouvre bien dans un onglet ; sur
+       l etabli il se charge dans le panneau de gauche, et le libelle doit le
+       dire. Un libelle qui ment sur ce qui va se passer est pire que pas de
+       libelle. */
+    if (d) h += '<a class="dom" href="' + esc(p.site) + '" data-i="' + i + '" target="_blank" rel="noopener noreferrer">'
+       + '<span class="motEtroit">↗ Voir son site </span>'
+       + '<span class="motLarge">Voir son site ici → </span>'
+       + '<span>' + esc(d) + '</span></a>';
     /* 14/11/2026 — la fiche choisit le script a la place de Loic. Sans site
        -> Essentiel, avec site -> Prestige : la meme regle que le pilote 14,
        pour que la liste et le script ne puissent pas se contredire. Le bouton
@@ -1642,6 +1725,23 @@ rendreSoir(); rendreAppels(); rendreOutils();
      a chaque chargement, et des ecouteurs poses fiche par fiche seraient
      perdus ou dupliques. */
   zone.addEventListener('click', function(ev){
+    /* 27/11/2026 — Loic : « sur grand ecran du Honor, quand on clique sur le
+       site du prospect ca se met sur toute la page, ce n est pas bon ».
+       C etait le lien « Voir son site » de la liste : target=_blank, donc un
+       onglet par-dessus l app, qui disparait. Sur l etabli on charge le site
+       dans le panneau de gauche a la place. Sous 700 px il n y a pas de
+       panneau, donc le lien garde son onglet et son libelle. */
+    var lien = ev.target.closest ? ev.target.closest('a.dom') : null;
+    if (lien && etabliActif()){
+      ev.preventDefault();
+      var pp = aAppeler[Number(lien.getAttribute('data-i'))];
+      if (pp){
+        var ong = $('#offres button[data-offre=' + (pp.sansSite ? 'essentiel' : 'prestige') + ']');
+        if (ong) ong.click();
+        prendreEnMain(pp);
+      }
+      return;
+    }
     var b = ev.target.closest ? ev.target.closest('.versScript') : null;
     if (!b) return;
     var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
@@ -1719,6 +1819,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
       resultats[k] = { n:nom, k:issue, e:'rate',
         m:'Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS.' };
       rendre(gardee);
+      rafraichirPanneau();
       return;
     }
     fetch(ECRITURE, {
@@ -1742,7 +1843,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
         else t = 'Pas de réseau. Rien n’est noté dans le tableau.';
         resultats[k] = { n:nom, k:issue, e:'rate', m:t };
       })
-      .then(function(){ rendre(gardee); });
+      .then(function(){ rendre(gardee); rafraichirPanneau(); });
   }
 
   function rendre(liste){
