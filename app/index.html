@@ -665,7 +665,7 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <!-- ================= APPELS ================= -->
   <section class="vue" id="v-appels" role="tabpanel" hidden>
     <h2 class="titre">Le script, <em>dans la main.</em></h2>
-    <p class="sous">Choisis l'offre, suis les cinq temps. Le silence fait partie du script.</p>
+    <p class="sous">Choisis l'offre, suis les trois phases. Le silence fait partie du script.</p>
 
   <!-- L'ÉTABLI : à gauche qui on appelle (puis son site), à droite quoi lui dire.
        Sur un téléphone, les deux panneaux s'empilent et l'ordre ne change pas. -->
@@ -864,96 +864,108 @@ var CHANTIERS=[
           {n:'Instagram',l:'instagram',u:'https://www.instagram.com'}]}
 ];
 
-/* ---------- le script d'appel, repris mot pour mot ---------- */
-/* ---------- le script d'appel : UN SEUL, en cinq temps ----------
-   27/11/2026. Loic : « un script c'est clair, impactant, et livre en 5 min.
-   Je ne peux pas retenir un prospect 10 min au telephone si je dois en
-   appeler plusieurs dans une journee. »
-   Avant : TROIS scripts de sept etapes (essentiel, prestige, signature), et
-   aucun pour Prismatik. Trois textes a tenir a jour, qui finissent par se
-   contredire. Maintenant : cinq temps toujours les memes, et un seul bloc
-   qui change — celui de la solution.
-   La trame est point A -> point B. Le point A, c'est sa reponse au temps 2 :
-   c'est LUI qui pose son probleme. Le point B, c'est le gros + de l'offre,
-   valide par Loic le 21/11 : Essentiel « Etre present », Prestige « Etre
-   valorise », Signature « Etre unique », Prismatik « Marquer les esprits ».
-   Les chiffres viennent des pages de vente, pas d'une estimation :
-   390, 690, 1290, option Prismatik 290, total Signature + Prismatik 1580.
-   Retire de l'ancien script, et pourquoi : l'etape « Pourquoi j'appelle »
-   parlait de Loic pendant 40 mots avant de l'avoir fait parler de lui ;
-   l'etape « 5 bis — avant d'annoncer 390 € » demandait les communes, alors
-   que le temps 3 l'a deja dit. Les deux coutaient trop cher en 5 minutes.
-   Parole de Loic mesuree : environ 175 mots, soit 70 secondes. Le reste des
-   cinq minutes, c'est le prospect qui parle, et ce sont les silences. */
+/* ---------- le script d'appel : UN SEUL, en TROIS PHASES ----------
+   27/11/2026. Loic, dans l'ordre ou il l'a dit :
+   « le mot d'ordre, c'est point A, point B » ; « il est important de
+   comprendre le probleme rencontre par le prospect suivant ce qu'il a deja ;
+   une fois qu'on le sait, nous on lui donne la solution ; donc probleme,
+   solution, le client passe a l'action avec nos offres irresistibles » ;
+   « un script c'est clair, impactant et livre en 5 min » ; et pour finir
+   « 1 script pour 3 phases comme on a dit ».
+
+   PHASE 1 — LE PROBLEME. Je me presente, je pose UNE question, je me tais.
+     Sa reponse me dit ce qu'il a deja. Je sonde ce qu'il a, et je me tais
+     encore : c'est LUI qui formule son probleme, pas moi.
+   PHASE 2 — LA SOLUTION. Le point B : le gros + de l'offre qui correspond,
+     son contenu, son prix une seule fois, et le silence.
+   PHASE 3 — L'ACTION. Les deux liens, et c'est moi qui fixe le rappel.
+
+   Seule la phase 2 change d'une offre a l'autre — et la sonde de la phase 1,
+   qui depend de ce qu'il a deja.
+
+   Avant : TROIS scripts de sept etapes, aucun pour Prismatik.
+
+   Les quatre gros + viennent du coffre, valides le 21/11 : Essentiel « etre
+   present », Prestige « etre valorise », Signature « etre unique »,
+   Prismatik « marquer les esprits ». Les chiffres viennent des pages de
+   vente : 390, 690, 1290, option Prismatik 290, total 1580.
+
+   Retire de l'ancien script : « Pourquoi j'appelle » (40 mots sur Loic avant
+   de l'avoir fait parler) et « 5 bis » (redemandait les communes). */
 
 var ACCROCHE='« Oui bonjour Monsieur, désolé de vous déranger. C’est Loïc, <strong>paysagiste confirmé en Seine-et-Marne</strong>, juste à côté de chez vous. Je suis aussi le <strong>fondateur d’Impact-NVA</strong>. Mon métier, c’est de rendre visible le vôtre. »';
 var QUESTION='« J’aimerais savoir : vos nouveaux clients, ils vous trouvent comment ? »';
+var TAIS_1='→ Je me tais. Sa réponse me dit ce qu’il a déjà.';
+var TAIS_2='→ Je me tais. C’est LUI qui pose son problème, avec ses mots.';
+var TAIS_3='→ Je me tais. Je ne comble pas le silence.';
 var OUVERTURE='« Votre travail est bon. Le problème, c’est qu’on ne le voit pas. »';
 var CONCLUSION='« Je vous envoie <strong>2 liens</strong> : mon site pour voir qui je suis, et un exemple concret. Vous regardez ce soir, et je vous rappelle <strong>[jour précis]</strong>. »';
 
-/* Les deux temps qui ne changent jamais, ecrits une fois. */
-var TEMPS_1={n:'1 · L’accroche',dit:[ACCROCHE],regie:'15 secondes. Je ne récite pas, je me présente.'};
-var TEMPS_2={n:'2 · La question',dit:[QUESTION],silence:'Je me tais. C’est sa réponse qui me dit quelle offre proposer.'};
-var TEMPS_5={n:'5 · L’action',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'};
+/* La phase 3 ne change jamais. Ecrite une fois. */
+var PHASE_3={n:'3 · L’action',dit:[CONCLUSION],
+  regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'};
+
+/* La phase 1 est la meme partout, sauf la sonde : ce que je demande depend
+   de ce qu il a deja. On la fabrique, plutot que de la recopier trois fois. */
+function phase1(sonde, regie){
+  return {n:'1 · Le problème',
+    dit:[ACCROCHE, QUESTION, TAIS_1].concat(sonde).concat([TAIS_2]),
+    regie:regie};
+}
 
 var SCRIPTS={
  essentiel:{
   liens:['impact-nva.fr','essentiel.impact-nva.fr'],
   pas:[
-   TEMPS_1,
-   TEMPS_2,
-   {n:'3 · Où il en est',dit:[
+   phase1([
      '« Et <strong>vous avez raison</strong>, c’est la meilleure pub qui existe. Mais elle vous entretient, elle ne vous fait pas grandir. »',
      '« Quand on vous recommande, la personne tape votre nom sur Google. <strong>Elle trouve quoi ?</strong> »'],
-    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.'},
-   {n:'4 · La solution — Essentiel 390 € · être présent',dit:[
+    'Accroche : 15 secondes. Je ne récite pas, je me présente.'),
+   {n:'2 · La solution — Essentiel 390 € · être présent',dit:[
      OUVERTURE,
      '« Moi, je vous fais une vitrine rien qu’à vous, avec <strong>vos vraies photos avant/après</strong>. Votre formulaire, et votre <strong>fiche Google reliée au site</strong>. »',
-     '« <strong>390 € une seule fois</strong>, pas d’abonnement. Vous n’êtes pas locataire de votre site, vous en êtes <strong>propriétaire</strong>. »'],
-    silence:'Je me tais. Je ne comble pas le silence.'},
-   TEMPS_5
+     '« <strong>390 € une seule fois</strong>, pas d’abonnement. Vous n’êtes pas locataire de votre site, vous en êtes <strong>propriétaire</strong>. »',
+     TAIS_3]},
+   PHASE_3
   ]},
  prestige:{
   liens:['impact-nva.fr','prestige.impact-nva.fr'],
   pas:[
-   TEMPS_1,
-   TEMPS_2,
-   {n:'3 · Où il en est',dit:[
+   phase1([
      '« Et ce site, il vous ramène <strong>combien de clients par mois</strong> ? »',
      '« Il est <strong>à vous</strong>, ou vous le payez tous les mois ? »'],
-    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.',
-    regie:'S’il le loue : « Ceux qui louent paient 100 à 150 € par mois. Sur 4 ans, ça fait 5 000 €, et le site n’est même pas à eux. »'},
-   {n:'4 · La solution — Prestige 690 € · être valorisé',dit:[
+    'Accroche : 15 secondes. — S’il loue son site : « Ceux qui louent paient 100 à 150 € par mois. Sur 4 ans, ça fait 5 000 €, et le site n’est même pas à eux. »'),
+   {n:'2 · La solution — Prestige 690 € · être valorisé',dit:[
      OUVERTURE,
      '« Un vrai site qui met <strong>vos chantiers</strong> en valeur, avec votre <strong>fiche Google reliée</strong>. Et vos clients vous envoient leur demande <strong>avec leurs photos</strong> : vous voyez le jardin avant même de vous déplacer. »',
-     '« <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »'],
-    silence:'Je me tais. Je ne comble pas le silence.'},
-   TEMPS_5
+     '« <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »',
+     TAIS_3]},
+   PHASE_3
   ]},
  signature:{
-  liens:['impact-nva.fr','prestige.impact-nva.fr'],
+  /* 27/11 — le 2e lien etait prestige.impact-nva.fr : on vendait la Signature
+     en montrant le Prestige. Loic : « tu as raison ». C est desormais
+     prismatik.impact-nva.fr, qui montre une Signature avec son option. */
+  liens:['impact-nva.fr','prismatik.impact-nva.fr'],
   pas:[
-   TEMPS_1,
-   TEMPS_2,
-   {n:'3 · Où il en est',dit:[
+   phase1([
      '« Vous travaillez sur <strong>combien de communes</strong> ? »',
      '« Et vos chantiers, vous les <strong>choisissez</strong>, ou vous prenez ce qui vient ? »'],
-    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.',
-    regie:'« Plus de demandes, ça veut dire que vous triez, vous gardez les beaux chantiers, et vous montez vos prix. »'},
-   {n:'4 · La solution — Signature 1 290 € · être unique',dit:[
+    'Accroche : 15 secondes. — « Plus de demandes, ça veut dire que vous triez, vous gardez les beaux chantiers, et vous montez vos prix. »'),
+   {n:'2 · La solution — Signature 1 290 € · être unique',dit:[
      OUVERTURE,
      '« Là, c’est votre travail qui passe en ligne : <strong>création entièrement sur mesure</strong>, textes rédigés pour vous, une page <strong>« Où j’interviens »</strong> avec toutes vos communes, et <strong>12 mois de suivi inclus</strong>. »',
-     '« <strong>1 290 € une seule fois.</strong> Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. »'],
-    silence:'Je me tais. Je ne comble pas le silence.',
-    regie:'Si ça bloque sur le prix : « Il y a aussi le Prestige à 690 €, je vous mets l’exemple dans le 2ᵉ lien. »'},
-   {n:'4 bis · L’option Prismatik — 290 € · marquer les esprits',dit:[
+     '« <strong>1 290 € une seule fois.</strong> Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. »',
+     TAIS_3],
+    regie:'Si ça bloque sur le prix : « Il y a aussi le Prestige à 690 €, je vous l’envoie aussi. »'},
+   {n:'2 bis · L’option Prismatik — 290 € · marquer les esprits',dit:[
      '« Et il y a une option, si vous voulez qu’on se souvienne de vous. »',
      '« Votre logo <strong>prend vie</strong> à l’ouverture du site : une animation à vos couleurs, le mot fort de votre nom éclate et se recompose. C’est votre <strong>signature visuelle</strong>. »',
      '« Et vous repartez avec <strong>les vidéos</strong> : story pour Facebook, Instagram et WhatsApp, et carré pour vos publications. Les fichiers sont à vous, pour toujours. »',
-     '« <strong>290 € en plus</strong> de la Signature. <strong>1 580 € au total</strong>, en une seule fois. »'],
-    silence:'Je me tais.',
-    regie:'Je ne la sors <strong>qu’après</strong> avoir senti que la Signature l’intéresse : avant, j’ajoute un prix à un prix. Si je la propose, le lien à envoyer est <strong>prismatik.impact-nva.fr</strong>.'},
-   TEMPS_5
+     '« <strong>290 € en plus</strong> de la Signature. <strong>1 580 € au total</strong>, en une seule fois. »',
+     TAIS_3],
+    regie:'Je ne la sors <strong>qu’après</strong> avoir senti que la Signature l’intéresse : avant, j’ajoute un prix à un prix. Le 2ᵉ lien la montre déjà.'},
+   PHASE_3
   ]}
 };
 
@@ -1173,7 +1185,15 @@ function rendreAppels(){
       ? '<div class="num"><span class="rom">'+ROM[+m[1]]+(m[2]?' bis':'')+'</span><span>'+esc(m[3])+'</span></div>'
       : '<div class="num"><span>'+esc(p.n)+'</span></div>';
     return '<div class="carte pas">'+tete+
-      p.dit.map(function(d){return '<p class="dit">'+d+'</p>'}).join('')+
+      /* 27/11/2026 — une phase contient plusieurs silences, pas un seul : apres
+         la question, puis apres sa reponse. Le champ « silence » n en portait
+         qu un. Une ligne qui commence par la fleche est donc dessinee comme un
+         silence, pas comme une phrase a dire. Un seul caractere a lire, aucune
+         structure de donnees a changer. */
+      p.dit.map(function(d){
+        return d.indexOf('→ ')===0 ? '<p class="silence">'+d+'</p>'
+                                        : '<p class="dit">'+d+'</p>';
+      }).join('')+
       (p.silence?'<p class="silence">→ '+esc(p.silence)+'</p>':'')+
       (p.regie?'<p class="regie">'+p.regie+'</p>':'')+'</div>';
   }).join('');
