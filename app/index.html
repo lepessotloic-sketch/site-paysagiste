@@ -179,6 +179,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .csiArg{margin-top:24px;padding-top:18px;border-top:1px solid var(--trait);
     font:400 13.5px/1.6 var(--sans);color:var(--doux)}
   .csiArg b{font-weight:600;color:var(--or-clair)}
+
+  /* 27/11/2026 — NOTER LE RESULTAT SUR GRAND ECRAN. Releve en l exercant a
+     724 px : les cinq boutons n existaient QUE dans la vue file, affichee
+     sous 540 px. Sur le Honor deplie et sur le PC il n y avait donc aucun
+     moyen de noter un appel — pas un bouton cache, un bouton jamais ecrit.
+     Ils vivent maintenant au bas du panneau de gauche, qui reste colle
+     pendant tout l appel. On reprend les classes de la vue file (.fApres,
+     .fIssues, .fFait, .fReessayer) pour n avoir qu une seule apparence a
+     entretenir, juste resserrees : 44 px de haut au lieu de 52. */
+  .csIssues{flex:none;margin:0 13px 13px}
+  .csIssues .fApres{padding-top:11px;margin-bottom:8px}
+  .csIssues .fIssues{gap:7px;margin-bottom:0}
+  .csIssues .fIssues button{min-height:44px;font-size:13px}
+  .csIssues .fFait{margin-top:0}
+  .csIssues .fReessayer{margin-top:7px}
 }
 @media(min-width:1100px){
   .enveloppe{max-width:1180px}
@@ -650,7 +665,7 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <!-- ================= APPELS ================= -->
   <section class="vue" id="v-appels" role="tabpanel" hidden>
     <h2 class="titre">Le script, <em>dans la main.</em></h2>
-    <p class="sous">Choisis l'offre, suis les sept étapes. Le silence fait partie du script.</p>
+    <p class="sous">Choisis l'offre, suis les trois phases. Le silence fait partie du script.</p>
 
   <!-- L'ÉTABLI : à gauche qui on appelle (puis son site), à droite quoi lui dire.
        Sur un téléphone, les deux panneaux s'empilent et l'ordre ne change pas. -->
@@ -849,67 +864,108 @@ var CHANTIERS=[
           {n:'Instagram',l:'instagram',u:'https://www.instagram.com'}]}
 ];
 
-/* ---------- le script d'appel, repris mot pour mot ---------- */
+/* ---------- le script d'appel : UN SEUL, en TROIS PHASES ----------
+   27/11/2026. Loic, dans l'ordre ou il l'a dit :
+   « le mot d'ordre, c'est point A, point B » ; « il est important de
+   comprendre le probleme rencontre par le prospect suivant ce qu'il a deja ;
+   une fois qu'on le sait, nous on lui donne la solution ; donc probleme,
+   solution, le client passe a l'action avec nos offres irresistibles » ;
+   « un script c'est clair, impactant et livre en 5 min » ; et pour finir
+   « 1 script pour 3 phases comme on a dit ».
+
+   PHASE 1 — LE PROBLEME. Je me presente, je pose UNE question, je me tais.
+     Sa reponse me dit ce qu'il a deja. Je sonde ce qu'il a, et je me tais
+     encore : c'est LUI qui formule son probleme, pas moi.
+   PHASE 2 — LA SOLUTION. Le point B : le gros + de l'offre qui correspond,
+     son contenu, son prix une seule fois, et le silence.
+   PHASE 3 — L'ACTION. Les deux liens, et c'est moi qui fixe le rappel.
+
+   Seule la phase 2 change d'une offre a l'autre — et la sonde de la phase 1,
+   qui depend de ce qu'il a deja.
+
+   Avant : TROIS scripts de sept etapes, aucun pour Prismatik.
+
+   Les quatre gros + viennent du coffre, valides le 21/11 : Essentiel « etre
+   present », Prestige « etre valorise », Signature « etre unique »,
+   Prismatik « marquer les esprits ». Les chiffres viennent des pages de
+   vente : 390, 690, 1290, option Prismatik 290, total 1580.
+
+   Retire de l'ancien script : « Pourquoi j'appelle » (40 mots sur Loic avant
+   de l'avoir fait parler) et « 5 bis » (redemandait les communes). */
+
 var ACCROCHE='« Oui bonjour Monsieur, désolé de vous déranger. C’est Loïc, <strong>paysagiste confirmé en Seine-et-Marne</strong>, juste à côté de chez vous. Je suis aussi le <strong>fondateur d’Impact-NVA</strong>. Mon métier, c’est de rendre visible le vôtre. »';
-var POURQUOI='« J’ai monté Impact-NVA pour une raison simple : j’en avais marre de voir des collègues doués perdre des chantiers face à des gars deux fois moins bons. Juste parce qu’eux, on les trouve sur Google, et nous non. »';
 var QUESTION='« J’aimerais savoir : vos nouveaux clients, ils vous trouvent comment ? »';
-var COEUR='« Votre travail est bon. Le problème, c’est qu’on ne le voit pas. Et sans visibilité, pas de nouveaux clients, et le chiffre d’affaires ne monte pas.<br><br>Moi, je vous fais un site vitrine rien qu’à vous, avec <strong>vos vraies photos avant/après</strong>, ce que vous faites vraiment sur vos chantiers.<br><br>Et ce site, vous en êtes <strong>propriétaire, pas locataire</strong> : vous payez une fois, il est à vous. »';
-var CONCLUSION='« Je vous envoie 2 liens : mon site pour voir qui je suis, et un exemple concret. Vous regardez ce soir, et je vous rappelle <strong>[jour précis]</strong>. »';
+var TAIS_1='→ Je me tais. Sa réponse me dit ce qu’il a déjà.';
+var TAIS_2='→ Je me tais. C’est LUI qui pose son problème, avec ses mots.';
+var TAIS_3='→ Je me tais. Je ne comble pas le silence.';
+var OUVERTURE='« Votre travail est bon. Le problème, c’est qu’on ne le voit pas. »';
+var CONCLUSION='« Je vous envoie <strong>2 liens</strong> : mon site pour voir qui je suis, et un exemple concret. Vous regardez ce soir, et je vous rappelle <strong>[jour précis]</strong>. »';
+
+/* La phase 3 ne change jamais. Ecrite une fois. */
+var PHASE_3={n:'3 · L’action',dit:[CONCLUSION],
+  regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'};
+
+/* La phase 1 est la meme partout, sauf la sonde : ce que je demande depend
+   de ce qu il a deja. On la fabrique, plutot que de la recopier trois fois. */
+function phase1(sonde, regie){
+  return {n:'1 · Le problème',
+    dit:[ACCROCHE, QUESTION, TAIS_1].concat(sonde).concat([TAIS_2]),
+    regie:regie};
+}
 
 var SCRIPTS={
  essentiel:{
   liens:['impact-nva.fr','essentiel.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · S’il dit « le bouche-à-oreille »',dit:[
-     '« Et <strong>vous avez raison</strong>, c’est la meilleure pub qui existe. Mais ça vous fait tourner, ça ne vous fait pas grandir. Le bouche-à-oreille vous entretient. Internet vous développe. »',
-     '« Quand on vous recommande, la personne tape votre nom sur Google. Elle trouve quoi ? »'],silence:'Je me tais.'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'5 bis · Avant d’annoncer 390 €',dit:['« Et vous travaillez sur combien de communes ? »'],
-    regie:'S’il en cite plusieurs, je bascule sur Prestige ou Signature. L’Essentiel, c’est pour celui qui démarre ou qui m’a dit que le budget bloque.'},
-   {n:'6 · L’offre — Essentiel 390 €',dit:[
-     '« Votre vitrine, votre formulaire, et votre <strong>fiche Google reliée au site</strong>. En ligne <strong>sous 48 h</strong>. <strong>390 € une seule fois</strong>, pas d’abonnement, et le site est à vous. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+   phase1([
+     '« Et <strong>vous avez raison</strong>, c’est la meilleure pub qui existe. Mais elle vous entretient, elle ne vous fait pas grandir. »',
+     '« Quand on vous recommande, la personne tape votre nom sur Google. <strong>Elle trouve quoi ?</strong> »'],
+    'Accroche : 15 secondes. Je ne récite pas, je me présente.'),
+   {n:'2 · La solution — Essentiel 390 € · être présent',dit:[
+     OUVERTURE,
+     '« Moi, je vous fais une vitrine rien qu’à vous, avec <strong>vos vraies photos avant/après</strong>. Votre formulaire, et votre <strong>fiche Google reliée au site</strong>. »',
+     '« <strong>390 € une seule fois</strong>, pas d’abonnement. Vous n’êtes pas locataire de votre site, vous en êtes <strong>propriétaire</strong>. »',
+     TAIS_3]},
+   PHASE_3
   ]},
  prestige:{
   liens:['impact-nva.fr','prestige.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · Il a déjà un site',dit:[
-     '« Et ce site, il vous ramène combien de clients par mois ? »',
+   phase1([
+     '« Et ce site, il vous ramène <strong>combien de clients par mois</strong> ? »',
      '« Il est <strong>à vous</strong>, ou vous le payez tous les mois ? »'],
-    silence:'Je me tais.',
-    regie:'S’il le loue : « Ceux qui louent paient 100 à 150 € par mois. Sur 4 ans, ça fait 5 000 €, et le site n’est même pas à eux. »'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'6 · L’offre — Prestige 690 €',dit:[
-     '« Un vrai site qui met vos chantiers en valeur, avec votre <strong>fiche Google reliée</strong>. Et vos clients vous envoient leur demande avec leurs photos : vous voyez le jardin avant même de vous déplacer.<br><br>En ligne <strong>sous 48 h</strong>. <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+    'Accroche : 15 secondes. — S’il loue son site : « Ceux qui louent paient 100 à 150 € par mois. Sur 4 ans, ça fait 5 000 €, et le site n’est même pas à eux. »'),
+   {n:'2 · La solution — Prestige 690 € · être valorisé',dit:[
+     OUVERTURE,
+     '« Un vrai site qui met <strong>vos chantiers</strong> en valeur, avec votre <strong>fiche Google reliée</strong>. Et vos clients vous envoient leur demande <strong>avec leurs photos</strong> : vous voyez le jardin avant même de vous déplacer. »',
+     '« <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »',
+     TAIS_3]},
+   PHASE_3
   ]},
  signature:{
-  liens:['impact-nva.fr','prestige.impact-nva.fr'],
+  /* 27/11 — le 2e lien etait prestige.impact-nva.fr : on vendait la Signature
+     en montrant le Prestige. Loic : « tu as raison ». C est desormais
+     prismatik.impact-nva.fr, qui montre une Signature avec son option. */
+  liens:['impact-nva.fr','prismatik.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · Lui donner envie',dit:[
-     '« Vous travaillez sur combien de communes ? »',
-     '« Donc être trouvé à <strong>Meaux</strong>, à <strong>Coulommiers</strong>, à <strong>La Ferté</strong> — pas seulement dans votre village. »',
+   phase1([
+     '« Vous travaillez sur <strong>combien de communes</strong> ? »',
      '« Et vos chantiers, vous les <strong>choisissez</strong>, ou vous prenez ce qui vient ? »'],
-    silence:'Je me tais.',
-    regie:'« Plus de demandes, ça veut dire que vous triez, vous gardez les beaux chantiers, et vous montez vos prix. »'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'6 · L’offre — Signature 1290 €',dit:[
-     '« Là, c’est votre travail qui passe en ligne : design sur-mesure, textes rédigés pour vous, une page "Où j’interviens" avec toutes vos communes, <strong>suivi 12 mois inclus</strong>, et les fichiers sont à vous. <strong>1290 € une seule fois</strong>. »',
-     '« Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. Regardez les deux liens, vous verrez tout de suite la différence. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.',
-    regie:'Si ça bloque sur le prix : « Il y a aussi le Prestige à 690 €, je vous mets l’exemple dans le 2ᵉ lien. »'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+    'Accroche : 15 secondes. — « Plus de demandes, ça veut dire que vous triez, vous gardez les beaux chantiers, et vous montez vos prix. »'),
+   {n:'2 · La solution — Signature 1 290 € · être unique',dit:[
+     OUVERTURE,
+     '« Là, c’est votre travail qui passe en ligne : <strong>création entièrement sur mesure</strong>, textes rédigés pour vous, une page <strong>« Où j’interviens »</strong> avec toutes vos communes, et <strong>12 mois de suivi inclus</strong>. »',
+     '« <strong>1 290 € une seule fois.</strong> Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. »',
+     TAIS_3],
+    regie:'Si ça bloque sur le prix : « Il y a aussi le Prestige à 690 €, je vous l’envoie aussi. »'},
+   {n:'2 bis · L’option Prismatik — 290 € · marquer les esprits',dit:[
+     '« Et il y a une option, si vous voulez qu’on se souvienne de vous. »',
+     '« Votre logo <strong>prend vie</strong> à l’ouverture du site : une animation à vos couleurs, le mot fort de votre nom éclate et se recompose. C’est votre <strong>signature visuelle</strong>. »',
+     '« Et vous repartez avec <strong>les vidéos</strong> : story pour Facebook, Instagram et WhatsApp, et carré pour vos publications. Les fichiers sont à vous, pour toujours. »',
+     '« <strong>290 € en plus</strong> de la Signature. <strong>1 580 € au total</strong>, en une seule fois. »',
+     TAIS_3],
+    regie:'Je ne la sors <strong>qu’après</strong> avoir senti que la Signature l’intéresse : avant, j’ajoute un prix à un prix. Le 2ᵉ lien la montre déjà.'},
+   PHASE_3
   ]}
 };
 
@@ -1129,7 +1185,15 @@ function rendreAppels(){
       ? '<div class="num"><span class="rom">'+ROM[+m[1]]+(m[2]?' bis':'')+'</span><span>'+esc(m[3])+'</span></div>'
       : '<div class="num"><span>'+esc(p.n)+'</span></div>';
     return '<div class="carte pas">'+tete+
-      p.dit.map(function(d){return '<p class="dit">'+d+'</p>'}).join('')+
+      /* 27/11/2026 — une phase contient plusieurs silences, pas un seul : apres
+         la question, puis apres sa reponse. Le champ « silence » n en portait
+         qu un. Une ligne qui commence par la fleche est donc dessinee comme un
+         silence, pas comme une phrase a dire. Un seul caractere a lire, aucune
+         structure de donnees a changer. */
+      p.dit.map(function(d){
+        return d.indexOf('→ ')===0 ? '<p class="silence">'+d+'</p>'
+                                        : '<p class="dit">'+d+'</p>';
+      }).join('')+
       (p.silence?'<p class="silence">→ '+esc(p.silence)+'</p>':'')+
       (p.regie?'<p class="regie">'+p.regie+'</p>':'')+'</div>';
   }).join('');
@@ -1542,6 +1606,42 @@ rendreSoir(); rendreAppels(); rendreOutils();
     versLeHaut(document.getElementById('blocListe'));
   });
 
+  /* Le prospect actuellement dans le panneau de gauche. Il faut le garder :
+     les boutons de resultat sont dessines dans ce panneau, et au clic il n y
+     a plus d indice dans le DOM pour savoir de qui il s agit. */
+  var enMain = null;
+
+  /* Le meme contenu que dans la vue file du telephone : soit les cinq
+     boutons, soit l etat de l envoi. Ecrit une fois, utilise aux deux
+     endroits — deux copies auraient fini par diverger. */
+  function blocResultat(p){
+    var r = resultats[cle(p)];
+    if (r){
+      var cls = r.e === 'ok' ? '' : (r.e === 'envoi' ? ' attente' : ' rate');
+      var dit = r.e === 'ok' ? '✓ noté dans le tableau'
+              : (r.e === 'envoi' ? '⏳ envoi au tableau…' : '⚠ pas noté dans le tableau');
+      var h = '<div class="fFait' + cls + '">' + esc(r.n) + '<small>' + esc(dit) + '</small></div>';
+      if (r.e === 'rate'){
+        if (r.m) h += '<p class="fNote erreur">' + esc(r.m) + '</p>';
+        h += '<button type="button" class="fReessayer" data-reprendre="' + esc(r.k) + '">Réessayer</button>';
+      }
+      return h;
+    }
+    var g = '<div class="fApres">APRÈS L’APPEL</div><div class="fIssues">';
+    ISSUES_FILE.forEach(function(x){
+      g += '<button type="button" class="' + (x.gros ? 'gros' : '') + '" data-issue="' + x.k + '">' + esc(x.n) + '</button>';
+    });
+    return g + '</div>';
+  }
+
+  /* Redessine UNIQUEMENT le bloc de resultat, jamais tout le panneau : sinon
+     le site du prospect serait recharge a chaque appui, avec le clignotement
+     et le trafic que ca suppose. */
+  function rafraichirPanneau(){
+    var z = document.getElementById('csIssues');
+    if (z && enMain) z.innerHTML = blocResultat(enMain);
+  }
+
   function prendreEnMain(p){
     var panneau = document.querySelector('.etPanneauG');
     var cadre = document.getElementById('cadreSite');
@@ -1594,7 +1694,10 @@ rendreSoir(); rendreAppels(); rendreOutils();
          + '</div>';
     }
 
+    h += '<div class="csIssues" id="csIssues">' + blocResultat(p) + '</div>';
+
     cadre.innerHTML = h;
+    enMain = p;
     /* La classe dit au CSS lequel des deux panneaux est monte. On l enleve
        toujours avant de la remettre : sans ça, passer d un prospect sans site
        a un prospect avec site laisserait le nom de l en-tete cache. */
@@ -1604,13 +1707,34 @@ rendreSoir(); rendreAppels(); rendreOutils();
 
   var cadreSite = document.getElementById('cadreSite');
   if (cadreSite) cadreSite.addEventListener('click', function(ev){
-    var b = ev.target.closest ? ev.target.closest('[data-cs]') : null;
-    if (!b || b.getAttribute('data-cs') !== 'liste') return;
-    var panneau = document.querySelector('.etPanneauG');
-    if (panneau) panneau.classList.remove('enAppel');
-    /* On vide le cadre : sinon le site du prospect precedent continue de
-       tourner derriere la liste — sons, videos, requetes. */
-    cadreSite.innerHTML = '';
+    /* Les trois boutons du panneau passent par ici. [data-reprendre] DOIT
+       figurer dans la liste : sans lui « Réessayer » ne serait reconnu par
+       personne et resterait muet — deja paye le 14/11 dans la vue file. */
+    var b = ev.target.closest ? ev.target.closest('[data-cs],[data-issue],[data-reprendre]') : null;
+    if (!b) return;
+
+    if (b.getAttribute('data-cs') === 'liste'){
+      var panneau = document.querySelector('.etPanneauG');
+      if (panneau) panneau.classList.remove('enAppel');
+      /* On vide le cadre : sinon le site du prospect precedent continue de
+         tourner derriere la liste — sons, videos, requetes. */
+      cadreSite.innerHTML = '';
+      enMain = null;
+      return;
+    }
+
+    if (!enMain) return;
+    var reprendre = b.getAttribute('data-reprendre');
+    if (reprendre){
+      envoyerResultat(enMain, reprendre);
+      rafraichirPanneau(); /* le « envoi… » doit apparaitre tout de suite */
+      return;
+    }
+    var issue = b.getAttribute('data-issue');
+    if (issue){
+      envoyerResultat(enMain, issue);
+      rafraichirPanneau();
+    }
   });
 
   function fiche(p, i){
@@ -1623,7 +1747,15 @@ rendreSoir(); rendreAppels(); rendreOutils();
     /* Le site s'ouvre dans un onglet a cote : rel noopener, parce qu'une page
        ouverte par un lien peut sinon reprendre la main sur celle qui l'ouvre. */
     var d = domaine(p.site);
-    if (d) h += '<a class="dom" href="' + esc(p.site) + '" target="_blank" rel="noopener noreferrer">↗ Voir son site <span>' + esc(d) + '</span></a>';
+    /* Deux libelles, et c est le CSS qui choisit, comme pour le bouton du
+       script. Sur un telephone le site s ouvre bien dans un onglet ; sur
+       l etabli il se charge dans le panneau de gauche, et le libelle doit le
+       dire. Un libelle qui ment sur ce qui va se passer est pire que pas de
+       libelle. */
+    if (d) h += '<a class="dom" href="' + esc(p.site) + '" data-i="' + i + '" target="_blank" rel="noopener noreferrer">'
+       + '<span class="motEtroit">↗ Voir son site </span>'
+       + '<span class="motLarge">Voir son site ici → </span>'
+       + '<span>' + esc(d) + '</span></a>';
     /* 14/11/2026 — la fiche choisit le script a la place de Loic. Sans site
        -> Essentiel, avec site -> Prestige : la meme regle que le pilote 14,
        pour que la liste et le script ne puissent pas se contredire. Le bouton
@@ -1642,6 +1774,23 @@ rendreSoir(); rendreAppels(); rendreOutils();
      a chaque chargement, et des ecouteurs poses fiche par fiche seraient
      perdus ou dupliques. */
   zone.addEventListener('click', function(ev){
+    /* 27/11/2026 — Loic : « sur grand ecran du Honor, quand on clique sur le
+       site du prospect ca se met sur toute la page, ce n est pas bon ».
+       C etait le lien « Voir son site » de la liste : target=_blank, donc un
+       onglet par-dessus l app, qui disparait. Sur l etabli on charge le site
+       dans le panneau de gauche a la place. Sous 700 px il n y a pas de
+       panneau, donc le lien garde son onglet et son libelle. */
+    var lien = ev.target.closest ? ev.target.closest('a.dom') : null;
+    if (lien && etabliActif()){
+      ev.preventDefault();
+      var pp = aAppeler[Number(lien.getAttribute('data-i'))];
+      if (pp){
+        var ong = $('#offres button[data-offre=' + (pp.sansSite ? 'essentiel' : 'prestige') + ']');
+        if (ong) ong.click();
+        prendreEnMain(pp);
+      }
+      return;
+    }
     var b = ev.target.closest ? ev.target.closest('.versScript') : null;
     if (!b) return;
     var onglet = $('#offres button[data-offre=' + b.getAttribute('data-offre') + ']');
@@ -1719,6 +1868,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
       resultats[k] = { n:nom, k:issue, e:'rate',
         m:'Clé de l’app non renseignée sur cet appareil. Saisis-la une fois dans OUTILS.' };
       rendre(gardee);
+      rafraichirPanneau();
       return;
     }
     fetch(ECRITURE, {
@@ -1742,7 +1892,7 @@ rendreSoir(); rendreAppels(); rendreOutils();
         else t = 'Pas de réseau. Rien n’est noté dans le tableau.';
         resultats[k] = { n:nom, k:issue, e:'rate', m:t };
       })
-      .then(function(){ rendre(gardee); });
+      .then(function(){ rendre(gardee); rafraichirPanneau(); });
   }
 
   function rendre(liste){
