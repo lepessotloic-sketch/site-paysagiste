@@ -665,7 +665,7 @@ p.titre-carte{margin:0 0 4px;font:600 15px/1.3 var(--romain);letter-spacing:.04e
   <!-- ================= APPELS ================= -->
   <section class="vue" id="v-appels" role="tabpanel" hidden>
     <h2 class="titre">Le script, <em>dans la main.</em></h2>
-    <p class="sous">Choisis l'offre, suis les sept étapes. Le silence fait partie du script.</p>
+    <p class="sous">Choisis l'offre, suis les cinq temps. Le silence fait partie du script.</p>
 
   <!-- L'ÉTABLI : à gauche qui on appelle (puis son site), à droite quoi lui dire.
        Sur un téléphone, les deux panneaux s'empilent et l'ordre ne change pas. -->
@@ -865,66 +865,95 @@ var CHANTIERS=[
 ];
 
 /* ---------- le script d'appel, repris mot pour mot ---------- */
+/* ---------- le script d'appel : UN SEUL, en cinq temps ----------
+   27/11/2026. Loic : « un script c'est clair, impactant, et livre en 5 min.
+   Je ne peux pas retenir un prospect 10 min au telephone si je dois en
+   appeler plusieurs dans une journee. »
+   Avant : TROIS scripts de sept etapes (essentiel, prestige, signature), et
+   aucun pour Prismatik. Trois textes a tenir a jour, qui finissent par se
+   contredire. Maintenant : cinq temps toujours les memes, et un seul bloc
+   qui change — celui de la solution.
+   La trame est point A -> point B. Le point A, c'est sa reponse au temps 2 :
+   c'est LUI qui pose son probleme. Le point B, c'est le gros + de l'offre,
+   valide par Loic le 21/11 : Essentiel « Etre present », Prestige « Etre
+   valorise », Signature « Etre unique », Prismatik « Marquer les esprits ».
+   Les chiffres viennent des pages de vente, pas d'une estimation :
+   390, 690, 1290, option Prismatik 290, total Signature + Prismatik 1580.
+   Retire de l'ancien script, et pourquoi : l'etape « Pourquoi j'appelle »
+   parlait de Loic pendant 40 mots avant de l'avoir fait parler de lui ;
+   l'etape « 5 bis — avant d'annoncer 390 € » demandait les communes, alors
+   que le temps 3 l'a deja dit. Les deux coutaient trop cher en 5 minutes.
+   Parole de Loic mesuree : environ 175 mots, soit 70 secondes. Le reste des
+   cinq minutes, c'est le prospect qui parle, et ce sont les silences. */
+
 var ACCROCHE='« Oui bonjour Monsieur, désolé de vous déranger. C’est Loïc, <strong>paysagiste confirmé en Seine-et-Marne</strong>, juste à côté de chez vous. Je suis aussi le <strong>fondateur d’Impact-NVA</strong>. Mon métier, c’est de rendre visible le vôtre. »';
-var POURQUOI='« J’ai monté Impact-NVA pour une raison simple : j’en avais marre de voir des collègues doués perdre des chantiers face à des gars deux fois moins bons. Juste parce qu’eux, on les trouve sur Google, et nous non. »';
 var QUESTION='« J’aimerais savoir : vos nouveaux clients, ils vous trouvent comment ? »';
-var COEUR='« Votre travail est bon. Le problème, c’est qu’on ne le voit pas. Et sans visibilité, pas de nouveaux clients, et le chiffre d’affaires ne monte pas.<br><br>Moi, je vous fais un site vitrine rien qu’à vous, avec <strong>vos vraies photos avant/après</strong>, ce que vous faites vraiment sur vos chantiers.<br><br>Et ce site, vous en êtes <strong>propriétaire, pas locataire</strong> : vous payez une fois, il est à vous. »';
-var CONCLUSION='« Je vous envoie 2 liens : mon site pour voir qui je suis, et un exemple concret. Vous regardez ce soir, et je vous rappelle <strong>[jour précis]</strong>. »';
+var OUVERTURE='« Votre travail est bon. Le problème, c’est qu’on ne le voit pas. »';
+var CONCLUSION='« Je vous envoie <strong>2 liens</strong> : mon site pour voir qui je suis, et un exemple concret. Vous regardez ce soir, et je vous rappelle <strong>[jour précis]</strong>. »';
+
+/* Les deux temps qui ne changent jamais, ecrits une fois. */
+var TEMPS_1={n:'1 · L’accroche',dit:[ACCROCHE],regie:'15 secondes. Je ne récite pas, je me présente.'};
+var TEMPS_2={n:'2 · La question',dit:[QUESTION],silence:'Je me tais. C’est sa réponse qui me dit quelle offre proposer.'};
+var TEMPS_5={n:'5 · L’action',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'};
 
 var SCRIPTS={
  essentiel:{
   liens:['impact-nva.fr','essentiel.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · S’il dit « le bouche-à-oreille »',dit:[
-     '« Et <strong>vous avez raison</strong>, c’est la meilleure pub qui existe. Mais ça vous fait tourner, ça ne vous fait pas grandir. Le bouche-à-oreille vous entretient. Internet vous développe. »',
-     '« Quand on vous recommande, la personne tape votre nom sur Google. Elle trouve quoi ? »'],silence:'Je me tais.'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'5 bis · Avant d’annoncer 390 €',dit:['« Et vous travaillez sur combien de communes ? »'],
-    regie:'S’il en cite plusieurs, je bascule sur Prestige ou Signature. L’Essentiel, c’est pour celui qui démarre ou qui m’a dit que le budget bloque.'},
-   {n:'6 · L’offre — Essentiel 390 €',dit:[
-     '« Votre vitrine, votre formulaire, et votre <strong>fiche Google reliée au site</strong>. En ligne <strong>sous 48 h</strong>. <strong>390 € une seule fois</strong>, pas d’abonnement, et le site est à vous. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+   TEMPS_1,
+   TEMPS_2,
+   {n:'3 · Où il en est',dit:[
+     '« Et <strong>vous avez raison</strong>, c’est la meilleure pub qui existe. Mais elle vous entretient, elle ne vous fait pas grandir. »',
+     '« Quand on vous recommande, la personne tape votre nom sur Google. <strong>Elle trouve quoi ?</strong> »'],
+    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.'},
+   {n:'4 · La solution — Essentiel 390 € · être présent',dit:[
+     OUVERTURE,
+     '« Moi, je vous fais une vitrine rien qu’à vous, avec <strong>vos vraies photos avant/après</strong>. Votre formulaire, et votre <strong>fiche Google reliée au site</strong>. »',
+     '« <strong>390 € une seule fois</strong>, pas d’abonnement. Vous n’êtes pas locataire de votre site, vous en êtes <strong>propriétaire</strong>. »'],
+    silence:'Je me tais. Je ne comble pas le silence.'},
+   TEMPS_5
   ]},
  prestige:{
   liens:['impact-nva.fr','prestige.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · Il a déjà un site',dit:[
-     '« Et ce site, il vous ramène combien de clients par mois ? »',
+   TEMPS_1,
+   TEMPS_2,
+   {n:'3 · Où il en est',dit:[
+     '« Et ce site, il vous ramène <strong>combien de clients par mois</strong> ? »',
      '« Il est <strong>à vous</strong>, ou vous le payez tous les mois ? »'],
-    silence:'Je me tais.',
+    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.',
     regie:'S’il le loue : « Ceux qui louent paient 100 à 150 € par mois. Sur 4 ans, ça fait 5 000 €, et le site n’est même pas à eux. »'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'6 · L’offre — Prestige 690 €',dit:[
-     '« Un vrai site qui met vos chantiers en valeur, avec votre <strong>fiche Google reliée</strong>. Et vos clients vous envoient leur demande avec leurs photos : vous voyez le jardin avant même de vous déplacer.<br><br>En ligne <strong>sous 48 h</strong>. <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+   {n:'4 · La solution — Prestige 690 € · être valorisé',dit:[
+     OUVERTURE,
+     '« Un vrai site qui met <strong>vos chantiers</strong> en valeur, avec votre <strong>fiche Google reliée</strong>. Et vos clients vous envoient leur demande <strong>avec leurs photos</strong> : vous voyez le jardin avant même de vous déplacer. »',
+     '« <strong>690 € une seule fois</strong>, pas d’abonnement, et il est à vous. »'],
+    silence:'Je me tais. Je ne comble pas le silence.'},
+   TEMPS_5
   ]},
  signature:{
   liens:['impact-nva.fr','prestige.impact-nva.fr'],
   pas:[
-   {n:'1 · Accroche',dit:[ACCROCHE]},
-   {n:'2 · Pourquoi j’appelle',dit:[POURQUOI]},
-   {n:'3 · La question',dit:[QUESTION],silence:'Je me tais.'},
-   {n:'4 · Lui donner envie',dit:[
-     '« Vous travaillez sur combien de communes ? »',
-     '« Donc être trouvé à <strong>Meaux</strong>, à <strong>Coulommiers</strong>, à <strong>La Ferté</strong> — pas seulement dans votre village. »',
+   TEMPS_1,
+   TEMPS_2,
+   {n:'3 · Où il en est',dit:[
+     '« Vous travaillez sur <strong>combien de communes</strong> ? »',
      '« Et vos chantiers, vous les <strong>choisissez</strong>, ou vous prenez ce qui vient ? »'],
-    silence:'Je me tais.',
+    silence:'Je me tais. C’est lui qui pose le problème, avec ses mots.',
     regie:'« Plus de demandes, ça veut dire que vous triez, vous gardez les beaux chantiers, et vous montez vos prix. »'},
-   {n:'5 · Le cœur du message',dit:[COEUR]},
-   {n:'6 · L’offre — Signature 1290 €',dit:[
-     '« Là, c’est votre travail qui passe en ligne : design sur-mesure, textes rédigés pour vous, une page "Où j’interviens" avec toutes vos communes, <strong>suivi 12 mois inclus</strong>, et les fichiers sont à vous. <strong>1290 € une seule fois</strong>. »',
-     '« Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. Regardez les deux liens, vous verrez tout de suite la différence. »'],
-    silence:'Je me tais. Je laisse le silence, je ne le comble pas.',
+   {n:'4 · La solution — Signature 1 290 € · être unique',dit:[
+     OUVERTURE,
+     '« Là, c’est votre travail qui passe en ligne : <strong>création entièrement sur mesure</strong>, textes rédigés pour vous, une page <strong>« Où j’interviens »</strong> avec toutes vos communes, et <strong>12 mois de suivi inclus</strong>. »',
+     '« <strong>1 290 € une seule fois.</strong> Les sites loués se ressemblent tous. Le vôtre ne ressemblera à personne. »'],
+    silence:'Je me tais. Je ne comble pas le silence.',
     regie:'Si ça bloque sur le prix : « Il y a aussi le Prestige à 690 €, je vous mets l’exemple dans le 2ᵉ lien. »'},
-   {n:'7 · Conclusion',dit:[CONCLUSION],regie:'C’est moi qui fixe le jour. Jamais « rappelez-moi ».'}
+   {n:'4 bis · L’option Prismatik — 290 € · marquer les esprits',dit:[
+     '« Et il y a une option, si vous voulez qu’on se souvienne de vous. »',
+     '« Votre logo <strong>prend vie</strong> à l’ouverture du site : une animation à vos couleurs, le mot fort de votre nom éclate et se recompose. C’est votre <strong>signature visuelle</strong>. »',
+     '« Et vous repartez avec <strong>les vidéos</strong> : story pour Facebook, Instagram et WhatsApp, et carré pour vos publications. Les fichiers sont à vous, pour toujours. »',
+     '« <strong>290 € en plus</strong> de la Signature. <strong>1 580 € au total</strong>, en une seule fois. »'],
+    silence:'Je me tais.',
+    regie:'Je ne la sors <strong>qu’après</strong> avoir senti que la Signature l’intéresse : avant, j’ajoute un prix à un prix. Si je la propose, le lien à envoyer est <strong>prismatik.impact-nva.fr</strong>.'},
+   TEMPS_5
   ]}
 };
 
